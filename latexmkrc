@@ -3,6 +3,6 @@
 $pdf_mode = 1;
 
 ensure_path('TEXINPUTS', './utils//',
-            './chapters/chapter1/figures',
-            './chapters/chapter2/figures',
+            './chapters/introduction/figures',
+            './chapters/polarons/figures',
             );
