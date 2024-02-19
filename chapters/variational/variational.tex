@@ -1,0 +1,555 @@
+\chapter{Variational Method}
+
+In extending the Feynman Variational Method to lattice polarons, we face two key difficulties. The first is that, unlike the path integral for the Fr\"ohlich model, the path integral for the Holstein model is constrained. The position paths are confined to the unit cell of the lattice with periodic boundary conditions. Likewise, the quasi-momentum paths are confined to the first Brillouin zone. 
+\newline
+
+Secondly, for the Fr\"ohlich model, the kinetic part of the trial action was chosen to be identical to that of the model action. The two kinetic actions then cancel, so that the final variational inequality for the polaron free energy is independent of the kinetic action. This is no longer possible for the Holstein model because by choosing the trial kinetic action to be the same as in the Holstein model, the trial path integral is no longer evaluable; it is no longer a Gaussian integral.
+\newline
+
+To circumnavigate these issues in pursuit of tangible results, I instead chose to approximate the Holstein kinetic action with an approximate parabolic form with an effective band mass, much like the Fr\"ohlich model. I then allow the electron paths to be unconstrained such that the momentum integrals for the electron are unbounded and can be evaluated to give the standard Gaussian kinetic action. I could keep the momentum integrals bounded to the first Brillouin zone and still have a closed-form expression for the kinetic action, however in addition to the standard Gaussian form, there are error functions that make it unclear how the resulting path integral could be evaluated - if it is even possible. By making these approximations, it is possible to follow the usual variational procedure with the same trial action as for the Fr\"ohlich model. I should note that the Holstein electron-phonon interaction is still treated properly and the phonon quasi-momenta is still confined to the first Brillouin zone. 
+\newline
+
+Thus far, I have been unsuccessful in generalising the variational principle to incorporate these path constraints and non-quadratic kinetic action, but I have some ideas for how it may be approached.
+\newline
+
+The first idea is to maintain the usual trial action and obtain an additional term in the variational inequality for the polaron free energy accounting for the difference in the tight-binding-like Holstein model kinetic action and the approximate parabolic trial kinetic action. Here the `electron' mass in the trial action would enter as a variational parameter in addition to the usual $v$ and $w$ parameters. The difficulty with this approach comes with calculating this additional expectation value as it is the expectation of a Modified Bessel function of the first kind with respect to the trial system. It is not clear to me if this has a closed-form expression.
+\newline
+
+The second idea is to use an entirely different representation for the path integral in terms of coherent states. Coherent state path integrals are commonly used in many-body condensed matter theory. I think the variational approximation may be derived from these coherent state path integrals and it may allow for a more sophisticated approximation for general Hamiltonians provided that Jensen's inequality can still be applied. I will not discuss this approach in this LSR, but I hope to include some derivations and theory in my thesis.
+
+\section{Variational Inequality}
+
+By following the standard procedure as done for the Fr\"ohlich model, we may derive an approximate variational inequality for the lattice polaron free energy that fully accounts for the lattice electron-phonon integral, despite allowing the electron to not be confined to individual lattice sites. Despite the latter approximation, this model still captures many of the typical features of small lattice polaron.
+\newline
+
+The variational method for the polaron developed by Feynman gives a lower upper-bound to the polaron free energy,
+\begin{equation}
+    \begin{aligned}
+         F &\leq F_0(\beta) - \frac{1}{\hbar\beta} \langle S_{\text{pol}} - S_{0} \rangle_0 , \\
+         &\leq F_0(\beta) -\frac{1}{4\hbar\omega_0\beta M} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ D_{\omega_0}(\abs{\tau - \tau'}) \langle \Phi_{\text{pol}} - \Phi_0 \rangle_0 ,
+    \end{aligned}
+\end{equation}
+where the expectation $\langle \mathcal{O} \rangle_0$ is defined as,
+\begin{equation}
+    \langle \mathcal{O} \rangle_0 \equiv \frac{\int \mathcal{D}^3 r(\tau) \mathcal{O} e^{-S_0[\vb{r}(\tau)]}}{\int \mathcal{D}^3 r(\tau) e^{-S_0[\vb{r}(\tau)]}},
+\end{equation}
+and $S_0[\vb{r}(\tau)]$ is a trial action that is chosen to best approximate the polaron model action $S_{\text{pol}}[\vb{r}(\tau)]$ and where the path integral for $S_0$ can be analytically evaluated. The trial action is typically chosen to be quadratic in the electron coordinate $\vb{r}(\tau)$ for this reason. We use the standard quasi-particle `trial action' for the electron-phonon lattice model, 
+\begin{equation}
+    \begin{aligned}
+        S_{0}[\vb{r}(\tau)] &= \frac{m_b}{2} \int_0^{\hbar\beta} d\tau\ \Dot{\vb{r}}^2(\tau) + \frac{w}{8 \kappa} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ D_{w}(\abs{\tau - \tau'}) \Phi_0\left[\vb{r}(\tau), \vb{r}(\tau')\right] ,
+    \end{aligned}
+\end{equation}
+where $\kappa$ and $w$ are variational parameters respectively representing the spring constant and oscillation frequency of Feynman's fictitious spring-mass trial model. The trial model is often reparameterised in terms of $v$ and $w$ variational parameters where $\kappa = m_b (v^2 - w^2)$. The trial self-interaction functional is quadratic,
+\begin{equation}
+    \Phi_0[\vb{r}(\tau), \vb{r}(\tau')] = \kappa^2 \left[\vb{r}(\tau) - \vb{r}(\tau')\right]^2 .
+\end{equation}
+All the expectation values in the variational expression can be evaluated from $\langle e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau')} \rangle_0$ which for the trial model has a closed-form expression:
+\begin{equation}
+    \langle e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau'))} \rangle_0 := \exp\left[-q^2 r_p^2 G(\abs{\tau - \tau'})\right] ,
+\end{equation}
+ where the imaginary-time thermal polaron Green function $G(\tau)$ is given by
+\begin{equation} \label{eqn:polarongreensfunc}
+    \begin{aligned}
+        G(\tau) &= \tau \left(1 - \frac{\tau}{\hbar\beta}\right) + \frac{v^2 - w^2}{v^3} \left[ D_v(0) - D_v(\tau) - v \tau \left(1 - \frac{\tau}{\hbar\beta} \right) \right].
+    \end{aligned}
+\end{equation}
+Generally, we can transform the $q$-space summation into a spherical integral over the $n$-ball,
+\begin{equation} \label{eqn:general_self_interaction}
+    \begin{aligned}
+        \langle \Phi_{\text{pol}}\rangle_0 &= \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 e^{-q^2 r_p^2 G(\tau) / 2} , \\
+        &= \frac{V \abs{S^{n-1}}}{(2\pi)^n} \int_0^R dq \abs{V_q}^2 q^{n-1} e^{-q^2 r_p^2 G(\tau)} ,
+    \end{aligned}
+\end{equation}
+where $\abs{S^{n-1}} = 2\pi^{n/2}/\Gamma(n/2)$ is the hypervolume of the unit $(n-1)$-sphere and $R$ is the radius of the ball. In $n$-dimensions, we have
+\begin{equation}\label{eqn:generalfreeenergy}
+    \begin{aligned}
+        F &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_{0} - \frac{1}{2\omega_0} \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 \int_0^{\hbar\beta} d\tau D_{\omega_0}(\tau)\ e^{-q^2 r_p^2 G(\tau)} , \\
+        &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_{0} - \frac{V \abs{S^{n-1}}}{2 (2\pi)^n \omega_0} \int_0^{\hbar\beta} d\tau D_{\omega_0}(\tau) \int_0^R dq\ \abs{V_q}^2 q^{n-1} e^{-q^2 r_p^2 G(\tau)} ,
+    \end{aligned}
+\end{equation}
+where I have used,
+\begin{equation}
+    \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ f(\abs{\tau - \tau'}) \sim 2\hbar\beta \int_0^{\hbar\beta}d\tau\ f(\tau),
+\end{equation}
+which is valid when the Hamiltonian for the system is time-translation invariant.
+\newline
+
+Specialising to the Holstein model, for the self-interaction functional we have,
+\begin{equation}
+    \begin{aligned}
+        \langle \Phi^{(H)} \rangle_0 &= \frac{g^2_H(n) \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\Lambda} dq\ q^{n-1} e^{-q^2 r_p^2 G(\tau)} , \\
+        &= \frac{g^2_H(n) \abs{S^{n-1}}}{(2\pi)^n} \frac{\Lambda^n}{2} \left(\Lambda^2 r_p^2 G(\tau) \right)^{-\frac{n}{2}} \left[ \Gamma\left(\frac{n}{2}\right) - \Gamma\left(\frac{n}{2}, \frac{\Lambda^2 r_p^2}{2} G(\tau) \right) \right], \\
+        &= \frac{g_H^2(n)}{(4\pi r_p^2 G(\tau))^{n/2}} \left[1 - \frac{\Gamma\left(\frac{n}{2}, \Lambda^2 r_p^2 G(\tau) \right)}{\Gamma(\frac{n}{2})} \right], 
+    \end{aligned}
+\end{equation}
+where $\Gamma(s, x)$ is the upper incomplete Gamma function. Since $\lim_{x\to\infty} \Gamma(s, x) \to 0$ the continuum approximation where $\Lambda \to \infty$ gives:
+\begin{equation}
+    \langle \Phi^{(H)} \rangle_0^C = \frac{2 n J \hbar \omega_0 \alpha_H}{(4\pi r^2_p G(\tau))^{n/2}}.
+\end{equation}
+However, with this expression the addition integral over the imaginary time variable diverges.
+\newline
+
+For the Fr\"ohlich self-interaction functional we have
+\begin{equation}
+    \begin{aligned}
+        \langle\Phi^{(F)}\rangle_0 &= \frac{g^2_F(n) \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\infty} dq\ e^{-q^2 r_p^2 G(\tau)} , \\
+        &= \alpha_F \frac{\Gamma(\frac{n-1}{2})}{2 \Gamma(\frac{n}{2})} \frac{1}{\sqrt{G(\tau)}}.
+    \end{aligned}
+\end{equation}
+
+One difference between the Holstein and Fr\"ohlich model is in the domain of the radial reciprocal-space integral. Whereas the domain of the radial integral for the Fr\"ohlich model is over all of reciprocal-space, it is bounded to the first Brillouin Zone for the Holstein model, keeping the total reciprocal-space integral within a sphere with volume equal to the Brillouin zone volume. Physically, this is a manifestation of an ultraviolet momentum cutoff due to the discrete lattice. In the continuum Fr\"ohlich model, the integral is convergent for all $n > 1$ – the Fr\"ohlich model diverges in 1D.
+\newline
+
+The variational inequality for the Holstein model is:
+\begin{equation}
+    \begin{aligned}
+        F^{(H)} &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_0 - \frac{g_H^2(n)}{2M\omega_0} \frac{V}{N} \int_0^{\hbar\beta} d\tau \frac{D_{\omega_0}(\tau)}{G(\tau)^{n/2}} \left[1 - \frac{\Gamma(n/2, \Lambda^2 r_p^2 G(\tau))}{\Gamma(n/2)}\right].
+    \end{aligned}
+\end{equation}
+
+and the variational inequality for the Fr\"ohlich model is:
+\begin{equation}
+    \begin{aligned}
+        F^{(F)} &\leq F_0(\beta) -\frac{1}{\beta} \langle S_0 \rangle_0 - \alpha_F \frac{\Gamma\left(\frac{n-1}{2}\right)}{2 \Gamma(\frac{n}{2})} \int_0^{\hbar\beta} d\tau \frac{D_{\omega_0}(\tau)}{\sqrt{G(\tau)}} ,
+    \end{aligned}
+\end{equation}
+
+The expectation value of the trail action $\langle S_0 \rangle_0$ and the free energy of the trial system $F_0(\beta) $ are the same for both models and are as given by \=Osaka \cite{Osaka1959},
+\begin{equation}
+    \langle S_0 \rangle_0 = \frac{n\hbar\beta}{4} \frac{v^2-w^2}{v} \left(\frac{2}{v\hbar\beta} - \coth\left(\frac{v\hbar\beta}{2}\right)\right),
+\end{equation}
+and the trial free energy is,
+\begin{equation}
+    F_0(\beta) = \frac{n}{2\beta} \log\left(2\pi\hbar\beta\right) + \frac{n}{\beta} \log\left(\frac{w \sinh(\hbar\beta v / 2)}{v \sinh(\hbar\beta w / 2)}\right).
+\end{equation}
+
+\section{Polaron Mobility}
+
+The polaron DC mobility may be obtained in the same way as was done for the Fr\"ohlich model from real component of the frequency- and temperature-dependent impedance function,
+
+\begin{equation}\label{eqn:mobility}
+    \mu_{dc} = \lim_{\Omega \to 0} \Re{\frac{1}{z(\Omega)}},
+\end{equation}
+where the impedence function is expressed in terms of the memory function $\Sigma(\Omega)$,
+\begin{equation}
+    z(\Omega) = i \left( \Omega - \Sigma(\Omega) \right).
+\end{equation}
+More specifically, we can express the inverse DC mobility just in terms of the memory function,
+\begin{equation}
+    \mu_{dc}^{-1} = \lim_{\Omega \to 0} \Im{\Sigma(\Omega)}.
+\end{equation}
+We start from an expression for the dynamical memory function for a general polaron and the specialise to the Holstein case. The general memory function can be written as,
+\begin{equation}
+    \Sigma(\Omega) = \frac{4}{n m_b \hbar\Omega} \int_0^{\infty} dt\ \left(1 - e^{i \Omega t}\right) \Im \left\{ \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 q^2 D_{\omega_{\vb{q}}}(t) \langle e^{i \vb{q} \cdot \left[ \vb{r}(t) - \vb{r}(0) \right]} \rangle \right\},
+\end{equation}
+where we assume the system to be rotationally-invariant. Here $D_{\omega}(t)$ is the \emph{real}-time thermal and \emph{dynamical} phonon Green function,
+\begin{equation}
+    D_\omega(t) = \coth(\frac{\hbar \beta \omega}{2}) \cos(\omega t) - i \sin(\omega t),
+\end{equation}
+and can be obtained from substituting $\tau \to i t$ into Eqn.(\ref{eqn:phonongf}).
+\newline
+
+The key term to evaluate is the density-density correlation function or dynamical structure factor,
+\begin{equation}
+    S_{\vb{q}}(t) = \langle \rho_{\vb{q}}(t) \rho^*_{\vb{q}}(0) \rangle = \langle e^{i \vb{q} \cdot \left[ \vb{r}(t) - \vb{r}(0) \right]} \rangle.
+\end{equation}
+The expectation value can be expressed as a path integral as done earlier. However, even for the full Fr\"ohlich model, it can not be exactly evaluated. We approximate this by evaluating this expectation value with respect to the Feynman polaron model,
+\begin{equation}
+    \langle \rho_{\vb{q}}(t) \rho^*_{\vb{q}}(0) \rangle_0 = e^{-q^2 r_p^2 G(t)},
+\end{equation}
+where $G(t)$ is the polaron Green function evaluated in real-time (i.e. substitute $\tau \to it$ into Eqn.(\ref{eqn:polarongreensfunc}),
+\begin{equation}
+    G(t) = i t \left(1 - \frac{i t}{\hbar \beta} \right) + \frac{v^2 - w^2}{v^3} \left[ D_v(0) - D_v(t)  - i v t \left(1 - \frac{i t}{\hbar \beta} \right) \right].
+\end{equation}
+
+In $n$-dimensions we need to evaluate the reciprocal-space integral ,
+\begin{equation}
+    \begin{aligned}
+        I(n) &= V \int \frac{d^n q}{(2\pi)^n} \abs{V_{\vb{q}}}^2 q^2 D_{\omega_{\vb{q}}}(t) e^{-q^2 r_p^2 G(t)}, \\
+        &= \frac{V \abs{S^{n-1}}}{(2\pi)^n} \int_0^R dq\ q^{n+1} \abs{V_{q}}^2 D_{\omega_{q}}(t) e^{-q^2 r_p^2 G(t)} ,
+    \end{aligned}
+\end{equation}
+where we have used that the system is rotation-invariant. For a general polaron model we then have the memory function,
+\begin{equation}
+    \Sigma(\Omega) = \frac{4}{n m_b\hbar\Omega} \frac{V \abs{S^{n-1}}}{(2\pi)^n} \int_0^\infty dt\ \left(1 - e^{i \Omega t}\right) \int_0^\Lambda dq\ \abs{V_{q}}^2 q^{n+1} \Im{D_{\omega_q}(t) e^{-q^2 r_p^2 G(t)}}.
+\end{equation}
+
+In the zero frequency limit we have,
+\begin{equation}
+    \lim_{\Omega \to 0} \frac{\left(1 - e^{i \Omega t}\right)}{\Omega} \to -i t,
+\end{equation}
+so for the general polaron DC mobility we get,
+
+\begin{equation}
+    \mu_{dc}^{-1} = -\frac{4 e^2}{n m_b \hbar} \frac{V \abs{S^{n-1}}}{(2\pi)^n} \int_0^\infty dt\ t \int_0^\Lambda dq\ q^{n+1} \abs{V_{q}}^2 \Im{ D_{\omega_{q}}(t) e^{-q^2 r_p^2 G(t)}} .
+\end{equation}
+
+\section{General $\vb{q}$-space Polarons}
+
+We now have general expressions for the free energy, complex conductivity and DC mobility for a whole class of polaron models. Before specialising to the Fr\"ohlich and Holstein models, I'd like to discuss the potential for more ab-initio numerical work. 
+\newline
+
+The momentum integral can be evaluated numerically, either by substituting an explicit form for the electron-phonon matrix $\abs{V_q}^2$ and phonon dispersion $\omega_q$ and then using a numerical integration algorithm like Gauss-Kronod. Many analytical forms are known for these as functions of $q$, such as for acoustic phonons, Bogoliubov-Fröhlich polaron, impurities etc.
+\newline 
+
+On the other hand, we could instead use other more `ab-initio' methods such as Density Functional Theory (DFT) to obtained $\abs{V_q}^2$ and $\omega_q$. These would then enter the variational method as vectors of $q$-points evaluated at the electron/hole band-extremum (e.g the gamma-point $\vb{k} = \vb{0}$). The above $q$-integrands would then become vector/matrix products that are then concatenated over all $q$-points.
+
+\section{The Fr\"ohlich Model}
+
+Now equipped with the general polaron variational equations for the free energy and the corresponding memory function, we can specialise to the Fr\"ohlich model by substituting
+
+\begin{subequations}
+    \begin{equation}
+        \abs{V_{\vb{q}}}^2 = g^2_F(n) / V q^{n-1},
+    \end{equation}
+    \begin{equation}
+        \omega_{q} = \omega_0,
+    \end{equation}
+    \begin{equation}
+         \Lambda \to \infty.
+    \end{equation}
+\end{subequations}
+The $q$-space integral is evaluated,
+\begin{equation}
+    \begin{aligned}
+    I^{(F)}(n) &= \frac{g^2_F(n) \abs{S^{n-1}}}{(2\pi)^n} D_{\omega_0}(t) \int_0^\infty dq\ q^2 e^{-q^2 r_p^2 G(t)}, \\
+    &= \frac{g_F^2(n) \abs{S^{n-1}} \sqrt{\pi}}{(2\pi)^n 4 r_p^3} \frac{D_{\omega_0}(t)}{G(t)^{\frac{3}{2}}}, \\
+    &= \alpha^{(F)} \frac{\sqrt{\pi}}{2 r_p^3} \frac{(2 \sqrt{\pi})^{-n}}{\Gamma\left(\frac{n}{2}\right)} \frac{D_{\omega_0}(t)}{G(t)^{\frac{3}{2}}} .
+    \end{aligned}
+\end{equation}
+The memory function for the Fr\"ohlich model is then,
+\begin{equation}
+    \Sigma^{(F)}(\Omega) =  \frac{1}{m_b \hbar \Omega r_p^3} \frac{\pi \sqrt{2 \pi} \alpha^{(F)}}{\Gamma\left(\frac{n}{2} + 1\right) \left(2 \sqrt{\pi}\right)^n} \int_0^\infty dt\ \left(1 - e^{i \Omega t}\right) \frac{D_{\omega_0}(t)}{\left[ G(t)\right]^{3/2}}.
+\end{equation}
+and the inverse Fr\"ohlich DC mobility is,
+\begin{equation}
+    \mu_{dc}^{-1} = -\frac{e^2}{m_b \hbar r_p^3} \frac{\pi \sqrt{2 \pi} \alpha^{(F)}}{\Gamma\left(\frac{n}{2} + 1\right) \left(2 \sqrt{\pi}\right)^n} \int_0^\infty dt\ \frac{t D_{\omega_0}(t)}{\left[ G(t)\right]^{3/2}}.
+\end{equation}
+
+
+\section{The Holstein Model}
+
+We can specialise to the Holstein model by substituting,
+
+\begin{subequations}
+    \begin{equation}
+        \abs{V_{\vb{q}}}^2 = g_H^2(n) / N ,
+    \end{equation}
+    \begin{equation}
+        \omega_{\vb{q}} = \omega_0 ,
+    \end{equation}
+    \begin{equation}
+        \Lambda = 2\sqrt{\pi} \left(V \Gamma\left(\frac{n}{2} + 1\right)\right)^{1/n} \equiv \Lambda_n .
+    \end{equation}
+\end{subequations}
+The $q$-space integral is evaluated,
+\begin{equation}
+    \begin{aligned}
+    I^{(H)}(n) &= \frac{g^2_H(n) V \abs{S^{n-1}}}{N (2\pi)^n} D_{\omega_0}(t) \int_0^{\Lambda_n} dq\ q^{n+1} e^{-q^2 r_p^2 G(t)} , \\
+    &= \frac{g^2_H(n) \abs{S^{n-1}}}{2 (2\pi)^n r_p^{n+2}} \frac{V}{N} 
+    \frac{D_{\omega_0}(t)}{G(t)^{\frac{n}{2}+1}} \left[ \Gamma\left(\frac{n}{2} +1\right) - \Gamma\left(\frac{n}{2}+1, r_p^2 \Lambda_n^2 G(t) \right) \right] , \\
+    &= \frac{1}{2 r_p^2} \frac{V}{N} \frac{n g_H^2(n)}{(2 r_p \sqrt{\pi})^n} \frac{D_{\omega_0}(t)}{G(t)^{\frac{n}{2}+1}} \left[ 1 - \frac{\Gamma\left(\frac{n}{2} + 1, r_p^2 \Lambda_n^2 G(t) \right)}{\Gamma\left(\frac{n}{2} + 1\right)} \right] .
+    \end{aligned}
+\end{equation}
+The memory function for the Holstein model is then:
+\begin{equation}
+    \Sigma^{(H)}(\Omega) = \frac{\rho}{m_b\hbar\Omega \gamma r_p^{n+2}} \frac{4 n \alpha^{(H)}}{(2 \sqrt{\pi})^n} \int_0^\infty dt\ \left(1 - e^{i \Omega t}\right) \frac{D_{\omega_0}(t)}{G(t)^{\frac{n}{2}+1}} \left[ 1 - \frac{\Gamma\left(\frac{n}{2} + 1, r_p^2 \Lambda_n^2 G(t) \right)}{\Gamma\left(\frac{n}{2} + 1\right)} \right],
+\end{equation}
+and where $\rho = V / N$ is the particle density and $\gamma = \hbar\omega_0 / J$ is the adiabaticity. The inverse Holstein DC mobility is then,
+\begin{equation}
+    \mu_{dc}^{-1} = \frac{\rho e^2}{m_b\hbar \gamma r_p^{n+2}} \frac{4 n \alpha^{(H)}}{(2 \sqrt{\pi})^n} \int_0^\infty dt\ t \frac{D_{\omega_0}(t)}{G(t)^{\frac{n}{2}+1}} \left[ 1 - \frac{\Gamma\left(\frac{n}{2} + 1, r_p^2 \Lambda_n^2 G(t) \right)}{\Gamma\left(\frac{n}{2} + 1\right)} \right].
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General Memory Function}
+
+Feynman's original trial action has been proven successful in imitating the Fr\"ohlich model, yet it has been demonstrated that this is not a universal result \cite{Dries2016, Rosenfelder2001}. Even for the Fr\"ohlich model, the trial solution can be improved by finding the optimal ``memory function'' that reduces the upper-bound of the polaron free energy.
+
+\section{Multiple Variational Parameters}
+
+The first way to improve the trial action is to couple the electron to more than one fictitious particle, each with their respective mass and spring-constant that enter as multiple pairs of variational parameters in the model. This has been done before for one additional fictitious mass \cite{Abe1971}. 
+\newline
+
+I have extended Feynman's trial action to represent a particle (the charge-carrier) coupled to $n$ massive fictitious particles. This results in $2 \times n$ variational parameters (one for the coupling strength and one for the coupling frequency of each fictitious particle).
+\newline
+
+The generalised polaron trial action is,
+\begin{equation} \label{eqn:multi_trial_action}
+    \begin{gathered}
+        S_{0}[\mathbf{r}(\tau)] =
+        \frac{m_b}{2}\int^{\hbar \beta}_0 d\tau \left(\frac{d\mathbf{r}(\tau)}{d\tau}\right)^2 +
+        \frac{1}{8} \sum_{p = 1}^n \kappa_{p} w_{p} \int^{\hbar\beta}_0 d\tau \int^{\hbar\beta}_0 d\sigma\ D_{w_p}(|\tau - \sigma|) (\mathbf{r}(\tau) - \mathbf{r}(\sigma))^{2} .
+    \end{gathered}
+\end{equation}
+Here $\kappa_{p}$ is the spring constant associated with the $p$th fictitious particle and $w_{p}$ is the corresponding frequency of oscillation. The solution to the partition function for this action was evaluated in \cite{Poulter1992}.
+\newline
+
+Following Feynman, I extend Hellwarth and Biaggio's $A$ and $C$ equations (Eqs. (62b) and (62e) in Ref. \cite{Hellwarth1999}), which are symmetrised (for ease of computation) version of the finite temperature polaron actions of \=Osaka \cite{Osaka1959}, 
+\begin{subequations}
+\begin{align}
+    A &= \frac{3}{\hbar \beta m} \left[ \sum_{p = 1}^n \log\left(\frac{v_{p} \sinh (w_{p} \hbar \beta / 2)}{w_{p} \sinh (v_{p} \hbar \beta / 2)}\right) + \frac{1}{2} \log \left(2\pi\hbar \beta\right) \right] , \label{eqn:A} \\
+    C &= \frac{3}{m} \sum_{p, q = 1}^n \frac{C_{pq}}{v_{q} w_{p}} \left( \coth \left( \frac{v_{q} \hbar \beta}{2} \right) - \frac{2}{v_{q} \hbar \beta} \right) . \label{eqn:C}
+\end{align}
+\end{subequations}
+With, 
+\begin{subequations}
+    \begin{align}
+        C_{pq} &= \frac{w_{p}}{4} \frac{\kappa_{p} h_{q}}{v_{q}^2 - w_{p}^2} ,\\
+        \kappa_{p} &= \left(v_{p}^2 - w_{p}^2 \right) \prod\limits_{\substack{q=1 \\ q\neq p}}^n \frac{v_{q}^2 - w_{p}^2}{w_{q}^2 - w_{p}^2} ,\\
+        h_{p} &= \left( v_{p}^2 - w_{p}^2 \right) \prod\limits_{\substack{q=1 \\ q\neq p}}^n \frac{w_{q}^2 - v_{q}^2}{v_{q}^2 - v_{q}^2} .
+    \end{align}
+\end{subequations}
+$C_{pq}$ are the components of a generalised ($n \times n$) matrix version of Feynman's $C$ variational parameter. The cross (off-diagonal) terms give the coupling (interaction) between the fictitious particles.
+\newline
+
+A generalisation of the expression in the denominator of Hellwarth and Biaggio's $B$ equation (Eqn. (62c) in \cite{Hellwarth1999}) is,
+\begin{equation}\label{eqn:multi_D}
+    G(\tau) = \tau  \left(1 - \frac{\tau}{\hbar\beta}\right) + \sum_{p=1}^n \frac{h_p}{v_p^3} \left(D_{v_p}(0) - D_{v_p}(\tau) - v_p \tau \left(1 - \frac{\tau}{\hbar\beta} \right)\right).
+\end{equation}
+When $n=1$ (a single fictitious particle) and $x \rightarrow iu$, $G(\tau)$ is the same as $D(u)$ from Eqn. (35c) in the FHIP \cite{Feynman1962} mobility theory. 
+\newline
+
+From this trial Green function $G(\tau)$ we arrive at a generalisation to Hellwarth and Biaggio's B expression with multiple ($n$ with index $p$) variational parameters $v_{p}$ and $w_{p}$, 
+\begin{equation}
+\begin{gathered}
+    B = \frac{\alpha \omega_0}{\sqrt{\pi}} \int_0^{\frac{\hbar\beta}{2}} d\tau D_{\omega_0}(\tau) \left[ G(\tau) \right]^{-\frac{1}{2}} .
+\label{eqn:B}
+\end{gathered}
+\end{equation}
+
+Summing the trial free energy $A$ in Eqn. (\ref{eqn:A}), the trial-model interaction $B$ in Eqn. (\ref{eqn:B}), and the trial action $C$ in Eqn. (\ref{eqn:C}), we obtain a generalised variational inequality for the contribution to the free energy of the polaron from $2n$ variational parameters $v_{p}$, $w_{p}$, 
+
+\begin{equation}\label{eqn:multi_feynman_jensen}
+        F(\beta) \leq - \hbar \omega_0 (A + C + B) . \\
+\end{equation}
+
+Here we have taken care to write out the expression explicitly, rather than use `polaron' units. 
+\newline
+
+We obtain vectors of length $n$ for the variational parameters $v_{p}$ and $w_{p}$ that correspond to these minima, which will be used in evaluating the polaron mobility. When we consider only two variational parameters ($n = 1$) this simplifies to Hellwarth and Biaggio's form of \=Osaka's free energy. Feynman's original athermal version can then be obtained by taking the zero-temperature limit ($\beta \rightarrow \infty$).
+\newline
+
+% Note on how we don't solve for multiple modes in the rest of the results
+Our derivation supports a set of normal modes for the polaron quasi-particle model (multiple $v_{p}$ and $w_{p}$ parameters).
+
+\subsection{Multiple variational parameter mobility}
+
+To generalise the frequency-dependent mobility in Eqn. (\ref{eqn:mobility}), we follow the same procedure as FHIP, but use our generalised polaron trial action $S_0$ in Eqn. (\ref{eqn:multi_trial_action}). The result is a memory function akin to FHIP's $\chi$ (Eqn. (35) in \cite{Feynman1962}), but includes multiple ($2n$) variational parameters $v_{p}$ and $w_{p}$,
+\begin{equation}\label{eqn:multichi}
+    \begin{gathered}
+        \chi(\Omega) = \frac{\alpha \omega_0^{2}}{3\sqrt{\pi}} \int_0^{\infty} dt\ \left[1 - e^{i\Omega t}\right] \textrm{Im} S(t)
+    \end{gathered} .
+\end{equation}
+Here, 
+\begin{equation}
+    S(t) = D_{\omega_0}(t) [G(t)]^{-3/2} ,
+\end{equation}
+
+where $G(t)$ is $G(\tau = i t)$ from Eqn. (\ref{eqn:multi_D}) rotated back to real-time to give a generalised version of $D(u)$ in Eqn. (35c) in FHIP,
+\begin{equation}
+    \begin{gathered}
+         G(t) = i t  \left(1 - \frac{i t}{\hbar\beta}\right) + \sum_{p=1}^n \frac{h_p}{v_p^3} \left(D_{v_p}(0) - D_{v_p}(\tau) - iv_p t\left(1 - \frac{it}{\hbar\beta} \right) \right).
+    \end{gathered}
+\end{equation}
+
+The new frequency-dependent mobility $\mu(\Omega)$ is then obtained from the real and imaginary parts of the generalised $\chi(\Omega)$ using Eqn. (\ref{eqn:mobility}).
+
+\section{Generalised Trial Action}
+
+The central quantity for the generalisation is the trial action functional,
+
+\begin{equation} \label{eqn:generaltrial}
+    \begin{aligned}
+        S_0 &= \frac{m_b}{2} \int_0^{\hbar\beta} \vb{\Dot{r}}(\tau)^2 - \frac{m_b}{2} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \Sigma(\tau - \tau')\ \vb{r}(\tau) \cdot \vb{r}(\tau'),
+    \end{aligned}
+\end{equation}
+
+where $\Sigma(\tau - \tau')$ is a general memory kernel and is a real, continuous function defined for $\abs{\tau} \leq \hbar\beta$ and can be assumed to be symmetric $\Sigma(-\tau) = \Sigma(\tau)$. This is the most general quadratic, isotropic two-time action. We can restrict the memory kernel to be $\beta$-periodic and also assume a sum-rule,
+
+\begin{subequations}
+    \begin{equation}
+        \int_0^{\hbar\beta} \Sigma(\tau - \tau')\ d\tau' = 0 \qquad \forall\ \tau \in [0, \hbar\beta],
+    \end{equation}
+    \begin{equation}
+        \Sigma(\tau - \hbar\beta) = \Sigma(\tau) \qquad \forall\ \tau \in [0, \hbar\beta].
+    \end{equation}
+\end{subequations}
+
+The first assumption is required for a translation invariant system but the second assumption can be relaxed if required. 
+\newline
+
+The goal is now to find the optimal memory function $\Tilde{\Sigma}(\tau)$ that minimises the upper-bound to the free energy. Therefore, the free energy becomes a functional of the memory function,
+
+\begin{equation}
+    F \leq F_{\text{trial}} \left[ \Sigma \right] = F_{\text{ph}} + F_{S_0[\Sigma]} + \frac{1}{\beta} \langle S - S_0[\Sigma] \rangle_{S_0[\Sigma]}.
+\end{equation}
+
+To evaluate this functional, we need to evaluate the density-density correlation function,
+
+\begin{equation}
+    \langle \rho^{\dagger}(\tau) \rho(\tau') \rangle = \langle e^{i \vb{q} \cdot \left[ \vb{r}(\tau) - \vb{r}(\tau') \right]} \rangle_{S_0} .
+\end{equation}
+
+To evaluate the density-density correlation function, we introduce the generating functional,
+
+\begin{equation}
+    Z[\vb{J}] = \Big\langle \exp{\int_0^{\hbar\beta} d\tau\ \vb{J}(\tau) \cdot \vb{r}(\tau) } \Big\rangle_{S_0},
+\end{equation}
+
+where $\vb{J}(\tau)$ is an arbitrary source term. If we can evaluate this field integral, we can derive all correlation functions and subsequently we can calculate both $\langle S - S_0 \rangle_{S_0}$ and $F_{S_0}$. We recognise that the expectation $\langle \cdot \rangle_{S_0}$ indicates averaging with respect to an isotropic Gaussian stochastic process $\vb{r}(\tau)$ with zero mean and so is uniquely characterised by its covariance $\langle \vb{r}(\tau) \cdot \vb{r}(\tau') \rangle_{S_0}$,
+
+\begin{equation}
+    Z[\vb{J}] = \exp{\frac{m_b}{2n \hbar \beta} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \langle \vb{r}(\tau) \cdot \vb{r}(\tau') \rangle_{S_0}\ \vb{J}(\tau) \cdot \vb{J}(\tau')},
+\end{equation}
+
+where $n$ is the dimensionality. The covariance is also often referred to in this context as the single-particle Green's function $G(\tau, \tau') \equiv \langle \vb{r}(\tau) \cdot \vb{r}(\tau') \rangle$ and can be determined as an appropriate inverse of the integral kernel of the trial action,
+
+\begin{equation}
+    S_0 = \frac{m_b}{2}\int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \vb{r}(\tau) \left[ \frac{\partial}{\partial \tau} \delta(\tau - \tau') - \Sigma(\tau - \tau') \right] \vb{r}(\tau'),
+\end{equation}
+
+where the integral kernel is $G^{-1}(\tau - \tau') = G_0(\tau - \tau') - \Sigma(\tau - \tau')$ with $G_0(\tau - \tau') = \partial_{\tau}\delta(\tau - \tau')$ the bare free particle Green's function. Under the assumption of translation invariance and ,
+
+\begin{equation}
+    \int_0^{\hbar\beta} \Sigma(\tau) d\tau \neq 0,
+\end{equation}
+
+the equation of motion of the polaron quasiparticle Green's function is,
+
+\begin{equation}
+    \int_0^{\hbar\beta} d\tau'' G(\tau - \tau'') G^{-1}(\tau' - \tau'') = n \delta(\tau - \tau'),
+\end{equation}
+
+where $\delta(\tau)$ is a periodic delta function and has the Fourier representation,
+
+\begin{equation}
+    \delta(\tau) = \sum_{n=-\infty}^{\infty} e^{i \omega_n \tau},
+\end{equation}
+
+where $\omega_n = 2\pi n / \hbar \beta$ are the ``even'' Matsubara frequencies. The polaron Green's function is then given in Fourier representation as,
+
+\begin{equation}
+    G(\tau - \tau') = \frac{1}{\hbar\beta} \sum_{n=-\infty}^{\infty} \frac{e^{i\omega_n \left( \tau - \tau' \right)}}{\omega^2_n - \Sigma_n},
+\end{equation}
+
+where we can identify the Fourier coefficients as $G_n = (\omega^2_n - \Sigma_n)^{-1}$ where $\Sigma_n$ is the n-th Fourier coefficient of the memory function,
+
+\begin{equation}
+    \Sigma_n = \frac{1}{\hbar\beta} \int_0^{\hbar\beta} \Sigma(\tau) e^{-i\omega_n \tau} d\tau = \Sigma_{-n} .
+\end{equation}
+
+If $\Sigma_0 = 0$ and we are in a translation invariant system, the equation of motion for the Green's function is still valid with the understanding that we omit the term at $n = 0$.
+\newline
+
+Now equipped with the polaron quasiparticle Green's function and the generating functional, we can compute all the averages required in the free energy inequality. Setting the source term to be,
+
+\begin{equation}
+    \vb{J}(\tau) = i \vb{q} \left[ \delta(\tau - \sigma) - \delta(\tau - \sigma') \right] \equiv \vb{J}_{\vb{q}, \sigma, \sigma'}(\tau).
+\end{equation}
+
+Within $\langle S \rangle_{0}$ we have to evaluate the density-density correlation,
+
+\begin{equation}
+    \langle e^{i \vb{q} \cdot \left[ \vb{r}(\tau) - \vb{r}(0) \right]}\rangle_0  = \exp \left( -q^2 r_p^2 \left[ G(0) - G(\tau) \right] \right).
+\end{equation}
+
+For the Fr\"ohlich polaron model we have to evaluate the expectation of the two-time Coulomb interaction which we do in the Fourier representation where we use the result from the density-density correlation,
+
+\begin{equation}
+    \begin{aligned}
+        \Big\langle \frac{1}{\abs{\vb{r}(\sigma) - \vb{r}(\sigma')}} \Big\rangle_{S_0} &= \frac{\abs{S^{n-1}}}{(2\pi)^n} \int d^n q\ q^{-2} Z\left[ \vb{J}_{\vb{q}, \sigma, \sigma'} \right], \\
+        &= \left(\frac{2 n}{\pi \Big\langle \abs{\vb{r}(\sigma) - \vb{r}(\sigma')}^2 \Big\rangle_{S_0}}\right)^{1/2}.
+    \end{aligned}
+\end{equation}
+
+We can evaluate the trial system free energy by using the ``coupling constant'' integration trick in which we extract a constant $\lambda$ from the memory function $\Sigma \to \lambda \Sigma$. For a translation-invariant system we can evaluate the free energy from,
+
+\begin{equation}
+    F_{S_0}(\lambda) = F_{S_0}(0) + \int_0^\lambda d\lambda'\ \frac{\partial F_{S_0}(\lambda)}{\partial \lambda}.
+\end{equation}
+
+The partial derivative is then,
+
+\begin{equation}
+    \frac{\partial F_{S_0}(\lambda)}{\partial \lambda} = \frac{1}{\hbar\beta} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \Sigma(\tau - \tau') G(\tau - \tau'),
+\end{equation}
+
+which implies,
+
+\begin{equation}
+    F_{S_0}(0) = -\frac{1}{\beta} \ln\left\{V \left( \frac{m_b}{2 \pi \hbar^2 \beta} \right)^{n/2}\right\} = F_{el},
+\end{equation}
+
+which is just the free energy for the free electron.
+
+\section{Self-consistent Equations}
+
+Overall, we have,
+
+\begin{equation}
+    F \leq F_{ph} + F_{el} + \Tr \ln \left(G G_0^{-1}\right)   + \Tr \left( \Sigma G \right) + \Phi[G],
+\end{equation}
+
+where, 
+
+\begin{equation}
+    \begin{aligned}
+        \Phi[G] &= \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 \int_{0}^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau' D_{\omega_{\vb{q}}}(\tau - \tau') \exp \left( -q^2 r_p^2 G(\tau - \tau') \right) ,\\
+        &= 2 \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 \int_0^{\hbar\beta}  d\tau (\hbar \beta - \tau) D_{\omega_{\vb{q}}} (\tau) \exp\left(-q^2 r_p^2 G(\tau)\right),
+    \end{aligned}
+\end{equation}
+where we have used that,
+\begin{equation}
+    \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau' f(\abs{\tau - \tau'}) = 2 \int_0^{\hbar\beta} d\tau (\hbar\beta - \tau) f(\tau).
+\end{equation}
+
+For the Fr\"ohlich model this becomes
+
+\begin{equation}
+    \Phi^{(F)}[G] = \abs{V_0}^2 \int^{\hbar\beta}_0 d\tau\ \left(\frac{\tau}{\hbar\beta} - 1 \right) D_{\omega_0}(\tau) \left[G(\tau)\right]^{-1/2} .
+\end{equation}
+
+We note that the free-electron energy is $F_{el} = \ln\{\det G_0^{-1}\} = \Tr \ln G_0^{-1}$ and so the free-energy inequality is,
+
+\begin{equation} \label{eqn:scfreeenergy}
+    F \leq \frac{1}{2} \Tr \ln \left( D_0 \right) + \Tr \ln \left(-G\right) + \Tr\left(\Sigma G\right) + \Phi[G],
+\end{equation}
+
+where we have used that for bosonic phonons $F_{ph} = \frac{1}{2} \Tr \ln (D_0)$ where $D_0$ is the free phonon Green's function. We note that this is takes on a similar form to the expression for the grand potential obtained by Luttinger and Ward \cite{Luttinger1960} where $\Phi[G]$ is an approximation to the Luttinger-Ward functional; sum of all closed, bold, two-particle irreducible diagrams. Other approximations to this functional include GW-theory where it is truncated to include just ring-diagrams $\Phi[G] \approx GUG + GUGGUG + \dots$, and Density Mean-Field Theory (DMFT) where only local-diagrams are accounted for.
+
+\section{Statics = Dynamics}
+
+The function $\Sigma(\Omega)$ which gives the lowest energy in the variational principal at zero temperature, satisfies the integral equation,
+
+\begin{equation}
+    \Sigma(\Omega) = \frac{2}{n} \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 q^2 \int^\infty_0 d\tau \left( 1 - \cos(\Omega \tau) \right)  e^{-\omega_{\vb{q}} \tau} e^{-q^2 r_p^2 [G(0) - G(\tau)]}, 
+\end{equation}
+
+where,
+
+\begin{equation}
+    G(\tau) = \int_{-\infty}^\infty \frac{d\omega}{2\pi} \frac{ e^{i \omega \tau} }{m \omega^2 - \Sigma(\omega)} .
+\end{equation}
+
+The polaron Green's function $G(\tau)$ that minimises the polaron free energy at arbitrary temperature in the absence of applied electric and magnetic fields also produces the optimal impedance function $z(\Omega)$. 
+\newline
+
+Generalising the variational equations to a general polaron system we obtain,
+
+\begin{equation}
+    F \leq \frac{n}{\beta} \sum_{l=1}^\infty \ln \left( \frac{Z(\omega_l)}{m \omega_l^2} \right) - \frac{n}{\beta} \sum_{l=1}^\infty \frac{1 - m \omega^2_l}{Z(\omega_l)} - \int_0^{\frac{\hbar\beta}{2}} d\tau \sum_{\vb{q}, j} \abs{V_{\vb{q}, j}}^2 D_{\vb{q}, j}(\tau) e^{-q^2 r_p^2 \left[G(0) - G(\tau)\right]},
+\end{equation}
+
+where,
+
+\begin{equation}
+    \Sigma(\tau) = \frac{2}{\beta} \sum_{l = 1}^\infty \frac{1 - \cos\left(\omega_l \tau \right)}{Z(\omega_l)},
+\end{equation}
+
+and,
+
+\begin{equation}
+    Z(\omega_l) = m \omega_l^2 + 4 \int_{-\infty}^\infty d\Omega \frac{P}{\Omega} \frac{G(\Omega) \omega^2_l}{\Omega^2 + \omega_l^2},
+\end{equation}
+
+and $\omega_l \equiv 2\pi l / \beta$, $l \in \mathbf{N}$.
