@@ -21,8 +21,8 @@
 \newcommand*{\eqmathskip}   {0.30\baselineskip}
 
 % --- Microtype
-% \microtypesetup{tracking=true,kerning=true,spacing=true,
-%                factor=1100,stretch=10,shrink=10}
+\microtypesetup{tracking=true,kerning=true,spacing=true,
+               factor=1100,stretch=10,shrink=10}
 
 % --- Widows and orphans
 \widowpenalty=10000
@@ -50,8 +50,8 @@
 
 % --- SI units
 \sisetup{mode = text,                              % ensures numbers and units are displayed with main font
-         text-micro = \ensuremath{\mu},            % uses 'mu' character from eulervm, more beautiful
-         binary-units = true,                      % allows using 'byte'
+         % text-micro = \ensuremath{\mu},            % uses 'mu' character from eulervm, more beautiful
+         % binary-units = true,                      % allows using 'byte'
          group-digits = integer,
          group-minimum-digits = 4,                 % activates separation for >4-digit numbers
          group-separator = {,}}                    % ensures comma is used as thousand separator
@@ -84,7 +84,7 @@
 
 % --- Epigraphs
 \setlength{\epigraphrule}       {0pt} % removes the horizontal line between text and source
-\setlength{\epigraphwidth}      {0.50\textwidth}
+\setlength{\epigraphwidth}      {1.0\textwidth}
 \setlength{\beforeepigraphskip} {0.5\baselineskip}
 \setlength{\afterepigraphskip}  {1.0\baselineskip}
 
