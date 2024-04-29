@@ -1,0 +1,19 @@
+name = "PolaronThesis"
+uuid = "049fa2f6-ac7a-40e9-9591-fc80ab658020"
+authors = ["Bradley A. A. Martin"]
+version = "0.1.0"
+
+[deps]
+Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
+Gaston = "4b11ee91-296f-5714-9832-002c20994614"
+JLD = "4138dd39-2aa7-5051-a626-17a0bb65d9c8"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+PGFPlotsX = "8314cec4-20b6-5062-9cdb-752b83310925"
+PlotlyBase = "a03496cd-edff-5a9b-9e67-9cda94a718b5"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
+QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
