@@ -1,7 +1,7 @@
 reset session
 
 prefix = "../../plots/rubrene/rubrene-energy-temp-1to400K"
-set key right
+set key center right
 set grid
 set xlabel  "T (K)"
 set ylabel  "Polaron Binding Energy (meV)"

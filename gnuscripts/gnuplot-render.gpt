@@ -40,9 +40,8 @@ set linetype 2 pi -1 pt 1 lc rgb '#E41A1C' dt solid # red
 set linetype 3 pi -1 pt 2 lc rgb '#4DAF4A' dt solid # green
 set linetype 4 pi -1 pt 4 lc rgb '#984EA3' dt solid # purple
 set linetype 5 pi -1 pt 1 lc rgb '#FF7F00' dt solid # orange
-set linetype 6 pi -1 pt 6 lc rgb '#FFFF33' dt solid # yellow
-set linetype 7 pi -1 pt 2 lc rgb '#A65628' dt solid # brown
-set linetype 8 pi -1 pt 4 lc rgb '#F781BF' dt solid # pink
+set linetype 6 pi -1 pt 2 lc rgb '#A65628' dt solid # brown
+set linetype 7 pi -1 pt 4 lc rgb '#F781BF' dt solid # pink
 #####
 set pointintervalbox 1.75
 
@@ -73,18 +72,20 @@ replot
 
 set terminal pdfcairo size 3in,2in enhanced font 'Helvetica,12'
 set output prefix . '-COLOUR.pdf'
+set key font "Helvetica,10"
 
-unset key
+# unset key
 set pointsize 0.3
 
 replot
 
 # PDF - Keep it oldskool and B&W, for journals.
 
-unset key
+# unset key
 
 set terminal pdfcairo size 3in,2in enhanced font 'Helvetica,12'
 set output prefix . '-BW.pdf'
+set key font "Helvetica,10"
 
 # Via Janert's Gnuplot in Action 2nd Edition; style3.gp
 # Black and White traditional Physical-review ish.
