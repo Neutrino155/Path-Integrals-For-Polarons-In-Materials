@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/holstein/holstein-3d-imag-memory-freq"
 set key Left right top
 set xlabel  "Frequency (ω₀)"
-set ylabel  "Imag Memory (m/ω₀)"
+set ylabel  "Holstein Imag Memory (m/ω₀)"
 set yrange [0:100]
 
 

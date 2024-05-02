@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/holstein/holstein-3d-real-memory-freq"
 set key Left right top
 set xlabel  "Frequency (ω₀)"
-set ylabel  "Real Memory (m/ω₀)"
+set ylabel  "Holstein Real Memory (m/ω₀)"
 set yrange [-100:20]
 
 

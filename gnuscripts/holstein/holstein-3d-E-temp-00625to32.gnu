@@ -4,7 +4,7 @@ prefix = "../../plots/holstein/holstein-3d-energy-temp-00625to32"
 set key Left left bottom
 set grid
 set xlabel  "T (ħω₀/kB)"
-set ylabel  "Energy (ħω₀)"
+set ylabel  "Holstein Energy (ħω₀)"
 set xrange [0.0625:32]
 set yrange [-42:-6]
 set ytics -6,-6,-42

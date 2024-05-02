@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/holstein/holstein-2d-imag-conductivity-freq"
 set key Left right top
 set xlabel  "Frequency (ω₀)"
-set ylabel  "Imag Optical Absorption (ϵ₀cn)⁻¹"
+set ylabel  "Holstein Imag Optical Absorption (ϵ₀cn)⁻¹"
 set yrange [0:0.4]
 set xrange [0:16]
 

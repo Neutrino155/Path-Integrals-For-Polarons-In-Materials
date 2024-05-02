@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/holstein/holstein-3d-real-conductivity-freq"
 set key Left right top
 set xlabel  "Frequency (ω₀)"
-set ylabel  "Real Optical Absorption (ϵ₀cn)⁻¹"
+set ylabel  "Holstein Real Optical Absorption (ϵ₀cn)⁻¹"
 set yrange [-0:0.2]
 
 
