@@ -90,22 +90,25 @@ end
 
 function optimal_frohlich(αωβΩ...; rtol = 1e-5, verbose = false, kwargs...) 
     if verbose println("# Fictitious Particles = 1") end
+    fs = []
     f = frohlich(αωβΩ...; verbose = true, kwargs...)
+    append!(fs, [f])
     energy = f.E
     err = 1
     if verbose n = 2 end
     while all(err .> rtol)
         if verbose println("# Fictitious Particles = $n") end
         v_guesses = length(f.v) > 1 ? pustrip.(vcat(f.v[1], maximum(f.v[1]) * 2)) : pustrip.(vcat(f.v, maximum(f.v) * 2))
-        w_guesses = length(f.w) > 1 ? pustrip.(vcat(f.w[1], maximum(f.w[1]) * 2)) : (vcat(f.w, maximum(f.w) * 2))
+        w_guesses = length(f.w) > 1 ? pustrip.(vcat(f.w[1], maximum(f.w[1]) * 2)) : pustrip.(vcat(f.w, maximum(f.w) * 2))
         upper = pustrip.([maximum(v_guesses) * 4, maximum(v_guesses) * 4])
         f = frohlich(αωβΩ...; v_guesses = v_guesses, w_guesses = w_guesses, upper = upper, verbose = verbose, kwargs...)
+        append!(fs, f)
         new_energy = f.E
         err = (new_energy .- energy) ./ energy
         energy = new_energy
         if verbose n += 1 end
     end
-    return f
+    return fs
 end
 
 function frohlich_alpha(optical_dielectric, static_dielectic, frequency, effective_mass)
