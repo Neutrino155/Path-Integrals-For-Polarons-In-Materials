@@ -13,8 +13,8 @@ include("Holstein.jl")
 
 # Export functions Å
 export puconvert, punit, pustrip, m0_pu, e_pu, ħ_pu, kB_pu, ω0_pu, r0_pu, E0_pu
-export Frohlich, frohlich, frohlich_alpha, frohlich_coupling, frohlich_S, frohlich_memory, save_frohlich, load_frohlich
-export Holstein, holstein, holstein_alpha, holstein_coupling, holstein_S, holstein_memory, save_holstein, load_holstein
+export Frohlich, frohlich, frohlich_alpha, frohlich_coupling, frohlich_S, frohlich_memory, save_frohlich, load_frohlich, optimal_frohlich
+export Holstein, holstein, holstein_alpha, holstein_coupling, holstein_S, holstein_memory, save_holstein, load_holstein, optimal_holstein
 export polaron_propagator, S₀, E₀
 export ball_surface, phonon_propagator, variation, reduce_array, ϵ_ionic_mode
 export Material, material, FrohlichMaterial, frohlichmaterial, save_frohlich_material, load_frohlich_material, HolsteinMaterial, holsteinmaterial, save_holstein_material, load_holstein_material
@@ -51,6 +51,44 @@ function variation(energy, initial_v, initial_w; lower = [0, 0], upper = [Inf, I
 
     return Δv + w, w, energy_minimized...
 end
+
+function variation(energy, initial_v::Vector, initial_w::Vector; lower = [0, 0], upper = [1e5, 1e5], warn = false)
+
+    if length(initial_v) != length(initial_w)
+        return error("The number of variational parameters v & w must be equal.")
+    end
+  
+    N_params = length(initial_v)
+  
+    Δv = initial_v .- initial_w
+    initial = vcat(Δv .+ repeat([eps(Float64)], N_params), initial_w)
+  
+    lower = vcat(fill(lower, N_params)...)
+    upper = vcat(fill(upper, N_params)...)
+  
+    f(x) = energy([x[2*n-1] for n in 1:N_params] .+ [x[2*n] for n in 1:N_params], [x[2*n] for n in 1:N_params])[1]
+  
+    solution = Optim.optimize(
+      Optim.OnceDifferentiable(f, initial; autodiff=:forward),
+      lower,
+      upper,
+      initial,
+      Fminbox(BFGS()),
+      Optim.Options(g_tol = eps())
+    )
+  
+    var_params = Optim.minimizer(solution)
+  
+    Δv = [var_params[2*n-1] for n in 1:N_params]
+    w = [var_params[2*n] for n in 1:N_params]
+    energy_minimized = energy(Δv .+ w, w)
+  
+    if !Optim.converged(solution) && warn
+          @warn "Failed to converge. v = $(Δv .+ w), w = $w, E = $energy_minimized"
+    end
+  
+    return sort(Δv .+ w), sort(w), energy_minimized...
+  end
 
 variation(energy; lower = [0, 0], upper = [Inf, Inf], warn = true) = variation(energy, 4, 2; lower = lower, upper = upper, warn = warn)
 
