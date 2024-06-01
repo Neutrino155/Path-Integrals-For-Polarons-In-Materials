@@ -36,13 +36,14 @@ function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::Number; dim
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
+    Ω = pustrip.(Ω)
     g = pustrip(holstein_coupling(α, ω * ω0_pu, J * E0_pu, dims))
-    S(v, w) = holstein_S(v, w, g, τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) : polaron_propagator(τ, v, w, β); limits = [0, β / 2], dims = dims)
+    S(v, w) = holstein_S(v, w, g, τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
     v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
     w_guess = w_guesses == false ? ω + 1 / β : w_guesses
     v, w, E = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
-    Σ = holstein_memory(Ω, g, t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v, w) : polaron_propagator(t, v, w, β); dims = dims) * ω
-    return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
+    Σ = holstein_memory(Ω, g, t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v, w) * J : polaron_propagator(t, v, w, β) * J; dims = dims) * J
+    return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
 function holstein(α, ω::Number, J::Number, β, Ω; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false, kwargs...)
@@ -57,13 +58,28 @@ function holstein(α, ω::Number, J::Number, β, Ω; dims = 3, v_guesses = false
     Σ = Array{Any}(undef, num_α, num_β, num_Ω)
     @inbounds for i in 1:num_α, j in 1:num_β, k in 1:num_Ω
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
-        h = holstein(α[i], ω, J, β[j], Ω[k]; v_guesses = v_guesses, w_guesses = w_guesses, upper = upper, kwargs...)
+        h = holstein(α[i], ω, J, β[j], Ω[k]; v_guesses = v_guesses, w_guesses = w_guesses, upper = upper, dims = dims, kwargs...)
         g[i], v[i,j], w[i,j], E[i,j], Σ[i,j,k] = h.g, h.v, h.w, h.E, h.Σ
         v_guesses, w_guesses = pustrip.(v[i,j]), pustrip.(w[i,j])
         upper = pustrip.([maximum(v[i,j]) * 2 + 2 * ω0_pu, maximum(v[i,j]) * 2 + 2 * ω0_pu])
         if verbose n += 1; print("\e[1F") end
     end
-    return Holstein(ω, J, dims, g, α, E, v, w, pustrip.(β), pustrip.(Ω), Σ)
+    return Holstein(ω, J, dims, g, α, E, v, w, β, Ω, Σ)
+end
+
+function holstein(material::Material; kwargs...)
+    α = holstein_alpha.(material.g, material.ω_LO, material.J, material.d)
+    return holstein(α,puconvert.(material.ω_LO), puconvert.(material.J); dims = material.d, kwargs...)
+end
+
+function holstein(material::Material, T; kwargs...)
+    α = holstein_alpha.(material.g, material.ω_LO, material.J, material.d)
+    return holstein(α, puconvert.(material.ω_LO), puconvert.(material.J), pustrip.(1 ./ (kB_pu .* T)) ./ E0_pu; dims = material.d, kwargs...)
+end
+
+function holstein(material::Material, T, Ω; kwargs...)
+    α = holstein_alpha.(material.g, material.ω_LO, material.J, material.d)
+    return holstein(α, puconvert.(material.ω_LO), puconvert.(material.J), pustrip.(1 ./ (kB_pu .* T)) ./ E0_pu, puconvert.(Ω); dims = material.d, kwargs...)
 end
 
 function optimal_holstein(αωJβΩ...; rtol = 1e-5, verbose = false, kwargs...) 
@@ -85,22 +101,6 @@ function optimal_holstein(αωJβΩ...; rtol = 1e-5, verbose = false, kwargs...)
     end
     return h
 end
-
-function holstein(material::Material; kwargs...)
-    α = holstein_alpha.(material.g, material.ω_LO, material.J, material.d)
-    return holstein(α, material.ω_LO, material.J; kwargs...)
-end
-
-function holstein(material::Material, T; kwargs...)
-    α = holstein_alpha.(material.g, material.ω_LO, material.J, material.d)
-    return holstein(α, material.ω_LO, material.J, pustrip.(1 ./ (kB_pu .* T)); kwargs...)
-end
-
-function holstein(material::Material, T, Ω; kwargs...)
-    α = holstein_alpha.(material.g, material.ω_LO, material.J, material.d)
-    return holstein(α, material.ω_LO, material.J, pustrip.(1 ./ (kB_pu .* T)), pustrip.(Ω); kwargs...)
-end
-
 function holstein_alpha(coupling, frequency, transfer_integral, dims)
     
     # Add units
@@ -132,7 +132,7 @@ end
 
 function holstein_memory(Ω, coupling, phonon_propagator, polaron_propagator; dims = 3)
     integral, _ = quadgk(t -> (1 - exp(im * Ω * t)) / Ω * imag(phonon_propagator(im * t) * (√π / 2 * erf(π * sqrt(polaron_propagator(im * t))) / polaron_propagator(im * t)^(3/2) - π * exp(-π^2 * polaron_propagator(im * t)) / polaron_propagator(im * t)) * (√π * erf(π * sqrt(polaron_propagator(im * t))) / sqrt(polaron_propagator(im * t)))^(dims - 1)), 0, Inf)
-    return norm(coupling)^2 / (2π)^dims * integral
+    return norm(coupling)^2 * integral * dims / (2π)^dims
 end
 
 function save_holstein(data::Holstein, prefix)

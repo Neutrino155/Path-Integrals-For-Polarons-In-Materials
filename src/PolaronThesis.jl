@@ -26,47 +26,20 @@ ball_surface(n) = 2 * π^(n/2) / gamma(n/2)
 phonon_propagator(τ, ω) = exp(-τ * ω)
 phonon_propagator(τ, ω, β) = 1 / (exp(β * ω) - 1) > eps() ? 1 / (exp(β * ω) - 1) * exp(τ * ω) + (1 + 1 / (exp(β * ω) - 1)) * exp(-τ * ω) : exp(-τ * ω)
 
-function variation(energy, initial_v, initial_w; lower = [0, 0], upper = [Inf, Inf], warn = true)
-
-    Δv = initial_v - initial_w # defines a constraint, so that v>w
-    initial = [Δv + eps(), initial_w]
-
-    f(x) = energy(x[1] + x[2], x[2])[1]
-
-    solution = Optim.optimize(
-        Optim.OnceDifferentiable(f, initial; autodiff=:forward),
-        lower,
-        upper,
-        initial,
-        Fminbox(BFGS()),
-        Optim.Options(g_tol = eps())
-    )
-
-    Δv, w = Optim.minimizer(solution) # v=Δv+w
-    energy_minimized = energy(Δv + w, w)
-
-    if !Optim.converged(solution) && warn
-        @warn "Failed to converge. v = $(Δv .+ w), w = $w, E = $energy_minimized"
-    end
-
-    return Δv + w, w, energy_minimized...
-end
-
-function variation(energy, initial_v::Vector, initial_w::Vector; lower = [0, 0], upper = [1e5, 1e5], warn = false)
+function variation(energy, initial_v, initial_w; lower = eps(), upper = Inf, warn = false)
 
     if length(initial_v) != length(initial_w)
         return error("The number of variational parameters v & w must be equal.")
     end
   
     N_params = length(initial_v)
-  
-    Δv = initial_v .- initial_w
-    initial = vcat(Δv .+ repeat([eps(Float64)], N_params), initial_w)
-  
-    lower = vcat(fill(lower, N_params)...)
-    upper = vcat(fill(upper, N_params)...)
-  
-    f(x) = energy([x[2*n-1] for n in 1:N_params] .+ [x[2*n] for n in 1:N_params], [x[2*n] for n in 1:N_params])[1]
+
+    params = sort(vcat(initial_w, initial_v))
+
+    Δx = params[2:end] .- params[1:end-1]
+    initial = vcat(minimum(initial_w), [Δx .+ eps()]...)
+    
+    f(x) = energy([sum(x[i] for i in 1:(2 * n)) for n in 1:N_params], [sum(x[i] for i in 1:(2 * n - 1)) for n in 1:N_params])[1]
   
     solution = Optim.optimize(
       Optim.OnceDifferentiable(f, initial; autodiff=:forward),
@@ -77,17 +50,18 @@ function variation(energy, initial_v::Vector, initial_w::Vector; lower = [0, 0],
       Optim.Options(g_tol = eps())
     )
   
-    var_params = Optim.minimizer(solution)
+    var_params = cumsum(Optim.minimizer(solution))
   
-    Δv = [var_params[2*n-1] for n in 1:N_params]
-    w = [var_params[2*n] for n in 1:N_params]
-    energy_minimized = energy(Δv .+ w, w)
+    v = [var_params[2*n] for n in 1:N_params]
+    w = [var_params[2*n-1] for n in 1:N_params]
+
+    energy_minimized = Optim.minimum(solution)
   
     if !Optim.converged(solution) && warn
-          @warn "Failed to converge. v = $(Δv .+ w), w = $w, E = $energy_minimized"
+          @warn "Failed to converge. v = $v, w = $w, E = $energy_minimized"
     end
   
-    return sort(Δv .+ w), sort(w), energy_minimized...
+    return v, w, energy_minimized...
   end
 
 variation(energy; lower = [0, 0], upper = [Inf, Inf], warn = true) = variation(energy, 4, 2; lower = lower, upper = upper, warn = warn)
