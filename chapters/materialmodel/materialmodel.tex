@@ -442,3 +442,69 @@ The momentum integral can be evaluated numerically, either by substituting an ex
 \newline 
 
 On the other hand, we could instead use other more `ab-initio' methods such as Density Functional Theory (DFT) to obtained $\abs{V_q}^2$ and $\omega_q$. These would then enter the variational method as vectors of $q$-points evaluated at the electron/hole band-extremum (e.g the gamma-point $\vb{k} = \vb{0}$). The above $q$-integrands would then become vector/matrix products that are then concatenated over all $q$-points.
+
+\subsection{General Polaron Action}
+
+Excluding spin and phonon branches, we may write the general polaron Hamiltonian:
+
+\begin{equation}
+    H_{\text{polaron}} = \sum_{\vb{k}} \epsilon_{\vb{k}} c^\dagger_{\vb{k}} c_{\vb{k}} + \sum_{\vb{q}} \hbar \omega_{\vb{q}} b^\dagger_{\vb{q}} b_{\vb{q}} + \sum_{\vb{k}, \vb{q}} V_{\vb{k},\vb{q}} c^\dagger_{\vb{k}+\vb{q}}c_{\vb{k}} \left( b^\dagger_{-\vb{q}} + b_{\vb{q}} \right)
+\end{equation}
+
+Propose a trial Hamiltonian where we uncorrelate the electron and phonon momenta:
+
+\begin{equation}
+    H_{\text{trial}} = \sum_{\vb{k}} \epsilon_{\vb{k}} c^\dagger_{\vb{k}} c_{\vb{k}} + \sum_{\vb{q}} \hbar \Omega_{\vb{q}} b^\dagger_{\vb{q}} b_{\vb{q}} + \sum_{\vb{k}, \vb{q}} M_{\vb{k},\vb{q}} c^\dagger_{\vb{k}}c_{\vb{k}} \left( b^\dagger_{-\vb{q}} + b_{\vb{q}} \right)
+\end{equation}
+
+where $\Omega_{\vb{q}}$ and $M_{\vb{k}, \vb{q}}$ will be variational parameters.
+
+The coherent state path integral for the polaron Hamiltonian $H_{\text{polaron}}$:
+
+\begin{equation}
+    Z_{\text{polaron}} = \int D[\Bar{c}, c] \int D[\Bar{b},b]\ e^{-S_{\text{el}}[\Bar{c}, c] - S_{\text{ph}}[\Bar{b},b] - S_{\text{el-ph}}[\Bar{c},c,\Bar{b},b]}
+\end{equation}
+
+with the free-electron action:
+
+\begin{equation}
+        S_{\text{el}}\left[\Bar{c}, c\right] =  \sum_{\vb{k}} \int_0^{\hbar\beta} d\tau\ \Bar{c}_{\vb{k}}(\tau) \left[\partial_{\tau} - \epsilon_{\vb{k}} - \mu \right] c_{\vb{k}}(\tau)
+\end{equation}
+
+the free-phonon action:
+
+\begin{equation}
+        S_{\text{ph}}\left[\Bar{b}, b\right] =  \sum_{\vb{q}} \int_0^{\hbar\beta} d\tau\ \Bar{b}_{\vb{q}}(\tau) \left[\partial_{\tau} - \omega_{\vb{q}} \right] b_{\vb{q}}(\tau)
+\end{equation}
+
+and the electron-phonon interaction action:
+
+\begin{equation}
+    \begin{aligned}
+        S_{\text{el-ph}}\left[\Bar{c}, c, \Bar{b}, b\right] &=  \sum_{\vb{k},\vb{q}} V_{\vb{k}, \vb{q}} \int_0^{\hbar\beta} d\tau\ \Bar{c}_{\vb{k}+\vb{q}}(\tau) c_{\vb{k}}(\tau) b_{\vb{q}}(\tau) \\
+        &+ \sum_{\vb{k},\vb{q}} V_{\vb{k}, \vb{q}} \int_0^{\hbar\beta} d\tau\ \Bar{b}_{-\vb{q}}(\tau) \Bar{c}_{\vb{k}+\vb{q}}(\tau) c_{\vb{k}}(\tau)
+    \end{aligned}
+\end{equation}
+
+The phonon contribution to the action is quadratic and may be integrated to give:
+
+\begin{equation}
+    Z^0_{\text{ph}} \exp{\frac{1}{2} \sum_{\vb{q}, \vb{k}, \vb{k}'} V_{\vb{k}, \vb{q}} V^*_{\vb{k}', \vb{q}} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \Bar{c}_{\vb{k}}(\tau) c_{\vb{k} - \vb{q}} (\tau) D^0_{\omega_{\vb{q}}}(\tau - \tau') \Bar{c}_{\vb{k}'-\vb{q}}(\tau') c_{\vb{k}'}(\tau')}
+\end{equation}
+
+where $D^0_{\omega_{\vb{q}}}(\tau)$ is the bare phonon kernel for a harmonic oscillator and $Z^0_{\text{ph}} = \det{D^0}^{-1/2}$ is the non-interactor phonon partition function.
+
+The coherent state path integral for the polaron Hamiltonian $H_{\text{polaron}}$:
+
+\begin{equation}
+    Z_{\text{polaron}} = \int D\Bar{c} Dc \exp{-S_{\text{polaron}}\left[\Bar{c}(\tau), c(\tau)\right]}
+\end{equation}
+
+with action:
+
+\begin{equation}
+    \begin{aligned}
+        S_{\text{polaron}}\left[\Bar{c}(\tau), c(\tau)\right] =  \sum_{\vb{k}} &\int_0^{\hbar\beta} d\tau\ \Bar{c}_{\vb{k}}(\tau) \left[\partial_{\tau} - \epsilon_{\vb{k}} - \mu \right] c_{\vb{k}}(\tau) \\
+        - \sum_{\vb{k}, \vb{q}} \frac{\abs{V_{\vb{k}, \vb{q}}}^2}{2} \int_0^{\hbar\beta} &\int_0^{\hbar\beta} d\tau d\tau'\ \Bar{c}_{\vb{k}}(\tau) c_{\vb{k}+\vb{q}}(\tau) D^0_{\omega_{\vb{q}}}(\tau - \tau') \Bar{c}_{\vb{k}+\vb{q}}(\tau') c_{\vb{k}}(\tau') 
+    \end{aligned}
+\end{equation}
