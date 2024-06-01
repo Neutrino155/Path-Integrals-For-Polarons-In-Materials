@@ -1,7 +1,7 @@
 reset session
 
 prefix = "../../plots/rubrene/rubrene-vw-temp-1to400K"
-set key Left left
+set key bottom right
 set grid
 set xlabel  "T (K)"
 set ylabel  "v, w (ω₀)"
