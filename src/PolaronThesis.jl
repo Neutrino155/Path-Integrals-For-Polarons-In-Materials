@@ -52,17 +52,17 @@ function variation(energy, initial_v, initial_w; lower = eps(), upper = Inf, war
   
     var_params = cumsum(Optim.minimizer(solution))
   
-    v = [var_params[2*n] for n in 1:N_params]
-    w = [var_params[2*n-1] for n in 1:N_params]
+    v = reduce_array([var_params[2*n] for n in 1:N_params])
+    w = reduce_array([var_params[2*n-1] for n in 1:N_params])
 
-    energy_minimized = Optim.minimum(solution)
+    energy_minimized = reduce_array(Optim.minimum(solution))
   
     if !Optim.converged(solution) && warn
           @warn "Failed to converge. v = $v, w = $w, E = $energy_minimized"
     end
   
     return v, w, energy_minimized...
-  end
+end
 
 variation(energy; lower = [0, 0], upper = [Inf, Inf], warn = true) = variation(energy, 4, 2; lower = lower, upper = upper, warn = warn)
 
