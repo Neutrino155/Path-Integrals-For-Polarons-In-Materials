@@ -8,9 +8,9 @@
 \section{Multiple Phonon Modes}
 \label{sec:3-1}
 
-\lettrine{I}n simple polar materials with two atoms in the basis, the single triply-degenerate optical phonon branch is split by dielectric coupling into the singly-degenerate longitudinal-optical mode and double-generate transverse-optical modes. Only the longitudinal-optical mode is infrared active, and contributes to the Fr\"ohlich dielectric electron-phonon interaction. 
+\lettrine{I}n simple polar materials with two atoms in the basis, the single triply-degenerate optical phonon branch is split by dielectric coupling into the singly-degenerate longitudinal-optical mode and double-generate transverse-optical modes. Only the longitudinal-optical mode is infrared active and contributes to the Fr\"ohlich dielectric electron-phonon interaction. 
 
-The infrared activity of this mode is driving the formation of the polaron, and similarly in a more complex material the range of infrared active modes all contribute to the polaron stabilisation. This relationship is, however, slightly obscured by the algebra in Eq. (\ref{eqn:frohlich_alpha}), and instead this electron-phonon coupling seems to emerge from bulk phenomenological quantities. The Pekar factor, $\frac{1}{\epsilon_{\infty}}-\frac{1}{\epsilon_{0}}$ being particularly opaque. Rearranging the Pekar factor as
+The infrared activity of this mode drives the formation of the polaron, and similarly, in a more complex material, the range of infrared active modes all contribute to the polaron stabilisation. This relationship is, however, slightly obscured by the algebra in Eq. (\ref{eqn:frohlich_alpha}), and instead, this electron-phonon coupling seems to emerge from bulk phenomenological quantities. The Pekar factor, $\frac{1}{\epsilon_{\infty}}-\frac{1}{\epsilon_{0}}$ being particularly opaque. Rearranging the Pekar factor as
 
 \begin{equation}
     \left( \frac{1}{\epsilon_{\infty}} - \frac{1}{\epsilon_{0}} \right) = \frac{\epsilon^{ionic}}{\epsilon_{\infty}\epsilon_{0}},
@@ -19,7 +19,7 @@ The infrared activity of this mode is driving the formation of the polaron, and 
 
 we can now see that the Fr\"ohlich $\alpha$ is proportional to the ionic dielectric contribution $\epsilon^{\text{ionic}}_j$, as would be expected from appreciating that this is the driving force for polaron formation. 
 
-The relative static dielectric constant is composed out of the high-frequency optical component (from the response of the electronic structure), and then the THz scale vibrational motion of the ions, $\epsilon_{0}=\epsilon_{\infty}+\epsilon_{j}$. This vibrational contribution is typically calculated (\cite{gonze_dynamical_1997}) by summing the infrared activity of the individual harmonic modes as Lorentz oscillators. This infrared activity can be obtained by projecting the Born effective charges along the dynamic matrix (harmonic phonon) eigenvectors. The overall dielectric function across the phonon frequency range can be written as 
+The relative static dielectric constant is composed out of the high-frequency optical component (from the response of the electronic structure), and then the THz scale vibrational motion of the ions, $\epsilon_{0}=\epsilon_{\infty}+\epsilon_{j}$. This vibrational contribution is typically calculated by summing the infrared activity of the individual harmonic modes as Lorentz oscillators~\cite{gonze_dynamical_1997}. This infrared activity can be obtained by projecting the Born effective charges along the dynamic matrix (harmonic phonon) eigenvectors. The overall dielectric function across the phonon frequency range can be written as 
 
 \begin{equation}
     \begin{gathered}
@@ -55,12 +55,12 @@ where
     \label{eqn:alphai}
 \end{equation}
 
-This concept of decomposing $\alpha$ into constituent pieces associated with individual phonon modes is implicit in the effective mode scheme of Hellwarth and Biaggio (Eqs. (\ref{eqn:hellwarth_scheme_s}) to (\ref{eqn:hellwarth_scheme_f})), and has also been used by Verdi,~\cite{verbist_extended_1992} and~\cite{devreese_many-body_2010}.
+This concept of decomposing $\alpha$ into constituent pieces associated with individual phonon modes is implicit in the effective mode scheme of Hellwarth and Biaggio (Eqs. (\ref{eqn:hellwarth_scheme_s}) to (\ref{eqn:hellwarth_scheme_f})), and has also been used by Verdi,~\cite{verbist_extended_1992} and Devreese~\cite{devreese_many-body_2010}.
 
 \subsection{Multiple Phonon Mode Path Integral}
 \label{subsec:3-1-1}
 
-\cite{verbist_extended_1992} proposed an extended Fr\"ohlich model Hamiltonian in Eq. (\ref{eqn:frohlich_hamiltonian}) with a sum over multiple ($m$) phonon branches,
+Verbist~\cite{verbist_extended_1992} proposed an extended Fr\"ohlich model Hamiltonian in Eq. (\ref{eqn:frohlich_hamiltonian}) with a sum over multiple ($m$) phonon branches,
 
 \begin{equation}
     \hat{H} = \frac{p^2}{2m_b} + \sum_{\mathbf{k}, j} \hslash \, \omega_{j} \, a_{\mathbf{k}, j}^\dagger a_{\mathbf{k}, j}
@@ -68,13 +68,13 @@ This concept of decomposing $\alpha$ into constituent pieces associated with ind
 \label{eqn:multifrohlich}
 \end{equation}
 
-Here the index $j$ indicates the $j$th phonon branch. The interaction coefficient is given by,
+Here, the index $j$ indicates the $j$th phonon branch. The interaction coefficient is given by,
 
 \begin{equation}
     V_{\mathbf{k}, j} = i\frac{2 \hslash \omega_j}{\mathbf{k}} \left(\sqrt{\frac{\hslash}{2 m_b \omega_j}} \frac{\alpha_j \pi}{\Omega_0} \right)^{1/2},
 \end{equation}
 
-with $\alpha_j$ as in Eq. (\ref{eqn:alphai}). From this Hamiltonian we get the following extended model action to use within the Feynman variational theory,
+with $\alpha_j$ as in Eq. (\ref{eqn:alphai}). From this Hamiltonian, we get the following extended model action to use within the Feynman variational theory,
 
 \begin{equation}
         S_j[\mathbf{r}(\tau)] =
@@ -89,14 +89,14 @@ where I introduce the reduced thermodynamic temperature for the $j$th phonon bra
     G_j(x) = \frac{\cosh{(\beta_j/2-x)}}{\sinh{(\beta_j/2)}} .
 \end{equation}
 
-This form of action is consistent with Hellwarth and Biaggio deduction that multiple phonon branches results in the interaction term simply becoming a sum over terms with phonon frequency $\omega_j$ and coupling constant $\alpha_j$ dependencies as shown in Eq. (\ref{eqn:hellwarth_multi_action}). 
+This form of action is consistent with Hellwarth and Biaggio's deduction that multiple phonon branches result in the interaction term simply becoming a sum over terms with phonon frequency $\omega_j$ and coupling constant $\alpha_j$ dependencies as shown in Eq. (\ref{eqn:hellwarth_multi_action}). 
 
-I now choose a suitable trial action to use with the action in Eq. (\ref{eqn:multiaction}). One option is to use Feynman's original trial action with two variational parameters, $C$ and $w$, which physically represents a particle (the charge carrier) coupled harmonically to a single fictitious particle (the additional mass of the quasi-particle due to interaction with the phonon field) with a strength $C$ and a frequency $w$. 
+I now choose a suitable trial action to use with the action in Eq. (\ref{eqn:multiaction}). One option is to use Feynman's original trial action with two variational parameters, $C$ and $w$, which physically represent a particle (the charge carrier) coupled harmonically to a single fictitious particle (the additional mass of the quasi-particle due to interaction with the phonon field) with a strength $C$ and a frequency $w$. 
 
-Obviously the dynamics of this model cannot be more complex than can be arrived at with the original Feynman theory, though the direct variational optimisation may get a better fit by using Hellwarth's and Biaggio's effective phonon mode approximation (Eqs. (\ref{eqn:hellwarth_scheme_s}) to (\ref{eqn:hellwarth_scheme_f})).
-In order to build a model capable of expressing richer dynamics, and more directly describe real materials with multiple phonon modes, I extend Feynman's trial action to represent a particle (the charge-carrier) coupled to $n$ massive fictitious particles. This results in $2\times n$ variational parameters (one for the coupling strength and coupling frequency of each fictitious particle, per phonon branch). 
+Obviously, the dynamics of this model cannot be more complex than can be arrived at with the original Feynman theory, though the direct variational optimisation may get a better fit by using Hellwarth's and Biaggio's effective phonon mode approximation (Eqs.~(\ref{eqn:hellwarth_scheme_s}) to (\ref{eqn:hellwarth_scheme_f})).
+To build a model capable of expressing richer dynamics and more directly describing real materials with multiple phonon modes, I extend Feynman's trial action to represent a particle (the charge-carrier) coupled to $n$ massive fictitious particles. This results in $2\times n$ variational parameters (one for each fictitious particle's coupling strength and frequency per phonon branch). 
 
-I extend Feynman's trial action using equations (1.1), (3.11) and (3.16) by \cite{poulter_complete_1992} which are given by:
+I extend Feynman's trial action using equations (1.1), (3.11), and (3.16) by \cite{poulter_complete_1992}, which are given by:
 
 \begin{subequations}
 
@@ -139,7 +139,7 @@ I then perform a Wick-rotation and equate the total time-like variable elapsed (
     \end{split}
 \end{equation}
 
-Here $\kappa_{p}$ is the spring constant associated with the $p$th fictitious particle and $w_{p}$ is the corresponding frequency of oscillation. 
+Here $\kappa_{p}$ is the spring constant associated with the $p$th fictitious particle, and $w_{p}$ is the corresponding oscillation frequency. 
 
 \subsection{Multiple Phonon Mode Free Energy}
 \label{subsec:3-1-2}
@@ -171,7 +171,7 @@ Now I note that the $R(x)$ function appearing in Eq. (3.8) in \cite{poulter_comp
     R(x) = 2 \sum_{p = 1}^n \frac{h_p}{\omega_p^3} \frac{\sin(\omega_p x / 2) \sin(\omega_p [t - x] / 2)}{\sin(\omega_p t / 2)} + \frac{1}{mt} \left( 1 - m \sum_{p = 1}^n \frac{h_p}{\omega_p^2} \right) x (t - x)
 \end{equation}
 
-is a generalisation of the $D(x)$ expression in FHIP given in Eq. (\ref{eqn:D_FHIP}), which in more familiar notation and again Wick-rotated to the form given in Eq. (\ref{eqn:FD}) gives
+is a generalisation of the $D(x)$ expression in FHIP given in Eq. (\ref{eqn:D_FHIP}), which is more familiar notation and again Wick-rotated to the form given in Eq. (\ref{eqn:FD}) gives
 
 \begin{equation}\label{eqn:multi_D}
 \begin{gathered}
@@ -180,7 +180,7 @@ is a generalisation of the $D(x)$ expression in FHIP given in Eq. (\ref{eqn:D_FH
 \end{gathered}
 \end{equation}
 
-When $n=1$ (a single ficticious particle) with $x \rightarrow -iu$ and $t \rightarrow -i\hslash\beta$, $D_j(x)$ is the same form as $D(u)$ fromEq. (\ref{eqn:FD}) from Feynman's polaron theory. 
+When $n=1$ (a single fictitious particle) with $x \rightarrow -iu$ and $t \rightarrow -i\hslash\beta$, $D_j(x)$ is the same form as $D(u)$ from Eq.~(\ref{eqn:FD}) from Feynman's polaron theory. 
 
 Combining $D_j(x)$ in Eq. (\ref{eqn:multi_D}) and the multiple phonon action in Eq. (\ref{eqn:multiaction}), we arrive at a generalisation to Hellwarth and Biaggio's B expression, including multiple ($m$ with index $j$) phonon branches, and multiple ($2n$ with index $p$) variational parameters $v_{p}$ and $w_{p}$,
 
@@ -201,20 +201,18 @@ Summing the trial free energy $A_j$ in Eq. (\ref{eqn:A}), the trial-model intera
     \end{gathered}
 \end{equation}
 
-Here I have taken care to write out the expression explicitly, rather than use ``polaron'' units as used in the literature. Despite that each of the phonon branches $j$ are independent, the RHS of Eq. (\ref{eqn:multi_feynman_jensen}) is minimised for total summation over each phonon branch to give the upper-bound for the total model free energy $F$. 
+Here, I have written out the expression explicitly rather than using ``polaron'' units as used in the literature. Despite that each of the phonon branches $j$ is independent, the RHS of Eq. (\ref{eqn:multi_feynman_jensen}) is minimised for total summation over each phonon branch to give the upper-bound for the total model free energy $F$. 
 
-I obtain vectors of length $n$ for the variational parameters $v_{p}$ and $w_{p}$ that correspond to these minima, which will be used in evaluating the polaron mobility. When we consider only one phonon branch ($m = 1$) and only two variational parameters ($n = 1$) this simplifies to Hellwarth and Biaggio's form of \=Osaka's free energy in Eq. (\ref{eqn:hellwarth_energy}). Feynman's original athermal version can then be obtained by taking the zero temperature limit ($\beta \rightarrow \infty$).
+I obtain vectors of length $n$ for the variational parameters $v_{p}$ and $w_{p}$ that correspond to these minima, which will be used to evaluate the polaron mobility. When we consider only one phonon branch ($m = 1$) and only two variational parameters ($n = 1$), this simplifies to Hellwarth and Biaggio's form of \=Osaka's free energy in Eq. (\ref{eqn:hellwarth_energy}). Feynman's original athermal version can then be obtained by taking the zero temperature limit ($\beta \rightarrow \infty$).
 
 \section{Lattice Polarons}
 \label{sec:3-2}
 
 Hans De Raedt and Ad Lagendijk~\cite{de_raedt_numerical_1983, de_raedt_monte_1985} derived the discrete path integral for a lattice polaron, which was then further developed by Pavel Kornilovitch~\cite{kornilovitch_polaron_1997, kornilovitch_continuous-time_1998, kornilovitch_ground-state_1999, kornilovitch_giant_1999, kornilovitch_band_2000, kornilovitch_feynmans_2004, kornilovitch_path_2007}. Kornilovitch derived the continuous path integral limit of the lattice polaron and developed a Continuous-time Path Integral Monte Carlo method for calculating properties of small polarons, with a special focus on the Holstein model and a lattice version of the Fr\"ohlich model (which allows for long-range electron-lattice interactions).
-\newline 
 
-The topology of the phase-space for the continuum large polaron model is Euclidean, flat, and infinite plane. The topology of the lattice small polaron is that of a torus, since both the position and the momentum space are periodic and discrete. If either one of the periodic boundary conditions (the thermodynamic limit of an infinite-size box or an infinite number of lattice points) or discreteness (going to the continuum limit) is removed, the topology changes to an infinitely long cylinder. Performing both limits gives back the infinite plane.
-\newline 
+The topology of the phase-space for the continuum large polaron model is Euclidean, flat, and infinite plane. The topology of the lattice small polaron is that of a torus since both the position and the momentum space are periodic and discrete. If either one of the periodic boundary conditions (the thermodynamic limit of an infinite-size box or an infinite number of lattice points) or discreteness (going to the continuum limit) is removed, the topology changes to an infinitely long cylinder. Performing both limits gives back the infinite plane.
 
-Currently, I have not found a way to extend Feynman's variational path integral approach to case where we retain this topology of the electronic phase-space. To explain the difficulties in trying this, I will first outline the key steps of deriving the exact lattice path integral for the Holstein model and use that to motivate the challenges the lattice small-polaron Path Integral presents for developing a variational method in analogy to that done for continuum large polarons.
+I have not found a way to extend Feynman's variational path integral approach to a case where we retain this topology of the electronic phase space. To explain the difficulties in trying this, I will first outline the key steps of deriving the exact lattice path integral for the Holstein model and use that to motivate the challenges the lattice small-polaron Path Integral presents for developing a variational method in analogy to that done for continuum large polarons.
 
 \subsection{Discrete-Time Path Integral}
 \label{subsec:3-2-1}
@@ -228,10 +226,9 @@ We begin with the Holstein Hamiltonian in a mixed representation:
         H_{2} &= -J \sum_{i=1}^N c^\dagger_i c_{i+1} + c_{i+1}^\dagger c_i ,
     \end{aligned}
 \end{equation}
- where the phonons are expressed in terms of their momenta $p_i$ and positions $x_i$ where $i$ labels the corresponding lattice-site. $M$ is the mass of one lattice-site (here we assume all of them to have the same mass) and $\omega_0$ is the dispersionless phonon frequency where we assume to have only one mode (i.e. Einstein mode). The electron description remains in terms of the creation and annihilation operators $c^\dagger_i$, $c_i$ on a lattice-site $i$.
-\newline
+ where the phonons are expressed in terms of their momenta $p_i$ and positions $x_i$ where $i$ labels the corresponding lattice site. $M$ is the mass of one lattice site (here, we assume all of them to have the same mass), and $\omega_0$ is the dispersionless phonon frequency where we assume to have only one mode (i.e. Einstein mode). The electron description remains in terms of the creation and annihilation operators $c^\dagger_i$, $c_i$ on a lattice-site $i$.
 
-In the derivation of the path integral, the quantum statistical partition function for a system may be obtained by inserting successive resolutions of identity within the definition of a quantum trace. In the limit of an infinite number of insertions, the Trotter-Suzuki expression \cite{trotter_product_1959, hatano_finding_2005} gives a direct equality between this discretised partition function $Z_M$ and the full partition function $Z$:
+In the derivation of the path integral, a system's quantum statistical partition function may be obtained by inserting successive resolutions of identity within the definition of a quantum trace. In the limit of an infinite number of insertions, the Trotter-Suzuki expression \cite{trotter_product_1959, hatano_finding_2005} gives a direct equality between this discretised partition function $Z_M$ and the full partition function $Z$:
 \begin{equation}
     \begin{aligned}
         Z &\equiv \Tr{e^{-\beta H}} = \lim_{M\to\infty} Z_M , \\
@@ -239,14 +236,12 @@ In the derivation of the path integral, the quantum statistical partition functi
     \end{aligned}
 \end{equation}
 where $\Delta\tau = \beta / M$ is the amount of imaginary-time between time-slices.
-\newline
 
 For the case of a lattice polaron, we have the time-discretised partition function,
 \begin{equation}
     Z_M = c_1 {\Delta\tau}^{-\frac{MN}{2}} \sum_{\{r_j\}} \int \left\{ \prod_{j=1}^M \prod_{n=1}^N dx_{n,j} \right\} e^{S_{ph}} \prod_{l=1}^M I_{\Delta r_l}(2 \tau J) ,
 \end{equation}
 where $\Delta r_l = r_{l+1} - r_l$ is the change in the electron position across one time-slice.
-\newline
 
 The discretised boson action is,
 \begin{equation}
@@ -257,10 +252,9 @@ The kinetic portion of the discretised action for the fermion on a lattice is,
 \begin{equation}
     I_{\Delta r_l}(2 \tau J) = \frac{1}{N} \sum_{n=1}^N \cos\left( \frac{2\pi n \Delta r_l}{N}  \right) \exp\left(-z \cos\left(\frac{2\pi n}{N}\right)\right) ,
 \end{equation}
-which is a discrete form of the modified Bessel function of the first-kind $I_m(z)$ \cite[\href{http://dlmf.nist.gov/10.32.E3}{(10.32.3)}]{NIST:DLMF} where here we have $m = r_{j+1} - r_j$ and $z = 2 \tau J$. In the thermodynamic limit $N \to \infty$ this becomes exactly the normal modified Bessel function.
-\newline
+which is a discrete form of the modified Bessel function of the first-kind $I_m(z)$ \cite[\href{http://dlmf.nist.gov/10.32.E3}{(10.32.3)}]{NIST:DLMF} where here we have $m = r_{j+1} - r_j$ and $z = 2 \tau J$. This becomes the normal modified Bessel function in the thermodynamic limit $N \to \infty$.
 
-The bosonic integrals are Gaussian, and so have closed-form expressions. By expanding the bosonic coordinates in Fourier modes,
+The bosonic integrals are Gaussian and so have closed-form expressions. By expanding the bosonic coordinates in Fourier modes,
 \begin{equation}
     x_{n,j} = \frac{1}{\sqrt{M}} \sum_{k=0}^{M-1} \nu_{n,j} \exp\left( \frac{2\pi j k}{M} \right) ,
 \end{equation}
@@ -289,11 +283,11 @@ is the memory function that fully encodes the electron-lattice interaction over 
 \subsection{Continuous-Time Path Integral}
 \label{subsec:3-2-2}
 
-To obtain the continuous-time limit of the partition function, it is necessary to explicitly take-out the summation over $N$ lattice sites in the kinetic action. Doing so, we find that we have a product of these lattice-site summation for each time-slice,
+To obtain the continuous-time limit of the partition function, it is necessary to explicitly take out the summation over $N$ lattice sites in the kinetic action. Doing so, we find that we have a product of this lattice-site summation for each time slice,
 \begin{equation}
     Z^{el}_M = \frac{1}{(2N)^M} \sum_{\left\{r_j\right\}} \sum_{\{n_j\}} \exp\left\{i \sum_{j=1}^M \frac{2 \pi n_j}{N} \Delta r_j - z \sum_{j=1}^M \cos(\frac{2 \pi n_j}{N})\right\} ,
 \end{equation}
-where since the cosine is even we expanded it into phases and changed the limits of the $n_j$ summations from $-N$ to $N$. It should be noted that the summations over $n_j$ exclude $n_j = 0$. This is just a summation over all possible paths a particle can take on the lattice within $M$ time-steps. From the kinetic action we can also see that $2\pi n_j / N$ plays the roll of a discrete lattice-momenta multiplying the changes in the electrons position $\Delta r_j$. The electronic partition function has taken the form of a discrete phase-space path integral. Therefore, in the continuous-time limit, the partition function may be written as,
+since the cosine is even, we expanded it into phases and changed the limits of the $n_j$ summations from $-N$ to $N$. It should be noted that the summations over $n_j$ exclude $n_j = 0$. This is just a summation of all possible paths a particle can take on the lattice within $M$ time-steps. From the kinetic action, we can also see that $2\pi n_j / N$ plays the role of a discrete lattice-momenta multiplying the changes in the electron's position $\Delta r_j$. The electronic partition function has become a discrete phase-space path integral. Therefore, in the continuous-time limit, the partition function may be written as,
 \begin{equation}
     Z = \mathcal{N} Z_B \sum_{r(\tau)} \sum_{n(\tau)} \exp{S_{\text{eff}}} ,
 \end{equation}
@@ -323,12 +317,10 @@ where $a$ is the lattice constant. This partition function is just the standard 
     Z = \int \mathcal{D}r(\tau) \int \mathcal{D}k(\tau) \exp \left[i \int_0^{\hbar\beta} d\tau k(\tau) \Dot{r}(\tau) - \int_0^{\hbar\beta} d\tau H(r(\tau), k(\tau)) \right] ,
 \end{equation}
 where the Hamiltonian is that of the tight-binding Hamiltonian with an additional non-local effective interaction term. In fact, we could have started with this phase-space path integral, substituted the Holstein Hamiltonian and performed the path integration over the lattice coordinates to arrive at the same result. 
-\newline
 
 It is then clear how to generalise to higher dimensions by substituting the higher-dimensional variants of the tight-binding Hamiltonian. The effective interaction term will be similar but with a generalised Kronecker-Delta dependent on vector positions $\Vec{r}(\tau)$.
-\newline
 
-We still face a difficulty when it comes to applying the variational method. The presence of the cosine in the kinetic action renders the overall action non-convex, even in imaginary-time, so using Jensen's inequality would be invalid. To continue, we assume that the electron quasi-momentum is small $k << 1$ so that we may make a parabolic effective-mass approximation. With $k << 1$ we ca expand the cosine,
+We still face difficulty when it comes to applying the variational method. The presence of the cosine in the kinetic action renders the overall action non-convex, even in imaginary time, so using Jensen's inequality would be invalid. To continue, we assume that the electron quasi-momentum is small $k << 1$, so we may make a parabolic effective-mass approximation. With $k << 1$, we can expand the cosine,
 \begin{equation}
     \cos(a k(\tau)) \approx 1 - \frac{a^2 [k(\tau)]^2}{2} ,
 \end{equation}
@@ -340,11 +332,11 @@ where the band-mass is $m_b = \hbar^2 / 2 J a^2$. By making this approximation, 
 \begin{equation}
     S_{\text{eff}}^{(H)} = \frac{m^{(H)}_b}{2} \int_0^{\hbar\beta} d\tau\ \vb{\Dot{r}}^2 - \frac{\lambda^2}{4 \omega M} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau' D(\tau - \tau') \delta_{\vb{r}(\tau), \vb{r}(\tau')} .
 \end{equation}
-It's important to reiterate the approximations made to arrive at this action. First we went to the thermodynamic limit, which means we do not expect this model to capture any finite-size effects. Secondly, we approximated the tight-binding like band-structure with a parabolic band centred at $\vb{k} = 0$. Whilst this may be a good approximation close to the band-minimum, we have made a third approximation where we assumed that the electron momentum is unbounded as if it were free, albeit with an effective band-mass. So, we can predict that this model will likely exclude any lattice-effects concerning the electron, such as explicit hopping between lattice-sites. Nonetheless, what we have gained compared to the Fr\"ohlich model is a different short-range electron-phonon coupling that is isolated to the currently occupied lattice-site. Upon integrating out the phonons, this transforms into a non-local point-like interaction of the electron with itself through imaginary-time which is only non-zero when the electron crosses its prior path. The other feature gained is that since we have a Kronecker-delta like interaction, the phonon momentum is bounded to remain within the first Brillouin zone. This can be seen from the integral representation of the Kronecker delta:
+It's important to reiterate the approximations made to arrive at this action. First, we went to the thermodynamic limit, which means we do not expect this model to capture any finite-size effects. Secondly, we approximated the tight-binding-like band structure with a parabolic band centred at $\vb{k} = 0$. Whilst this may be a good approximation close to the band minimum, we have made a third approximation where we assumed that the electron momentum is unbounded as if it were free, albeit with an effective band mass. So, we can predict that this model will likely exclude any lattice effects concerning the electron, such as explicit hopping between lattice sites. Nonetheless, compared to the Fr\"ohlich model, we have gained a different short-range electron-phonon coupling that is isolated to the currently occupied lattice site. Upon integrating out the phonons, this transforms into a non-local point-like interaction of the electron with itself through imaginary time, which is only non-zero when the electron crosses its prior path. The other feature gained is that since we have a Kronecker-delta-like interaction, the phonon momentum is bound to remain within the first Brillouin zone. This can be seen from the integral representation of the Kronecker delta:
 \begin{equation}
     \delta _{r, r'} = \frac{a}{2\pi} \int_0^{2\pi / a} dq\ e^{i q (r - r')} .
 \end{equation}
-Therefore, as far as the phonons are concerned, we include description of the lattice. We can generalise the Kronecker-delta to arbitrary dimensions $n$ in Cartesian coordinates:
+Therefore, as far as the phonons are concerned, we include a description of the lattice. We can generalise the Kronecker-delta to arbitrary dimensions $n$ in Cartesian coordinates:
 \begin{equation}
     \delta_{\vb{r}, \vb{r'}} = \frac{V_n}{(2\pi)^n} \int_0^{2\pi/a} d\vb{q}\ e^{i \vb{q} \cdot (\vb{r} - \vb{r'})} ,
 \end{equation}
@@ -353,7 +345,6 @@ where for example for a cubic unitcell $V_3 = a^3$. However, to maintain a close
     \delta_{\vb{r}, \vb{r'}} = \frac{V_n \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\Lambda_n} dq\ q^{n-1} e^{i q (r - r')} ,
 \end{equation}
 where $\Lambda_n$ is some momentum cutoff. We assume that the system has rotational invariance so that the angular components of $\vb{q} \cdot \vb{r}$ can be integrated over to give $\abs{S^{n-1}} = 2\pi^{n/2} / \Gamma(n/2)$ the surface-``area'' of an $n$-dimensional sphere where $\Gamma(x)$ is the Gamma function.
-\newline
 
 We now have everything we need to establish the general machinery for a variational method for polaron models.
 
@@ -375,7 +366,7 @@ To make comparisons with the isotropic case, I define an effective ground-state 
     E = \frac{2 E_\perp + E_z}{3}.
 \end{equation}
 
-Similarly, I define an effective radius of the anisotropic polaron by finding a radius of sphere with the same volume of the ellipsoidal anisotropic polaron. This means taking the geometric mean of the uni-axial components of the polaron radius, 
+Similarly, I define an effective radius of the anisotropic polaron by finding the radius of a sphere with the same volume as the ellipsoidal anisotropic polaron. This means taking the geometric mean of the uni-axial components of the polaron radius, 
 
 \begin{equation}
     r_P = \left(r^2_{P\perp} r_{Pz}\right)^{1/3}.
@@ -386,14 +377,13 @@ The two averaging methods are justified as they are the only methods found to gi
 \section{The General Polaron}
 \label{sec:chap-third-fourth}
 
-The Hamiltonian for a general polaron model \cite{Alexandrov2009} can be written in second-quantisation form and momentum-basis as,
+The Hamiltonian for a general polaron model~\cite{alexandrov_advances_2010} can be written in second-quantisation form and momentum-basis as,
 \begin{equation}
     \begin{aligned}
         H &= \sum_{\vb{k}} \epsilon_{\vb{k}} c^\dagger_{\vb{k}} c_{\vb{k}} + \sum_{\vb{q}} \hbar \omega_{\vb{q}} b^\dagger_{\vb{q}} b_{\vb{q}} + \sum_{\vb{k},\vb{q}} V_{\vb{k}, \vb{q}} c^\dagger_{\vb{k}+\vb{q}} c_{\vb{k}} (b^\dagger_{\vb{-q}} + b_{\vb{q}})
     \end{aligned}
 \end{equation} 
 where $\epsilon_{\vb{k}}$ is the electron band energy for momentum $\vb{k}$, $c^\dagger_{\vb{k}}$ and $c_{\vb{k}}$ are the electron creation and annihilation operators for an electron with momentum $\vb{k}$, $\omega_{\vb{q}}$ is the phonon frequency for momentum $\vb{q}$, $b^\gamma_{\vb{q}}$ and $b_{\vb{q}}$ are the phonon creation and annihilation operators for a phonon with momentum $\vb{q}$, $V_{\vb{k}, \vb{q}}$ is the electron-phonon coupling matrix which describes the strength of the interaction.
-\newline
 
 For a model describing a parabolic band electron linearly coupled to harmonic phonons, the path integral over the phonon operators is Gaussian and can be evaluated analytically. The resultant electron action describes a temporally non-local self-interaction acting on the electron,
 \begin{equation} \label{eqn:eph-action}
@@ -406,9 +396,8 @@ where $ D_{\omega_0}(\tau)$ is the imaginary-time thermal phonon propagator and 
     \Phi\left[\vb{r}(\tau), \vb{r}(\tau')\right] = \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 \rho_{\vb{q}} \left[\vb{r}(\tau)\right] \rho_{\vb{-q}}\left[\vb{r}(\tau')\right].
 \end{equation}
 Here $\rho_{\vb{q}}[\vb{r}(\tau)] = e^{i \vb{q} \cdot \vb{r}(\tau)}$ is the density for the electron derived from corresponding first-quantisation density operator.
-\newline
 
-For the Fr\"ohlich model the self-interaction functional is,
+For the Fr\"ohlich model, the self-interaction functional is,
 \begin{equation}
     \begin{aligned}
         \Phi^{(F)}\left[\vb{r}(\tau), \vb{r}(\tau')\right] &= \sum_{\vb{q}} \frac{g_{F}^2(n)}{V q^{n-1}} e^{i \vb{q} \cdot \left(\vb{r}(\tau) - \vb{r}(\tau') \right)} , \\
@@ -417,7 +406,6 @@ For the Fr\"ohlich model the self-interaction functional is,
     \end{aligned}
 \end{equation}
 where $\abs{S^{n-1}} = 2\pi^{n/2}/\Gamma(n/2)$ is the hypervolume of the unit $(n-1)$-sphere and the phonon momentum is unbounded, $0 \leq \abs{\vb{q}} < \infty$. The Fr\"ohlich model makes the continuum approximation of the lattice, $\lim_{V \to \infty} V^{-1}\sum_{\vb{q}} \sim \int d^nq / (2\pi)^n$, where $V$ is the $n$-dimensional crystal volume.
-\newline
 
 For the Holstein model, the self-interaction functional is:
 \begin{equation}
@@ -431,17 +419,15 @@ where $\delta^n_{ij}$ is the $n$-dimensional Kronecker Delta function and $0 \le
 \begin{equation}
     \Lambda = 2\sqrt{\pi} \left(V \Gamma\left(\frac{n}{2} + 1\right)\right)^{1/n}.
 \end{equation}
-We can now develop the variational path integral method for this generalised polaron action and specialise to a specific case by using an explicit expression for the electron-phonon coupling in the self-interaction functional as we have above for the Fr\"ohlich and Holstein models. We will assume that we are only working with one parabolic-band electron so that the self-interaction functional contains depends on the electron position only through the term $e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau'))}$. Provided this is true, we can use Feynman's derivation of the variational path integral method.
+We can now develop the variational path integral method for this generalised polaron action and specialise to a specific case by using an explicit expression for the electron-phonon coupling in the self-interaction functional as we have above for the Fr\"ohlich and Holstein models. We will assume that we are only working with one parabolic-band electron so that the self-interaction functional contains depends on the electron position only through the term $e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau'))}$. If this is true, we can use Feynman's derivation of the variational path integral method.
 
 \subsection{General Phonon-Band Polarons}
 
-We now have general expressions for the free energy, complex conductivity and DC mobility for a whole class of polaron models. Before specialising to the Fr\"ohlich and Holstein models, I'd like to discuss the potential for more ab-initio numerical work. 
-\newline
+We now have general expressions for the free energy, complex conductivity and DC mobility for a whole class of polaron models. Before specialising in the Fr\"ohlich and Holstein models, I'd like to discuss the potential for more ab initio numerical work. 
 
-The momentum integral can be evaluated numerically, either by substituting an explicit form for the electron-phonon matrix $\abs{V_q}^2$ and phonon dispersion $\omega_q$ and then using a numerical integration algorithm like Gauss-Kronod. Many analytical forms are known for these as functions of $q$, such as for acoustic phonons, Bogoliubov-Fröhlich polaron, impurities etc.
-\newline 
+The momentum integral can be evaluated numerically, either by substituting an explicit form for the electron-phonon matrix $\abs{V_q}^2$ and phonon dispersion $\omega_q$ and then using a numerical integration algorithm like Gauss-Kronod. Many analytical forms are known for these as functions of $q$, such as for acoustic phonons, Bogoliubov-Fröhlich polaron, impurities, etc.
 
-On the other hand, we could instead use other more `ab-initio' methods such as Density Functional Theory (DFT) to obtained $\abs{V_q}^2$ and $\omega_q$. These would then enter the variational method as vectors of $q$-points evaluated at the electron/hole band-extremum (e.g the gamma-point $\vb{k} = \vb{0}$). The above $q$-integrands would then become vector/matrix products that are then concatenated over all $q$-points.
+On the other hand, we could instead use other more `ab initio' methods, such as Density Functional Theory (DFT), to obtain $\abs{V_q}^2$ and $\omega_q$. These would then enter the variational method as vectors of $q$-points evaluated at the electron/hole band-extremum (e.g. the gamma-point $\vb{k} = \vb{0}$). The above $q$-integrands would then become vector/matrix products that are then concatenated over all $q$-points.
 
 \subsection{General Polaron Action}
 
@@ -451,7 +437,7 @@ Excluding spin and phonon branches, we may write the general polaron Hamiltonian
     H_{\text{polaron}} = \sum_{\vb{k}} \epsilon_{\vb{k}} c^\dagger_{\vb{k}} c_{\vb{k}} + \sum_{\vb{q}} \hbar \omega_{\vb{q}} b^\dagger_{\vb{q}} b_{\vb{q}} + \sum_{\vb{k}, \vb{q}} V_{\vb{k},\vb{q}} c^\dagger_{\vb{k}+\vb{q}}c_{\vb{k}} \left( b^\dagger_{-\vb{q}} + b_{\vb{q}} \right)
 \end{equation}
 
-Propose a trial Hamiltonian where we uncorrelate the electron and phonon momenta:
+Propose a trial Hamiltonian where we uncorrelated the electron and phonon momenta:
 
 \begin{equation}
     H_{\text{trial}} = \sum_{\vb{k}} \epsilon_{\vb{k}} c^\dagger_{\vb{k}} c_{\vb{k}} + \sum_{\vb{q}} \hbar \Omega_{\vb{q}} b^\dagger_{\vb{q}} b_{\vb{q}} + \sum_{\vb{k}, \vb{q}} M_{\vb{k},\vb{q}} c^\dagger_{\vb{k}}c_{\vb{k}} \left( b^\dagger_{-\vb{q}} + b_{\vb{q}} \right)
@@ -492,7 +478,7 @@ The phonon contribution to the action is quadratic and may be integrated to give
     Z^0_{\text{ph}} \exp{\frac{1}{2} \sum_{\vb{q}, \vb{k}, \vb{k}'} V_{\vb{k}, \vb{q}} V^*_{\vb{k}', \vb{q}} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \Bar{c}_{\vb{k}}(\tau) c_{\vb{k} - \vb{q}} (\tau) D^0_{\omega_{\vb{q}}}(\tau - \tau') \Bar{c}_{\vb{k}'-\vb{q}}(\tau') c_{\vb{k}'}(\tau')}
 \end{equation}
 
-where $D^0_{\omega_{\vb{q}}}(\tau)$ is the bare phonon kernel for a harmonic oscillator and $Z^0_{\text{ph}} = \det{D^0}^{-1/2}$ is the non-interactor phonon partition function.
+where $D^0_{\omega_{\vb{q}}}(\tau)$ is the bare phonon kernel for a harmonic oscillator and $Z^0_{\text{ph}} = \det{D^0}^{-1/2}$ is the non-interacting phonon partition function.
 
 The coherent state path integral for the polaron Hamiltonian $H_{\text{polaron}}$:
 

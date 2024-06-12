@@ -3,7 +3,7 @@
 
 % --- Warn when use of obsolete/deprecated/non-amsmath commands
 \RequirePackage[l2tabu,orthodox]{nag}
-\RequirePackage[all,warning]{onlyamsmath}
+% \RequirePackage[all,warning]{onlyamsmath}
 
 % --- Include external files from any directory
 \RequirePackage{import}
@@ -24,13 +24,13 @@
 
 % --- Mathematics
 % mathtools loads amsmath + improvements
-\RequirePackage{mathtools}
-\RequirePackage{amsfonts}
+% \RequirePackage{mathtools}
+% \RequirePackage{amsfonts}
 
 % --- Font choice
 % newpxtext should be loaded after babel
 % \RequirePackage{newpxtext}  % text font
-\RequirePackage{eulervm}    % math font
+% \RequirePackage{eulervm}    % math font
 
 % --- URLs
 \RequirePackage{url}
@@ -42,7 +42,7 @@
 % --- Bibliography
 % biblatex should be loaded after babel
 % csquotes is recommended by biblatex if not writing in US english
-\RequirePackage[backend=biber,bibstyle=authoryear,citestyle=authoryear]{biblatex}
+\RequirePackage[backend=biber,bibstyle=numeric,citestyle=numeric]{biblatex}
 \RequirePackage[autostyle]{csquotes}
 
 % --- Customise design of LoF/LoT
@@ -93,7 +93,7 @@
 
 % --- Cross-referencing
 \RequirePackage{hyperref}
-\RequirePackage[capitalise]{cleveref}
+% \RequirePackage[capitalise]{cleveref}
 
 % --- Customise PDF bookmarks
 % requires hyperref
