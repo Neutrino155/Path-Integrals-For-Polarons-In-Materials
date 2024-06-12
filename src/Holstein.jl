@@ -32,7 +32,7 @@ holstein(α, ω, J; kwargs...) = holstein(α, ω, J, Inf; kwargs...)
 
 holstein(α, ω, J, β; kwargs...) = holstein(α, ω, J, β, eps(); kwargs...)
 
-function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -46,7 +46,7 @@ function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::Number; dim
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, Ω * ω0_pu, Σ * ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -75,7 +75,7 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::Numb
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -104,7 +104,7 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::Numb
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -133,7 +133,7 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::Numb
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -162,7 +162,7 @@ function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::Numb
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -188,7 +188,7 @@ function holstein(α::Number, ω::Number, J::Number, β::Number, Ω::AbstractArr
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -218,7 +218,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, �
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -247,7 +247,7 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, �
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -278,7 +278,7 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, �
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -309,7 +309,7 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::Abst
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -338,7 +338,7 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, �
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -369,7 +369,7 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, �
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -400,7 +400,7 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::Abst
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -431,7 +431,7 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, �
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -462,7 +462,7 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::Abst
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -493,7 +493,7 @@ function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::Abst
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Number, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -522,7 +522,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Nu
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -553,7 +553,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractA
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -584,7 +584,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, �
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -615,7 +615,7 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractA
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -646,7 +646,7 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, �
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -677,7 +677,7 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractA
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -708,7 +708,7 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, �
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -741,7 +741,7 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, �
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -774,7 +774,7 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, �
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -807,7 +807,7 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, �
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::Number; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -838,7 +838,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Ab
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Number, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -869,7 +869,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Nu
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -902,7 +902,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractA
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -935,7 +935,7 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractA
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
@@ -968,7 +968,7 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractA
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω .* ω0_pu, Σ .* ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::AbstractArray, Ω::AbstractArray; dims = 3, v_guesses = false, w_guesses = false, upper = [Inf, Inf], verbose = false)
     ω = pustrip.(ω)
     J = pustrip.(J)
     β = pustrip.(β .* ħ_pu / E0_pu) 
