@@ -46,7 +46,7 @@ set linetype 7 pi -1 pt 4 lc rgb '#F781BF' dt solid # pink
 set pointintervalbox 1.75
 
 ##### Gnuplotting xyborder.cfg
-set style line 101 lc rgb '#000000' lt 1 lw 1
+# set style line 101 lc rgb '#000000' lt 1 lw 1
 # set border 3 front ls 101
 set tics nomirror out scale 0.75
 set format '%g'
@@ -55,8 +55,8 @@ set format '%g'
 ##### Gnuplotting grid.cfg
 # Add light grid to plot
 # AUTHOR: Hagen Wierstorf
-set style line 102 lc rgb '#808080' lt 0 lw 1
-set grid back ls 102
+# set style line 102 lc rgb '#aaaaaa' lt 0 lw 1
+# set grid back ls 102
 #####
 
 # OK - colourful PNG suitable for talks (~full screen slide).

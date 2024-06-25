@@ -5,14 +5,15 @@ set key Left left bottom
 set grid
 set xlabel  "T (ħω₀/kB)"
 set ylabel  "Frohlich Energy (ħω₀)"
-set xrange [0.0625:32]
+set xrange [0:32]
+set xtics 0,4,32
 set yrange [-120:0]
-set logscale x 2
-unset xtics
-set xtics nomirror
-do for [i=-4:5] {
-    set xtics add (sprintf("2^{%d}", i) 2**i)
-}
+#set logscale x 2
+#unset xtics
+#set xtics nomirror
+#do for [i=-4:5] {
+#    set xtics add (sprintf("2^{%d}", i) 2**i)
+#}
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-E-alpha-0to12-temp-00625to32.dat" u 1:2 w l t "{/Symbol a}=0.1", \
         "../../data/frohlich/variational/model/frohlich-3d-E-alpha-0to12-temp-00625to32.dat" u 1:21 w l t "{/Symbol a}=2", \
