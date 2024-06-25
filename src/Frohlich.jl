@@ -56,14 +56,17 @@ function frohlich(α::AbstractArray, ω::Number, β::Number, Ω::Number; mb = 1m
     E = Vector{Any}(undef, num_α)
     Σ = Vector{Any}(undef, num_α)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β : 4 * α[1]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β : w_guesses
+
     for i in eachindex(α)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α]") end
         Mₖ[i] = pustrip(frohlich_coupling(α[i], ω * ω0_pu, mb; dims = dims))
         S(v, w) = frohlich_S(v, w, Mₖ[i], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β) * ω; dims = dims, limits = [0, sqrt(β / 2)])
-        v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β : w_guesses
         v[i], w[i], E[i] = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
         Σ[i] = isinf(β) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ[i], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[i], w[i]) * ω : polaron_propagator(t, v[i], w[i], β) * ω; dims = dims) * ω
+        v_guess = v_guesses == false ? v[i] : v_guesses
+        w_guess = w_guesses == false ? w[i] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Frohlich(ω * ω0_pu, Mₖ .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -83,14 +86,17 @@ function frohlich(α::Number, ω::AbstractArray, β::Number, Ω::Number; mb = 1m
     E = Vector{Any}(undef, num_ω)
     Σ = Vector{Any}(undef, num_ω)
 
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β : w_guesses
+
     for p in eachindex(ω)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω]") end
         Mₖ[p] = pustrip(frohlich_coupling(α, ω[p] * ω0_pu, mb; dims = dims))
         S(v, w) = frohlich_S(v, w, Mₖ[p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β) * ω[p]; dims = dims, limits = [0, sqrt(β / 2)])
-        v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β : w_guesses
         v[p], w[p], E[p] = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
         Σ[p] = isinf(β) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ[p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[p], w[p]) * ω[p] : polaron_propagator(t, v[p], w[p], β) * ω[p]; dims = dims) * ω[p]
+        v_guess = v_guesses == false ? v[p] : v_guesses
+        w_guess = w_guesses == false ? w[p] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Frohlich(ω .* ω0_pu, Mₖ .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -109,14 +115,17 @@ function frohlich(α::Number, ω::Number, β::AbstractArray, Ω::Number; mb = 1m
     E = Vector{Any}(undef, num_β)
     Σ = Vector{Any}(undef, num_β)
 
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[1] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[1] : w_guesses
+
     Mₖ = pustrip(frohlich_coupling(α, ω * ω0_pu, mb; dims = dims))
     for j in eachindex(β)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | β = $(β[j]) [$j/$num_β]") end
         S(v, w) = frohlich_S(v, w, Mₖ, τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β[j]) * ω; dims = dims, limits = [0, sqrt(β[j] / 2)])
-        v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[j] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[j] : w_guesses
         v[j], w[j], E[j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
         Σ[j] = isinf(β[j]) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ, t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[j], w[j]) * ω : polaron_propagator(t, v[j], w[j], β[j]) * ω; dims = dims) * ω
+        v_guess = v_guesses == false ? v[j] : v_guesses
+        w_guess = w_guesses == false ? w[j] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Frohlich(ω * ω0_pu, Mₖ * E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -159,14 +168,17 @@ function frohlich(α::AbstractArray, ω::AbstractArray, β::Number, Ω::Number; 
     E = Matrix{Any}(undef, num_α, num_ω)
     Σ = Matrix{Any}(undef, num_α, num_ω)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β : 4 * α[1]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω]") end
         Mₖ[i,p] = pustrip(frohlich_coupling(α[i], ω[p] * ω0_pu, mb; dims = dims))
         S(v, w) = frohlich_S(v, w, Mₖ[i,p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β) * ω[p]; dims = dims, limits = [0, sqrt(β / 2)])
-        v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β : w_guesses
         v[i,p], w[i,p], E[i,p] = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
         Σ[i,p] = isinf(β) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ[i,p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[i,p], w[i,p]) * ω[p] : polaron_propagator(t, v[i,p], w[i,p], β) * ω[p]; dims = dims) * ω[p]
+        v_guess = v_guesses == false ? v[i,p] : v_guesses
+        w_guess = w_guesses == false ? w[i,p] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Frohlich(ω .* ω0_pu, Mₖ .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -186,15 +198,18 @@ function frohlich(α::AbstractArray, ω::Number, β::AbstractArray, Ω::Number; 
     E = Matrix{Any}(undef, num_α, num_β)
     Σ = Matrix{Any}(undef, num_α, num_β)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β[1] : 4 * α[1]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β[1] : w_guesses
+
     for i in eachindex(α)
         Mₖ[i] = pustrip(frohlich_coupling(α[i], ω * ω0_pu, mb; dims = dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = frohlich_S(v, w, Mₖ[i], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β[j]) * ω; dims = dims, limits = [0, sqrt(β[j] / 2)])
-            v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β[j] : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β[j] : w_guesses
             v[i,j], w[i,j], E[i,j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
             Σ[i,j] = isinf(β[j]) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ[i], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,j], w[i,j]) * ω : polaron_propagator(t, v[i,j], w[i,j], β[j]) * ω; dims = dims) * ω
+            v_guess = v_guesses == false ? v[i,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -215,12 +230,15 @@ function frohlich(α::AbstractArray, ω::Number, β::Number, Ω::AbstractArray; 
     E = Vector{Any}(undef, num_α)
     Σ = Matrix{Any}(undef, num_α, num_Ω)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β : 4 * α[1]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β : w_guesses
+
     for i in eachindex(α)
         Mₖ[i] = pustrip(frohlich_coupling(α[i], ω * ω0_pu, mb; dims = dims))
         S(v, w) = frohlich_S(v, w, Mₖ[i], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β) * ω; dims = dims, limits = [0, sqrt(β / 2)])
-        v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β : w_guesses
         v[i], w[i], E[i] = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+        v_guess = v_guesses == false ? v[i] : v_guesses
+        w_guess = w_guesses == false ? w[i] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[i,k] = isinf(β) && Ω[k] == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ[i], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[i], w[i]) * ω : polaron_propagator(t, v[i], w[i], β) * ω; dims = dims) * ω
@@ -244,15 +262,18 @@ function frohlich(α::Number, ω::AbstractArray, β::AbstractArray, Ω::Number; 
     E = Matrix{Any}(undef, num_ω, num_β)
     Σ = Matrix{Any}(undef, num_ω, num_β)
 
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[1] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[1] : w_guesses
+
     for p in eachindex(ω)
         Mₖ[p] = pustrip(frohlich_coupling(α, ω[p] * ω0_pu, mb; dims = dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = frohlich_S(v, w, Mₖ[p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β[j]) * ω[p]; dims = dims, limits = [0, sqrt(β[j] / 2)])
-            v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[j] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[j] : w_guesses
             v[p,j], w[p,j], E[p,j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
             Σ[p,j] = isinf(β[j]) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ[p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[p,j], w[p,j]) * ω[p] : polaron_propagator(t, v[p,j], w[p,j], β[j]) * ω[p]; dims = dims) * ω[p]
+            v_guess = v_guesses == false ? v[p,j] : v_guesses
+            w_guess = w_guesses == false ? w[p,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -273,12 +294,15 @@ function frohlich(α::Number, ω::AbstractArray, β::Number, Ω::AbstractArray; 
     E = Vector{Any}(undef, num_ω)
     Σ = Matrix{Any}(undef, num_ω, num_Ω)
 
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β : w_guesses
+
     for p in eachindex(ω)
         Mₖ[p] = pustrip(frohlich_coupling(α, ω[p] * ω0_pu, mb; dims = dims))
         S(v, w) = frohlich_S(v, w, Mₖ[p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β) * ω[p]; dims = dims, limits = [0, sqrt(β / 2)])
-        v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β : w_guesses
         v[p], w[p], E[p] = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+        v_guess = v_guesses == false ? v[p] : v_guesses
+        w_guess = w_guesses == false ? w[p] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[p,k] = isinf(β) && Ω[k] == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ[p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[p], w[p]) * ω[p] : polaron_propagator(t, v[p], w[p], β) * ω[p]; dims = dims) * ω[p]
@@ -302,11 +326,15 @@ function frohlich(α::Number, ω::Number, β::AbstractArray, Ω::AbstractArray; 
     Σ = Matrix{Any}(undef, num_β, num_Ω)
 
     Mₖ = pustrip(frohlich_coupling(α, ω * ω0_pu, mb; dims = dims))
+
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[1] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[1] : w_guesses
+
     for j in eachindex(β)
         S(v, w) = frohlich_S(v, w, Mₖ, τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β[j]) * ω; dims = dims, limits = [0, sqrt(β[j] / 2)])
-        v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[j] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[j] : w_guesses
         v[j], w[j], E[j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+        v_guess = v_guesses == false ? v[j] : v_guesses
+        w_guess = w_guesses == false ? w[j] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[j,k] = isinf(β[j]) && Ω[k] == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ, t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[j], w[j]) * ω : polaron_propagator(t, v[j], w[j], β[j]) * ω; dims = dims) * ω
@@ -331,13 +359,16 @@ function frohlich(α::Number, ω::AbstractArray, β::AbstractArray, Ω::Abstract
     E = Matrix{Any}(undef, num_ω, num_β)
     Σ = Array{Any}(undef, num_ω, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[1] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[1] : w_guesses
+
     for p in eachindex(ω)
         Mₖ[p] = pustrip(frohlich_coupling(α, ω[p] * ω0_pu, mb; dims = dims))
         for j in eachindex(β)
             S(v, w) = frohlich_S(v, w, Mₖ[p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β[j]) * ω[p]; dims = dims, limits = [0, sqrt(β[j] / 2)])
-            v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[j] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[j] : w_guesses
             v[p,j], w[p,j], E[p,j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+            v_guess = v_guesses == false ? v[p,j] : v_guesses
+            w_guess = w_guesses == false ? w[p,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[p,j,k] = isinf(β[j]) && Ω[k] == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ[p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[p,j], w[p,j]) * ω[p] : polaron_propagator(t, v[p,j], w[p,j], β[j]) * ω[p]; dims = dims) * ω[p]
@@ -363,13 +394,16 @@ function frohlich(α::AbstractArray, ω::Number, β::AbstractArray, Ω::Abstract
     E = Matrix{Any}(undef, num_α, num_β)
     Σ = Array{Any}(undef, num_α, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β[1] : 4 * α[1]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β[1] : w_guesses
+
     for i in eachindex(α)
         Mₖ[i] = pustrip(frohlich_coupling(α[i], ω * ω0_pu, mb; dims = dims))
         for j in eachindex(β)
             S(v, w) = frohlich_S(v, w, Mₖ[i], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β[j]) * ω; dims = dims, limits = [0, sqrt(β[j] / 2)])
-            v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β[j] : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β[j] : w_guesses
             v[i,j], w[i,j], E[i,j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+            v_guess = v_guesses == false ? v[i,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[i,j,k] = isinf(β[j]) && Ω[k] == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ[i], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,j], w[i,j]) * ω : polaron_propagator(t, v[i,j], w[i,j], β[j]) * ω; dims = dims) * ω
@@ -395,15 +429,18 @@ function frohlich(α::AbstractArray, ω::AbstractArray, β::AbstractArray, Ω::N
     E = Array{Any}(undef, num_α, num_ω, num_β)
     Σ = Array{Any}(undef, num_α, num_ω, num_β)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β[1] : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β[1] : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         Mₖ[i,p] = pustrip(frohlich_coupling(α[i], ω[p] * ω0_pu, mb; dims = dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = frohlich_S(v, w, Mₖ[i,p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β[j]) * ω[p]; dims = dims, limits = [0, sqrt(β[j] / 2)])
-            v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β[j] : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β[j] : w_guesses
             v[i,p,j], w[i,p,j], E[i,p,j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
             Σ[i,p,j] = isinf(β[j]) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω, Mₖ[i,p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,p,j], w[i,p,j]) * ω[p] : polaron_propagator(t, v[i,p,j], w[i,p,j], β[j]) * ω[p]; dims = dims) * ω[p]
+            v_guess = v_guesses == false ? v[i,p,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,p,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -425,12 +462,15 @@ function frohlich(α::AbstractArray, ω::AbstractArray, β::Number, Ω::Abstract
     E = Matrix{Any}(undef, num_α, num_ω)
     Σ = Array{Any}(undef, num_α, num_ω, num_Ω)
 
+    v_guess = v_guesses == false ? α[1] < 7 ? 3 + α[1] / 4 + 1 / β : 4 * α[1]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α[1]) / 3) + 1 / β : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         Mₖ[i,p] = pustrip(frohlich_coupling(α[i], ω[p] * ω0_pu, mb; dims = dims))
         S(v, w) = frohlich_S(v, w, Mₖ[i,p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β) * ω[p]; dims = dims, limits = [0, sqrt(β / 2)])
-        v_guess = v_guesses == false ? α[i] < 7 ? 3 + α[i] / 4 + 1 / β : 4 * α[i]^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
-        w_guess = w_guesses == false ? 2 + tanh((6 - α[i]) / 3) + 1 / β : w_guesses
         v[i,p], w[i,p], E[i,p] = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+        v_guess = v_guesses == false ? v[i,p] : v_guesses
+        w_guess = w_guesses == false ? w[i,p] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[i,p,k] = isinf(β) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ[i,p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[i,p], w[i,p]) * ω[p] : polaron_propagator(t, v[i,p], w[i,p], β) * ω[p]; dims = dims) * ω[p]
@@ -455,13 +495,16 @@ function frohlich(α::AbstractArray, ω::AbstractArray, β::AbstractArray, Ω::A
     E = Array{Any}(undef, num_α, num_ω, num_β)
     Σ = Array{Any}(undef, num_α, num_ω, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[1] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[1] : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         Mₖ[i,p] = pustrip(frohlich_coupling(α[i], ω[p] * ω0_pu, mb; dims = dims))
         for j in eachindex(β)
             S(v, w) = frohlich_S(v, w, Mₖ[i,p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * ω[p] : polaron_propagator(τ, v, w, β[j]) * ω[p]; dims = dims, limits = [0, sqrt(β[j] / 2)])
-            v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β[j] : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β[j] : w_guesses
             v[i,p,j], w[i,p,j], E[i,p,j] = variation((v, w) -> β[j] == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+            v_guess = v_guesses == false ? v[i,p,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,p,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[i,p,j,k] = isinf(β[j]) && Ω == eps() ? zero(Complex) : frohlich_memory(Ω[k], Mₖ[i,p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,p,j], w[i,p,j]) * ω[p] : polaron_propagator(t, v[i,p,j], w[i,p,j], β[j]) * ω[p]; dims = dims) * ω[p]

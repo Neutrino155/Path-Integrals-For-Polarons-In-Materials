@@ -62,14 +62,17 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::Numb
     E = Vector{Any}(undef, num_α)
     Σ = Vector{Any}(undef, num_α)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β : w_guesses
+
     for i in eachindex(α)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α]") end
         g[i] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β : w_guesses
         v[i], w[i], E[i] = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[i] = holstein_memory(Ω, g[i], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[i], w[i]) * J : polaron_propagator(t, v[i], w[i], β) * J; dims = dims) * J
+        v_guess = v_guesses == false ? v[i] : v_guesses
+        w_guess = w_guesses == false ? w[i] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -91,14 +94,17 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::Numb
     E = Vector{Any}(undef, num_ω)
     Σ = Vector{Any}(undef, num_ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
+
     for p in eachindex(ω)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω]") end
         g[p] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[p], w[p], E[p] = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[p] = holstein_memory(Ω, g[p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[p], w[p]) * J : polaron_propagator(t, v[p], w[p], β) * J; dims = dims) * J
+        v_guess = v_guesses == false ? v[p] : v_guesses
+        w_guess = w_guesses == false ? w[p] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω .* ω0_pu, J * E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -120,14 +126,17 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::Numb
     E = Vector{Any}(undef, num_J)
     Σ = Vector{Any}(undef, num_J)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β : w_guesses
+
     for q in eachindex(J)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | J = $(J[q]) [$q/$num_J]") end
         g[q] = pustrip(holstein_coupling(α, ω * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[q], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β : w_guesses
         v[q], w[q], E[q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[q] = holstein_memory(Ω, g[q], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[q], w[q]) * J[q] : polaron_propagator(t, v[q], w[q], β) * J[q]; dims = dims) * J[q]
+        v_guess = v_guesses == false ? v[q] : v_guesses
+        w_guess = w_guesses == false ? w[q] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -150,13 +159,16 @@ function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::Numb
 
     g = pustrip(holstein_coupling(α, ω * ω0_pu, J * E0_pu, dims))
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for j in eachindex(β)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | β = $(β[j]) [$j/$num_β]") end
         S(v, w) = holstein_S(v, w, g, τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
         v[j], w[j], E[j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[j] = holstein_memory(Ω, g, t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[j], w[j]) * J : polaron_propagator(t, v[j], w[j], β[j]) * J; dims = dims) * J
+        v_guess = v_guesses == false ? v[j] : v_guesses
+        w_guess = w_guesses == false ? w[j] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -204,14 +216,17 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, �
     E = Matrix{Any}(undef, num_α, num_ω)
     Σ = Matrix{Any}(undef, num_α, num_ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω]") end
         g[i,p] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i,p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[i,p], w[i,p], E[i,p] = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[i,p] = holstein_memory(Ω, g[i,p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[i,p], w[i,p]) * J : polaron_propagator(t, v[i,p], w[i,p], β) * J; dims = dims) * J
+        v_guess = v_guesses == false ? v[i,p] : v_guesses
+        w_guess = w_guesses == false ? w[i,p] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
 
@@ -234,14 +249,17 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, �
     E = Matrix{Any}(undef, num_α, num_J)
     Σ = Matrix{Any}(undef, num_α, num_J)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β : w_guesses
+
     for i in eachindex(α), q in eachindex(J)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | J = $(J[q]) [$q/$num_J]") end
         g[i,q] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i,q], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β : w_guesses
         v[i,q], w[i,q], E[i,q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[i,q] = holstein_memory(Ω, g[i,q], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[i,q], w[i,q]) * J[q] : polaron_propagator(t, v[i,q], w[i,q], β) * J[q]; dims = dims) * J[q]
+        v_guess = v_guesses == false ? v[i,q] : v_guesses
+        w_guess = w_guesses == false ? w[i,q] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω * ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -263,15 +281,18 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, �
     E = Matrix{Any}(undef, num_α, num_β)
     Σ = Matrix{Any}(undef, num_α, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for i in eachindex(α)
         g[i] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[i], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
             v[i,j], w[i,j], E[i,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[i,j] = holstein_memory(Ω, g[i], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,j], w[i,j]) * J : polaron_propagator(t, v[i,j], w[i,j], β[j]) * J; dims = dims) * J
+            v_guess = v_guesses == false ? v[i,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -294,12 +315,15 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::Number, Ω::Abst
     E = Vector{Any}(undef, num_α)
     Σ = Matrix{Any}(undef, num_α, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β : w_guesses
+
     for i in eachindex(α)
         g[i] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β : w_guesses
         v[i], w[i], E[i] = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[i] : v_guesses
+        w_guess = w_guesses == false ? w[i] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[i,k] = holstein_memory(Ω[k], g[i], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[i], w[i]) * J : polaron_propagator(t, v[i], w[i], β) * J; dims = dims) * J
@@ -325,14 +349,17 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, �
     E = Matrix{Any}(undef, num_ω, num_J)
     Σ = Matrix{Any}(undef, num_ω, num_J)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for p in eachindex(ω), q in eachindex(J)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J]") end
         g[p,q] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[p,q], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[p,q], w[p,q], E[p,q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[p,q] = holstein_memory(Ω, g[p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[p,q], w[p,q]) * J[q] : polaron_propagator(t, v[p,q], w[p,q], β) * J[q]; dims = dims) * J[q]
+        v_guess = v_guesses == false ? v[p,q] : v_guesses
+        w_guess = w_guesses == false ? w[p,q] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -354,15 +381,18 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, �
     E = Matrix{Any}(undef, num_ω, num_β)
     Σ = Matrix{Any}(undef, num_ω, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for p in eachindex(ω)
         g[p] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[p,j], w[p,j], E[p,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[p,j] = holstein_memory(Ω, g[p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[p,j], w[p,j]) * J : polaron_propagator(t, v[p,j], w[p,j], β[j]) * J; dims = dims) * J
+            v_guess = v_guesses == false ? v[p,j] : v_guesses
+            w_guess = w_guesses == false ? w[p,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -385,12 +415,15 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::Number, Ω::Abst
     E = Vector{Any}(undef, num_ω)
     Σ = Matrix{Any}(undef, num_ω, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for p in eachindex(ω)
         g[p] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[p], w[p], E[p] = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[p] : v_guesses
+        w_guess = w_guesses == false ? w[p] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[p,k] = holstein_memory(Ω[k], g[p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[p], w[p]) * J : polaron_propagator(t, v[p], w[p], β) * J; dims = dims) * J
@@ -416,15 +449,18 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, �
     E = Matrix{Any}(undef, num_J, num_β)
     Σ = Matrix{Any}(undef, num_J, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for q in eachindex(J)
         g[q] = pustrip(holstein_coupling(α, ω * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[q], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
             v[q,j], w[q,j], E[q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[q,j] = holstein_memory(Ω, g[q], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[q,j], w[q,j]) * J[q] : polaron_propagator(t, v[q,j], w[q,j], β[j]) * J[q]; dims = dims) * J[q]
+            v_guess = v_guesses == false ? v[q,j] : v_guesses
+            w_guess = w_guesses == false ? w[q,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -447,12 +483,15 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::Number, Ω::Abst
     E = Vector{Any}(undef, num_J)
     Σ = Matrix{Any}(undef, num_J, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β : w_guesses
+
     for q in eachindex(J)
         g[q] = pustrip(holstein_coupling(α, ω * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[q], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β : w_guesses
         v[q], w[q], E[q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[q] : v_guesses
+        w_guess = w_guesses == false ? w[q] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | J = $(J[q]) [$q/$num_J] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[q,k] = holstein_memory(Ω[k], g[q], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[q], w[q]) * J[q] : polaron_propagator(t, v[q], w[q], β) * J[q]; dims = dims) * J[q]
@@ -479,11 +518,14 @@ function holstein(α::Number, ω::Number, J::Number, β::AbstractArray, Ω::Abst
 
     g = pustrip(holstein_coupling(α, ω * ω0_pu, J * E0_pu, dims))
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for j in eachindex(β)
         S(v, w) = holstein_S(v, w, g, τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
         v[j], w[j], E[j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[j] : v_guesses
+        w_guess = w_guesses == false ? w[j] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[j,k] = holstein_memory(Ω[k], g, t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[j], w[j]) * J : polaron_propagator(t, v[j], w[j], β[j]) * J; dims = dims) * J
@@ -509,14 +551,17 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Nu
     E = Array{Any}(undef, num_α, num_ω, num_J)
     Σ = Array{Any}(undef, num_α, num_ω, num_J)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for i in eachindex(α), p in eachindex(ω), q in eachindex(J)
         if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J]") end
         g[i,p,q] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i,p,q], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[i,p,q], w[i,p,q], E[i,p,q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
         Σ[i,p,q] = holstein_memory(Ω, g[i,p,q], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[i,p,q], w[i,p,q]) * J[q] : polaron_propagator(t, v[i,p,q], w[i,p,q], β) * J[q]; dims = dims) * J[q]
+        v_guess = v_guesses == false ? v[i,p,q] : v_guesses
+        w_guess = w_guesses == false ? w[i,p,q] : w_guesses
         if verbose n += 1; print("\e[1F") end
     end
     return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β / E0_pu, Ω * ω0_pu, Σ .* ω0_pu)
@@ -538,15 +583,18 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractA
     E = Array{Any}(undef, num_α, num_ω, num_β)
     Σ = Array{Any}(undef, num_α, num_ω, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         g[i,p] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[i,p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[i,p,j], w[i,p,j], E[i,p,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[i,p,j] = holstein_memory(Ω, g[i,p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,p,j], w[i,p,j]) * J : polaron_propagator(t, v[i,p,j], w[i,p,j], β[j]) * J; dims = dims) * J
+            v_guess = v_guesses == false ? v[i,p,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,p,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -569,12 +617,15 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number, �
     E = Matrix{Any}(undef, num_α, num_ω)
     Σ = Array{Any}(undef, num_α, num_ω, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         g[i,p] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i,p], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β) * J; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[i,p], w[i,p], E[i,p] = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[i,p] : v_guesses
+        w_guess = w_guesses == false ? w[i,p] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[i,p,k] = holstein_memory(Ω[k], g[i,p], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[i,p], w[i,p]) * J : polaron_propagator(t, v[i,p], w[i,p], β) * J; dims = dims) * J
@@ -600,15 +651,18 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractA
     E = Array{Any}(undef, num_α, num_J, num_β)
     Σ = Array{Any}(undef, num_α, num_J, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for i in eachindex(α), q in eachindex(J)
         g[i,q] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[i,q], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
             v[i,q,j], w[i,q,j], E[i,q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[i,q,j] = holstein_memory(Ω, g[i,q], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,q,j], w[i,q,j]) * J[q] : polaron_propagator(t, v[i,q,j], w[i,q,j], β[j]) * J[q]; dims = dims) * J[q]
+            v_guess = v_guesses == false ? v[i,q,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,q,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -631,12 +685,15 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::Number, �
     E = Matrix{Any}(undef, num_α, num_J)
     Σ = Array{Any}(undef, num_α, num_J, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β : w_guesses
+
     for i in eachindex(α), q in eachindex(J)
         g[i,q] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i,q], τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω + 1 / β : w_guesses
         v[i,q], w[i,q], E[i,q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[i,q] : v_guesses
+        w_guess = w_guesses == false ? w[i,q] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | J = $(J[q]) [$q/$num_J] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[i,q,k] = holstein_memory(Ω[k], g[i,q], t -> β == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β), t -> β == Inf ? polaron_propagator(t, v[i,q], w[i,q]) * J[q] : polaron_propagator(t, v[i,q], w[i,q], β) * J[q]; dims = dims) * J[q]
@@ -662,15 +719,18 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractA
     E = Array{Any}(undef, num_ω, num_J, num_β)
     Σ = Array{Any}(undef, num_ω, num_J, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for p in eachindex(ω), q in eachindex(J)
         g[p,q] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[p,q], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[p,q,j], w[p,q,j], E[p,q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[p,q,j] = holstein_memory(Ω, g[p,q], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[p,q,j], w[p,q,j]) * J[q] : polaron_propagator(t, v[p,q,j], w[p,q,j], β[j]) * J[q]; dims = dims) * J[q]
+            v_guess = v_guesses == false ? v[p,q,j] : v_guesses
+            w_guess = w_guesses == false ? w[p,q,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -693,12 +753,15 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::Number, �
     E = Matrix{Any}(undef, num_ω, num_J)
     Σ = Array{Any}(undef, num_ω, num_J, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for p in eachindex(ω), q in eachindex(J)
         g[p,q] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[p,q], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[p,q], w[p,q], E[p,q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[p,q] : v_guesses
+        w_guess = w_guesses == false ? w[p,q] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J] | Ω = $(Ω[k]) [$k/$num_Ω]") end
             Σ[p,q,k] = holstein_memory(Ω[k], g[p,q], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[p,q], w[p,q]) * J[q] : polaron_propagator(t, v[p,q], w[p,q], β) * J[q]; dims = dims) * J[q]
@@ -724,13 +787,16 @@ function holstein(α::AbstractArray, ω::Number, J::Number, β::AbstractArray, �
     E = Matrix{Any}(undef, num_α, num_β)
     Σ = Array{Any}(undef, num_α, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for i in eachindex(α)
         g[i] = pustrip(holstein_coupling(α[i], ω * ω0_pu, J * E0_pu, dims))
         for j in eachindex(β)
             S(v, w) = holstein_S(v, w, g[i], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
             v[i,j], w[i,j], E[i,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[i,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[i,j,k] = holstein_memory(Ω[k], g[i], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,j], w[i,j]) * J : polaron_propagator(t, v[i,j], w[i,j], β[j]) * J; dims = dims) * J
@@ -757,6 +823,9 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, �
     E = Matrix{Any}(undef, num_ω, num_β)
     Σ = Array{Any}(undef, num_ω, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for p in eachindex(ω)
         g[p] = pustrip(holstein_coupling(α, ω[p] * ω0_pu, J * E0_pu, dims))
         for j in eachindex(β)
@@ -764,6 +833,8 @@ function holstein(α::Number, ω::AbstractArray, J::Number, β::AbstractArray, �
             v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
             w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[p,j], w[p,j], E[p,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[p,j] : v_guesses
+            w_guess = w_guesses == false ? w[p,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[p,j,k] = holstein_memory(Ω[k], g[p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[p,j], w[p,j]) * J : polaron_propagator(t, v[p,j], w[p,j], β[j]) * J; dims = dims) * J
@@ -790,13 +861,16 @@ function holstein(α::Number, ω::Number, J::AbstractArray, β::AbstractArray, �
     E = Matrix{Any}(undef, num_J, num_β)
     Σ = Array{Any}(undef, num_J, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for q in eachindex(J)
         g[q] = pustrip(holstein_coupling(α, ω * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             S(v, w) = holstein_S(v, w, g[q], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[q,j], w[q,j], E[q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[q,j] : v_guesses
+            w_guess = w_guesses == false ? w[q,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[q,j,k] = holstein_memory(Ω[k], g[q], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[q,j], w[q,j]) * J[q] : polaron_propagator(t, v[q,j], w[q,j], β[j]) * J[q]; dims = dims) * J[q]
@@ -823,15 +897,18 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Ab
     E = Array{Any}(undef, num_α, num_ω, num_J, num_β)
     Σ = Array{Any}(undef, num_α, num_ω, num_J, num_β)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for i in eachindex(α), p in eachindex(ω), q in eachindex(J)
         g[i,p,q] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β]") end
             S(v, w) = holstein_S(v, w, g[i,p,q], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[i,p,q,j], w[i,p,q,j], E[i,p,q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
             Σ[i,p,q,j] = holstein_memory(Ω, g[i,p,q], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,p,q,j], w[i,p,q,j]) * J[q] : polaron_propagator(t, v[i,p,q,j], w[i,p,q,j], β[j]) * J[q]; dims = dims) * J[q]
+            v_guess = v_guesses == false ? v[i,p,q,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,p,q,j] : w_guesses
             if verbose n += 1; print("\e[1F") end
         end
     end
@@ -854,12 +931,15 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Nu
     E = Array{Any}(undef, num_α, num_ω, num_J)
     Σ = Array{Any}(undef, num_α, num_ω, num_J, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β : w_guesses
+
     for i in eachindex(α), p in eachindex(ω), q in eachindex(J)
         g[i,p,q] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J[q] * E0_pu, dims))
         S(v, w) = holstein_S(v, w, g[i,p,q], τ -> β == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β) * J[q]; limits = [0, β / 2], dims = dims)
-        v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
-        w_guess = w_guesses == false ? ω[p] + 1 / β : w_guesses
         v[i,p,q], w[i,p,q], E[i,p,q] = variation((v, w) -> β == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper)
+        v_guess = v_guesses == false ? v[i,p,q] : v_guesses
+        w_guess = w_guesses == false ? w[i,p,q] : w_guesses
         for k in eachindex(Ω)
             if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J] | β = $(Ω[k]) [$k/$num_Ω]") end
             Σ[i,p,q,k] = holstein_memory(Ω[k], g[i,p,q], t -> β == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β), t -> β == Inf ? polaron_propagator(t, v[i,p,q], w[i,p,q]) * J[q] : polaron_propagator(t, v[i,p,q], w[i,p,q], β) * J[q]; dims = dims) * J[q]
@@ -885,13 +965,16 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::AbstractA
     E = Array{Any}(undef, num_α, num_ω, num_β)
     Σ = Array{Any}(undef, num_α, num_ω, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for i in eachindex(α), p in eachindex(ω)
         g[i,p] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J * E0_pu, dims))
         for j in eachindex(β)
             S(v, w) = holstein_S(v, w, g[i,p], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J : polaron_propagator(τ, v, w, β[j]) * J; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[i,p,j], w[i,p,j], E[i,p,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[i,p,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,p,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[i,p,j,k] = holstein_memory(Ω[k], g[i,p], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,p,j], w[i,p,j]) * J : polaron_propagator(t, v[i,p,j], w[i,p,j], β[j]) * J; dims = dims) * J
@@ -918,13 +1001,16 @@ function holstein(α::AbstractArray, ω::Number, J::AbstractArray, β::AbstractA
     E = Array{Any}(undef, num_α, num_J, num_β)
     Σ = Array{Any}(undef, num_α, num_J, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω + 1 / β[1] : w_guesses
+
     for i in eachindex(α), q in eachindex(J)
         g[i,q] = pustrip.(holstein_coupling(α[i], ω * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             S(v, w) = holstein_S(v, w, g[i,q], τ -> β[j] == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω + 1 / β[j] : w_guesses
             v[i,q,j], w[i,q,j], E[i,q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[i,q,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,q,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[i,q,j,k] = holstein_memory(Ω[k], g[i,q], t -> β[j] == Inf ? phonon_propagator(t, ω) : phonon_propagator(t, ω, β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,q,j], w[i,q,j]) * J[q] : polaron_propagator(t, v[i,q,j], w[i,q,j], β[j]) * J[q]; dims = dims) * J[q]
@@ -951,13 +1037,16 @@ function holstein(α::Number, ω::AbstractArray, J::AbstractArray, β::AbstractA
     E = Array{Any}(undef, num_ω, num_J, num_β)
     Σ = Array{Any}(undef, num_ω, num_J, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for p in eachindex(ω), q in eachindex(J)
         g[p,q] = pustrip.(holstein_coupling(α, ω[p] * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             S(v, w) = holstein_S(v, w, g[p,q], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[p,q,j], w[p,q,j], E[p,q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[p,q,j] : v_guesses
+            w_guess = w_guesses == false ? w[p,q,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[p,q,j,k] = holstein_memory(Ω[k], g[p,q], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[p,q,j], w[p,q,j]) * J[q] : polaron_propagator(t, v[p,q,j], w[p,q,j], β[j]) * J[q]; dims = dims) * J[q]
@@ -984,13 +1073,16 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::AbstractArray, β::Ab
     E = Array{Any}(undef, num_α, num_ω, num_J, num_β)
     Σ = Array{Any}(undef, num_α, num_ω, num_J, num_β, num_Ω)
 
+    v_guess = v_guesses == false ? 2 * dims + 1 / β[1] : v_guesses
+    w_guess = w_guesses == false ? ω[1] + 1 / β[1] : w_guesses
+
     for i in eachindex(α), p in eachindex(ω), q in eachindex(J)
         g[i,p,q] = pustrip(holstein_coupling(α[i], ω[p] * ω0_pu, J[q] * E0_pu, dims))
         for j in eachindex(β)
             S(v, w) = holstein_S(v, w, g[i,p,q], τ -> β[j] == Inf ? phonon_propagator(τ, ω[p]) : phonon_propagator(τ, ω[p], β[j]), (τ, v, w) -> β[j] == Inf ? polaron_propagator(τ, v, w) * J[q] : polaron_propagator(τ, v, w, β[j]) * J[q]; limits = [0, β[j] / 2], dims = dims)
-            v_guess = v_guesses == false ? 2 * dims + 1 / β[j] : v_guesses
-            w_guess = w_guesses == false ? ω[p] + 1 / β[j] : w_guesses
             v[i,p,q,j], w[i,p,q,j], E[i,p,q,j] = variation((v, w) -> β[j] == Inf ? -2 * dims * J[q] + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J[q] + E₀(v, w, β[j]) * dims / 3 - (S(v, w) - S₀(v, w, β[j]) * dims / 3), v_guess, w_guess; upper = upper)
+            v_guess = v_guesses == false ? v[i,p,q,j] : v_guesses
+            w_guess = w_guesses == false ? w[i,p,q,j] : w_guesses
             for k in eachindex(Ω)
                 if verbose println("\e[K[$n/$N ($(round(n/N*100, digits=1)) %)] | α = $(α[i]) [$i/$num_α] | ω = $(ω[p]) [$p/$num_ω] | J = $(J[q]) [$q/$num_J] | β = $(β[j]) [$j/$num_β] | Ω = $(Ω[k]) [$k/$num_Ω]") end
                 Σ[i,p,q,j,k] = holstein_memory(Ω[k], g[i,p,q], t -> β[j] == Inf ? phonon_propagator(t, ω[p]) : phonon_propagator(t, ω[p], β[j]), t -> β[j] == Inf ? polaron_propagator(t, v[i,p,q,j], w[i,p,q,j]) * J[q] : polaron_propagator(t, v[i,p,q,j], w[i,p,q,j], β[j]) * J[q]; dims = dims) * J[q]
