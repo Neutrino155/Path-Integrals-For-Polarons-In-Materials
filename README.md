@@ -1,1 +1,1 @@
-# PhD Thesis
+# Path Integral Methods for Polarons in Real Materials
