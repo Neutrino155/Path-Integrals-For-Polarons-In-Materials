@@ -55,7 +55,7 @@ This covers all the “Improve Trial Model”, “Generalise Material Model” a
 
 - B. A. A. Martin and J. M. Frost, Predicting polaron mobility in organic semiconductors with the Feynman variational approach, 2023. Preprint arXiv:2207.06846 (2024).
 
-- B. A. A. Martin and J. M. Frost, “Multiple phonon modes in feynman path-integral variational polaron mobility”, Phys. Rev. B 107, 115203 (2024).
+- B. A. A. Martin and J. M. Frost, “Multiple phonon modes in feynman path-integral variational polaron mobility”, Phys. Rev. B 107, 115203 (2023).
 
 - X. Zheng, T. R. Hopper, A. Gorodetsky, M. Maimaris, W. Xu, B. A. A. Martin, J. M. Frost, and A. A. Bakulin, “Multipulse terahertz spectroscopy unveils hot polaron photoconductivity dynamics in metal-halide perovskites”, The Journal of Physical Chemistry Letters 12, PMID: 34478291, 8732–8739 (2021).
 
