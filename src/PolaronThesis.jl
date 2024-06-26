@@ -13,7 +13,7 @@ include("Holstein.jl")
 
 # Export functions Å
 export puconvert, punit, pustrip, m0_pu, e_pu, ħ_pu, kB_pu, ω0_pu, r0_pu, E0_pu
-export Frohlich, frohlich, frohlich_alpha, frohlich_coupling, frohlich_S, frohlich_memory, save_frohlich, load_frohlich, optimal_frohlich
+export Frohlich, frohlich, frohlich_alpha, frohlich_coupling, frohlich_S, frohlich_memory, save_frohlich, load_frohlich
 export Holstein, holstein, holstein_alpha, holstein_coupling, holstein_S, holstein_memory, save_holstein, load_holstein, optimal_holstein
 export polaron_propagator, S₀, E₀
 export ball_surface, phonon_propagator, variation, reduce_array, ϵ_ionic_mode
