@@ -51,11 +51,14 @@ end
 function holstein(α, ω, J, β; verbose = false, reduce = true, dims = 3, v_guesses = false, w_guesses = false, kwargs...)
     num_α, num_ω, num_J, num_β = length(α), length(ω), length(J), length(β)
     if verbose N, n = num_α * num_ω * num_J * num_β, Threads.Atomic{Int}(1) end
-    holsteins = Array{Holstein}(undef, num_α, num_ω, num_J, num_β)
-    Threads.@threads for ijkl in CartesianIndices((num_α, num_ω, num_J, num_β))
-        if verbose println("\e[KStatics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijkl[1]]) [$(ijkl[1])/$num_α] | ω = $(ω[ijkl[2]]) [$(ijkl[2])/$num_ω] | J = $(J[ijkl[3]]) [$(ijkl[3])/$num_J] | β = $(β[ijkl[4]])\e[1F"); Threads.atomic_add!(n, 1) end
-        holsteins[ijkl] = holstein(α[ijkl[1]], ω[ijkl[2]], J[ijkl[3]], β[ijkl[4]]; v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
-        v_guesses, w_guesses = pustrip.(holsteins[ijkl].v), pustrip.(holsteins[ijkl].w)
+    hstart = holstein(; dims = dims, v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
+    v_guess, w_guess = fill(pustrip.(hstart.v), Threads.nthreads()), fill(pustrip.(hstart.w), Threads.nthreads())
+    holsteins = fill(hstart, num_α, num_ω, num_J, num_β)
+    Threads.@threads :static for ijkl in CartesianIndices((num_α, num_ω, num_J, num_β))
+        id = Threads.threadid()
+        if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijkl[1]]) [$(ijkl[1])/$num_α] | ω = $(ω[ijkl[2]]) [$(ijkl[2])/$num_ω] | J = $(J[ijkl[3]]) [$(ijkl[3])/$num_J] | β = $(β[ijkl[4]])\e[1F"); Threads.atomic_add!(n, 1) end
+        @views holsteins[ijkl] = holstein(α[ijkl[1]], ω[ijkl[2]], J[ijkl[3]], β[ijkl[4]]; v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
+        v_guess[id], w_guess[id] = pustrip.(holsteins[ijkl].v), pustrip.(holsteins[ijkl].w)
     end
     polaron = holstein(holsteins)
     polaron.α, polaron.g, polaron.d, polaron.ω, polaron.J, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array(polaron.g), dims, pustrip.(ω) * ω0_pu, pustrip.(J) .* E0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
@@ -64,13 +67,13 @@ end
 
 function holstein(h::Holstein, Ω; dims = 3, verbose = false, kwargs...)
     Ω = pustrip.(Ω)
-    ω, J, d, g, α, E, v, w, β = [pustrip.(getfield(h, x)) for x in fieldnames(Holstein)]
+    ω, J, d, g, α, E, v, w, β = [map(y -> pustrip.(y), getfield(h, x)) for x in fieldnames(Holstein)]
     num_α, num_ω, num_J, num_β, num_Ω = length(α), length(ω), length(J), length(β), length(Ω)
     if verbose N, n = num_α * num_ω * num_J * num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_α, num_ω, num_J, num_β, num_Ω)
-    Threads.@threads for ijklm in CartesianIndices((num_α, num_ω, num_J, num_β, num_Ω))
+    Threads.@threads :static for ijklm in CartesianIndices((num_α, num_ω, num_J, num_β, num_Ω))
         if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijklm[1]]) [$(ijklm[1])/$num_α] | ω = $(ω[ijklm[2]]) [$(ijklm[2])/$num_ω] | J = $(J[ijklm[3]]) [$(ijklm[3])/$num_J] | β = $(β[ijklm[4]]) [$(ijklm[4])/$num_β] | Ω = $(Ω[ijklm[5]]) [$(ijklm[5])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
-        Σ[ijklm] = holstein_memory(Ω[ijklm[5]], g[ijklm[1],ijklm[2],ijklm[3]], t -> β[ijklm[4]] == Inf ? phonon_propagator(t, ω[ijklm[2]]) : phonon_propagator(t, ω[ijklm[2]], β[ijklm[4]]), t -> β[ijklm[4]] == Inf ? polaron_propagator(t, v[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], w[ijklm[1],ijklm[2],ijklm[3],ijklm[4]]) * J[ijklm[3]] : polaron_propagator(t, v[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], w[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], β[ijklm[4]]) * J[ijklm[3]]; dims = dims) * J[ijklm[3]]
+        @views Σ[ijklm] = holstein_memory(Ω[ijklm[5]], g[ijklm[1],ijklm[2],ijklm[3]], t -> β[ijklm[4]] == Inf ? phonon_propagator(t, ω[ijklm[2]]) : phonon_propagator(t, ω[ijklm[2]], β[ijklm[4]]), t -> β[ijklm[4]] == Inf ? polaron_propagator(t, v[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], w[ijklm[1],ijklm[2],ijklm[3],ijklm[4]]) * J[ijklm[3]] : polaron_propagator(t, v[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], w[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], β[ijklm[4]]) * J[ijklm[3]]; dims = dims) * J[ijklm[3]]
         h.Ω, h.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
     end
     return holstein(h)
