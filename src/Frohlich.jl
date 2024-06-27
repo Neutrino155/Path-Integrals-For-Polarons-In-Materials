@@ -61,11 +61,11 @@ function frohlich(α, ω, β; verbose = false, reduce = true, v_guesses = false,
     fstart = frohlich(; v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
     v_guess, w_guess = fill(pustrip.(fstart.v), Threads.nthreads()), fill(pustrip.(fstart.w), Threads.nthreads())
     frohlichs = fill(fstart, num_α, num_ω, num_β)
-    Threads.@threads :static for ijk in CartesianIndices((num_α, num_ω, num_β))
+    Threads.@threads :static for x in CartesianIndices((num_α, num_ω, num_β))
         id = Threads.threadid()
-        if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijk[1]]) [$(ijk[1])/$num_α] | ω = $(ω[ijk[2]]) [$(ijk[2])/$num_ω] | β = $(β[ijk[3]]) [$(ijk[3])/$num_β]\e[1F"); Threads.atomic_add!(n, 1) end
-        @views frohlichs[ijk] = frohlich(α[ijk[1]], ω[ijk[2]], β[ijk[3]]; v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
-        v_guess[id], w_guess[id] = pustrip.(frohlichs[ijk].v), pustrip.(frohlichs[ijk].w)
+        if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[x[1]]) [$(x[1])/$num_α] | ω = $(ω[x[2]]) [$(x[2])/$num_ω] | β = $(β[x[3]]) [$(x[3])/$num_β]\e[1F"); Threads.atomic_add!(n, 1) end
+        @views frohlichs[x] = frohlich(α[x[1]], ω[x[2]], β[x[3]]; v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
+        v_guess[id], w_guess[id] = pustrip.(frohlichs[x].v), pustrip.(frohlichs[x].w)
     end
     polaron = frohlich(frohlichs)
     polaron.α, polaron.Mₖ, polaron.ω, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array(polaron.Mₖ), pustrip.(ω) * ω0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
