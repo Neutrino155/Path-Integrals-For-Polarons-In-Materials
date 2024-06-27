@@ -32,7 +32,7 @@ frohlich(f::Frohlich; reduce = true, kwargs...) = reduce ? Frohlich((reduce_arra
 
 frohlich(f::Array{Frohlich}) = Frohlich((getfield.(f, x) for x in fieldnames(Frohlich))...)
 
-function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps())
+function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), reduce = true, verbose = false)
     ω = pustrip(ω)
     β = pustrip(β * ħ_pu / E0_pu) 
     Mₖ = pustrip(frohlich_coupling(α, ω * ω0_pu, mb; dims = dims))
@@ -41,6 +41,18 @@ function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_g
     w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β : w_guesses
     v, w, E = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
     return Frohlich(ω * ω0_pu, Mₖ * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
+end
+
+function frohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), reduce = true, verbose = false)
+    if length(α) != length(ω) return frohlich(α, ω, β; verbose = verbose, reduce = reduce, v_guesses = v_guesses, w_guesses = w_guesses, mb = mb, dims = dims, upper = upper, lower = lower) end
+    ω = pustrip.(ω)
+    β = pustrip(β * ħ_pu / E0_pu) 
+    Mₖ = pustrip.(frohlich_coupling.(α, ω * ω0_pu, mb; dims = dims))
+    S(v, w) = sum(frohlich_S(v, w, Mₖ[j], τ -> β == Inf ? phonon_propagator(τ, ω[j]) : phonon_propagator(τ, ω[j], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω[j] : polaron_propagator(τ, v, w, β) * ω[j]; dims = dims, limits = [0, sqrt(β / 2)]) for j in eachindex(ω))
+    v_guess = v_guesses == false ? sum(α) < 7 ? 3 + sum(α) / 4 + 1 / β : 4 * sum(α)^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
+    w_guess = w_guesses == false ? 2 + tanh((6 - sum(α)) / 3) + 1 / β : w_guesses
+    v, w, E = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+    return Frohlich(ω .* ω0_pu, Mₖ .* E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
 function frohlich(α, ω, β; verbose = false, reduce = true, v_guesses = false, w_guesses = false, kwargs...)
@@ -63,12 +75,27 @@ end
 function frohlich(f::Frohlich, Ω; dims = 3, verbose = false, kwargs...)
     Ω = pustrip.(Ω)
     ω, Mₖ, α, E, v, w, β = [map(y -> pustrip.(y), getfield(f, x)) for x in fieldnames(Frohlich)]
+    if length(α) == length(ω) return multifrohlich(f, Ω; dims = dims, verbose = verbose, kwargs...) end
     num_α, num_ω, num_β, num_Ω = length(α), length(ω), length(β), length(Ω)
     if verbose N, n = num_α * num_ω * num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_α, num_ω, num_β, num_Ω)
-    Threads.@threads :static for ijkl in CartesianIndices((num_α, num_ω, num_β, num_Ω))
-        if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijkl[1]]) [$(ijkl[1])/$num_α] | ω = $(ω[ijkl[2]]) [$(ijkl[2])/$num_ω] | β = $(β[ijkl[3]]) [$(ijkl[3])/$num_β] | Ω = $(Ω[ijkl[4]]) [$(ijkl[4])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
-        @views Σ[ijkl] = frohlich_memory(Ω[ijkl[4]], Mₖ[ijkl[1],ijkl[2]], t -> β[ijkl[3]] == Inf ? phonon_propagator(t, ω[ijkl[2]]) : phonon_propagator(t, ω[ijkl[2]], β[ijkl[3]]), t -> β[ijkl[3]] == Inf ? polaron_propagator(t, v[ijkl[1],ijkl[2],ijkl[3]], w[ijkl[1],ijkl[2],ijkl[3]]) * ω[ijkl[2]] : polaron_propagator(t, v[ijkl[1],ijkl[2],ijkl[3]], w[ijkl[1],ijkl[2],ijkl[3]], β[ijkl[3]]) * ω[ijkl[2]]; dims = dims) * ω[ijkl[2]]
+    Threads.@threads :static for x in CartesianIndices((num_α, num_ω, num_β, num_Ω))
+        if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[x[1]]) [$(x[1])/$num_α] | ω = $(ω[x[2]]) [$(x[2])/$num_ω] | β = $(β[x[3]]) [$(x[3])/$num_β] | Ω = $(Ω[x[4]]) [$(x[4])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
+        @views Σ[x] = frohlich_memory(Ω[x[4]], Mₖ[x[1],x[2]], t -> β[x[3]] == Inf ? phonon_propagator(t, ω[x[2]]) : phonon_propagator(t, ω[x[2]], β[x[3]]), t -> β[x[3]] == Inf ? polaron_propagator(t, v[x[1],x[2],x[3]], w[x[1],x[2],x[3]]) * ω[x[2]] : polaron_propagator(t, v[x[1],x[2],x[3]], w[x[1],x[2],x[3]], β[x[3]]) * ω[x[2]]; dims = dims) * ω[x[2]]
+        f.Ω, f.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
+    end
+    return frohlich(f)
+end
+
+function multifrohlich(f::Frohlich, Ω; dims = 3, verbose = false, kwargs...)
+    Ω = pustrip.(Ω)
+    ω, Mₖ, α, E, v, w, β = [map(y -> pustrip.(y), getfield(f, x)) for x in fieldnames(Frohlich)]
+    num_β, num_Ω = length(β), length(Ω)
+    if verbose N, n = num_β * num_Ω, Threads.Atomic{Int}(1) end
+    Σ = Array{ComplexF64}(undef, num_β, num_Ω)
+    Threads.@threads :static for x in CartesianIndices((num_β, num_Ω))
+        if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | β = $(β[x[1]]) [$(x[1])/$num_β] | Ω = $(Ω[x[2]]) [$(x[2])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
+        @views Σ[x] = sum(frohlich_memory(Ω[x[2]], Mₖ[j], t -> β[x[1]] == Inf ? phonon_propagator(t, ω[j]) : phonon_propagator(t, ω[j], β[x[1]]), t -> β[x[1]] == Inf ? polaron_propagator(t, v[x[1]], w[x[1]]) * ω[j] : polaron_propagator(t, v[x[1]], w[x[1]], β[x[1]]) * ω[j]; dims = dims) * ω[j] for j in eachindex(ω))
         f.Ω, f.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
     end
     return frohlich(f)
@@ -76,17 +103,17 @@ end
 
 function frohlich(material::Material; kwargs...)
     α = frohlich_alpha.(material.ϵ_optic, material.ϵ_total, material.ϵ_ionic, material.ω_LO, material.mb)
-    return frohlich(α, material.ω_LO; kwargs...)
+    return frohlich(α, material.ω_LO; mb = material.mb, kwargs...)
 end
 
 function frohlich(material::Material, T; kwargs...)
     α = frohlich_alpha.(material.ϵ_optic, material.ϵ_total, material.ϵ_ionic, material.ω_LO, material.mb)
-    return frohlich(α, material.ω_LO, pustrip.(1 ./ (kB_pu .* T)); kwargs...)
+    return frohlich(α, material.ω_LO, pustrip.(1 ./ (kB_pu .* T)); mb = material.mb, kwargs...)
 end
 
 function frohlich(material::Material, T, Ω; kwargs...)
     α = frohlich_alpha.(material.ϵ_optic, material.ϵ_total, material.ϵ_ionic, material.ω_LO, material.mb)
-    return frohlich(α, material.ω_LO, pustrip.(1 ./ (kB_pu .* T)), pustrip.(Ω); kwargs...)
+    return frohlich(α, material.ω_LO, pustrip.(1 ./ (kB_pu .* T)), pustrip.(Ω); mb = material.mb, kwargs...)
 end
 function frohlich_alpha(optical_dielectric, static_dielectic, frequency, effective_mass)
     
@@ -136,9 +163,9 @@ function frohlich_coupling(q, α, frequency, effective_mass; dims = 3)
     mb = puconvert(effective_mass)
     phonon_energy = ħ_pu * ω
     q = puconvert(q)
-    polaron_radius = sqrt(ħ_pu / (2 * mb * ω)) / r0_pu
+    polaron_radius = sqrt(ħ_pu / (2 * 1m0_pu * 1ω0_pu)) / r0_pu
 
-    Mₖ = im * phonon_energy / q^((dims - 1) / 2) * sqrt(α * polaron_radius * gamma((dims - 1) / 2) * (2√π)^(dims - 1))
+    Mₖ = im * phonon_energy / q^((dims - 1) / 2) * sqrt(α * polaron_radius * gamma((dims - 1) / 2) * (2√π)^(dims - 1)) 
 
     return Mₖ |> E0_pu
 end
@@ -151,7 +178,7 @@ function frohlich_S(v, w, coupling, phonon_propagator, polaron_propagator; limit
 end
 
 function frohlich_memory(Ω, coupling, phonon_propagator, polaron_propagator; dims = 3)
-    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf)
+    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf, rtol=1e-4)
     return 2 / dims * norm(coupling)^2 * ball_surface(dims) / (2π)^dims * sqrt(π / 2) * integral
 end
 

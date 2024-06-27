@@ -36,7 +36,7 @@ holstein(h::Holstein; reduce = true, kwargs...) = reduce ? Holstein((reduce_arra
 
 holstein(h::Array{Holstein}) = Holstein((getfield.(h, x) for x in fieldnames(Holstein))...)
 
-function holstein(α::Number, ω::Number, J::Number, β::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf)
+function holstein(α::Number, ω::Number, J::Number, β::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
