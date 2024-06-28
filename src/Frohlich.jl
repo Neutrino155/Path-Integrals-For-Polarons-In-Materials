@@ -178,7 +178,7 @@ function frohlich_S(v, w, coupling, phonon_propagator, polaron_propagator; limit
 end
 
 function frohlich_memory(Ω, coupling, phonon_propagator, polaron_propagator; dims = 3)
-    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf, rtol=1e-4)
+    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf)
     return 2 / dims * norm(coupling)^2 * ball_surface(dims) / (2π)^dims * sqrt(π / 2) * integral
 end
 
@@ -191,8 +191,8 @@ function save_frohlich(data::Frohlich, prefix)
         "Mₖ", pustrip.(data.Mₖ),
         "α", pustrip.(data.α),
         "E", pustrip.(data.E),
-        "v", pustrip.(data.v),
-        "w", pustrip.(data.w),
+        "v", pustrip.(reduce_array(reshape_array(data.v))),
+        "w", pustrip.(reduce_array(reshape_array(data.w))),
         "β", pustrip.(data.β),
         "Ω", pustrip.(data.Ω),
         "Σ", pustrip.(data.Σ)

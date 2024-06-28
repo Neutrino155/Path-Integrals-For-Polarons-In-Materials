@@ -167,8 +167,8 @@ function save_holstein(data::Holstein, prefix)
         "g", pustrip.(data.g),
         "α", pustrip.(data.α),
         "E", pustrip.(data.E),
-        "v", pustrip.(data.v),
-        "w", pustrip.(data.w),
+        "v", pustrip.(reduce_array(reshape_array(data.v))),
+        "w", pustrip.(reduce_array(reshape_array(data.w))),
         "β", pustrip.(data.β),
         "Ω", pustrip.(data.Ω),
         "Σ", pustrip.(data.Σ)
