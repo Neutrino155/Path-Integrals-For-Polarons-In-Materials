@@ -70,7 +70,7 @@ replot
 
 # Colour PDF for swanky journals
 
-set terminal pdfcairo size 3in,2in enhanced font 'Helvetica,12'
+set terminal pdfcairo size 3in,2.25in enhanced font 'Helvetica,12'
 set output prefix . '-COLOUR.pdf'
 set key font "Helvetica,10"
 
@@ -83,7 +83,7 @@ replot
 
 # unset key
 
-set terminal pdfcairo size 3in,2in enhanced font 'Helvetica,12'
+set terminal pdfcairo size 3in,2.25in enhanced font 'Helvetica,12'
 set output prefix . '-BW.pdf'
 set key font "Helvetica,10"
 

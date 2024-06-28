@@ -1,9 +1,10 @@
 reset session
 
+set grid
 prefix = "../../plots/frohlich/frohlich-3d-real-conductivity-freq"
 set key Left right top
 set xlabel  "Frequency (ω₀)"
-set ylabel  "Frohlich Real Optical Absorption (ϵ₀cn)⁻¹"
+set ylabel  "Frohlich Optical Absorption (ϵ₀cn)⁻¹" offset 0,-1
 set yrange [0:0.5]
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-real-conductivity-alpha-1to7-beta-100-freq-0to30.dat" u 1:2 w l t "{/Symbol a}=1", \
