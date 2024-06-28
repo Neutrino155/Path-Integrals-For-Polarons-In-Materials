@@ -16,7 +16,7 @@ export puconvert, punit, pustrip, m0_pu, e_pu, ħ_pu, kB_pu, ω0_pu, r0_pu, E0_p
 export Frohlich, frohlich, frohlich_alpha, frohlich_coupling, frohlich_S, frohlich_memory, save_frohlich, load_frohlich
 export Holstein, holstein, holstein_alpha, holstein_coupling, holstein_S, holstein_memory, save_holstein, load_holstein, optimal_holstein
 export polaron_propagator, S₀, E₀
-export ball_surface, phonon_propagator, variation, reduce_array, ϵ_ionic_mode
+export ball_surface, phonon_propagator, variation, reduce_array, reshape_array, ϵ_ionic_mode
 export Material, material, FrohlichMaterial, frohlichmaterial, save_frohlich_material, load_frohlich_material, HolsteinMaterial, holsteinmaterial, save_holstein_material, load_holstein_material
 
 # Universal functions
@@ -67,6 +67,7 @@ end
 variation(energy; lower = [0, 0], upper = [Inf, Inf], warn = true) = variation(energy, 4, 2; lower = lower, upper = upper, warn = warn)
 
 reduce_array(a) = length(a) == 1 ? only(a) : Array(dropdims(a, dims=tuple(findall(size(a) .== 1)...)))
+reshape_array(M) = [M[I][k] for I=CartesianIndices(M),k=eachindex(M[1,1])]
 
 # Register newly defined units with Unitful
 Unitful.register(PolaronThesis)
