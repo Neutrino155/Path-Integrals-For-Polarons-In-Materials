@@ -85,7 +85,7 @@ function holstein(h::Holstein, Ω; dims = 3, verbose = false, kwargs...)
     num_α, num_ω, num_J, num_β, num_Ω = length(α), length(ω), length(J), length(β), length(Ω)
     if verbose N, n = num_α * num_ω * num_J * num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_α, num_ω, num_J, num_β, num_Ω)
-    Threads.@threads :static for ijklm in CartesianIndices((num_α, num_ω, num_J, num_β, num_Ω))
+    Threads.@threads for ijklm in CartesianIndices((num_α, num_ω, num_J, num_β, num_Ω))
         if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijklm[1]]) [$(ijklm[1])/$num_α] | ω = $(ω[ijklm[2]]) [$(ijklm[2])/$num_ω] | J = $(J[ijklm[3]]) [$(ijklm[3])/$num_J] | β = $(β[ijklm[4]]) [$(ijklm[4])/$num_β] | Ω = $(Ω[ijklm[5]]) [$(ijklm[5])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
         @views Σ[ijklm] = holstein_memory(Ω[ijklm[5]], g[ijklm[1],ijklm[2],ijklm[3]], t -> β[ijklm[4]] == Inf ? phonon_propagator(t, ω[ijklm[2]]) : phonon_propagator(t, ω[ijklm[2]], β[ijklm[4]]), t -> β[ijklm[4]] == Inf ? polaron_propagator(t, v[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], w[ijklm[1],ijklm[2],ijklm[3],ijklm[4]]) * J[ijklm[3]] : polaron_propagator(t, v[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], w[ijklm[1],ijklm[2],ijklm[3],ijklm[4]], β[ijklm[4]]) * J[ijklm[3]]; dims = dims) * J[ijklm[3]]
         h.Ω, h.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
@@ -99,7 +99,7 @@ function multiholstein(h::Holstein, Ω; dims = 3, verbose = false, kwargs...)
     num_J, num_β, num_Ω = length(J), length(β), length(Ω)
     if verbose N, n = num_J * num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_J, num_β, num_Ω)
-    Threads.@threads :static for x in CartesianIndices((num_J, num_β, num_Ω))
+    Threads.@threads for x in CartesianIndices((num_J, num_β, num_Ω))
         if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | J = $(J[x[1]]) [$(x[1])/$num_J] | β = $(β[x[2]]) [$(x[2])/$num_β] | Ω = $(Ω[x[3]]) [$(x[3])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
         @views Σ[x] = sum(holstein_memory(Ω[x[3]], g[j][x[1]], t -> β[x[2]] == Inf ? phonon_propagator(t, ω[j]) : phonon_propagator(t, ω[j], β[x[2]]), t -> β[x[2]] == Inf ? polaron_propagator(t, v[x[1],x[2]], w[x[1],x[2]]) * J[x[1]] : polaron_propagator(t, v[x[1],x[2]], w[x[1],x[2]], β[x[2]]) * J[x[1]]; dims = dims) * J[x[1]] for j in eachindex(ω))
         h.Ω, h.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu

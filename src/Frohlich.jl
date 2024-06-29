@@ -79,7 +79,7 @@ function frohlich(f::Frohlich, Ω; dims = 3, verbose = false, kwargs...)
     num_α, num_ω, num_β, num_Ω = length(α), length(ω), length(β), length(Ω)
     if verbose N, n = num_α * num_ω * num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_α, num_ω, num_β, num_Ω)
-    Threads.@threads :static for x in CartesianIndices((num_α, num_ω, num_β, num_Ω))
+    Threads.@threads for x in CartesianIndices((num_α, num_ω, num_β, num_Ω))
         if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[x[1]]) [$(x[1])/$num_α] | ω = $(ω[x[2]]) [$(x[2])/$num_ω] | β = $(β[x[3]]) [$(x[3])/$num_β] | Ω = $(Ω[x[4]]) [$(x[4])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
         @views Σ[x] = frohlich_memory(Ω[x[4]], Mₖ[x[1],x[2]], t -> β[x[3]] == Inf ? phonon_propagator(t, ω[x[2]]) : phonon_propagator(t, ω[x[2]], β[x[3]]), t -> β[x[3]] == Inf ? polaron_propagator(t, v[x[1],x[2],x[3]], w[x[1],x[2],x[3]]) * ω[x[2]] : polaron_propagator(t, v[x[1],x[2],x[3]], w[x[1],x[2],x[3]], β[x[3]]) * ω[x[2]]; dims = dims) * ω[x[2]]
         f.Ω, f.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
@@ -93,7 +93,7 @@ function multifrohlich(f::Frohlich, Ω; dims = 3, verbose = false, kwargs...)
     num_β, num_Ω = length(β), length(Ω)
     if verbose N, n = num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_β, num_Ω)
-    Threads.@threads :static for x in CartesianIndices((num_β, num_Ω))
+    Threads.@threads for x in CartesianIndices((num_β, num_Ω))
         if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | β = $(β[x[1]]) [$(x[1])/$num_β] | Ω = $(Ω[x[2]]) [$(x[2])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
         @views Σ[x] = sum(frohlich_memory(Ω[x[2]], Mₖ[j], t -> β[x[1]] == Inf ? phonon_propagator(t, ω[j]) : phonon_propagator(t, ω[j], β[x[1]]), t -> β[x[1]] == Inf ? polaron_propagator(t, v[x[1]], w[x[1]]) * ω[j] : polaron_propagator(t, v[x[1]], w[x[1]], β[x[1]]) * ω[j]; dims = dims) * ω[j] for j in eachindex(ω))
         f.Ω, f.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
