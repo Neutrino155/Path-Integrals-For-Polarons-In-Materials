@@ -30,13 +30,13 @@ holstein(α, ω; kwargs...) = holstein(α, ω, 1; kwargs...)
 
 holstein(α, ω, J; kwargs...) = holstein(α, ω, J, Inf; kwargs...)
 
-holstein(α, ω, J, β, Ω; kwargs...) = holstein(holstein(α, ω, J, β; reduce = false, kwargs...), Ω; kwargs...)
+holstein(α, ω, J, β, Ω; kwargs...) = holstein(holstein(α, ω, J, β; kwargs...), Ω; kwargs...)
 
-holstein(h::Holstein; reduce = true, kwargs...) = reduce ? Holstein((reduce_array(getfield(h, x)) for x in fieldnames(Holstein))...) : Holstein((getfield(h, x) for x in fieldnames(Holstein))...)
+holstein(h::Holstein; kwargs...) = Holstein((getfield(h, x) for x in fieldnames(Holstein))...)
 
 holstein(h::Array{Holstein}) = Holstein((getfield.(h, x) for x in fieldnames(Holstein))...)
 
-function holstein(α::Number, ω::Number, J::Number, β::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, reduce = true, verbose = false)
+function holstein(α::Number, ω::Number, J::Number, β::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
     ω = pustrip(ω)
     J = pustrip(J)
     β = pustrip(β * ħ_pu / E0_pu) 
@@ -48,7 +48,7 @@ function holstein(α::Number, ω::Number, J::Number, β::Number; dims = 3, v_gue
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
-function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number; dims = 3, v_guesses = false, w_guesses = false, reduce = true, upper = Inf, verbose = false)
+function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number; dims = 3, v_guesses = false, w_guesses = false, upper = Inf, verbose = false)
     if length(α) != length(ω) return holstein(α, ω, J, β; verbose = verbose, reduce = reduce, v_guesses = v_guesses, w_guesses = w_guesses, dims = dims, upper = upper) end
     ω = pustrip.(ω)
     J = pustrip(J)
@@ -61,7 +61,7 @@ function holstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Number; d
     return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
-function holstein(α, ω, J, β; verbose = false, reduce = true, dims = 3, v_guesses = false, w_guesses = false, kwargs...)
+function holstein(α, ω, J, β; verbose = false, dims = 3, v_guesses = false, w_guesses = false, kwargs...)
     num_α, num_ω, num_J, num_β = length(α), length(ω), length(J), length(β)
     if verbose N, n = num_α * num_ω * num_J * num_β, Threads.Atomic{Int}(1) end
     hstart = holstein(; dims = dims, v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
@@ -75,7 +75,7 @@ function holstein(α, ω, J, β; verbose = false, reduce = true, dims = 3, v_gue
     end
     polaron = holstein(holsteins)
     polaron.α, polaron.g, polaron.d, polaron.ω, polaron.J, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array(polaron.g), dims, pustrip.(ω) * ω0_pu, pustrip.(J) .* E0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
-    return holstein(polaron; reduce = reduce)
+    return holstein(polaron)
 end
 
 function holstein(h::Holstein, Ω; dims = 3, verbose = false, kwargs...)
@@ -167,8 +167,8 @@ function save_holstein(data::Holstein, prefix)
         "g", pustrip.(data.g),
         "α", pustrip.(data.α),
         "E", pustrip.(data.E),
-        "v", pustrip.(reduce_array(reshape_array(data.v))),
-        "w", pustrip.(reduce_array(reshape_array(data.w))),
+        "v", pustrip.(data.v),
+        "w", pustrip.(data.w),
         "β", pustrip.(data.β),
         "Ω", pustrip.(data.Ω),
         "Σ", pustrip.(data.Σ)

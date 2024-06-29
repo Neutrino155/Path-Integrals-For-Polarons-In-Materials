@@ -26,13 +26,13 @@ frohlich(α; kwargs...) = frohlich(α, 1; kwargs...)
 
 frohlich(α, ω; kwargs...) = frohlich(α, ω, Inf; kwargs...)
 
-frohlich(α, ω, β, Ω; kwargs...) = frohlich(frohlich(α, ω, β; reduce = false, kwargs...), Ω; kwargs...)
+frohlich(α, ω, β, Ω; kwargs...) = frohlich(frohlich(α, ω, β; kwargs...), Ω; kwargs...)
 
-frohlich(f::Frohlich; reduce = true, kwargs...) = reduce ? Frohlich((reduce_array(getfield(f, x)) for x in fieldnames(Frohlich))...) : Frohlich((getfield(f, x) for x in fieldnames(Frohlich))...)
+frohlich(f::Frohlich; kwargs...) = Frohlich((getfield(f, x) for x in fieldnames(Frohlich))...)
 
 frohlich(f::Array{Frohlich}) = Frohlich((getfield.(f, x) for x in fieldnames(Frohlich))...)
 
-function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), reduce = true, verbose = false)
+function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), verbose = false)
     ω = pustrip(ω)
     β = pustrip(β * ħ_pu / E0_pu) 
     Mₖ = pustrip(frohlich_coupling(α, ω * ω0_pu, mb; dims = dims))
@@ -43,8 +43,8 @@ function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_g
     return Frohlich(ω * ω0_pu, Mₖ * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
-function frohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), reduce = true, verbose = false)
-    if length(α) != length(ω) return frohlich(α, ω, β; verbose = verbose, reduce = reduce, v_guesses = v_guesses, w_guesses = w_guesses, mb = mb, dims = dims, upper = upper, lower = lower) end
+function frohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), verbose = false)
+    if length(α) != length(ω) return frohlich(α, ω, β; verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, mb = mb, dims = dims, upper = upper, lower = lower) end
     ω = pustrip.(ω)
     β = pustrip(β * ħ_pu / E0_pu) 
     Mₖ = pustrip.(frohlich_coupling.(α, ω * ω0_pu, mb; dims = dims))
@@ -55,7 +55,7 @@ function frohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu,
     return Frohlich(ω .* ω0_pu, Mₖ .* E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
-function frohlich(α, ω, β; verbose = false, reduce = true, v_guesses = false, w_guesses = false, kwargs...)
+function frohlich(α, ω, β; verbose = false, v_guesses = false, w_guesses = false, kwargs...)
     num_α, num_ω, num_β = length(α), length(ω), length(β)
     if verbose N, n = num_α * num_ω * num_β, Threads.Atomic{Int}(1) end
     fstart = frohlich(; v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
@@ -69,7 +69,7 @@ function frohlich(α, ω, β; verbose = false, reduce = true, v_guesses = false,
     end
     polaron = frohlich(frohlichs)
     polaron.α, polaron.Mₖ, polaron.ω, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array(polaron.Mₖ), pustrip.(ω) * ω0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
-    return frohlich(polaron; reduce = reduce)
+    return frohlich(polaron)
 end
 
 function frohlich(f::Frohlich, Ω; dims = 3, verbose = false, kwargs...)
@@ -191,8 +191,8 @@ function save_frohlich(data::Frohlich, prefix)
         "Mₖ", pustrip.(data.Mₖ),
         "α", pustrip.(data.α),
         "E", pustrip.(data.E),
-        "v", pustrip.(reduce_array(reshape_array(data.v))),
-        "w", pustrip.(reduce_array(reshape_array(data.w))),
+        "v", map(x -> pustrip.(x), data.v),
+        "w", map(x -> pustrip.(x), data.w),
         "β", pustrip.(data.β),
         "Ω", pustrip.(data.Ω),
         "Σ", pustrip.(data.Σ)
