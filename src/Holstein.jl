@@ -70,7 +70,7 @@ function holstein(α, ω, J, β; verbose = false, dims = 3, v_guesses = false, w
     Threads.@threads :static for ijkl in CartesianIndices((num_α, num_ω, num_J, num_β))
         id = Threads.threadid()
         if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[ijkl[1]]) [$(ijkl[1])/$num_α] | ω = $(ω[ijkl[2]]) [$(ijkl[2])/$num_ω] | J = $(J[ijkl[3]]) [$(ijkl[3])/$num_J] | β = $(β[ijkl[4]])\e[1F"); Threads.atomic_add!(n, 1) end
-        @views holsteins[ijkl] = holstein(α[ijkl[1]], ω[ijkl[2]], J[ijkl[3]], β[ijkl[4]]; v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
+        @views holsteins[ijkl] = holstein(α[ijkl[1]], ω[ijkl[2]], J[ijkl[3]], β[ijkl[4]]; v_guesses = v_guess[id], w_guesses = w_guess[id], dims = dims, kwargs...)
         v_guess[id], w_guess[id] = pustrip.(holsteins[ijkl].v), pustrip.(holsteins[ijkl].w)
     end
     polaron = holstein(holsteins)
