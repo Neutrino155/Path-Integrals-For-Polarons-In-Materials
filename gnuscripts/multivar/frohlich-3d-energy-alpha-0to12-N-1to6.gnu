@@ -4,7 +4,7 @@ prefix = "../../plots/multivar/frohlich-3d-multivariate-alpha-0to12-beta-inf-N-1
 set key Left left top
 set grid
 set xlabel  "α"
-set ylabel  "Percentage Difference with N=1"
+set ylabel  "Absolute Difference with N=1"
 set xrange [0:12]
 set yrange [0:0.015]
 set xtics 0,1,12
