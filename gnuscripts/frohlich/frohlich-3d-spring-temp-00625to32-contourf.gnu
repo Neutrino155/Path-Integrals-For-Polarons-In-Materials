@@ -19,13 +19,9 @@ set logscale cb 4
 set origin 0.02,-0.04
 set size 0.9,1.14
 
-unset ytics
-set ytics nomirror
 set for [i=-4:5] ytics (sprintf("2^{%d}", i) 2**i)
 set ytics offset 1,0
 
-unset cbtics
-set cbtics nomirror
 set for [i=-1:7] cbtics (sprintf("4^{%d}", i) 4**i)
 
 set autoscale fix

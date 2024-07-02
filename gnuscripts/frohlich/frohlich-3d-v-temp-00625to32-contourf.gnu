@@ -20,13 +20,9 @@ set cbrange [1:256]
 set origin 0.02,-0.04
 set size 0.9,1.14
 
-unset ytics
-set ytics nomirror
 set for [i=-4:5] ytics (sprintf("2^{%d}", i) 2**i)
 set ytics offset 1,0
 
-unset cbtics
-set cbtics nomirror
 set for [i=0:8] cbtics (sprintf("2^{%d}", i) 2**i)
 
 set autoscale fix

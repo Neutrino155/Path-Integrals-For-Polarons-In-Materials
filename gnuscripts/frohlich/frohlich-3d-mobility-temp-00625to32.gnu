@@ -9,16 +9,8 @@ set xrange [0.0625:32]
 set yrange[1e-3:1e6]
 set logscale y 10
 set logscale x 2
-unset xtics
-set xtics nomirror
-do for [i=-4:5] {
-    set xtics add (sprintf("2^{%d}", i) 2**i)
-}
-unset ytics
-set ytics nomirror
-do for [i=-3:6] {
-    set ytics add (sprintf("10^{%d}", i) 10**i)
-}
+set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i)
+set for [i=-3:6] ytics (sprintf("10^{%d}", i) 10**i)
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-mobility-alpha-0to12-temp-00625to32.dat" u 1:2 w l t "{/Symbol a}=0.1", \
         "../../data/frohlich/variational/model/frohlich-3d-mobility-alpha-0to12-temp-00625to32.dat" u 1:21 w l t "{/Symbol a}=2", \

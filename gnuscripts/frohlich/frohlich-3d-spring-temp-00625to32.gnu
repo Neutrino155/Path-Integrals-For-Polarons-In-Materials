@@ -7,11 +7,8 @@ set xlabel  "T (ħω₀/kB)"
 set ylabel  "Polaron Spring Constant (m₀ω₀²)"
 set xrange [0.0625:32]
 set logscale xy 2
-unset xtics
-set xtics nomirror
-do for [i=-4:5] {
-    set xtics add (sprintf("2^{%d}", i) 2**i)
-}
+set for [i=-1:7] ytics (sprintf("4^{%d}", i) 4**i)
+set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i)
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-spring-alpha-0to12-temp-00625to32.dat" u 1:2 w l t "{/Symbol a}=0.1", \
         "../../data/frohlich/variational/model/frohlich-3d-spring-alpha-0to12-temp-00625to32.dat" u 1:21 w l t "{/Symbol a}=2", \

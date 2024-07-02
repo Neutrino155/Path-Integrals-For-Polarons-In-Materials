@@ -65,7 +65,7 @@ set key # key!
 
 set terminal pngcairo size 1024,768 enhanced font 'Helvetica,24'
 set output prefix . '.png'
-set pointsize 2.0
+# set pointsize 2.0
 replot
 
 # Colour PDF for swanky journals

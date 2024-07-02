@@ -7,6 +7,7 @@ set xlabel  "α"
 set ylabel  "Frohlich Properties"
 set xrange [0:12]
 set yrange [*:*]
+set for [i=-3:7] ytics (sprintf("4^{%d}", i) 4**i)
 set xtics 0,1,12
 set logscale y 2
 

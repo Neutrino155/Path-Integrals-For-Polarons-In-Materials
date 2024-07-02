@@ -33,7 +33,7 @@ set ytics 0,-3,-21
 set xrange [0:12]
 set xtics 0,1,12
 
-plot    "../../data/frohlich/variational/model/frohlich-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "Fro", \
+plot    "../../data/frohlich/variational/model/frohlich-3d-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "Fro", \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
@@ -86,7 +86,7 @@ set ylabel  "Energy (ħω₀)"
 set xrange [0:12]
 set xtics 0,1,12
 
-plot    "../../data/frohlich/variational/model/frohlich-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "Fro", \
+plot    "../../data/frohlich/variational/model/frohlich-3d-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "Fro", \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
@@ -154,7 +154,7 @@ set ylabel  "Energy (ħω₀)"
 set xrange [0:12]
 set xtics 0,1,12
 
-plot    "../../data/frohlich/variational/model/frohlich-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "Fro", \
+plot    "../../data/frohlich/variational/model/frohlich-3d-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "Fro", \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
