@@ -55,8 +55,9 @@ function frohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu,
     return Frohlich(ω .* ω0_pu, Mₖ .* E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
-function frohlich(α, ω, β; verbose = false, v_guesses = false, w_guesses = false, kwargs...)
+function frohlich(α, ω, β; dims = 3, verbose = false, v_guesses = false, w_guesses = false, kwargs...)
     num_α, num_ω, num_β = length(α), length(ω), length(β)
+    if length(α) == length(ω) return multifrohlich(α, ω, β; dims = dims, verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, kwargs...) end
     if verbose N, n = num_α * num_ω * num_β, Threads.Atomic{Int}(1) end
     fstart = frohlich(; v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
     v_guess, w_guess = fill(pustrip.(fstart.v), Threads.nthreads()), fill(pustrip.(fstart.w), Threads.nthreads())
@@ -64,11 +65,28 @@ function frohlich(α, ω, β; verbose = false, v_guesses = false, w_guesses = fa
     Threads.@threads :static for x in CartesianIndices((num_α, num_ω, num_β))
         id = Threads.threadid()
         if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | α = $(α[x[1]]) [$(x[1])/$num_α] | ω = $(ω[x[2]]) [$(x[2])/$num_ω] | β = $(β[x[3]]) [$(x[3])/$num_β]\e[1F"); Threads.atomic_add!(n, 1) end
-        @views frohlichs[x] = frohlich(α[x[1]], ω[x[2]], β[x[3]]; v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
+        @views frohlichs[x] = frohlich(α[x[1]], ω[x[2]], β[x[3]]; dims = dims, v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
         v_guess[id], w_guess[id] = pustrip.(frohlichs[x].v), pustrip.(frohlichs[x].w)
     end
     polaron = frohlich(frohlichs)
-    polaron.α, polaron.Mₖ, polaron.ω, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array(polaron.Mₖ), pustrip.(ω) * ω0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
+    polaron.α, polaron.Mₖ, polaron.ω, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array(polaron.Mₖ[:,:,1]), pustrip.(ω) * ω0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
+    return frohlich(polaron)
+end
+
+function multifrohlich(α, ω, β; dims = 3, verbose = false, v_guesses = false, w_guesses = false, kwargs...)
+    num_β = length(β)
+    if verbose N, n = num_β, Threads.Atomic{Int}(1) end
+    fstart = frohlich(; v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
+    v_guess, w_guess = fill(pustrip.(fstart.v), Threads.nthreads()), fill(pustrip.(fstart.w), Threads.nthreads())
+    frohlichs = fill(fstart, num_β)
+    Threads.@threads :static for x in 1:num_β
+        id = Threads.threadid()
+        if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | β = $(β[x]) [$(x)/$num_β]\e[1F"); Threads.atomic_add!(n, 1) end
+        @views frohlichs[x] = frohlich(α, ω, β[x]; dims = dims, v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
+        v_guess[id], w_guess[id] = pustrip.(frohlichs[x].v), pustrip.(frohlichs[x].w)
+    end
+    polaron = frohlich(frohlichs)
+    polaron.α, polaron.Mₖ, polaron.ω, polaron.β, polaron.Ω, polaron.Σ = α, reduce_array.(polaron.Mₖ[1]), pustrip.(ω) * ω0_pu, pustrip.(β) / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu
     return frohlich(polaron)
 end
 
@@ -178,7 +196,7 @@ function frohlich_S(v, w, coupling, phonon_propagator, polaron_propagator; limit
 end
 
 function frohlich_memory(Ω, coupling, phonon_propagator, polaron_propagator; dims = 3)
-    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf)
+    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf; rtol=1e-4)
     return 2 / dims * norm(coupling)^2 * ball_surface(dims) / (2π)^dims * sqrt(π / 2) * integral
 end
 
