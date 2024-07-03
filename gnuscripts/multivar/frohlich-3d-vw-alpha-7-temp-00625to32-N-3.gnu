@@ -5,7 +5,7 @@ set key outside center right
 set rmargin at screen 0.8
 set grid
 set xlabel  "T (ħω₀/kB)"
-set ylabel  "Variational Parameters (ω₀), N = 2"
+set ylabel  "Variational Parameters (ω₀), N = 3"
 set logscale yx 2
 set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i) 
 set for [i=0:6] ytics (sprintf("4^{%d}", i) 4**i) offset 0.7,0

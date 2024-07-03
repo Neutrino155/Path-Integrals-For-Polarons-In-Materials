@@ -4,12 +4,12 @@ prefix = "../../plots/multivar/frohlich-3d-multivariate-alpha-0to12-beta-inf-N-1
 set key Left left top
 set grid
 set xlabel  "α"
-set ylabel  "Absolute Difference with N=1"
+set ylabel  "Absolute Difference with N = 1"
 set xrange [0:12]
 set yrange [0:0.015]
 set xtics 0,1,12
 
-plot    "../../data/frohlich/variational/multivar/frohlich-3d-multivariate-energy-alpha-0to12-beta-inf-N-1to6.dat" u 1:($7 - $2) w l t "N=6", \
+plot    "../../data/frohlich/variational/multivar/frohlich-3d-multivariate-energy-alpha-0to12-beta-inf-N-1to6.dat" u 1:($2 - $7) w l t "N=6", \
         "../../data/frohlich/variational/multivar/frohlich-3d-multivariate-energy-alpha-0to12-beta-inf-N-1to6.dat" u 1:($2 - $6) w l t "N=5", \
         "../../data/frohlich/variational/multivar/frohlich-3d-multivariate-energy-alpha-0to12-beta-inf-N-1to6.dat" u 1:($2 - $5) w l t "N=4", \
         "../../data/frohlich/variational/multivar/frohlich-3d-multivariate-energy-alpha-0to12-beta-inf-N-1to6.dat" u 1:($2 - $4) w l t "N=3", \
