@@ -62,7 +62,7 @@ plot    "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamm
        
 unset multiplot
 
-set terminal pdfcairo size 3in,2in enhanced font 'Helvetica,12'
+set terminal pdfcairo size 3in,2.25in enhanced font 'Helvetica,12'
 set output prefix . '-COLOUR.pdf'
 set style line 101 lc rgb '#000000' lt 1 lw 1
 set tics nomirror out scale 0.75
@@ -117,7 +117,7 @@ plot    "../../data/holstein/diagmc/holstein_3d_parabolic_energy_alpha_0to5_gamm
        
 unset multiplot
 
-set terminal pdfcairo size 3in,2in enhanced font 'Helvetica,12'
+set terminal pdfcairo size 3in,2.25in enhanced font 'Helvetica,12'
 set output prefix . '-BW.pdf'
 
 # Via Janert's Gnuplot in Action 2nd Edition; style3.gp
