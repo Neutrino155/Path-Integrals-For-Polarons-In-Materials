@@ -16,7 +16,7 @@ set xtics 0,1,12 offset 0,0.5
 set logscale y 2
 # set logscale cb 2
 
-set origin 0.01,-0.04
+set origin 0.0,-0.04
 set size 0.9,1.14
 
 set for [i=-4:5] ytics (sprintf("2^{%d}", i) 2**i)
