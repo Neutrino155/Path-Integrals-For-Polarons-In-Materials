@@ -98,9 +98,9 @@ and the inverse Fr\"ohlich DC mobility is,
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/moblility_temp_alpha.pdf}
-    \includegraphics[width=.49\textwidth]{figures/medium (1).png}
-    
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-mobility-alpha-2.5-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-mobility-alpha-4-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-mobility-alpha-6-temp-00625to32-COLOUR.pdf}
     \caption{Temperature dependence of the polaron mobility. The Mott-Ioffe-Regel (MIR) threshold is given by the red dotted lines. Left: Mobility obtained from the thermal FHIP theory with $v$ and $w$ variational parameters calculated for each temperature, for Fr\"ohlich alphas ranging from $\alpha = 1$ to  $12$. The temperature is given in units of the phonon frequency $\omega$. Right: Mobility obtained by~\cite{mishchenko_polaron_2019} using the diagrammatic Monte Carlo method for $\alpha = 6$. The temperature is in units of the phonon frequency $\Omega$.}
     \label{fig:mishchenko2}
 \end{figure}
@@ -234,12 +234,9 @@ and where $\rho = V / N$ is the particle density and $\gamma = \hbar\omega_0 / J
 \subsubsection{Polaron Mobility}
 
 \begin{figure}[!tbp]
-    \includegraphics[width=.49\textwidth]{figures/mobility_temp_25_083.png}
-    \includegraphics[width=.49\textwidth]{figures/mobility_temp_4_133.png}
-    \includegraphics[width=.49\textwidth]{figures/mobility_temp_6_2.png}
-    \includegraphics[width=.49\textwidth]{figures/mobility_temp_8_267.png}
-    \includegraphics[width=.49\textwidth]{figures/mobility_temp_10_333.png}
-    \includegraphics[width=.49\textwidth]{figures/mobility_temp_12_4.png}
+    \includegraphics[width=.49\textwidth]{figures/holstein-2d-mobility-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{chapters/responsefunctions/figures/holstein-3d-mobility-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{chapters/responsefunctions/figures/frohlich-3d-mobility-temp-00625to32-COLOUR.pdf}
     \caption{Temperature dependence ($T$, in units of phonon frequency $\omega_0$) of the polaron DC mobility $\mu$ for the Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange), and for the Holstein model in 1D (dot-dashed green), 2D (dot-dot-dashed pink) and 3D (solid gold), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling.}
     \label{fig:mobility_temp}
 \end{figure}
@@ -262,15 +259,16 @@ In this section, we look at how the Holstein model varies with an external, pert
 \begin{figure}
 \centering
   \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/im_mem_freq_3_1.png}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/im_mem_freq_5_167.png}
+    \includegraphics[width=\textwidth]{figures/holstein-1d-imag-memory-freq-COLOUR.pdf}
   \end{subfigure}
   \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/im_mem_freq_7_233.png}
+    \includegraphics[width=\textwidth]{figures/holstein-2d-imag-memory-freq-COLOUR.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-3d-imag-memory-freq-COLOUR.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/frohlich-3d-imag-memory-freq-COLOUR.pdf}
   \end{subfigure}
   \caption{Frequency dependence ($\Omega$, in units of the phonon frequency $\omega_0$) of the polaron memory function $\chi(\Omega)$ for the Fr\"ohlich model in 3D (solid blue), and the Holstein model in 1D (dashed orange), 2D (dot-dashed green) and 3D (solid gold), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 1, 3, 5,6, 7$ and $1/3$ of these values for the Holstein electron-phonon coupling. Here, I only consider the imaginary component to reduce graph clutter, but the real component was also evaluated.} 
   \label{fig:im_mem_freq}
@@ -287,11 +285,10 @@ The 2D and 3D Holstein memory functions take very different forms from what is s
 
 \begin{figure}[!tbp]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/re_con_freq_1_033.png}
-    \includegraphics[width=.49\textwidth]{figures/re_con_freq_3_1.png}
-    \includegraphics[width=.49\textwidth]{figures/re_con_freq_5_167.png}
-    \includegraphics[width=.49\textwidth]{figures/re_con_freq_6_2.png}
-    \includegraphics[width=.49\textwidth]{figures/re_con_freq_7_233.png}
+    \includegraphics[width=.49\textwidth]{figures/holstein-1d-real-conductivity-freq-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/holstein-2d-real-conductivity-freq-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/holstein-3d-real-conductivity-freq-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{chapters/literature/figures/frohlich-3d-real-conductivity-freq-COLOUR.pdf}
     \caption{Frequency dependence ($\Omega$, in units of the phonon frequency $\omega_0$) of the polaron complex conductivity $\sigma(\Omega)$ for the Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange), and for the Holstein model in 1D (dotted green), 2D (dot-dashed pink) and 3D (d pink), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 3, 5, 7$ and $1/3$ of these values for the Holstein electron-phonon coupling. Here, I only consider the imaginary component to reduce graph clutter, but the real component was also evaluated.}
     \label{fig:re_con_freq}
 \end{figure}

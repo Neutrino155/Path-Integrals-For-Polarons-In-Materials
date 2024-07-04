@@ -1006,11 +1006,11 @@ and
 \makebox[\linewidth][c]{%
 \begin{subfigure}[b]{.6\textwidth}
 \centering
-\includegraphics[width=.9\textwidth]{figures/athermal_theory.pdf}
+\includegraphics[width=.9\textwidth]{figures/frohlich-3d-alpha-0to12-COLOUR.pdf}
 \end{subfigure}%
 \begin{subfigure}[b]{.6\textwidth}
 \centering
-\includegraphics[width=.9\textwidth]{figures/zero_temp_alpha.pdf}
+\includegraphics[width=.9\textwidth]{figures/frohlich-3d-real-conductivity-freq-COLOUR.pdf}
 \end{subfigure}%
 }
 \caption{(left): Unitless values from Feynman's athermal $0$K polaron theory, calculated for electron-phonon $\alpha$ couplings ranging from $1$ to $12$. Blue-solid is the negative of the best approximated ground-state energy $F$, orange-dashed is the polaron effective mass $m_b$, green-dotted is the $v$ variational parameter and purple-dash-dotted is the $w$ variational parameter. (right): The real conductivity (also the frequency-dependent mobility) of the polaron response obtained from the FHIP theory and calculated for $\alpha$ ranging from $1$ to $12$ and external field angular frequencies ranging from $0\ \omega_{LO}$ to $20\ \omega_{LO}$ multiples of the effective phonon angular frequency. The relative magnitudes of the curves for different values of $\alpha$ have been normalised and are not comparable.}
@@ -1282,10 +1282,10 @@ These results generalise Feynman's variational parameter for the polaron at zero
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = .49\textwidth]{figures/free_energy.pdf}
-    \includegraphics[width = .49\textwidth]{figures/effective_mass.pdf}
-    \includegraphics[width = .49\textwidth]{figures/v_parameter.pdf}
-    \includegraphics[width = .49\textwidth]{figures/w_parameter.pdf}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-energy-temp-00625to32-contourf-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-mass-temp-00625to32-contourf-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-v-temp-00625to32-contourf-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-w-temp-00625to32-contourf-COLOUR.pdf}
     \caption{Contour plots of (a) \=Osaka's polaron free energy, (b) Feynman's effective mass (log scale), (c) the $v$ variational parameter (log scale) and (d) the $w$ variational parameter (log scale), as a function of `effective' temperature $T / \omega_{LO}$ and the Fr\"ohlich $\alpha$ parameter.}
     \label{fig:thermaltheory}
 \end{figure}
@@ -1692,7 +1692,7 @@ In Appendix A, I have reproduced the contour integration for $\text{Im}\chi(\Ome
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=.7\textwidth]{figures/dc_mobility.pdf}
+    \includegraphics[width=.7\textwidth]{chapters/literature/figures/frohlich-3d-mobility-temp-00625to32-contourf-COLOUR.pdf}
     \caption{Log contour plot of the DC mobility (arbitrary units).}
     \label{fig:dcmobility}
 \end{figure}
@@ -1773,27 +1773,35 @@ In Appendices B and C, I have derived the expansions of $\text{Re}\chi(\Omega)$ 
 
 \subsubsection{Numerical Results}
 
-\begin{figure}[p]
+\begin{figure}[t]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/conductivity_contour_real_3.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_contour_imag_3.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_contour_real_6.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_contour_imag_6.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_contour_real_9.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_contour_imag_9.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-0to12-temp-001-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-0to12-temp-001-freq-0to30-contourf-COLOUR.pdf}
+    \caption{Contours for the real (left) and imaginary (right) complex conductivity at different values of $\alpha$. (a) Real conductivity at $\alpha = 3$. (b) Imaginary conductivity at $\alpha = 3$. (c) Real conductivity at $\alpha = 6$. (d) Imaginary conductivity at $\alpha = 6$. (e) Real conductivity at $\alpha = 9$. (f) Imaginary conductivity at $\alpha = 9$.}
+    \label{fig:gscontour}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-1-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-2-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-3-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-4-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-5-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-6-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
 
     \caption{Contours for the real (left) and imaginary (right) complex conductivity at different values of $\alpha$. (a) Real conductivity at $\alpha = 3$. (b) Imaginary conductivity at $\alpha = 3$. (c) Real conductivity at $\alpha = 6$. (d) Imaginary conductivity at $\alpha = 6$. (e) Real conductivity at $\alpha = 9$. (f) Imaginary conductivity at $\alpha = 9$.}
     \label{fig:osakacontour}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[t]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/conductivity_plot_temp_real_3.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_plot_temp_imag_3.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_plot_temp_real_6.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_plot_temp_imag_6.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_plot_temp_real_9.pdf}
-    \includegraphics[width=.49\textwidth]{figures/conductivity_plot_temp_imag_9.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-1-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-2-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-3-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-4-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-5-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-6-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
 
     \caption{Ridgeline plots for the real (left) and imaginary (right) complex conductivity at different values of $\alpha$. (a) Real conductivity at $\alpha = 3$. (b) Imaginary conductivity at $\alpha = 3$. (c) Real conductivity at $\alpha = 6$. (d) Imaginary conductivity at $\alpha = 6$. (e) Real conductivity at $\alpha = 9$. (f) Imaginary conductivity at $\alpha = 9$.}
     \label{fig:osakaridge}
@@ -1803,12 +1811,12 @@ I used the optical absorption expression obtained from~\cite{devreese_optical_19
 
 Figures \ref{fig:osakacontour} (contour plots) and \ref{fig:osakaridge} (ridge-line plots) show the real (left columns) and imaginary (right columns) of the complex conductivity for $\alpha = 3$ in the first rows, $\alpha = 6$ in the second rows and $\alpha = 9$ in the last rows. The figures are all log-scaled concerning the complex conductivity, and for the imaginary component, I have taken the absolute value to go to the log scale. This means that for the imaginary plots, any sharp `rifts' indicate a change in sign as the imaginary component passes through zero. The imaginary component always starts negative at low temperature and frequency, so the first rift can be assumed to indicate a change to a positive sign. I chose $\alpha = 3, 6, 9$ to give some spread of coupling strength about $\alpha = 6$ where perturbation theory typically breaks down. 
 
-From Figures \ref{fig:osakacontour} and \ref{fig:osakaridge}, we can see that firstly, at $\alpha = 3$, the complex conductivity starts with a single peak starting at $\Omega = \omega_{LO}$ for zero temperature, which broadens out and blue-shifts to higher frequencies as the temperature increases. This peak corresponds to a single phonon excitation. At $\alpha = 6$, the conductivity develops more peaks starting at $\Omega = \omega_{LO} + n \omega_{LO} v,\ n \in \mathbb{Z}^+$ at zero temperature, corresponding to further phonon excitations, which also broaden out and blue-shift to higher frequencies as the temperature increases. The first peak for $\alpha = 6$ now has more features, with an initial shoulder which leads into a far sharper peak than before and sharper, more structured peaks as $\alpha$ increases. Finally, for $\alpha = 9$, the landscape becomes much more erratic and complex. The first peak remains, however the trough that follows it has become so deep (reaching values close to zero) that the numerical results is noisy due to reaching float-point accuracy (working here with 64-bit floats). The second main peak (that I identify as regions now separated by the deep troughs) now seems to begin a little earlier than $\Omega = \omega_{LO} + v \omega_{LO}$ and appears to be composed of smaller, sharper peaks and shoulders. 
+From Figures \ref{fig:osakacontour} and \ref{fig:osakaridge}, we can see that firstly, at $\alpha = 3$, the complex conductivity starts with a single peak starting at $\Omega = \omega_{LO}$ for zero temperature, which broadens out and blue-shifts to higher frequencies as the temperature increases. This peak corresponds to a single phonon excitation. At $\alpha = 6$, the conductivity develops more peaks starting at $\Omega = \omega_{LO} + n \omega_{LO} v,\ n \in \mathbb{Z}^+$ at zero temperature, corresponding to further phonon excitations, which also broaden out and blue-shift to higher frequencies as the temperature increases. The first peak for $\alpha = 6$ now has more features, with an initial shoulder which leads into a far sharper peak than before and sharper, more structured peaks as $\alpha$ increases. Finally, for $\alpha = 9$, the landscape becomes much more erratic and complex. The first peak remains. However, the trough that follows it has become so deep (reaching values close to zero) that the numerical results are noisy due to reaching float-point accuracy (working here with 64-bit floats). The second main peak (that I identify as regions now separated by the deep troughs) now seems to begin a little earlier than $\Omega = \omega_{LO} + v \omega_{LO}$ and appears to be composed of smaller, sharper peaks and shoulders. 
 
 \subsection{Effective Multimode Mobility}
 \label{subsec:2-3-3}
 
-Hellwarth and Biaggio~\cite{hellwarth_mobility_1999} extended the Fr\"ohlich model to where multiple phonon modes are present in a polar cubic material. They did this by deriving the full classical field Lagrangian that describes one conduction-band electron with charge $-e$, isotropic band mass $m_b$ and position $\vb{r}_{el}(t)$, which is coupled to a polar cubic lattice that possesses many infrared-active modes with varying strengths and frequencies. They derive an effective electron-phonon coupling constant that generalises Fr\"ohlich's $\alpha$ parameter. Then, rather than explicitly incorporating the frequencies of multiple phonon modes into the Feynman path integral polaron model, they propose two different schemes for deriving an effective longitudinal optical phonon frequency. This enables them to directly use \=Osaka's finite-temhelpfulre variational principle for determining the temperature-dependent variational parameters $v$ and $w$ needed to evaluate the FHIP mobility. 
+Hellwarth and Biaggio~\cite{hellwarth_mobility_1999} extended the Fr\"ohlich model to where multiple phonon modes are present in a polar cubic material. They did this by deriving the full classical field Lagrangian that describes one conduction-band electron with charge $-e$, isotropic band mass $m_b$ and position $\vb{r}_{el}(t)$, which is coupled to a polar cubic lattice that possesses many infrared-active modes with varying strengths and frequencies. They derive an effective electron-phonon coupling constant that generalises Fr\"ohlich's $\alpha$ parameter. Then, rather than explicitly incorporating the frequencies of multiple phonon modes into the Feynman path integral polaron model, they propose two different schemes for deriving an effective longitudinal optical phonon frequency. This enables them to directly use \=Osaka's finite-temperature variational principle for determining the temperature-dependent variational parameters $v$ and $w$ needed to evaluate the FHIP mobility. 
 
 As usual with Fr\"ohlich polarons, they assume that the lattice unit cell is small compared to the electron wavelength such that the lattice polarisation density $\vb{P}(\vb{r}, t)$ can be treated as continuous. All other electrons are bound in fully occupied valence bands. The system is then perturbed by a homogeneous electric field $\vb{E}^{\text{ext}}(t)$. The polarisation density is composed of many independent terms $\vb{P}_j(\vb{r}, t)$ where $j = 1, \dots m; m + 1, \dots m + M$ correspond to the $m$ infrared (lattice) and $M$ ultraviolet (bound electron) modes of the material such that
 
@@ -1956,7 +1964,7 @@ where $B(\Omega)$ was obtained from the relation $\vb{\Tilde{P}}^{\text{L}}_{C}(
 
 $B(\Omega)$ is the macroscopic polarisability, where each term in the sum of $B(\Omega)$ acts as a harmonic longitudinal lattice mode with a frequency $\omega_j$ and coupling constant $\kappa_j$ that linearly coupled to the conduction electron field $\vb{\Tilde{D}}^{el}$. 
 
-Hellwarth and Biaggio use the Born-Oppenheimer approximation just as in the original Fr\"ohlich model by assuming that the bound-electrons (ultraviolet oscillators) response speed is near instantaneous. Therefore, the short-wavelength limit $\epsilon_\infty$ of the dielectric constant accounts for the electronic contribution when the ions are immobile. Otherwise, the contribution corresponding to ionic displacements is assumed to be described by the static dielectric constant $\epsilon_0$. Therefore, the ions slowly follow the harmonic movement of the electron with a time delay. Hellwarth and Biaggio separate $B(\Omega)$ into infrared and optical contributions where the latter is represented by $\epsilon_\infty$ so that
+Hellwarth and Biaggio use the Born-Oppenheimer approximation as in the original Fr\"ohlich model by assuming that the bound-electrons (ultraviolet oscillators) response speed is near instantaneous. Therefore, the short-wavelength limit $\epsilon_\infty$ of the dielectric constant accounts for the electronic contribution when the ions are immobile. Otherwise, the contribution corresponding to ionic displacements is assumed to be described by the static dielectric constant $\epsilon_0$. Therefore, the ions slowly follow the harmonic movement of the electron with a time delay. Hellwarth and Biaggio separate $B(\Omega)$ into infrared and optical contributions where the latter is represented by $\epsilon_\infty$ so that
 
 \begin{equation}
     B(\Omega) = \Tilde{B}(\Omega) + \frac{1}{4\pi} \left( 1 - \frac{1}{\epsilon_\infty} \right)
