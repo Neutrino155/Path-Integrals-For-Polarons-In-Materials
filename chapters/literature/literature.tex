@@ -1282,17 +1282,17 @@ These results generalise Feynman's variational parameter for the polaron at zero
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-energy-temp-00625to32-contourf-COLOUR.pdf}
-    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-mass-temp-00625to32-contourf-COLOUR.pdf}
-    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-v-temp-00625to32-contourf-COLOUR.pdf}
-    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-w-temp-00625to32-contourf-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-energy-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-mass-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-v-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-w-temp-00625to32-contourf.png}
     \caption{Contour plots of (a) \=Osaka's polaron free energy, (b) Feynman's effective mass (log scale), (c) the $v$ variational parameter (log scale) and (d) the $w$ variational parameter (log scale), as a function of `effective' temperature $T / \omega_{LO}$ and the Fr\"ohlich $\alpha$ parameter.}
     \label{fig:thermaltheory}
 \end{figure}
 
 Using \=Osaka's generalised variational principle, I was able to write codes that calculate the polaron free energy, effective mass and complex conductivity for temperatures $T$ ranging from $1$ to $10$ multiples of $\omega_{LO}$ (here $\hbar = k_B = 1$) and for $1\leq\alpha\leq12$. 
 
-In Figure \ref{fig:thermaltheory} are contour plots that show, as a function of temperature $T / \omega_{LO}$ and $\alpha$, (a) the polaron free energy, (b) the polaron effective mass, (c) values of the $v$ variational parameters and (d) values of the $w$ variational parameter. The free energy shows similar behaviour at low temperatures $T \gtrsim \hbar \omega_{LO} / k_B$ to the ground-state energy. Still, it then seems to shift more negatively with an increasing negative gradient for $T \gtrsim \hbar \omega_{LO} / k_B$. The effective mass follows a similar pattern as it has roughly the same behaviour for $T \lesssim \hbar \omega_{LO} / k_B$ as it did for $T = 0$, but becomes exponentially more positive for temperatures $T \gtrsim \hbar \omega_{LO} / k_B$. The $v$ and $w$ parameters also show this pattern and increase exponentially with temperature beyond $T \gtrsim \hbar \omega_{LO} / k_B$. However, $v$ grows faster than $w$, so their difference increases exponentially with temperature. The artefacts that appear in contour plots for the effective mass and variational parameters at lower $\alpha$ and high temperatures may be numerical errors due to difficulties in the optimisation process. The free energy seems to vary less with temperature at weak coupling, which may have made finding the global minima difficult, resulting in noise. 
+In Figure \ref{fig:thermaltheory} are contour plots that show, as a function of temperature $T / \omega_{LO}$ and $\alpha$, (a) the polaron free energy, (b) the polaron effective mass, (c) values of the $v$ variational parameters and (d) values of the $w$ variational parameter. The free energy behaves similarly at low temperatures $T \gtrsim \hbar \omega_{LO} / k_B$ to the ground-state energy. Still, it seems to shift more negatively with an increasing negative gradient for $T \gtrsim \hbar \omega_{LO} / k_B$. The effective mass follows a similar pattern as it has roughly the same behaviour for $T \lesssim \hbar \omega_{LO} / k_B$ as it did for $T = 0$, but becomes exponentially more positive for temperatures $T \gtrsim \hbar \omega_{LO} / k_B$. The $v$ and $w$ parameters also show this pattern and increase exponentially with temperature beyond $T \gtrsim \hbar \omega_{LO} / k_B$. However, $v$ grows faster than $w$, so their difference increases exponentially with temperature. The artefacts that appear in contour plots for the effective mass and variational parameters at lower $\alpha$ and high temperatures may be numerical errors due to difficulties in the optimisation process. The free energy seems to vary less with temperature at weak coupling, which may have made finding the global minima difficult, resulting in noise. 
 
 \section{Influence Functionals \& Response Functions}
 \label{sec:2-3}
@@ -1692,7 +1692,7 @@ In Appendix A, I have reproduced the contour integration for $\text{Im}\chi(\Ome
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=.7\textwidth]{chapters/literature/figures/frohlich-3d-mobility-temp-00625to32-contourf-COLOUR.pdf}
+    \includegraphics[width=.7\textwidth]{chapters/literature/figures/frohlich-3d-mobility-temp-00625to32-contourf.png}
     \caption{Log contour plot of the DC mobility (arbitrary units).}
     \label{fig:dcmobility}
 \end{figure}
@@ -1775,20 +1775,20 @@ In Appendices B and C, I have derived the expansions of $\text{Re}\chi(\Omega)$ 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-0to12-temp-001-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-0to12-temp-001-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-0to12-temp-001-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-0to12-temp-001-freq-0to30-contourf.png}
     \caption{Contours for the real (left) and imaginary (right) complex conductivity at different values of $\alpha$. (a) Real conductivity at $\alpha = 3$. (b) Imaginary conductivity at $\alpha = 3$. (c) Real conductivity at $\alpha = 6$. (d) Imaginary conductivity at $\alpha = 6$. (e) Real conductivity at $\alpha = 9$. (f) Imaginary conductivity at $\alpha = 9$.}
     \label{fig:gscontour}
 \end{figure}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-1-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-2-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-3-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-4-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-5-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-6-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-1-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-2-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-3-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-4-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-5-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-6-temp-00625to32-freq-0to30-contourf.png}
 
     \caption{Contours for the real (left) and imaginary (right) complex conductivity at different values of $\alpha$. (a) Real conductivity at $\alpha = 3$. (b) Imaginary conductivity at $\alpha = 3$. (c) Real conductivity at $\alpha = 6$. (d) Imaginary conductivity at $\alpha = 6$. (e) Real conductivity at $\alpha = 9$. (f) Imaginary conductivity at $\alpha = 9$.}
     \label{fig:osakacontour}
@@ -1796,12 +1796,12 @@ In Appendices B and C, I have derived the expansions of $\text{Re}\chi(\Omega)$ 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-1-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-2-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-3-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-4-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-5-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-6-temp-00625to32-freq-0to30-contourf-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-1-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-2-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-3-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-4-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-5-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-6-temp-00625to32-freq-0to30-contourf.png}
 
     \caption{Ridgeline plots for the real (left) and imaginary (right) complex conductivity at different values of $\alpha$. (a) Real conductivity at $\alpha = 3$. (b) Imaginary conductivity at $\alpha = 3$. (c) Real conductivity at $\alpha = 6$. (d) Imaginary conductivity at $\alpha = 6$. (e) Real conductivity at $\alpha = 9$. (f) Imaginary conductivity at $\alpha = 9$.}
     \label{fig:osakaridge}
