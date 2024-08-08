@@ -7,7 +7,7 @@ set xlabel  "T (ħω₀/kB)"
 set ylabel  "Holstein Energy (ħω₀)"
 set xrange [0:32]
 set xtics 0,4,32
-set yrange [-120:0]
+set yrange [*:*]
 #set logscale x 2
 #unset xtics
 #set xtics nomirror
