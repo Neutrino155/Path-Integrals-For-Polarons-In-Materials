@@ -6,7 +6,7 @@ prefix = "../../plots/frohlich/frohlich-3d-real-conductivity-alpha-2-temp-00625t
 # Set the titles
 set xlabel "Frequency (ω₀)" offset 0,0.8
 set ylabel "Temperature (ħω₀/kB)" offset -0.5,0
-set cblabel "Real Conductivity" offset 1,0
+set cblabel "Frohlich Real Conductivity (e²ħ⁻¹)" offset 1,0
 
 # Enable grid
 set grid
@@ -29,6 +29,6 @@ set autoscale fix
 set pm3d map
 
 # Plot the preprocessed data
-splot '../../data/frohlich/variational/model/frohlich-3d-real-conductivity-alpha-2-temp-00625to32-freq-0to30omega.dat' matrix nonuniform notitle
+splot '../../data/frohlich/variational/model/frohlich-3d-real-conductivity-alpha-2-temp-00625to32-freq-0to30.dat' matrix nonuniform notitle
 
 load "../gnuplot-render.gpt"

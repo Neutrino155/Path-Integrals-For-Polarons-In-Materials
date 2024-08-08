@@ -6,7 +6,7 @@ prefix = "../../plots/frohlich/frohlich-3d-imag-conductivity-alpha-0to12-temp-00
 # Set the titles
 set xlabel "Frequency (ω₀)" offset 0,0.8
 set ylabel "α" offset -0.5,0
-set cblabel "Imag Conductivity (e²ħ⁻¹)" offset 1,0
+set cblabel "Frohlich Imag Conductivity (e²ħ⁻¹)" offset 1,0
 
 # Enable grid
 set grid
@@ -27,9 +27,16 @@ set for [i=-2:1] cbtics (sprintf("10^{%d}", i) 10**i)
 
 set autoscale fix
 
+input_file = '../../data/frohlich/variational/model/frohlich-3d-imag-conductivity-alpha-0to12-beta-100-freq-0to30.dat'
+transposed_file = 'transposed_matrix_data.dat'
+
+system(sprintf("awk '{ for (i = 1; i <= NF; i++) { a[NR, i] = $i; if (i > p) p = i } } END { for (j = 1; j <= p; j++) { for (i = 1; i <= NR; i++) printf(\"%%s \", a[i, j]); printf(\"\\n\") } }' %s > %s", input_file, transposed_file))
+
 set pm3d map
 
 # Plot the preprocessed data
-splot '../../data/frohlich/variational/model/frohlich-3d-imag-conductivity-alpha-12-beta-100-freq-0to30omega.dat' matrix nonuniform notitle
+splot transposed_file matrix nonuniform notitle
 
 load "../gnuplot-render.gpt"
+
+system('rm ' . transposed_file)

@@ -3,8 +3,8 @@ reset session
 prefix = "../../plots/frohlich/frohlich-3d-spring-temp-00625to32"
 set key right bottom
 set grid
-set xlabel  "T (ħω₀/kB)"
-set ylabel  "Polaron Spring Constant (m₀ω₀²)"
+set xlabel  "Temperature (ħω₀/kB)"
+set ylabel  "Frohlich Spring Constant (m₀ω₀²)"
 set xrange [0.0625:32]
 set logscale xy 2
 set for [i=-1:7] ytics (sprintf("4^{%d}", i) 4**i)

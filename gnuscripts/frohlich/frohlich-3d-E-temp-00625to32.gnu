@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/frohlich/frohlich-3d-energy-temp-00625to32"
 set key Left left bottom
 set grid
-set xlabel  "T (ħω₀/kB)"
+set xlabel  "Temperature (ħω₀/kB)"
 set ylabel  "Frohlich Energy (ħω₀)"
 set xrange [0:32]
 set xtics 0,4,32

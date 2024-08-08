@@ -3,8 +3,8 @@ reset session
 prefix = "../../plots/frohlich/frohlich-3d-v-temp-00625to32"
 set key right bottom
 set grid
-set xlabel  "T (ħω₀/kB)"
-set ylabel  "v (ω₀)"
+set xlabel  "Temperature (ħω₀/kB)"
+set ylabel  "Frohlich v (ω₀)"
 set xrange [0.0625:32]
 set yrange [1:256]
 set logscale xy 2

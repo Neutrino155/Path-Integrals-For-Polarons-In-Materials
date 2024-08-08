@@ -6,7 +6,7 @@ prefix = "../../plots/frohlich/frohlich-3d-energy-temp-00625to32-contourf"
 # Set the titles
 set xlabel "α" offset 0,0.8
 set ylabel "Temperature (ħω₀/kB)" offset -0.5,0
-set cblabel "Energy (ħω₀)" offset -0.2,0
+set cblabel "Frohlich Energy (ħω₀)" offset -0.2,0
 
 # Enable grid
 set grid

@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/frohlich/frohlich-3d-mobility-alpha-2.5-temp-00625to32"
 set key Left right top
 set grid
-set xlabel  "T (ħω₀/kB)"
+set xlabel  "Temperature (ħω₀/kB)"
 set ylabel  "Frohlich Mobility (eω₀/m)"
 set xrange [0.0625:32]
 set logscale y 10

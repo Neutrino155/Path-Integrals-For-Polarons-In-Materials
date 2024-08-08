@@ -3,8 +3,8 @@ reset session
 prefix = "../../plots/frohlich/frohlich-3d-mass-temp-00625to32"
 set key right top
 set grid
-set xlabel  "T (ħω₀/kB)"
-set ylabel  "Polaron Mass (m₀)"
+set xlabel  "Temperature (ħω₀/kB)"
+set ylabel  "Frohlich Polaron Mass (m₀)"
 set xrange [0.0625:32]
 set logscale xy 2
 set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i)

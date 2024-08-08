@@ -4,7 +4,7 @@ prefix = "../../plots/frohlich/frohlich-3d-radius-temp-00625to32"
 set key right top
 set grid
 set xlabel  "T (ħω₀/kB)"
-set ylabel  "Polaron Radius (r₀)"
+set ylabel  "Frohlich Polaron Radius (r₀)"
 set xrange [0.0625:32]
 set logscale xy 2
 
