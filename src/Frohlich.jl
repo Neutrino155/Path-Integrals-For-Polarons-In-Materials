@@ -39,25 +39,24 @@ function frohlich(α::Number, ω::Number, β::Number; mb = 1m0_pu, dims = 3, v_g
     S(v, w) = frohlich_S(v, w, Mₖ, τ -> β == Inf ? phonon_propagator(τ, ω) : phonon_propagator(τ, ω, β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω : polaron_propagator(τ, v, w, β) * ω; dims = dims, limits = [0, sqrt(β / 2)])
     v_guess = v_guesses == false ? α < 7 ? 3 + α / 4 + 1 / β : 4 * α^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
     w_guess = w_guesses == false ? 2 + tanh((6 - α) / 3) + 1 / β : w_guesses
-    v, w, E = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+    v, w, E = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3) + dims / 2 * log(2π * β) / β, v_guess, w_guess; upper = upper, lower = lower)
     return Frohlich(ω * ω0_pu, Mₖ * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
-function frohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), verbose = false)
-    if length(α) != length(ω) return frohlich(α, ω, β; verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, mb = mb, dims = dims, upper = upper, lower = lower) end
+function multifrohlich(α::AbstractArray, ω::AbstractArray, β::Number; mb = 1m0_pu, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, lower = eps(), verbose = false)
     ω = pustrip.(ω)
     β = pustrip(β * ħ_pu / E0_pu) 
     Mₖ = pustrip.(frohlich_coupling.(α, ω * ω0_pu, mb; dims = dims))
     S(v, w) = sum(frohlich_S(v, w, Mₖ[j], τ -> β == Inf ? phonon_propagator(τ, ω[j]) : phonon_propagator(τ, ω[j], β), (τ, v, w) -> β == Inf ? polaron_propagator(τ, v, w) * ω[j] : polaron_propagator(τ, v, w, β) * ω[j]; dims = dims, limits = [0, sqrt(β / 2)]) for j in eachindex(ω))
     v_guess = v_guesses == false ? sum(α) < 7 ? 3 + sum(α) / 4 + 1 / β : 4 * sum(α)^2 / 9π - 3/2 * (2 * log(2) + 0.5772) - 3/4 + 1 / β : v_guesses
     w_guess = w_guesses == false ? 2 + tanh((6 - sum(α)) / 3) + 1 / β : w_guesses
-    v, w, E = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3), v_guess, w_guess; upper = upper, lower = lower)
+    v, w, E = variation((v, w) -> β == Inf ? E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3) + dims / 2 * log(2π * β) / β, v_guess, w_guess; upper = upper, lower = lower)
     return Frohlich(ω .* ω0_pu, Mₖ .* E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
 end
 
 function frohlich(α, ω, β; dims = 3, verbose = false, v_guesses = false, w_guesses = false, kwargs...)
     num_α, num_ω, num_β = length(α), length(ω), length(β)
-    if length(α) == length(ω) return multifrohlich(α, ω, β; dims = dims, verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, kwargs...) end
+    if num_α == num_ω && num_ω > 1 return multifrohlich(α, ω, β; dims = dims, verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, kwargs...) end
     if verbose N, n = num_α * num_ω * num_β, Threads.Atomic{Int}(1) end
     fstart = frohlich(; v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
     v_guess, w_guess = fill(pustrip.(fstart.v), Threads.nthreads()), fill(pustrip.(fstart.w), Threads.nthreads())
@@ -82,7 +81,7 @@ function multifrohlich(α, ω, β; dims = 3, verbose = false, v_guesses = false,
     Threads.@threads :static for x in 1:num_β
         id = Threads.threadid()
         if verbose println("\e[KStatics | Threadid: $id | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | β = $(β[x]) [$(x)/$num_β]\e[1F"); Threads.atomic_add!(n, 1) end
-        @views frohlichs[x] = frohlich(α, ω, β[x]; dims = dims, v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
+        @views frohlichs[x] = multifrohlich(α, ω, β[x]; dims = dims, v_guesses = v_guess[id], w_guesses = w_guess[id], kwargs...)
         v_guess[id], w_guess[id] = pustrip.(frohlichs[x].v), pustrip.(frohlichs[x].w)
     end
     polaron = frohlich(frohlichs)
