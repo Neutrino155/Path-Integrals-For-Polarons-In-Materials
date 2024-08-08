@@ -16,7 +16,7 @@ set size 0.9,1.14
 
 set xrange [0:12]
 set yrange [0:32]
-set cbrange [-120:0]
+set cbrange [*:*]
 set xtics 0,1,12 offset 0,0.5
 set ytics 0,4,32 offset 1,0
 #set logscale y 2

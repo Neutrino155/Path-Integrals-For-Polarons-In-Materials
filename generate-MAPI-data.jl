@@ -89,34 +89,22 @@ md"""
 """
 
 # ╔═╡ e6f4c89c-32cb-419f-9a92-fd4837632b81
-#=╠═╡
 MAPI_mass(frohlich) = frohlich.v.^2 ./ frohlich.w.^2 .* MAPIs.mb
-  ╠═╡ =#
 
 # ╔═╡ 6d58793a-126c-44d5-adc7-b4acfbdae12a
-#=╠═╡
 MAPI_spring(frohlich) = (frohlich.v.^2 .- frohlich.w.^2) .* MAPIs.mb .|> u"N/m"
-  ╠═╡ =#
 
 # ╔═╡ 78dc4361-a01e-4aed-880f-65d3f7e75e9e
-#=╠═╡
 MAPI_radius(frohlich; dims=3) = dims / 2 .* frohlich.v ./ (frohlich.v.^2 .- frohlich.w.^2) .* coth.(pustrip.(frohlich.β .* frohlich.v ./ 2)) .* sqrt(ħ_pu * MAPIs.ω_LO / MAPIs.mb) .|> u"Å"
-  ╠═╡ =#
 
 # ╔═╡ 7eae6361-48bf-4994-a529-0cb4b9c84e0b
-#=╠═╡
 MAPI_radius2(frohlich; dims=3) = dims / 2 .* pustrip.(frohlich.v[:,1,:])' ./ (pustrip.(frohlich.v[:,1,:])'.^2 .- pustrip.(frohlich.w[:,1,:])'.^2) .* coth.(pustrip.(frohlich.β .* pustrip.(frohlich.v[:,1,:])' ./ 2)) .* sqrt(ħ_pu / MAPIs.mb / MAPIs.ω_LO) .|> u"Å"
-  ╠═╡ =#
 
 # ╔═╡ 0135db00-7d9a-45ec-b9b9-bd4359a02089
-#=╠═╡
 MAPI_mobility(frohlich) = abs.(1 ./ imag.(frohlich.Σ)) * e_pu / MAPIs.mb .|> u"cm^2/V/s"
-  ╠═╡ =#
 
 # ╔═╡ 799e2865-eb50-49ca-8aaf-e1d648ae2b25
-#=╠═╡
 MAPI_conductivity(frohlich) = -im ./ (frohlich.Ω .+ frohlich.Σ') .* e_pu^2 / MAPIs.mb / (ħ_pu / MAPIs.mb / MAPIs.ω_LO) .|> u"μS"
-  ╠═╡ =#
 
 # ╔═╡ 39eda869-dfab-47e7-9c8d-2ca734eed33e
 md"""
@@ -134,7 +122,6 @@ md"""
 """
 
 # ╔═╡ afd07d59-b067-4350-80bf-e26cc3e2c086
-#=╠═╡
 begin
 data1 = Matrix{Any}(undef, length(MAPIs_frohlich_temp_1to400K.β) + 1, 10)
 data1[1, :] = ["T(K)" "v(THz2π)" "w(THz2π)" "E(meV)" "M(mₑ)"	"R(Å)" "κ(N/m)" "ReΣ(ps⁻¹)" "ImΣ(ps⁻¹)" "μ(cm²V⁻¹s⁻¹)"]
@@ -151,7 +138,6 @@ data1[2:end, 10] = ustrip.(MAPI_mobility(MAPIs_frohlich_temp_1to400K))
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K.dat", data1)
 data1
 end
-  ╠═╡ =#
 
 # ╔═╡ 7552e315-ddf3-4045-a475-3e6b13430d18
 md"""
@@ -159,7 +145,6 @@ md"""
 """
 
 # ╔═╡ da40a936-d2b3-495d-9896-a9775aa165d0
-#=╠═╡
 begin
 data2 = Matrix{Any}(undef, length(MAPIm_frohlich_temp_1to400K.β) + 1, 10)
 data2[1, :] = ["T(K)" "v(THz2π)" "w(THz2π)" "E(meV)" "M(mₑ)"	"R(Å)" "κ(N/m)" "ReΣ(ps⁻¹)" "ImΣ(ps⁻¹)" "μ(cm²V⁻¹s⁻¹)"]
@@ -176,7 +161,6 @@ data2[2:end, 10] = ustrip.(MAPI_mobility(MAPIm_frohlich_temp_1to400K))
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K.dat", data2)
 data2
 end
-  ╠═╡ =#
 
 # ╔═╡ 42d079df-9d76-42f1-bbf1-d5d891f4b048
 md"""
@@ -189,7 +173,6 @@ md"""
 """
 
 # ╔═╡ 5a35830a-cf26-4426-9201-99667fe2600a
-#=╠═╡
 begin
 data3 = Matrix{Any}(undef, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data3[1, 1] = "ℜΣ(ps⁻¹)|Ω(THz2π)↓|T(K)→"
@@ -199,10 +182,8 @@ data3[2:end, 2:end] = real.(ustrip.(MAPI_memory(MAPIs_frohlich_temp_0to400K_freq
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-single-real-memory-temp-0to400K-freq-0to30omega.dat", data3)
 data3
 end
-  ╠═╡ =#
 
 # ╔═╡ 73da4e9d-8556-4bda-ad6f-5b40fe892c27
-#=╠═╡
 begin
 data4 = Matrix{Any}(undef, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data4[1, 1] = "ℑΣ(ps⁻¹)|Ω(THz2π)↓|T(K)→"
@@ -212,10 +193,8 @@ data4[2:end, 2:end] = abs.(imag.(ustrip.(MAPI_memory(MAPIs_frohlich_temp_0to400K
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-single-imag-memory-temp-0to400K-freq-0to30omega.dat", data4)
 data4
 end
-  ╠═╡ =#
 
 # ╔═╡ f0384492-ff6f-4767-ba09-ac8b5854cd1f
-#=╠═╡
 begin
 data5 = Matrix{Any}(undef, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data5[1, 1] = "ℜσ(μS)|Ω(THz2π)↓|T(K)→"
@@ -225,10 +204,8 @@ data5[2:end, 2:end] = ustrip(abs.(real.(MAPI_conductivity(MAPIs_frohlich_temp_0t
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-single-real-conductivity-temp-0to400K-freq-0to30omega.dat", data5)
 data5
 end
-  ╠═╡ =#
 
 # ╔═╡ c5f0305e-8601-4cf6-b1d8-9f967ded332d
-#=╠═╡
 begin
 data6 = Matrix{Any}(undef, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data6[1, 1] = "ℑσ(μS)|Ω(THz2π)↓|T(K)→"
@@ -238,7 +215,6 @@ data6[2:end, 2:end] = ustrip(abs.(imag.(MAPI_conductivity(MAPIs_frohlich_temp_0t
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-single-imag-conductivity-temp-0to400K-freq-0to30omega.dat", data6)
 data6
 end
-  ╠═╡ =#
 
 # ╔═╡ 84d1260c-f2f5-4ff7-8029-45af59c669e8
 md"""
@@ -246,7 +222,6 @@ md"""
 """
 
 # ╔═╡ 096529e8-2ad0-4cfd-bbfa-de6007d93223
-#=╠═╡
 begin
 data7 = Matrix{Any}(undef, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data7[1, 1] = "ℜΣ(ps⁻¹)|Ω(THz2π)↓|T(K)→"
@@ -256,10 +231,8 @@ data7[2:end, 2:end] = real.(ustrip.(MAPI_memory(MAPIm_frohlich_temp_0to400K_freq
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-multi-real-memory-temp-0to400K-freq-0to30omega.dat", data7)
 data7
 end
-  ╠═╡ =#
 
 # ╔═╡ 01d39122-ceda-4458-9c52-6135fe07afaf
-#=╠═╡
 begin
 data8 = Matrix{Any}(undef, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data8[1, 1] = "ℑΣ(ps⁻¹)|Ω(THz2π)↓|T(K)→"
@@ -269,10 +242,8 @@ data8[2:end, 2:end] = abs.(imag.(ustrip.(MAPI_memory(MAPIm_frohlich_temp_0to400K
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-memory-temp-0to400K-freq-0to30omega.dat", data8)
 data8
 end
-  ╠═╡ =#
 
 # ╔═╡ 05275586-ffc3-4f15-a183-e60e3dcd5beb
-#=╠═╡
 begin
 data9 = Matrix{Any}(undef, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data9[1, 1] = "ℜσ(μS)|Ω(THz2π)↓|T(K)→"
@@ -282,10 +253,8 @@ data9[2:end, 2:end] = ustrip(abs.(real.(MAPI_conductivity(MAPIm_frohlich_temp_0t
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-multi-real-conductivity-temp-0to400K-freq-0to30omega.dat", data9)
 data9
 end
-  ╠═╡ =#
 
 # ╔═╡ 9cfb1ff9-d1fa-4260-b63d-02641fa98fad
-#=╠═╡
 begin
 data10 = Matrix{Any}(undef, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.Ω) + 1, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.β) + 1)
 data10[1, 1] = "ℑσ(μS)|Ω(THz2π)↓|T(K)→"
@@ -295,27 +264,9 @@ data10[2:end, 2:end] = ustrip(abs.(imag.(MAPI_conductivity(MAPIm_frohlich_temp_0
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat", data10)
 data10
 end
-  ╠═╡ =#
 
-# ╔═╡ a7826662-223f-46ae-9f2c-8521a6cf220c
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 26348s
-begin
-MAPIm_frohlich_temp_0to400K_freq_0to30omega = frohlich(MAPIm, LinRange(0,400,401) .* 1u"K", LinRange(0.01,30.0, 3000) .* phonon_frequency)
-save_frohlich(MAPIm_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega")
-end
-  ╠═╡ =#
-
-# ╔═╡ 0c1b1590-6fed-4cf5-b829-c65fdfccf166
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 490s
-begin
-MAPIm_frohlich_temp_1to400K = frohlich(MAPIm, LinRange(1,400,400) .* 1u"K", eps())
-save_frohlich(MAPIm_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K")
-end
-  ╠═╡ =#
+# ╔═╡ 9bcc691e-e704-464a-85a5-fd6bcdbecc6d
+MAPIs = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-single.jld")
 
 # ╔═╡ 76efc24c-812a-4e22-86e1-0f928ef13677
 # ╠═╡ disabled = true
@@ -335,36 +286,6 @@ save_frohlich_material(MAPIm, "data/frohlich/materials/MAPI/MAPI-multi")
 end
   ╠═╡ =#
 
-# ╔═╡ 568d6894-2895-4c43-985e-32e0fad66210
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 27s
-begin
-MAPIs_frohlich_temp_1to400K = frohlich(MAPIs, LinRange(1,400,400) .* 1u"K", eps())
-save_frohlich(MAPIs_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K")
-end
-  ╠═╡ =#
-
-# ╔═╡ 0c48545a-1646-4405-9e9f-6e53d04cc0a7
-#=╠═╡
-MAPIm_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega.jld")
-  ╠═╡ =#
-
-# ╔═╡ 60bdbb74-e4d5-4d6e-b374-45b0ead3dcf9
-#=╠═╡
-MAPIs_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-0to400K-freq-0to30omega.jld")
-  ╠═╡ =#
-
-# ╔═╡ 8ddf0c8d-794f-4188-b38f-0dea63dd4656
-#=╠═╡
-MAPIm_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K.jld")
-  ╠═╡ =#
-
-# ╔═╡ e39f0dca-d015-42f1-a49d-ee88b938e545
-#=╠═╡
-MAPIm = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-multi.jld")
-  ╠═╡ =#
-
 # ╔═╡ c670dd62-a06d-4fb4-83d7-ae5fdb54baf3
 # ╠═╡ disabled = true
 #=╠═╡
@@ -375,14 +296,49 @@ save_frohlich(MAPIs_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variat
 end
   ╠═╡ =#
 
-# ╔═╡ 39ad223a-76e2-46f6-9ff9-b1e206b8bca1
+# ╔═╡ 568d6894-2895-4c43-985e-32e0fad66210
+# ╠═╡ disabled = true
 #=╠═╡
-MAPIs_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K.jld")
+# 16 threads ~ 27s
+begin
+MAPIs_frohlich_temp_1to400K = frohlich(MAPIs, LinRange(1,400,400) .* 1u"K", eps())
+save_frohlich(MAPIs_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K")
+end
   ╠═╡ =#
 
-# ╔═╡ 9bcc691e-e704-464a-85a5-fd6bcdbecc6d
+# ╔═╡ a7826662-223f-46ae-9f2c-8521a6cf220c
+# ╠═╡ disabled = true
 #=╠═╡
-MAPIs = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-single.jld")
+# 16 threads ~ 26348s
+begin
+MAPIm_frohlich_temp_0to400K_freq_0to30omega = frohlich(MAPIm, LinRange(0,400,401) .* 1u"K", LinRange(0.01,30.0, 3000) .* phonon_frequency)
+save_frohlich(MAPIm_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega")
+end
+  ╠═╡ =#
+
+# ╔═╡ 39ad223a-76e2-46f6-9ff9-b1e206b8bca1
+MAPIs_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K.jld")
+
+# ╔═╡ 0c48545a-1646-4405-9e9f-6e53d04cc0a7
+MAPIm_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega.jld")
+
+# ╔═╡ 60bdbb74-e4d5-4d6e-b374-45b0ead3dcf9
+MAPIs_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-0to400K-freq-0to30omega.jld")
+
+# ╔═╡ e39f0dca-d015-42f1-a49d-ee88b938e545
+MAPIm = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-multi.jld")
+
+# ╔═╡ 8ddf0c8d-794f-4188-b38f-0dea63dd4656
+MAPIm_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K.jld")
+
+# ╔═╡ 0c1b1590-6fed-4cf5-b829-c65fdfccf166
+# ╠═╡ disabled = true
+#=╠═╡
+# 16 threads ~ 490s
+begin
+MAPIm_frohlich_temp_1to400K = frohlich(MAPIm, LinRange(1,400,400) .* 1u"K", eps())
+save_frohlich(MAPIm_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K")
+end
   ╠═╡ =#
 
 # ╔═╡ Cell order:
