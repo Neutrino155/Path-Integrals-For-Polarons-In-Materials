@@ -35,9 +35,9 @@ set xtics 0,1,12
 plot    "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
         
 
 set nokey
@@ -55,9 +55,9 @@ set xtics 0,1,5
 plot    "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
        
 unset multiplot
 
@@ -88,9 +88,9 @@ set xtics 0,1,12
 plot    "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:2 w l t "γ=0.1", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:4 w l t "γ=0.3", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l t "γ=0.5"
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
         
 
 set nokey
@@ -109,9 +109,9 @@ set xtics 0,1,5
 plot    "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:2 w l t "γ=0.1", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:4 w l t "γ=0.3", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l t "γ=0.5"
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
        
 unset multiplot
 
@@ -155,9 +155,9 @@ set xtics 0,1,12
 plot    "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:2 w l t "γ=0.1", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:4 w l t "γ=0.3", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l t "γ=0.5"
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
         
 
 set nokey
@@ -176,9 +176,9 @@ set xtics 0,1,5
 plot    "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_01.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_03.txt" u 1:2:3 with yerrorbars notitle, \
         "../../data/holstein/diagmc/holstein_2d_parabolic_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars notitle, \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:2 w l t "γ=0.1", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:4 w l t "γ=0.3", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l t "γ=0.5"
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:2 w l lw 2 t "γ=0.1", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:4 w l lw 2 t "γ=0.3", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "γ=0.5"
        
 unset multiplot
 

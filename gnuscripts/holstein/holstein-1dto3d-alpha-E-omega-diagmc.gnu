@@ -13,8 +13,8 @@ plot    "../../data/holstein/diagmc/holstein_1d_parabolic_energy_alpha_0to5_gamm
         "../../data/holstein/diagmc/holstein_1d_tightbinding_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars t "1D TB", \
         "../../data/holstein/diagmc/holstein_2d_tightbinding_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars t "2D TB", \
         "../../data/holstein/diagmc/holstein_3d_tightbinding_energy_alpha_0to5_gamma_05.txt" u 1:2:3 with yerrorbars t "3D TB", \
-        "../../data/holstein/variational/model/holstein-1d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l lw 2 t "1D V", \
-        "../../data/holstein/variational/model/holstein-2d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l lw 2 t "2D V", \
-        "../../data/holstein/variational/model/holstein-3d-E-alpha-0to12-omega-0to2-beta-inf.dat" u 1:6 w l lw 2 t "3D V"
+        "../../data/holstein/variational/model/holstein-1d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "1D V", \
+        "../../data/holstein/variational/model/holstein-2d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "2D V", \
+        "../../data/holstein/variational/model/holstein-3d-energy-alpha-0to12-beta-inf.dat" u 1:6 w l lw 2 t "3D V"
      
 load "../gnuplot-render.gpt"
