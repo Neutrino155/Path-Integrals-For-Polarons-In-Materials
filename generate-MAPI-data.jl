@@ -88,6 +88,18 @@ md"""
 ## Single Mode
 """
 
+# ╔═╡ 76efc24c-812a-4e22-86e1-0f928ef13677
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+MAPIs = frohlichmaterial("[CH3NH3]PbX3", static_dielectric, electronic_dielectric, phonon_frequency, band_mass, unitcell_volume)
+save_frohlich_material(MAPIs, "data/frohlich/materials/MAPI/MAPI-single")
+end
+  ╠═╡ =#
+
+# ╔═╡ 9bcc691e-e704-464a-85a5-fd6bcdbecc6d
+MAPIs = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-single.jld")
+
 # ╔═╡ e6f4c89c-32cb-419f-9a92-fd4837632b81
 MAPI_mass(frohlich) = frohlich.v.^2 ./ frohlich.w.^2 .* MAPIs.mb
 
@@ -111,6 +123,18 @@ md"""
 ## Multiple Modes
 """
 
+# ╔═╡ cff673c1-b106-44b7-89ed-4d3a3cd588a3
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+MAPIm = frohlichmaterial("[CH3NH3]PbX3", static_dielectric, electronic_dielectric, ionic_dielectric, phonon_frequencies, band_mass, unitcell_volume)
+save_frohlich_material(MAPIm, "data/frohlich/materials/MAPI/MAPI-multi")
+end
+  ╠═╡ =#
+
+# ╔═╡ e39f0dca-d015-42f1-a49d-ee88b938e545
+MAPIm = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-multi.jld")
+
 # ╔═╡ 5270ea61-c216-47e8-a9de-87635dabecec
 md"""
 # MAPI | T = 1:400 K 
@@ -120,6 +144,19 @@ md"""
 md"""
 ## Single Mode
 """
+
+# ╔═╡ 568d6894-2895-4c43-985e-32e0fad66210
+# ╠═╡ disabled = true
+#=╠═╡
+# 16 threads ~ 27s
+begin
+MAPIs_frohlich_temp_1to400K = frohlich(MAPIs, LinRange(1,400,400) .* 1u"K", eps())
+save_frohlich(MAPIs_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K")
+end
+  ╠═╡ =#
+
+# ╔═╡ 39ad223a-76e2-46f6-9ff9-b1e206b8bca1
+MAPIs_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K.jld")
 
 # ╔═╡ afd07d59-b067-4350-80bf-e26cc3e2c086
 begin
@@ -143,6 +180,19 @@ end
 md"""
 ## Multiple Modes
 """
+
+# ╔═╡ 0c1b1590-6fed-4cf5-b829-c65fdfccf166
+# ╠═╡ disabled = true
+#=╠═╡
+# 16 threads ~ 490s
+begin
+MAPIm_frohlich_temp_1to400K = frohlich(MAPIm, LinRange(1,400,400) .* 1u"K", eps())
+save_frohlich(MAPIm_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K")
+end
+  ╠═╡ =#
+
+# ╔═╡ 8ddf0c8d-794f-4188-b38f-0dea63dd4656
+MAPIm_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K.jld")
 
 # ╔═╡ da40a936-d2b3-495d-9896-a9775aa165d0
 begin
@@ -171,6 +221,19 @@ md"""
 md"""
 ## Single Mode
 """
+
+# ╔═╡ c670dd62-a06d-4fb4-83d7-ae5fdb54baf3
+# ╠═╡ disabled = true
+#=╠═╡
+# 16 threads ~ 13520s
+begin
+MAPIs_frohlich_temp_0to400K_freq_0to30omega = frohlich(MAPIs, LinRange(0,400,401) .* 1u"K", LinRange(0.01,30.0, 3000) .* phonon_frequency)
+save_frohlich(MAPIs_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-0to400K-freq-0to30omega")
+end
+  ╠═╡ =#
+
+# ╔═╡ 60bdbb74-e4d5-4d6e-b374-45b0ead3dcf9
+MAPIs_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-0to400K-freq-0to30omega.jld")
 
 # ╔═╡ 5a35830a-cf26-4426-9201-99667fe2600a
 begin
@@ -211,7 +274,7 @@ data6 = Matrix{Any}(undef, length(MAPIs_frohlich_temp_0to400K_freq_0to30omega.Ω
 data6[1, 1] = "ℑσ(μS)|Ω(THz2π)↓|T(K)→"
 data6[1, 2:end] = 0.0:400.0
 data6[2:end, 1] = ustrip.(MAPIs_frohlich_temp_0to400K_freq_0to30omega.Ω)
-data6[2:end, 2:end] = ustrip(abs.(imag.(MAPI_conductivity(MAPIs_frohlich_temp_0to400K_freq_0to30omega))))
+data6[2:end, 2:end] = ustrip(imag.(MAPI_conductivity(MAPIs_frohlich_temp_0to400K_freq_0to30omega)))
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-single-imag-conductivity-temp-0to400K-freq-0to30omega.dat", data6)
 data6
 end
@@ -220,6 +283,19 @@ end
 md"""
 ## Multiple Modes
 """
+
+# ╔═╡ a7826662-223f-46ae-9f2c-8521a6cf220c
+# ╠═╡ disabled = true
+#=╠═╡
+# 16 threads ~ 26348s
+begin
+MAPIm_frohlich_temp_0to400K_freq_0to30omega = frohlich(MAPIm, LinRange(0,400,401) .* 1u"K", LinRange(0.01,30.0, 3000) .* phonon_frequency)
+save_frohlich(MAPIm_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega")
+end
+  ╠═╡ =#
+
+# ╔═╡ 0c48545a-1646-4405-9e9f-6e53d04cc0a7
+MAPIm_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega.jld")
 
 # ╔═╡ 096529e8-2ad0-4cfd-bbfa-de6007d93223
 begin
@@ -260,86 +336,10 @@ data10 = Matrix{Any}(undef, length(MAPIm_frohlich_temp_0to400K_freq_0to30omega.�
 data10[1, 1] = "ℑσ(μS)|Ω(THz2π)↓|T(K)→"
 data10[1, 2:end] = 0.0:400.0
 data10[2:end, 1] = ustrip.(MAPIm_frohlich_temp_0to400K_freq_0to30omega.Ω)
-data10[2:end, 2:end] = ustrip(abs.(imag.(MAPI_conductivity(MAPIm_frohlich_temp_0to400K_freq_0to30omega))))
+data10[2:end, 2:end] = ustrip(imag.(MAPI_conductivity(MAPIm_frohlich_temp_0to400K_freq_0to30omega)))
 writedlm("data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat", data10)
 data10
 end
-
-# ╔═╡ 9bcc691e-e704-464a-85a5-fd6bcdbecc6d
-MAPIs = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-single.jld")
-
-# ╔═╡ 76efc24c-812a-4e22-86e1-0f928ef13677
-# ╠═╡ disabled = true
-#=╠═╡
-begin
-MAPIs = frohlichmaterial("[CH3NH3]PbX3", static_dielectric, electronic_dielectric, phonon_frequency, band_mass, unitcell_volume)
-save_frohlich_material(MAPIs, "data/frohlich/materials/MAPI/MAPI-single")
-end
-  ╠═╡ =#
-
-# ╔═╡ cff673c1-b106-44b7-89ed-4d3a3cd588a3
-# ╠═╡ disabled = true
-#=╠═╡
-begin
-MAPIm = frohlichmaterial("[CH3NH3]PbX3", static_dielectric, electronic_dielectric, ionic_dielectric, phonon_frequencies, band_mass, unitcell_volume)
-save_frohlich_material(MAPIm, "data/frohlich/materials/MAPI/MAPI-multi")
-end
-  ╠═╡ =#
-
-# ╔═╡ c670dd62-a06d-4fb4-83d7-ae5fdb54baf3
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 13520s
-begin
-MAPIs_frohlich_temp_0to400K_freq_0to30omega = frohlich(MAPIs, LinRange(0,400,401) .* 1u"K", LinRange(0.01,30.0, 3000) .* phonon_frequency)
-save_frohlich(MAPIs_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-0to400K-freq-0to30omega")
-end
-  ╠═╡ =#
-
-# ╔═╡ 568d6894-2895-4c43-985e-32e0fad66210
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 27s
-begin
-MAPIs_frohlich_temp_1to400K = frohlich(MAPIs, LinRange(1,400,400) .* 1u"K", eps())
-save_frohlich(MAPIs_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K")
-end
-  ╠═╡ =#
-
-# ╔═╡ a7826662-223f-46ae-9f2c-8521a6cf220c
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 26348s
-begin
-MAPIm_frohlich_temp_0to400K_freq_0to30omega = frohlich(MAPIm, LinRange(0,400,401) .* 1u"K", LinRange(0.01,30.0, 3000) .* phonon_frequency)
-save_frohlich(MAPIm_frohlich_temp_0to400K_freq_0to30omega, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega")
-end
-  ╠═╡ =#
-
-# ╔═╡ 39ad223a-76e2-46f6-9ff9-b1e206b8bca1
-MAPIs_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K.jld")
-
-# ╔═╡ 0c48545a-1646-4405-9e9f-6e53d04cc0a7
-MAPIm_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-0to400K-freq-0to30omega.jld")
-
-# ╔═╡ 60bdbb74-e4d5-4d6e-b374-45b0ead3dcf9
-MAPIs_frohlich_temp_0to400K_freq_0to30omega = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-0to400K-freq-0to30omega.jld")
-
-# ╔═╡ e39f0dca-d015-42f1-a49d-ee88b938e545
-MAPIm = load_frohlich_material("data/frohlich/materials/MAPI/MAPI-multi.jld")
-
-# ╔═╡ 8ddf0c8d-794f-4188-b38f-0dea63dd4656
-MAPIm_frohlich_temp_1to400K = load_frohlich("data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K.jld")
-
-# ╔═╡ 0c1b1590-6fed-4cf5-b829-c65fdfccf166
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 490s
-begin
-MAPIm_frohlich_temp_1to400K = frohlich(MAPIm, LinRange(1,400,400) .* 1u"K", eps())
-save_frohlich(MAPIm_frohlich_temp_1to400K, "data/frohlich/variational/MAPI/frohlich-MAPI-multi-temp-1to400K")
-end
-  ╠═╡ =#
 
 # ╔═╡ Cell order:
 # ╟─69067b24-4916-11ef-037f-0902e798e948

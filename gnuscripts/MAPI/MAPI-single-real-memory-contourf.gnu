@@ -17,7 +17,7 @@ set ytics 0,50,400 offset 0.5,0
 set origin 0.02,-0.04
 set size 0.9,1.14
 
-set cbrange [-40:3]
+set cbrange [-43:3]
 
 set autoscale fix
 

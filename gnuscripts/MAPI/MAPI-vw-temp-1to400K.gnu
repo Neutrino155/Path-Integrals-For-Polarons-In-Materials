@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/MAPI/MAPI-vw-temp-1to400K"
 set key bottom right
 set grid
-set xlabel  "T (K)"
+set xlabel  "Temperature (K)"
 set ylabel  "v, w (ω₀)"
 set xrange [1:362]
 #set xtics (1,50,100,150,200,250,300,350,400)

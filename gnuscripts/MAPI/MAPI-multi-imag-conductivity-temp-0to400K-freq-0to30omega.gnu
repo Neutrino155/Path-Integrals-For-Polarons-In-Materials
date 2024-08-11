@@ -29,7 +29,7 @@ set xlabel  "Frequency (THz2π)"
 set ylabel  "Imag Conductivity σ (μS)"
 set xrange [0:48]
 set mxtics 2
-set yrange [-1:100]
+set yrange [3:-100]
 set size 1, 1
 set origin 0, 0
 
@@ -44,9 +44,9 @@ unset grid
 unset xlabel
 unset ylabel
 set size 0.45, 0.5       # set size of inset
-set origin 0.50, 0.28
+set origin 0.50, 0.3
 set xrange [0:5]
-set yrange [-1:5]
+set yrange [3:-5]
 
 plot    "../../data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat" u 1:2 w l t "0 K", \
         "../../data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat" u 1:101 w l t "100 K", \
@@ -75,7 +75,7 @@ set xlabel  "Frequency (THz2π)"
 set ylabel  "Imag Conductivity σ (μS)"
 set xrange [0:48]
 set mxtics 2
-set yrange [-1:100]
+set yrange [3:-100]
 set size 1, 1
 set origin 0, 0
 
@@ -90,10 +90,10 @@ unset grid
 unset xlabel
 unset ylabel
 set size 0.45, 0.5       # set size of inset
-set origin 0.5, 0.28
+set origin 0.5, 0.3
 set tics font "Helvetica, 10"
 set xrange [0:5]
-set yrange [-1:5]
+set yrange [3:-5]
 
 plot    "../../data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat" u 1:2 w l t "0 K", \
         "../../data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat" u 1:101 w l t "100 K", \
@@ -135,7 +135,7 @@ set xlabel  "Frequency (THz2π)"
 set ylabel  "Imag Conductivity σ (μS)"
 set xrange [0:48]
 set mxtics 2
-set yrange [-1:100]
+set yrange [3:-100]
 set size 1, 1
 set origin 0, 0
 
@@ -150,10 +150,10 @@ unset grid
 unset xlabel
 unset ylabel
 set size 0.45, 0.5       # set size of inset
-set origin 0.5, 0.28
+set origin 0.5, 0.3
 set tics font "Helvetica, 10"
 set xrange [0:5]
-set yrange [-1:5]
+set yrange [3:-5]
 
 plot    "../../data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat" u 1:2 w l t "0 K", \
         "../../data/frohlich/variational/MAPI/frohlich-MAPI-multi-imag-conductivity-temp-0to400K-freq-0to30omega.dat" u 1:101 w l t "100 K", \

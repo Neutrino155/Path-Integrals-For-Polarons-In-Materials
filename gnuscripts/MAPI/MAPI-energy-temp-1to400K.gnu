@@ -3,7 +3,7 @@ reset session
 prefix = "../../plots/MAPI/MAPI-energy-temp-1to400K"
 set key top right
 set grid
-set xlabel  "T (K)"
+set xlabel  "Temperature (K)"
 set ylabel  "Polaron Binding Energy (meV)"
 set xrange [1:362]
 # set xtics (1,50,100,150,200,250,300,350,400)
