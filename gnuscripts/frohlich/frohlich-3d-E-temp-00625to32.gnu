@@ -7,7 +7,7 @@ set xlabel  "Temperature (ħω₀/kB)"
 set ylabel  "Frohlich Energy (ħω₀)"
 set xrange [0:32]
 set xtics 0,4,32
-set yrange [*:*]
+set yrange [-250:10]
 #set logscale x 2
 #unset xtics
 #set xtics nomirror

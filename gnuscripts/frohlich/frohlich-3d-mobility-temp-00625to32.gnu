@@ -6,11 +6,11 @@ set grid
 set xlabel  "Temperature (ħω₀/kB)"
 set ylabel  "Frohlich Mobility (eω₀/m)"
 set xrange [0.0625:32]
-set yrange[1e-3:1e6]
+set yrange[5e-5:1e6]
 set logscale y 10
 set logscale x 2
 set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i)
-set for [i=-3:6] ytics (sprintf("10^{%d}", i) 10**i)
+set for [i=-4:6:2] ytics (sprintf("10^{%d}", i) 10**i)
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-mobility-alpha-0to12-temp-00625to32.dat" u 1:2 w l t "{/Symbol a}=0.1", \
         "../../data/frohlich/variational/model/frohlich-3d-mobility-alpha-0to12-temp-00625to32.dat" u 1:21 w l t "{/Symbol a}=2", \

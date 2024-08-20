@@ -35,13 +35,13 @@
 # line styles
 # Edited by JMF to more reflect Janert's choice of point type below for
 # publication-ready figures. (Well, Physical Review at least!)
-set linetype 1 pi -1 pt 7 lc rgb '#377EB8' dt solid # blue
-set linetype 2 pi -1 pt 1 lc rgb '#E41A1C' dt solid # red
-set linetype 3 pi -1 pt 2 lc rgb '#4DAF4A' dt solid # green
-set linetype 4 pi -1 pt 4 lc rgb '#984EA3' dt solid # purple
-set linetype 5 pi -1 pt 1 lc rgb '#FF7F00' dt solid # orange
-set linetype 6 pi -1 pt 2 lc rgb '#A65628' dt solid # brown
-set linetype 7 pi -1 pt 4 lc rgb '#F781BF' dt solid # pink
+set linetype 1 pi -1 pt 7 lc rgb '#377EB8' dt solid lw 2 # blue
+set linetype 2 pi -1 pt 1 lc rgb '#E41A1C' dt solid lw 2 # red
+set linetype 3 pi -1 pt 2 lc rgb '#4DAF4A' dt solid lw 2 # green
+set linetype 4 pi -1 pt 4 lc rgb '#984EA3' dt solid lw 2 # purple
+set linetype 5 pi -1 pt 1 lc rgb '#FF7F00' dt solid lw 2 # orange
+set linetype 6 pi -1 pt 2 lc rgb '#A65628' dt solid lw 2 # brown
+set linetype 7 pi -1 pt 4 lc rgb '#F781BF' dt solid lw 2 # pink
 #####
 set pointintervalbox 1.75
 
@@ -89,14 +89,14 @@ set key font "Helvetica,10"
 
 # Via Janert's Gnuplot in Action 2nd Edition; style3.gp
 # Black and White traditional Physical-review ish.
-set linetype 1 pi -1 pt 1 lc black dt solid
-set linetype 2 pi -1 pt 6 lc black dt (8,6)
-set linetype 3 pi -1 pt 2 lc black dt (4,3)
-set linetype 4 pi -1 pt 4 lc black dt (3,6)
-set linetype 5 pi -1 pt 1 lc black dt (12,5,2,5,2,5)
-set linetype 6 pi -1 pt 6 lc black dt (16,8)
-set linetype 7 pi -1 pt 2 lc black dt (20,6,2,6)
-set linetype 8 pi -1 pt 4 lc black dt (30,10)
+set linetype 1 pi -1 pt 1 lc black dt solid lw 2 
+set linetype 2 pi -1 pt 6 lc black dt (8,6) lw 2 
+set linetype 3 pi -1 pt 2 lc black dt (4,3) lw 2 
+set linetype 4 pi -1 pt 4 lc black dt (3,6) lw 2 
+set linetype 5 pi -1 pt 1 lc black dt (12,5,2,5,2,5) lw 2 
+set linetype 6 pi -1 pt 6 lc black dt (16,8) lw 2 
+set linetype 7 pi -1 pt 2 lc black dt (20,6,2,6) lw 2 
+set linetype 8 pi -1 pt 4 lc black dt (30,10) lw 2 
 set pointsize 0.3
 set pointintervalbox 1.75
 set termoption font "Helvetica,12"

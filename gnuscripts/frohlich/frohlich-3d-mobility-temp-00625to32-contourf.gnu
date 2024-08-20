@@ -12,6 +12,7 @@ set cblabel "Frohlich Mobility (eω₀m₀⁻¹)" offset 1,0
 set grid
 
 set xrange [0:12]
+set cbrange [5e-5:1e6]
 set xtics 0,1,12 offset 0,0.5
 set logscale y 2
 set logscale cb
@@ -22,7 +23,7 @@ set size 0.9,1.14
 set for [i=-4:5] ytics (sprintf("2^{%d}", i) 2**i)
 set ytics offset 1,0
 
-set for [i=-2:6] cbtics (sprintf("10^{%d}", i) 10**i)
+set for [i=-4:6:2] cbtics (sprintf("10^{%d}", i) 10**i)
 
 set autoscale fix
 

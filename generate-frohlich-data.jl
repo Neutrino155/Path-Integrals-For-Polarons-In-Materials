@@ -402,6 +402,19 @@ md"""
 # 2D and 3D Frohlich α = 0.05:0.05:12, T = 0.48 ħω₀/kB, Ω = 0.01:0.01:30.0 ω₀
 """
 
+# ╔═╡ 0636ff35-bfea-4b0e-9e3b-af3559b1468c
+# ╠═╡ disabled = true
+#=╠═╡
+# 16 threads ~ 30734s
+begin
+frohlich_2d_alpha_0to12_beta_100_freq_0to30 = frohlich(LinRange(12,0.05,240), 1.0, 100.0, 0.01:0.01:30; dims = 2)
+save_frohlich(frohlich_2d_alpha_0to12_beta_100_freq_0to30, "data/frohlich/variational/model/frohlich-2d-alpha-0to12-beta-100-freq-0to30")
+end
+  ╠═╡ =#
+
+# ╔═╡ 4bfa6a60-757d-459b-8cbc-3de399639d35
+frohlich_2d_alpha_0to12_beta_100_freq_0to30 = load_frohlich("data/frohlich/variational/model/frohlich-2d-alpha-0to12-beta-100-freq-0to30.jld")
+
 # ╔═╡ 99859951-fce1-4224-9961-cb8bfb3a0ddb
 # ╠═╡ disabled = true
 #=╠═╡
@@ -686,19 +699,6 @@ for α in 1:7
 	writedlm("data/frohlich/variational/model/frohlich-3d-imag-conductivity-alpha-$α-temp-00625to32-freq-0to30.dat", data24)
 end
 
-# ╔═╡ 0636ff35-bfea-4b0e-9e3b-af3559b1468c
-# ╠═╡ disabled = true
-#=╠═╡
-# 16 threads ~ 30734s
-begin
-frohlich_2d_alpha_0to12_beta_100_freq_0to30 = frohlich(LinRange(12,0.05,240), 1.0, 100.0, 0.01:0.01:30; dims = 2)
-save_frohlich(frohlich_2d_alpha_0to12_beta_100_freq_0to30, "data/frohlich/variational/model/frohlich-2d-alpha-0to12-beta-100-freq-0to30")
-end
-  ╠═╡ =#
-
-# ╔═╡ 4bfa6a60-757d-459b-8cbc-3de399639d35
-frohlich_2d_alpha_0to12_beta_100_freq_0to30 = load_frohlich("data/frohlich/variational/model/frohlich-2d-alpha-0to12-beta-100-freq-0to30.jld")
-
 # ╔═╡ Cell order:
 # ╟─bfd6e85c-48e2-11ef-2751-3147edce85d8
 # ╟─68c1b156-ee71-4717-94d6-914500fab1ff
@@ -763,7 +763,7 @@ frohlich_2d_alpha_0to12_beta_100_freq_0to30 = load_frohlich("data/frohlich/varia
 # ╟─0636ff35-bfea-4b0e-9e3b-af3559b1468c
 # ╟─4bfa6a60-757d-459b-8cbc-3de399639d35
 # ╟─99859951-fce1-4224-9961-cb8bfb3a0ddb
-# ╠═9ae9e209-3db0-46e9-8e36-b4394a4d9417
+# ╟─9ae9e209-3db0-46e9-8e36-b4394a4d9417
 # ╟─724fa1d6-cf9a-4c41-bff1-fc9108086d14
 # ╟─5bf8f537-acac-4a5b-9fc3-f453d2ec2e29
 # ╟─c0f61a12-276a-451f-a94c-c52855af8d04

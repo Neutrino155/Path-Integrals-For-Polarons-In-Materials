@@ -57,12 +57,12 @@ function multiholstein(α::AbstractArray, ω::AbstractArray, J::Number, β::Numb
     v_guess = v_guesses == false ? 2 * dims + 1 / β : v_guesses
     w_guess = w_guesses == false ? 1 + 1 / β : w_guesses
     v, w, E = variation((v, w) -> β == Inf ? -2 * dims * J + E₀(v, w) * dims / 3 - (S(v, w) - S₀(v, w) * dims / 3) : -2 * dims * J + E₀(v, w, β) * dims / 3 - (S(v, w) - S₀(v, w, β) * dims / 3) + dims / 2 * log(2π * β) / β, v_guess, w_guess; upper = upper)
-    return Holstein(ω * ω0_pu, J * E0_pu, dims, g * E0_pu, α, E * E0_pu, v * ω0_pu, w * ω0_pu, β / E0_pu, zero(Float64) * ω0_pu, zero(Complex) * ω0_pu)
+    return Holstein(ω .* ω0_pu, J .* E0_pu, dims, g .* E0_pu, α, E .* E0_pu, v .* ω0_pu, w .* ω0_pu, β ./ E0_pu, zero(Float64) .* ω0_pu, zero(Complex) .* ω0_pu)
 end
 
 function holstein(α, ω, J, β; verbose = false, dims = 3, v_guesses = false, w_guesses = false, upper = Inf, kwargs...)
     num_α, num_ω, num_J, num_β = length(α), length(ω), length(J), length(β)
-    if length(α) == length(ω) return multiholstein(α, ω, J, β; verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, dims = dims, upper = upper) end
+    if num_α == num_ω && num_ω > 1 return multiholstein(α, ω, J, β; verbose = verbose, v_guesses = v_guesses, w_guesses = w_guesses, dims = dims, upper = upper) end
     if verbose N, n = num_α * num_ω * num_J * num_β, Threads.Atomic{Int}(1) end
     hstart = holstein(; dims = dims, v_guesses = v_guesses, w_guesses = w_guesses, kwargs...)
     v_guess, w_guess = fill(pustrip.(hstart.v), Threads.nthreads()), fill(pustrip.(hstart.w), Threads.nthreads())
@@ -118,7 +118,7 @@ function multiholstein(h::Holstein, Ω; dims = 3, verbose = false, kwargs...)
     Σ = Array{ComplexF64}(undef, num_J, num_β, num_Ω)
     Threads.@threads for x in CartesianIndices((num_J, num_β, num_Ω))
         if verbose println("\e[KDynamics | Threadid: $(Threads.threadid()) | $(n[])/$N ($(round(n[]/N*100, digits=1)) %)] | J = $(J[x[1]]) [$(x[1])/$num_J] | β = $(β[x[2]]) [$(x[2])/$num_β] | Ω = $(Ω[x[3]]) [$(x[3])/$num_Ω]\e[1F"); Threads.atomic_add!(n, 1) end
-        @views Σ[x] = sum(holstein_memory(Ω[x[3]], g[x[1]][j], t -> β[x[2]] == Inf ? phonon_propagator(t, ω[j]) : phonon_propagator(t, ω[j], β[x[2]]), t -> β[x[2]] == Inf ? polaron_propagator(t, v[x[1],x[2]], w[x[1],x[2]]) * J[x[1]] : polaron_propagator(t, v[x[1],x[2]], w[x[1],x[2]], β[x[2]]) * J[x[1]]; dims = dims) * J[x[1]] for j in eachindex(ω))
+        @views Σ[x] = sum(holstein_memory(Ω[x[3]], g[j], t -> β[x[2]] == Inf ? phonon_propagator(t, ω[j]) : phonon_propagator(t, ω[j], β[x[2]]), t -> β[x[2]] == Inf ? polaron_propagator(t, v[x[1],x[2]], w[x[1],x[2]]) * J[x[1]] : polaron_propagator(t, v[x[1],x[2]], w[x[1],x[2]], β[x[2]]) * J[x[1]]; dims = dims) * J[x[1]] for j in eachindex(ω))
         h.Ω, h.Σ = Ω .* ω0_pu, reduce_array(Σ) .* ω0_pu
     end
     return holstein(h)

@@ -6,8 +6,8 @@ set grid
 set xlabel  "α"
 set ylabel  "Frohlich Properties"
 set xrange [0:12]
-set yrange [*:*]
-set for [i=-3:7] ytics (sprintf("4^{%d}", i) 4**i)
+set yrange [4**-3:4**5]
+set for [i=-3:5] ytics (sprintf("4^{%d}", i) 4**i)
 set xtics 0,1,12
 set logscale y 2
 

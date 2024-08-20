@@ -6,11 +6,11 @@ set grid
 set xlabel  "α"
 set ylabel  "Frohlich Properties" offset 4,0
 set xrange [0:12]
-set yrange [*:*]
+set yrange [4**-3:4**5]
 set xtics 0,1,12
 set lmargin 8
 set logscale y 2
-set for [i=-2:4] ytics add (sprintf("4^{%d}", i) 4**i)
+set for [i=-3:5] ytics add (sprintf("4^{%d}", i) 4**i)
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-alpha-0to12-beta-inf.dat" u 1:2 w l t "v", \
         "../../data/frohlich/variational/model/frohlich-3d-alpha-0to12-beta-inf.dat" u 1:3 w l t "w", \
