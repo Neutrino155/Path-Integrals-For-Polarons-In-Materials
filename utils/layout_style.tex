@@ -66,7 +66,7 @@
 \definecolor{ThesisRed}       {HTML} {cc0000}
 \definecolor{ThesisBlack}     {HTML} {000000}
 \definecolor{ThesisGreen}     {HTML} {006600}
-\definecolor{ThesisLghtGrey}  {HTML} {e0e0e0}
+\definecolor{ThesisLghtGrey}  {HTML} {ededed}
 \definecolor{ThesisDarkGrey}  {HTML} {808080}
 
 % --- Lines and markers for captions
@@ -95,7 +95,7 @@
 % --- Ornaments
 \newcommand*{\titleornament}{%
 \begin{tikzpicture}
-  \node[anchor=center]{\pgfornament[color=ImperialBlue,width=\titleornwidth]{84}};
+  \node[anchor=center]{\pgfornament[color=ImperialBlue,width=\titleornwidth]{88}};
 \end{tikzpicture}}
 
 \newcommand*{\chapornament}{\pgfornament[width=\chapornwidth]{88}}
@@ -146,9 +146,20 @@
 
 % --- Coloured boxes for chapter introduction
 \newcommand*{\chapterintrobox}[1]{%
-\begin{tcolorbox}[colback=ThesisLghtGrey,colframe=ThesisLghtGrey,sharp corners]
-  \textit{#1}
+\begin{tcolorbox}[colback=ThesisLghtGrey,colframe=ThesisDarkGrey, sharp corners]
+  #1
 \end{tcolorbox}}
+
+% --- Coloured boxes for equations
+\newtcolorbox{empheq}[2][]{colback=ThesisLghtGrey,
+ colframe=ThesisDarkGrey,
+ width=\textwidth,
+ top=3pt, % default value 2mm
+ bottom=3pt,
+ title={#2},
+ after=,% <----- remove the default \par
+ #1
+}
 
 % --- Quotations
 \AtBeginEnvironment{displayquote}{\singlespacing}  % single spacing for indented quotations

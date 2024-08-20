@@ -1,67 +1,163 @@
 \chapter{Application for Real Materials}
 \label{chap:sixth}
 
-\thesisepisrcyear{What is the meaning of life?}{John Doe}{Thoughts}{1971}
+\thesisepisrcyear{``One shouldn't work on semiconductors, that is a filthy mess; who knows whether any semiconductors exist.''}{Wolfgang Pauli}{Letter to Peierls}{1931}
 
-\chapterintrobox{This is the introduction paragraph.}
+\chapterintrobox{In this chapter I compare the free energy and linear response of the polaron evaluated from the Hellwarth and Biaggio~\cite{hellwarth_mobility_1999} effective phonon mode method to my explicit multiple phonon mode method.}
 
 \section{Methylammonium Lead Halide Perovskites}
 \label{sec:chap-sixth-first}
 
-\begin{table}
-\begin{center}
-\begin{tabular}{||c|c|c|c||} 
-\hline\hline
-Phonon Frequencies (THz) & IR Activity & $\epsilon^{\text{ionic}}_j$ & $\alpha_j$ \\
-\hline\hline
-4.017 & 0.082 & 0.300 & 0.034 \\
-\hline
-3.888 & 0.006 & 0.025 & 0.003 \\
-\hline
-3.531 & 0.054 & 0.254 & 0.031 \\ 
-\hline
-2.755 & 0.021 & 0.166 & 0.023 \\
-\hline
-2.438 & 0.232 & 2.308 & 0.336 \\
-\hline
-2.249 & 0.262 & 3.071 & 0.465 \\
-\hline
-2.080 & 0.234 & 3.203 & 0.505 \\
-\hline
-2.034 & 0.062 & 0.893 & 0.142 \\
-\hline
-1.567 & 0.037 & 0.886 & 0.161 \\
-\hline
-1.019 & 0.013 & 0.721 & 0.162 \\
-\hline
-1.002 & 0.007 & 0.402 & 0.091 \\
-\hline
-0.997 & 0.010 & 0.618 & 0.141 \\
-\hline
-0.920 & 0.011 & 0.767 & 0.182 \\
-\hline
-0.801 & 0.002 & 0.156 & 0.040 \\
-\hline
-0.574 & 0.007 & 1.163 & 0.349 \\
-\hline\hline
-\end{tabular} \label{table:mapidata}
-\caption{Infrared activity, ionic dielectric contribution and decomposed Fr\"ohlich alpha values associated with each of the phonon modes in MAPbI3 taken from Ref~\cite{brivio_lattice_2015}. The effective Fr\"ohlich alpha $\alpha_{\text{eff}} = \sum_j \alpha_j$ is found to be $2.66$ for MAPbI3.}
-\end{center}
-\end{table}
+\begin{table*}
+\centering
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccc}
+    \toprule
+    Material & $\epsilon_{\text{optical}}$ & $\epsilon_{\text{static}}$ & $\omega_0$ & $m_b$ \\
+    \midrule
+    \ce{MAPbI3}-e & 4.5 & 24.1 & 2.25 & 0.12 \\
+    \ce{MAPbI3}-h & 4.5 & 24.1 & 2.25 & 0.15 \\
+    \bottomrule
+    % \ce{CsPbI3}   & 6.1 & 18.1 & 2.57 & 0.12 \\
+    % \colrule 
+    % \ce{MAPbI3}  \footnote{These parameters specify the model as in Sendner et
+    % al.~\cite{Sendner2016}. Effective mode frequency, reduced by a Hellwarth and Biaggio
+    % scheme, is from prviate communication with the authors.} 
+    %   & 5.0 & 33.5 & 3.38 & 0.104 \\
+    % \ce{MAPbBr3} & 4.7 & 32.3 & 4.47 & 0.117 \\
+    % \ce{MAPbCl3} & 4.0 & 29.8 & 6.42 & 0.2 \\
+    % \colrule
+    % \ce{CsSnI3}  \footnote{Parameters for holes in cesium tin halides are
+    % taken from Huang et al.~\cite{Huang2013}. Dielectric constants are from Table VII
+    % therein, effective masses from Table VI, phonon frequency from Table VII.}
+    %     & 6.05 & 48.2 &  4.56 & 0.069 \\
+    % \ce{CsSnBr3} & 5.35 & 32.4 &  5.48 & 0.082 \\
+    % \ce{CsSnCl3} & 4.80 & 29.4 &  7.28 & 0.140 \\
+\end{tabular*}
+\caption{
+    Parameters of the Feynman polaron model (single effective phonon mode) as used in this work.  
+    Relative high frequency ($\epsilon_{\text{optical}}$) and static
+    ($\epsilon_{\text{static}}$) dielectric constants are given in units of the permittivity of free space
+    ($\epsilon_0$). Frequency (f) is in \si{\tera\hertz}. Effective mass
+    ($m_b$) is in units of the bare electron mass. These data are as in Ref.~\cite{frost_calculating_2017}.
+    }
+\label{tab:Params}
+\end{table*}
 
-I have produced a Julia Pluto.jl notebook that uses the multiple phonon theory to evaluate the decomposed Fr\"ohlich $\alpha_j$ components associated with $15$ modes of Methylammonium lead iodide (MAPbI$_3$). The frequencies and infrared activities associated with these modes are listed in Table 1. The decomposed $\alpha_j$ parameters and phonon frequencies $\omega_j$ are then inserted into the variational principle for multiple phonons to obtain a $v$ and $w$ parameter that provide the lowest upper-bound to the exact free energy of the multi-modal polaron system. The two effective phonon frequencies schemes, labelled scheme A and B in~\cite{hellwarth_mobility_1999} (c.f. section 3.6.5), evaluate the Fr\"ohlich alpha for MAPbI$_3$ to be $\alpha = 2.52$ (towards zero temperature the A scheme gives a slightly different value of $2.44$). In comparison, including the ionic contributions of each MAPbI$_3$ phonon mode explicitly produced the decomposed Fr\"ohlich alpha $\alpha_j$ shown in Table 1. From there, I obtain an effective alpha for MAPbI$_3$ of $\alpha_{\text{eff}} = 2.66$ which is only slightly larger than the value predicted by the effective mode A and B schemes. The free energy approximated by the multiple phonon theory is compared to the Hellwarth and Biaggio effective mode theory in Figure \ref{fig:multitheory}a. The two Hellwarth schemes agree for almost all temperatures except for a small deviation towards zero temperature, whereas the A scheme gives a slightly lower value. The multiple phonon theory gives a lower estimate of the polaron's free energy than the Hellwarth theory for all temperatures above roughly $100$K. Still, it gives a higher value at lower and zero temperatures. Figure \ref{fig:multitheory}b compares the multiple phonon variational $v$ and $w$ parameters to the effective variational parameters from the Hellwarth and Biaggio effective mode theory. The two agree at zero temperature, but the multiple phonon theory predicts larger polaron frequencies at higher temperatures and a smaller difference in $v$ and $w$, $v - w$, at all temperatures. 
-
-\begin{figure}[t]
+\begin{table*}
     \centering
-    \includegraphics[width=.49\textwidth]{figures/MAPI-energy-temp-1to400K-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/MAPI-vw-temp-1to400K-COLOUR.pdf}
-    \caption{(left): The free energy of the Hellwarth and Biaggio effective mode A \& B schemes and for the multiple phonon model between $1$K and $400$K. The two Hellwarth schemes agree almost exactly, except for a small deviation at low temperatures. The multiple phonon model gives a lower free energy estimate for temperatures above $100$K. (right): The variational parameters $v$ \& $w$ from the Hellwarth and Biaggio effective mode A \& B schemes and the multiple phonon model. The effective mode schemes agree, whereas the multiple phonon model gives values larger than the Hellwarth schemes but approaches their values towards zero temperature.}
-    \label{fig:multitheory}
+    \sisetup{table-comparator, round-mode = figures, round-precision = 3}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}S[table-format=1.3]S[table-format=2.2]S[table-format=1.5]S[table-format=1.5]}
+        \toprule
+        {Base Frequency} & {Polaron Frequency} & {Infrared Activity} & {Coupling $\alpha_j$} \\
+        \midrule
+        4.016471586720514  &  10.760864419751513  &  0.08168931020200264  &  0.034  \\
+        3.887605410774121  &  10.415608286921941  &  0.006311654262282101  & 0.003  \\
+        3.5313112232401513  &  9.461030777081  &  0.05353548710183397  &  0.031  \\
+        2.755392921480459  &  7.382203262491912  &  0.021303020776321225  &  0.023  \\
+        2.4380741812443247  &  6.532048128115507  &  0.23162784335484837  &  0.336  \\
+        2.2490917637719408  &  6.0257295526621535  &  0.2622203718355982  &  0.465  \\
+        2.079632190634424  &  5.571716259703516  &  0.23382298607799906  &  0.505  \\
+        2.0336707697261187  &  5.4485771789818624  &  0.0623239656843172  &  0.142  \\
+        1.5673011873879714  &  4.199087487176367  &  0.0367465760261409  &  0.161  \\
+        1.0188379384951798  &  2.7296537981481457  &  0.0126328938653956  &  0.162  \\
+        1.0022960504442775  &  2.6853350445558144  &  0.006817361620021601  &  0.091  \\
+        0.9970130778462072  &  2.6711809915185523  &  0.0103757951973341  &  0.141  \\
+        0.9201781906386209  &  2.4653262291740656  &  0.01095811116040592  &  0.182  \\
+        0.800604081794174  &  2.144965249242841  &  0.0016830270365341532  &  0.040  \\
+        0.5738689505255512  &  1.537500225752314  &  0.00646428491253749  &  0.349  \\
+        \bottomrule
+    \end{tabular*}
+    \caption{Infrared activity of phonon modes in \ce{MAPbI3} taken from~\cite{brivio_lattice_2015}, scaled to their ground-state polaron value by the multimodal $w=2.6792$ factor for \ce{MAPbI3}-e of this work (Table \ref{tab:Results}).} 
+    \label{tab:simulatedspectra}
+\end{table*}
+
+Having extended the Feynman theory with explicit phonon modes in the \emph{model} action, I now try and answer what improvement this makes. 
+
+Halide perovskites are relatively new semiconductors of considerable technical interest. Due to their unusual mix of light, effective mass, and strong dielectric electron-phonon coupling, they host strongly interacting large polarons.
+Recently, the coherent charge-carrier dynamics upon photo-excitation are being measured, the Terahertz spectroscopy showing rich transient vibrational features~\cite{guzelturk_terahertz_2018}.
+
+Therefore, I choose to use this system to represent the more complex systems that could be modelled with our extended theory. Applied to the 15 optical solid-state phonon modes in \ce{MAPbI3}, I show that my explicit mode method predicts slightly higher mobility for temperatures $0$ K to $400$ K, to a maximum of $20$ \% increase at $100$ K. At $300$ K I predict electron and hole mobilities of $160$ and $112$ cm$^2$V$^{-1}$s$^{-1}$ respectively. This is to be compared to previous predictions of $133$ and $94$ cm$^2$V$^{-1}$s$^{-1}$ for one effective phonon mode evaluated using Hellwarth and Biaggio's~\cite{hellwarth_mobility_1999} `B scheme' (see Eqs.~(\ref{eqn:b1, eqn:b2}) and of $2.25$ THz, as evaluated in~\cite{frost_calculating_2017}. More importantly, this theory recovers considerable structure in the complex conductivity and impedance functions as individual phonon modes are activated. The effective and explicit methods show the same temperature and frequency dependence towards higher temperatures - the quantum details are washed out. 
+
+In what follows, I take the materials data from~\cite{frost_calculating_2017}, which I reproduce here in Table \ref{tab:Params}.
+
+\subsection{Free energy} \label{Sec:compfreeenergy}
+
+I compare the polaron free energy and variational parameters evaluated by our explicit phonon frequency method presented in Eq.~(\ref{eqn:multi_feynman_jensen}) to Hellwarth and Biaggio's effective phonon frequency scheme (scheme `B' in Eqs. (58) and (59) in~\cite{hellwarth_mobility_1999}),
+\begin{subequations}
+    \begin{align}
+        \frac{\kappa_{\text{eff}}^2}{\omega_{\text{eff}}^2} &= \sum_{j=1}^m \frac{\kappa_j^2}{\omega_k^2} \label{eqn:b1}\\
+        \kappa_{\text{eff}}^2 &= \sum_{j=1}^m \kappa_j^2, \label{eqn:b2}
+    \end{align}
+\end{subequations}
+that use an effective LO phonon mode frequency $\omega_{\text{eff}}$ and associated  infrared oscillator strength $\kappa_{\text{eff}}$ derived from sums over the phonon modes $j$. 
+
+I apply these methods to the 15 solid-state optical phonon branches of \ce{MAPbI3}, of which the frequencies and infrared activities are shown in Table~\ref{tab:simulatedspectra}.
+
+Using the Hellwarth and Biaggio~\cite{hellwarth_mobility_1999} effective phonon frequency `B' scheme, the effective phonon frequency for \ce{MAPbI3} is $\omega_0 = 2.25 \cdot 2\pi$ THz and the Fr\"ohlich alpha for \ce{MAPbI3}-e is $\alpha = 2.39$ and \ce{MAPbI3}-h is $\alpha = 2.68$, as in~\cite{frost_calculating_2017} (values from bulk dielectric constants).
+
+Using Eq.~(\ref{eqn:alphai}), we calculated the partial Fr\"ohlich alpha $\alpha_j$ parameters for each of the 15 phonon branches in \ce{MAPbI3}, which are given in Table~\ref{tab:simulatedspectra}. For \ce{MAPbI3}-e the partial Fr\"ohlich alphas sum to $\alpha = 2.66$ and for \ce{MAPbI3}-h they sum to $\alpha = 2.98$. These 15 partial alphas $\alpha_j$ and corresponding phonon frequencies $\omega_j$ were then used in the variational principle for the multiple phonon-dependent free energy in Eq.~(\ref{eqn:multi_feynman_jensen}). From Eq.~(\ref{eqn:multi_feynman_jensen}), we variationally evaluate a $v$ and $w$ parameter.
+
+Fig.~\ref{fig:energycomparison} shows the polaron free energy comparison. The explicit multiple phonon mode approach predicts a higher free energy at temperatures $T < 65$K and a lower free energy at temperatures $T > 65$K. See Table~\ref{tab:Results} for our athermal results, where we find new multiple-mode estimates for the polaron binding energy $E_b$ (at \SI{0}{\kelvin}) for \ce{MAPbI3}-e as $E_b = -19.52$ meV and \ce{MAPbI3}-h as $E_b = -21.92$ meV. Also see Table~\ref{tab:Results300K} for our thermal results at $T = 300$ K, where we find new multiple-mode estimates for the polaron free energy $F$ for \ce{MAPbI3}-e at $300$ K as $F = -42.84$ meV and \ce{MAPbI3}-h as $F = -50.40$ meV. These are to be compared to our previous results in~\cite{frost_calculating_2017}, which are also provided in Tables~(\ref{tab:Results, tab:Results300K}).
+
+Fig.~\ref{fig:varparamscomparison} shows the comparison in polaron variational parameters $v$ and $w$. We have different trends for the polaron free energy and variational $v$ and $w$ parameters, which shows that we find quite a different quasi-particle solution from our multiple phonon scheme compared to the single effective frequency scheme. 
+
+\begin{table*}
+    \centering
+    \sisetup{table-format=2.2, table-comparator, round-mode = figures, round-precision = 3}    
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccSSS}
+    \toprule
+    Material & $\alpha$ & {$v$} & {$w$} & {$E_b$} \\ 
+    \midrule
+    \ce{MAPbI3}-e & 2.39  & 3.3086 & 2.6634 & \SI{-23.041730}{\meV} \\
+    \ce{MAPbI3}-h & 2.68  & 3.3586 & 2.6165 & \SI{-25.879823}{\meV} \\
+    \midrule
+    \ce{MAPbI3}-e & 2.66  & 3.2923 & 2.6792 &  \SI{-19.516889}{\meV} \\
+    \ce{MAPbI3}-h & 2.98  & 3.3388 & 2.6349 &  \SI{-21.915437}{\meV} \\
+    \bottomrule
+\end{tabular*}
+\caption{\label{tab:Results} Athermal 0 K results. Dielectric electron-phonon coupling ($\alpha$), Feynman athermal variational parameters ($v$ and $w$) and polaron binding energy ($E_b$) for an effective phonon mode (top rows) and for multiple explicit phonon modes (bottom rows).}
+\end{table*}
+
+\begin{table*}
+\centering
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccccccc}
+    \toprule
+    {Material} & {$\alpha$} & {$v$} & {$w$} & {$F$} & {$\mu$} & {$M$} & {$r_f$} \\ 
+    \midrule
+    \ce{MAPbI3}-e & 2.39 & 19.9 & 17.0 & -35.5 & 136 & 0.37 & 43.6 \\
+    \ce{MAPbI3}-h & 2.68 & 20.1 & 16.8 & -43.6 & 94 & 0.43 & 36.9 \\
+    \midrule
+    \ce{MAPbI3}-e & 2.66 & 35.2 & 32.5 & -42.8 & 160 & 0.18 & 44.1 \\
+    \ce{MAPbI3}-h & 2.98 & 35.3 & 32.2 & -50.4 & 112 & 0.20 & 37.2 \\
+    \bottomrule
+\end{tabular*}
+\caption{\label{tab:Results300K} 300 K Results. Dielectric electron-phonon coupling ($\alpha$), Feynman thermal variational parameters ($v$ and $w$), polaron free energy ($F$, meV), dc mobility ($\mu$, cm$^2$V$^{-1}$s$^{-1}$), polaron effective mass ($M$, $m^*$) and Schultz polaron radius ($r_f$, \r{A}) for an effective phonon mode (top rows) and for multiple explicit phonon modes from Table \ref{tab:simulatedspectra} (bottom rows).   
+}
+\end{table*}
+
+\begin{figure}[!tbp]
+\centering
+    \includegraphics[width=.49\columnwidth]{chapters/materials/figures/MAPI-energy-temp-1to400K-COLOUR.pdf}
+    \includegraphics[width=.49\columnwidth]{chapters/materials/figures/MAPI-vw-temp-1to400K-COLOUR.pdf}
+    \includegraphics[width=.49\columnwidth]{chapters/materials/figures/MAPI-mobility-temp-1to400K-COLOUR.pdf}
+    \caption{\label{fig:MAPIenergycomparison} Left: Comparison of the polaron free energy as a function of temperature for MAPbI$_3$ with the single effective phonon mode approach (solid) and the explicit multiple phonon mode approach (dashed). Right: Comparison of the two polaron variational parameters ($v$ and $w$) for \ce{MAPbI3} in the single effective phonon mode approach ($v$, solid; $w$ dashed) and the explicit multiple phonon mode approach ($v$, dots; $w$ dot-dashes). Bottom: Comparison of the temperature-dependent mobility predicted for \ce{MAPbI3} by the single effective phonon mode approach (solid) and the explicit multiple phonon mode approach (dashed).
+}
 \end{figure}
 
-Figures \ref{fig:multicontour} (contour plots) and \ref{fig:multiridge} (ridge-line plots) compare the complex conductivity obtained from the multiple phonon model (left column) to the complex conductivity obtained from the Hellwarth and Biaggio B scheme (right column). The top rows show the real part of the conductivity (i.e. the AC mobility), the middle rows show the imaginary part, and the bottom rows show the absolute value. I chose the B scheme over the A scheme because it matches an effective frequency to the extent of \=Osaka's finite temperature variational principle, which is arguably more accurate. On the other hand, the A scheme produces a temperature-dependent Fr\"ohlich alpha parameter and effective phonon frequency. This is unlike the original Fr\"ohlich alpha and phonon frequency, which are independent of temperature. Nonetheless, the two schemes produce near-identical results for most temperatures, except for a slight deviation at very low temperatures. So, many comparisons with the B scheme will also be comparable to those of the A scheme. 
+\subsection{DC mobility} \label{Sec:compmobility}
 
-The multiple phonons and Hellwarth and Biaggio, effective mode theories, have similar DC mobilities and high-temperature complex conductivities. Likewise, they both possess a broad peak starting around a frequency of $2.03$ THz, the effective phonon frequency derived from the B scheme. (At zero temperature, the A scheme gives an effective phonon frequency of $2.17$ THz). The start of the main peak then shifts in frequency as the temperature increases whilst primarily broadening and flattening. The theories differ in their frequency dependence. Whilst both possess the same main peak starting around $2$ THz, the multiple phonon theory possesses extra peaks below $2$ THz, particularly two fairly sharp peaks around $0.50$ THz and $1.00$ THz. All these extra details are washed out at higher temperatures to leave one main broad peak with a maximum located at a slightly lower frequency than Hellwarth's and Biaggio's theory.
+I calculate the zero-frequency (direct current, dc) electron-polaron mobility $\mu$ in \ce{MAPbI3} using the effective phonon mode and explicit multiple phonon mode approaches. Both approaches have the same relationship between the mobility and the memory function (Eqs.~(\ref{eqn:freq_dep_mobility, eqn:dcmobility})), but the effective mode approach uses the memory function $\chi(\Omega)$ from Eq.~(\ref{eqn:fhip_chi}) (the FHIP~\cite{feynman_mobility_1962} memory function, Eq.~(35) ibid.), whereas the multiple phonon mode approach uses our $\chi_{\textrm{multi}}(\Omega)$ from Eqn. (\ref{eqn:multichi}) (with a sum over the phonon modes). Fig.~\ref{fig:mobilitycomparison} shows temperatures \SIrange{0}{400}{\kelvin}. In Fig.~\ref{fig:mobilityratiocomparison} the multiple mode approach corrects the single effective mode approach by up to 20\%, with this correction maximised at T$ = $\SI{140}{\kelvin}. The multiple-mode mobility slowly approaches the single-mode mobility towards higher temperatures. I assume the divergence towards zero temperature to be a numerical error due to the ratio of large floating-point numbers, as both mobility values diverge to positive infinity.
+
+\subsection{Complex conductivity and impedance} \label{Sec:compconduct}
+
+I calculate the complex impedance $z_{\textrm{multi}}(\Omega)$ for the polaron in \ce{MAPbI3} using Eq.~(\ref{eqn:compleximpedance}), where the only difference between the effective mode and multiple mode approaches is in the form of the memory function $\chi_{\textrm{multi}}(\Omega)$ as described for the polaron mobility above. The complex conductivity $\sigma_{\textrm{multi}}(\Omega)$ is the reciprocal of the complex impedance, $\sigma_{\textrm{multi}} (\Omega) = 1 / z_{\textrm{multi}}(\Omega)$.
+
+I show in Fig.~\ref{fig:realconductivitycomparison} the real component and in Fig.~\ref{fig:imagconductivitycomparison} the imaginary component of the complex conductivity for the single effective mode approach (top) and the explicit multiple mode approach (bottom) for temperatures $T = $ \SI{0}{\kelvin}, \SI{10}{\kelvin}, \SI{40}{\kelvin}, \SI{80}{\kelvin}, \SI{150}{\kelvin}, \SI{300}{\kelvin} and \SI{400}{\kelvin} (starting with the solid black line through to the yellow solid line) and for frequencies $0 \leq \Omega \leq 20$ THz. The vertical dashed red lines show the LO phonon modes of \ce{MAPbI3}. The difference between the two approaches is most prominent at low temperatures $T = $ \SI{0}{\kelvin} and \SI{10}{\kelvin} where the multiple phonon approach has more structure due to the extra phonon modes. At higher temperatures, the structure attenuates, and the two approaches show similar frequency dependence of the complex conductivity at $T = $ \SI{030}{\kelvin} and \SI{400}{\kelvin}. These features are further reflected in the real and imaginary components of the complex impedance as shown in Fig.~\ref{fig:realimpedancecomparison} and Fig.~\ref{fig:imagimpedancecomparison}, respectively.
+
+In Fig.~\ref{fig:zeroconductivitycomparison}, I show the real and imaginary components of the complex conductivity at zero temperature $T = $ \SI{0}{\kelvin} over frequencies $0 \leq \Omega \leq 5.0$ THz for both approaches. Again, the vertical dashed red lines show the longitudinal optical (LO) phonon modes of \ce{MAPbI3} used in the calculation and are shown in Table~\ref{tab:simulatedspectra}. The single effective mode conductivity peaks in the real component at frequencies above the effective mode frequency $\Omega \geq 2.25$ THz. 
+Whereas the real component of the multiple mode conductivity shows peaks at frequencies at and above the LO phonon mode frequencies in \ce{MAPbI3}. 
+The imaginary components of both approaches show some structure changes at their respective LO phonon mode frequencies but are more challenging to discern at zero temperature. 
+The most prominent modes in \ce{MAPbI3} appear at the large electron-phonon coupled modes $\omega_0 = 0.58$, $1.00$ and $2.44$ THz.
 
 \begin{figure}
     \centering
@@ -85,15 +181,6 @@ The multiple phonons and Hellwarth and Biaggio, effective mode theories, have si
 
 \subsection{Modelling terahertz spectroscopy unveiled polaron photo-conductivity dynamics in Metal-Halide Perovskites}
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=.49\textwidth]{figures/zero_mem.pdf}
-    \includegraphics[width=.49\textwidth]{figures/zero_conduct.pdf}
-    
-    \caption{(left): The imaginary part of the multiple phonon mode memory function in Eq. (\ref{eqn:multi_memory}) evaluated for MAPbI$_3$. (right): The real part of the multiple phonon mode complex conductivity (i.e. mobility) in Eq. (\ref{eqn:freq_dep_mobility}) evaluated for MAPbI$_3$. These are calculated for the phonon modes listed in Table 1. The reduced thermodynamic beta $\beta_j = \hbar \omega_j / (k_B T)$ is evaluated for temperatures $T = 1$ K (black curves) to $T = 30$ K (yellow curves).}
-    \label{fig:athermal_thz}
-\end{figure}
-
 Recently, we used ultrafast visible pump-infrared push-terahertz probe spectroscopy to measure the real-time photo-conductivity of methyl-ammonium lead iodide in~\cite{zheng_multipulse_2021}. In this paper, I provided my multiple phonon mode mobility, applied to the $15$ modes of MAPbI$_3$ in Table 1, to model the complex conductivity and compare the results to the photo-conductivity measurements. 
 
 \begin{figure}[t]  
@@ -108,95 +195,218 @@ In Figure \ref{fig:athermal_thz}, I provide the low-temperature ($T = 1$K to $T 
 
 Figures \ref{fig:multicontour} and \ref{fig:multiridge} show that the broad peak is the last feature that decays away at higher frequencies. The broad peak has a maximum of around $3.00$ THz at $T = 1$, which flattens and shifts to higher frequencies at higher temperatures, where it becomes the only remaining feature. This is to be compared to the photo-conductivity measurements shown in Figure \ref{fig:thzplot}, where the real component maxima occur around the frequencies $1.25$ THz and $2.25$ THz, with a shoulder occurring on the side of the $1.25$ THz peak around $0.60$ THz. The shoulder and $1.25$ THz peak seem to agree with the multiple phonon model; however, the broader peak, roughly around the right frequency of $2.25$ THz, is far broader and more prominent in the theoretical model than the photo-conductivity measurements. 
 
-One thing to note is the apparent temperature differences between the multiple phonon model and the experiment. In the multiple phonon model, the one-phonon peaks associated with each phonon mode only appear at very low temperatures and are quickly washed out as the temperature increases until around $T > 10$ K, only the broad peak around $3.00$ Thz remains. The multiple phonon theory assumes that the electron and phonon thermal bath are at thermal equilibrium. However, in the experiment, the electron(s) is very hot and not at thermal equilibrium.
+One thing to note is the apparent temperature differences between the multiple phonon model and the experiment. In the multiple phonon model, the one-phonon peaks associated with each phonon mode only appear at very low temperatures and are quickly washed out as the temperature increases until around $T > 10$ K, only the broad peak around $3.00$ THz remains. The multiple phonon theory assumes that the electron and phonon thermal bath are at thermal equilibrium. However, the experiment's electron(s) is very hot and not at thermal equilibrium.
 
 \section{Rubrene \& Organic Crystals}
 \label{sec:chap-sixth-second}
 
-\begin{figure}[!tbp]
+\begin{table*}
+\centering
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccccccc}
+    \toprule
+    $g$ (meV) & $\omega_0$ (THz) & $J$ (meV) & $a$ (Å) & $\gamma$ & $m_b$ ($m_e$) & $\lambda^2$ & $\alpha$ \\
+    \midrule
+     $106.8$ & $5.768$ & $134.0$ & $14.06$ & $0.178$ & $0.144$ & $19.75$ & $0.586$ \\
+    \bottomrule
+\end{tabular*}
+\caption{3D Rubrene Bulk crystal data derived from~\cite{Ordejn2017}. Here $g$ is the Holstein hole-phonon coupling element, $\omega_0$ is the single-mode effective phonon frequency, $J$ is the electron transfer/hopping integral, $a$ is the geometric-meaned crystal lattice constant, $\gamma$ is the Holstein adiabaticity unitless parameter, $m_b$ is the effective hole band-mass, $\lambda^2 = (g / \hbar\omega_0)^2$ is the unitless squared hole-phonon coupling element and $\alpha = \lambda^2 \gamma / 6$ is the 3D unitless Holstein electron-phonon parameter.}
+\label{tab:rubrene_data}
+\end{table*}
+
+\begin{table*}
+\centering
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccccc}
+    \toprule
+    & $v_0$ (THz) & $w_0$ (THz) & $M_0$ ($m_e$) & $R_0$ (Å) & $F_0$ (meV) \\
+    \midrule
+    Holstein & $21.01$ & $7.258$ & $0.146$ & $121.3$ & $-6.867$ \\
+    \midrule
+    Fr\"ohlich & $17.66$ & $16.88$ & $0.149$ & $304.2$ & $-5.842$ \\
+    \bottomrule
+\end{tabular*}
+\caption{Ground-state polaron properties for a Rubrene Bulk crystal calculated using the variational Holstein and Fr\"ohlich models.}
+\label{tab:gs_rubrene}
+\end{table*}
+
+\begin{table*}
+\centering
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccccc}
+    \toprule
+    & $v$ (THz) & $w$ (THz) & $M$ ($m_e$) & $R$ (Å) & $F$ (meV) & $\mu$ (cm$^2$V$^{-1}$s$^{-1}$) \\
+    \midrule
+    Holstein & $77.22$ & $74.37$ & $0.155$ & $34.28$ & $-18.10$ & $47.72$ \\
+    \midrule
+    Fr\"ohlich & $43.56$ & $41.15$ & $0.151$ & $99.10$ & $-10.95$ & $92.59$ \\
+    \bottomrule
+\end{tabular*}
+\caption{Room temperature ($300$ K) polaron properties for a Rubrene Bulk crystal calculated using the variational Holstein and Fr\"ohlich models.}
+\label{tab:rt_rubrene}
+\end{table*}
+
+\begin{figure*}[!tbp]
     \centering
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/rubrene_F_temp.png}
+    \includegraphics[width=\textwidth]{figures/rubrene-energy-temp-1to400K-COLOUR.pdf}
     \label{fig:rubrene_F_temp}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/rubrene_vw_temp.png}
+    \includegraphics[width=\textwidth]{figures/rubrene-vw-temp-1to400K-COLOUR.pdf}
     \label{fig:rubene_vw_temp}
   \end{subfigure}
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/rubrene_mobility_temp_plot.png}
-    \label{fig:rubrene_mobility_temp}
+    \includegraphics[width=\textwidth]{figures/rubrene-mobility-temp-1to400K-COLOUR.pdf}
+    \label{fig:rubrene_temp}
+  \end{subfigure}
+  \caption{Polaron properties predicted from the variational parabolic Holstein and Fr\"ohlich models for a bulk 3D Rubrene organic crystal. \textbf{Top-left:} The polaron binding energy (the polaron self-energy relative to the band extrema) $F$ (\si{meV}) in Rubrene as a function of temperature (\si{K}). \textbf{Top-right:} Optimal variational parameters $v$ and $w$ (\si{THz}) as a function of temperature (K). \textbf{Bottom} The DC polaron mobility $\mu(T)$ (\si{cm^2V^{-1}s^{-1}}) as a function of temperature $T$ (\si{K}).}
+  \label{fig:rubrene_temp}
+\end{figure*}
+
+% \begin{figure*}[!tbp]
+%     \centering
+%   \begin{subfigure}[b]{0.49\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth]{plots/rubrene/rubrene-frohlich-real-memory-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
+%   \end{subfigure}
+%   \hfill
+%   \begin{subfigure}[b]{0.49\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth]{plots/rubrene/rubrene-frohlich-imag-memory-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
+%   \end{subfigure}
+%   \begin{subfigure}[b]{0.49\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth]{plots/rubrene/rubrene-holstein-real-memory-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
+%   \end{subfigure}
+%   \hfill
+%   \begin{subfigure}[b]{0.49\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth]{plots/rubrene/rubrene-holstein-imag-memory-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
+%   \end{subfigure}
+%   \caption{Frequency dependence of the polaron memory function from the variational parabolic Holstein and Fr\"ohlich models for a bulk 3D Rubrene organic crystal, for temperatures $T = 0.48$~\si{K}, $100$~\si{K}, $200$~\si{K}, $300$~\si{K} and $400$~\si{K}. The top row shows the real (left) and imaginary (right) components of the Fr\"ohlich memory function. The bottom row shows the real (left) and imaginary (right) components of the parabolic Holstein memory function.}
+%   \label{fig:rubrene_memory}
+% \end{figure*}
+
+\begin{figure*}[!tbp]
+    \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/rubrene-frohlich-real-conductivity-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/rubrene_cond_freq.png}
-    \label{fig:rubrene_cond_freq}
+    \includegraphics[width=\textwidth]{figures/rubrene-frohlich-imag-conductivity-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
   \end{subfigure}
-  \caption{Polaron properties of the variational Holstein model for a bulk 3D Rubrene organic crystal. \textbf{Top-left:} The polaron free energy $F$ (meV) in Rubrene as a function of temperature (K). \textbf{Top-right:} Optimal variational parameters $v$ and $w$ (THz2$\pi$) as a function of temperature (K). There appears to be some possible numerical artefact manifesting as the step-like increments. \textbf{Bottom-left:} The DC polaron mobility $\mu(T)$ (cm$^2$ V$^{-1}$ s$^{-1}$) as a function of temperature $T$ (K). \textbf{Bottom-right:} The real component of the conductivity $\Re\sigma(\Omega)$ (mS) as a function of frequency $\Omega$ (THz) for temperatures $T = 0.1$ K, $0.8$ K, $6.3$ K and $50$ K.}
-  \label{fig:rubrene}
-\end{figure}
-
-In organic electronic materials, it is understood that the charge-carrier state is a small polaron.  This is often modelled with semi-classical transfer rate theories as a classical object hopping from site to site. The matrix elements that parameterise these rate equations can be calculated, within certain approximations, from electronic structures. Still, defining the sites where the charge carriers are localised is challenging (and often input to the simulation and calculations). 
-
-One of the prototypical materials studied frequently to investigate electron-phonon coupling is Rubrene (5,6,11,12-tetraphenyltetracene), which has one of the highest carrier mobilities and can reach a few tens of cm$^2$/Vs for holes. This is a good test for applying our newly derived variational Holstein model to predict its charge-carrier mobility in bulk. I take parameters for Rubrene from Ordejon et al.~\cite{ordejon_ab_2017} where they derived Peierls (off-site) and Holstein (on-site) contributions by fitting the generalise Holstein-Peirels model with Density Functional Theory (DFT) calculations performed using SEISTA code. Here, I use their Holstein parameter coupling, which I have listed in Table 1, and use these parameters within our newly derived variational Holstein method. For simplicity, I consider a single effective phonon frequency, though the method presented here could be extended to multiple phonon modes, as I have demonstrated for the Fr\"ohlich Hamiltonian~\cite{martin_multiple_2023}.
-
-The results for ground-state Holstein and Fr\"ohlich polarons for Rubrene are shown in Table 2. Likewise, Table 3 gives the result for $T = 300$ K, including the finite temperature DC mobility, which I calculate to be $\mu^{(H)}_{\text{Rubrene}} = 11.55$ cm$^2$V$^{-1}$s$^{-1}$ for the Holstein polaron and $\mu^{(F)}_{\text{Rubrene}} = 89.76$ cm$^2$V$^{-1}$s$^{-1}$ for the Fr\"ohlich polaron. Immediately, the Holstein prediction is inline which whats observed in experiments whereas the Fr\"ohlich greatly overestimates. Note that for the Fr\"ohlich model, I have used an approximate comparative unitless coupling value of $\alpha^{(F)} \approx 3.0 \times \alpha^{(H)} = 1.785$.
-
-\begin{table}
+  \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-        $g$ (meV) & $\omega_0$ (THz) & $J$ (meV) & $a$ (Å) & $\gamma$ & $m_b$ ($m_e$) & $\lambda^2$ & $\alpha$ \\
-    \hline
-         $106.8$ & $5.768$ & $134.0$ & $14.06$ & $0.178$ & $0.144$ & $20.04$ & $0.595$ \\
-    \hline
-    \end{tabular}
-    \caption{3D Rubrene Bulk crystal data. Here $g$ is the Holstein hole-phonon coupling element, $\omega_0$ is the single-mode effective phonon frequency, $J$ is the electron transfer/hopping integral, $a$ is the geometric-meaned crystal lattice constant, $\gamma$ is the Holstein adiabaticity unitless parameter, $m_b$ is the effective hole band-mass, $\lambda^2 = (g / \hbar\omega_0)^2$ is the unitless squared hole-phonon coupling element and $\alpha = \lambda^2 \gamma / 6$ is the 3D unitless Holstein electron-phonon parameter.}
-    \label{tab:rubrene}
-\end{table}
-
-At zero temperature, the Holstein polaron radius $R_0$ is $0.058$ times the lattice constant, and so is a \emph{small} polaron. Compare this to the Fr\"ohlich model where the polaron radius is $3.436$ times the lattice constant and so is a \emph{large} polaron. The Holstein polaron mass $M_0$ is slightly larger at $1.08$ times the hole band mass. In contrast, the Fr\"ohlich polaron mass is already $2.48$ times heavier than the valence-band hole. Notably, the spring-constant $\kappa_0$ for the Holstein polaron is over $7$ times stronger than for the Fr\"ohlich polaron, which may correspond to an increased likelihood for the Holstein polaron to stay local to its current lattice site compared to the Fr\"ohlich polaron which is more delocalised and likely to move around. This is certainly reflected in the predicted room-temperature mobilities, as mentioned above.
-
-\begin{table}
+    \includegraphics[width=\textwidth]{figures/rubrene-holstein-real-conductivity-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|}
-    \hline
-        & $v_0$ (THz$2\pi$) & $w_0$ (THz$2\pi$) & $M_0$ ($m_e$) &  $\kappa_0$ (mN m$^{-1}$) & $R_0$ (Å) & $F_0$ (meV) \\
-    \hline
-         Holstein & $3.376$ & $3.139$ & $0.157$ & $24.71$ & $0.828$ & $-0.178$ \\
-    \hline
-         Fr\"ohlich & $3.213$ & $2.758$ & $0.357$ & $3.250$ & $48.33$ & $-43.60$ \\
-    \hline
-    \end{tabular}
-    \caption{Ground-state polaron properties for a Rubrene Bulk crystal calculated using the variational Holstein and Fr\"ohlich models.}
-    \label{tab:rubrenegs}
-\end{table}
+    \includegraphics[width=\textwidth]{figures/rubrene-holstein-imag-conductivity-temp-0.4to400K-freq-0to10omega-COLOUR.pdf}
+  \end{subfigure}
+  \caption{Frequency dependence of the polaron complex conductivity (in units of \si{\siemens\per\centi\meter}) predicted by the variational parabolic Holstein and Fr\"ohlich models for a bulk 3D Rubrene organic crystal, for temperatures $T = 0.48$~\si{K}, $100$~\si{K}, $200$~\si{K}, $300$~\si{K} and $400$~\si{K}. The top row shows the real (left) and imaginary (right) components of the Fr\"ohlich complex conductivity. The bottom row shows the parabolic Holstein complex conductivity's real (left) and imaginary (right) components.}
+  \label{fig:rubrene_conductivity}
+\end{figure*}
 
-\begin{table}
-    \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-        & $v$ (THz$2\pi$) & $w$ (THz$2\pi$) & $M$ ($m_e$) &  $\kappa$ (mN m$^{-1}$) & $R$ (Å) & $F$ (meV) & $\mu$ (cm$^2$V$^{-1}$s$^{-1}$) \\
-    \hline
-         Holstein & $4.656$ & $3.875$ & $0.444$ & $106.8$ & $1.465$ & $-3.735$ & $11.55$ \\
-    \hline
-        Fr\"ohlich & $8.143$ & $6.780$ & $0.442$ & $24.33$ & $83.07$ & $-81.58$ & $89.76$ \\
-    \hline
-    \end{tabular}
-    \caption{Room temperature ($300$ K) polaron properties for a Rubrene Bulk crystal calculated using the variational Holstein and Fr\"ohlich models.}
-    \label{tab:rubrenert}
-\end{table}
+In organic electronic materials, the charge-carrier state is often understood to be a small polaron. This is often modelled with semi-classical transfer rate theories as a classical object hopping from site to site. The matrix elements that parameterise these rate equations can be calculated within certain approximations using electronic structure calculations. Still, defining the sites where the charge carriers are localised is challenging (and often input to the simulation and calculations). 
 
-At room temperature $T = 300$ K, both polarons have roughly doubled in size. The Holstein polaron radius is still only $0.1$ times the lattice constant, whereas the Fr\"ohlich polaron is now about $6$ times larger than the lattice constant. Both polarons now have the same mass, around $3$ times heavier than the valence-band hole. The spring constant for the Holstein polaron is now only $4$ times greater than the Fr\"ohlich polaron.
+One of the prototypical materials studied frequently to investigate electron-phonon coupling is Rubrene (5,6,11,12-tetraphenyltetracene), which has one of the highest carrier mobilities and can reach a few tens of cm$^2$/Vs for holes. This is a good test for applying our newly derived variational Holstein model to predict its charge-carrier mobility in bulk. We take parameters for Rubrene from Ordejon et al.~\cite{ordejon_ab_2017} where they derived Peierls (off-site) and Holstein (on-site) contributions by fitting the generalise Holstein-Peirels model with Density Functional Theory (DFT) calculations performed using SEISTA code. I use their Holstein parameters coupling, which we list in Table~\ref{tab:rubrene_data}, and use them within our newly derived variational Holstein method. For simplicity, we consider a single effective phonon frequency, though the technique presented here could be extended to multiple phonon modes, as we have demonstrated for the Fr\"ohlich Hamiltonian~\cite{martin_multiple_2023}.
 
-In Figs.~(\ref{fig:rubrene}) I give the temperature-dependent properties for the Rubrene polaron: polaron-free energy and mobility. I also provide the optimal variational parameters $v$ and $w$ with respect to temperature.  Additionally, I provide the frequency-response of the optical conductivity at temperatures $T = 0.1$ K, $6.3$ K and $50$ K for the Holstein polaron and $T = 0.4$ K, $26$ K and $207$ K for the Fr\"ohlich polaron. The temperature difference is because the two models have the same temperature regime for their respective inverse thermodynamics temperatures. For the Holstein polaron, $T^{(H)} = 1$ in polaron units is about $T = 11.6$ K, whereas in the Fr\"ohlich polaron units $T^{(F)} = 1$ is about $T = 48$ K. In the top-left figure, we have the polaron free energies for Rubrene, which has a maximum of $T = 1$ in polaron units (note that the figure shows the negative of the free energy). The Holstein polaron free energy is significantly smaller than the Fr\"ohlich polaron since it only ever couples to one lattice site, whereas the Fr\"olich polaron (in principle) couples to many lattice sites over an extent of multiple lattice constants. The Holstein polaron seems to have a sharper dependence on temperature at lower temperatures. Still, both polarons have a similar dependence above the Debye temperature $T_D \sim 120$ K corresponding to the energy of the Rubrene effective phonon mode. The top-right figure shows the temperature dependence of the $v$ and $w$ variational parameters. For both polarons, these take a minimum at $T=1$ is the respective polaron units. Still, whilst above the Debye temperature $v$ and $w$ increase linearly with temperature for the Fr\"ohlich polaron, they reach a sudden plateau for the Holstein polaron. In the bottom-right figure, we see the temperature dependence of the polaron charge-carrier mobility. The Holstein polaron mobility descends far more quickly than for the Fr\"ohlich polaron and reaches what will eventually become a constant value around $\mu \sim 9.0$ cm$^2$V$^{-1}$s$^{-1}$ towards higher temperatures, whereas the Fr\"ohlich mobility will continue to decrease at a rate proportional to $\mu \sim T^{-1/2}$. Finally, the bottom-right figure shows the frequency dependence of the real component of the complex conductivity for both polarons. At low temperatures, both polarons see a response peak beginning at the phonon frequency $\omega_0 = 5.768$ THz. Still, the Fr\"ohlich polaron response decays far more rapidly with frequency than the Holstein polaron. As we increase the temperature, this trend continues, except that for both polarons, we begin to see some response below the phonon frequency due to thermally excited phonons that generate an extra background response. This results in a local minimum in the conductivity around the effective polaron frequency $v$ as energy is lost to internal phonons that make up the polaron state. At much higher temperatures, the thermally excited phonon response now drowns out any polaronic response, and we are left with a typical Drude-like conductivity for both polarons, again with the Holstein polaron decaying more slowly than the Fr\"ohlich polaron with increasing frequency.
+The results for ground-state Holstein and Fr\"ohlich polarons for Rubrene are shown in Table~\ref{tab:gs_rubrene}. Likewise, Table~\ref{tab:rt_rubrene} gives the result for $T = 300$ K, including the finite temperature DC mobility, which we calculate to be $\mu^{(H)}_{\text{Rubrene}} = 47.72$~\si{cm^2V^{-1}s^{-1}} for the Holstein polaron and $\mu^{(F)}_{\text{Rubrene}} = 92.59$~\si{cm^2V^{-1}s^{-1}} for the Fr\"ohlich polaron. Immediately, the Holstein prediction is more inline which whats observed in experiments whereas the Fr\"ohlich overestimates.
 
-By applying both polaron models to Rubrene, we can more clearly see that the physics described by either model is very different. However, the predictions of the Holstein model seem to better align with the experimentally observed charge-carrier mobility.
+% In Fig.~\ref{fig:rubrene_temp}, we present the Rubrene polaron's temperature-dependent properties: free energy and mobility. I provide the optimal variational parameters $v$ and $w$ concerning temperature. In the top-left figure, we have the polaron \emph{binding} energies (relative to the band extrema) for Rubrene predicted by both models. The Holstein polaron binding energy is significantly smaller than the Fr\"ohlich polaron since it only ever couples to one lattice site, whereas the Fr\"olich polaron (in principle) couples to many lattice sites over an extent of multiple lattice constants. The top-right figure shows the temperature dependence of the $v$ and $w$ variational parameters. For the Fr\"ohlich polaron, these take a minimum at $T=50$~\si{K} and then increase linearly above this temperature. For the Holstein polaron, the variational parameters have less temperature dependence, but the $w$ parameter also shows a minimum at $T=50$~\si{K} whereas the $v$ parameter is minimum towards $T=0$~\si{K}. In the bottom figure, we have the temperature dependence of the polaron charge-carrier mobility. The Holstein polaron mobility descends far more quickly than for the Fr\"ohlich polaron and reaches what will eventually become a constant value around $\mu \sim 10.0$ cm$^2$V$^{-1}$s$^{-1}$ towards higher temperatures, whereas the Fr\"ohlich mobility will continue to decrease at a rate proportional to $\mu \sim T^{-1/2}$.
+
+\subsubsection{Rubrene Thermal Properties}
+
+In Fig.~\ref{fig:rubrene_temp}, I analyse the polaron properties predicted by the variational parabolic Holstein and Fröhlich models in a bulk 3D Rubrene organic crystal. This figure includes three subplots: the polaron binding energy, the optimal variational parameters, and the DC polaron mobility, each as a function of temperature.
+
+The top-left subplot of Fig.~\ref{fig:rubrene_temp} depicts the polaron binding energy, $F$, as a function of temperature ($T$). The binding energy is presented in millielectronvolts (meV). Both the Holstein (H) and Fr\"ohlich (F) models show a decrease in binding energy with increasing temperature. Notably, the Holstein model (blue curve) predicts a more pronounced decline in binding energy compared to the Fr\"ohlich model (red curve). At lower temperatures, the binding energy in the Holstein model is significantly higher, indicating stronger polaron formation. As temperature increases, the binding energies of both models converge, reflecting a reduction in polaron stabilisation due to thermal agitation.
+
+The top-right subplot illustrates the optimal variational parameters $v$ (dimensionless) and $w$ (in units of $\omega_0$) as functions of temperature. The parameters $v_H$ and $v_F$ (blue and red curves) represent the Holstein and Fr\"ohlich models. Similarly, $w_H$ and $w_F$ (green and magenta curves) correspond to the $w$ parameters. Both variational parameters exhibit non-monotonic behaviour with temperature, with distinct minima observed around 120 K for the Holstein model and 50 K for the Fr\"ohlich mode. This suggests that the polaron wavefunction undergoes significant changes at certain temperatures, potentially due to the competing effects of electron-phonon coupling and thermal excitation.
+
+The bottom subplot shows the DC polaron mobility, $\mu(T)$, in units of $\text{cm}^2\text{V}^{-1}\text{s}^{-1}$, as a function of temperature. Both models' mobility decreases sharply with increasing temperature, indicating enhanced phonon scattering at higher temperatures. The two models predict similar mobilities below 120 K, with the Holstein mobility (blue curve) a little higher than the Fr\"ohlich model (red curve). However, the Fr\"ohlich model predicts consistently higher mobility compared to the Holstein model above this temperature. This can be attributed to the long-range nature of the electron-phonon interactions in the Fr\"ohlich model, which tends to preserve higher mobility despite thermal disruptions.
+
+These results provide insights into the temperature dependence of polaron properties in 3D Rubrene crystals. The distinct behaviours of the Holstein and Fr\"ohlich models highlight the importance of considering different electron-phonon interaction mechanisms when analysing organic semiconductors. The findings underscore the complex interplay between thermal effects and electron-phonon coupling, which governs polarons' formation, stability, and mobility in these materials.
+
+\subsubsection{Rubrene Complex Conductivity}
+
+% In Fig.~\ref{fig:rubrene_conductivity} we show the frequency-dependence of the real and imaginary components of the complex conductivity for both polarons. At low temperatures both polarons see a response peak beginning at the phonon frequency $\omega_0 = 5.768$ THz2$\pi$, but then the Fr\"ohlich polaron response decays far more rapidly with frequency than the Holstein polaron. As we increase the temperature, this trend continues, except that for both polarons we begin to see some response below the phonon frequency due to the presence of thermally excited phonons that generate an extra background response. This results in a local minimum in the conductivity around the effective polaron frequency $v$ as energy is lost to internal phonons that make up the polaron state. At much higher temperatures, the thermally excited phonon response now drowns out any kind of polaronic response and we are left with a typical Drude-like conductivity for both polarons, again with the Holstein polaron decaying more slowly than the Fr\"ohlich polaron with increasing frequency.
+
+% By applying both polaron models to Rubrene, we can more clearly see that the physics described by either model is very different. However, the predictions of the Holstein model seem to better align with the experimentally observed charge-carrier mobility.
+
+Fig.~\ref{fig:rubrene_conductivity} illustrates the frequency dependence of the polaron complex conductivity, presented in units of Siemens per centimetre ($\text{S}/\text{cm}$), as predicted by the variational parabolic Holstein and Fr\"ohlich models for a bulk 3D Rubrene organic crystal at various temperatures. This figure contains four subplots: the real and imaginary components of the Fr\"ohlich and Holstein complex conductivities, each plotted against frequency.
+
+The top-left subplot of Fig.~\ref{fig:rubrene_conductivity} displays the real component of the Fr\"ohlich model's conductivity across a range of temperatures: 0.48 K, 100 K, 200 K, 300 K, and 400 K. At the lowest temperature (0.48 K), the real conductivity shows a significant one-phonon peak at low frequencies starting at the phonon frequency $\Omega = \omega_0 = 5.768$~\si{THz}, which rapidly decreases with increasing frequency. As temperature rises, the peak becomes less pronounced and is no longer visible, indicating a reduction in the polaronic response due to thermally excited phonons that generate an extra background response. The inset in the top-left subplot provides a closer view of the high-frequency behaviour, emphasising the one-phonon peak and the gradual decline in real conductivity across all temperatures.
+
+The top-right subplot represents the imaginary component of the Fr\"ohlich model's conductivity for the same temperature range. Like the real component, the imaginary conductivity peaks at low frequencies, with the magnitude decreasing as the temperature rises. This peak indicates the reactive part of the polaron response, which is dominant at lower frequencies and diminishes with increasing thermal agitation.
+
+The bottom-left subplot shows the real component of the Holstein model's conductivity at the specified temperatures. The conductivity profile is similar to that of the Fr\"ohlich model, with a prominent one-phonon peak at low frequencies starting at the phonon frequency that diminishes with increasing temperature to be replaced by a Drude-like background response. The inset highlights the high-frequency region, revealing the temperature-dependent decrease in real conductivity.
+
+The bottom-right subplot illustrates the imaginary component of the Holstein model's conductivity. This component also shows a peak at low frequencies, which decreases in magnitude as temperature increases. The behaviour is consistent with the Fr\"ohlich model, although the absolute values and specific trends differ due to the distinct nature of electron-phonon interactions in the Holstein model.
+
+These plots collectively demonstrate the frequency-dependent behaviour of polaron complex conductivity in 3D Rubrene crystals, as the Holstein and Fr\"ohlich models predicted. The observed trends underscore the significant impact of temperature on the real and imaginary conductivity components. At low temperatures, the strong polaronic interactions result in a high conductivity one-phonon peak at low frequencies. In contrast, increased thermal energy at higher temperatures disrupts these interactions due to thermally excited phonons, leading to a diminished polaronic response. These insights are crucial for understanding the dynamic electrical properties of organic semiconductors under varying thermal conditions.
+
+% In organic electronic materials, it is understood that the charge-carrier state is a small polaron.  This is often modelled with semi-classical transfer rate theories as a classical object hopping from site to site. The matrix elements that parameterise these rate equations can be calculated, within certain approximations, from electronic structures. Still, defining the sites where the charge carriers are localised is challenging (and often input to the simulation and calculations). 
+
+% One of the prototypical materials studied frequently to investigate electron-phonon coupling is Rubrene (5,6,11,12-tetraphenyltetracene), which has one of the highest carrier mobilities and can reach a few tens of cm$^2$/Vs for holes. This is a good test for applying our newly derived variational Holstein model to predict its charge-carrier mobility in bulk. I take parameters for Rubrene from Ordejon et al.~\cite{ordejon_ab_2017} where they derived Peierls (off-site) and Holstein (on-site) contributions by fitting the generalise Holstein-Peirels model with Density Functional Theory (DFT) calculations performed using SEISTA code. Here, I use their Holstein parameter coupling, which I have listed in Table 1, and use these parameters within our newly derived variational Holstein method. For simplicity, I consider a single effective phonon frequency, though the method presented here could be extended to multiple phonon modes, as I have demonstrated for the Fr\"ohlich Hamiltonian~\cite{martin_multiple_2023}.
+
+% The results for ground-state Holstein and Fr\"ohlich polarons for Rubrene are shown in Table 2. Likewise, Table 3 gives the result for $T = 300$ K, including the finite temperature DC mobility, which I calculate to be $\mu^{(H)}_{\text{Rubrene}} = 11.55$ cm$^2$V$^{-1}$s$^{-1}$ for the Holstein polaron and $\mu^{(F)}_{\text{Rubrene}} = 89.76$ cm$^2$V$^{-1}$s$^{-1}$ for the Fr\"ohlich polaron. Immediately, the Holstein prediction is inline which whats observed in experiments whereas the Fr\"ohlich greatly overestimates. Note that for the Fr\"ohlich model, I have used an approximate comparative unitless coupling value of $\alpha^{(F)} \approx 3.0 \times \alpha^{(H)} = 1.785$.
+
+% \begin{table}
+%     \centering
+%     \begin{tabular}{|c|c|c|c|c|c|c|c|}
+%     \hline
+%         $g$ (meV) & $\omega_0$ (THz) & $J$ (meV) & $a$ (Å) & $\gamma$ & $m_b$ ($m_e$) & $\lambda^2$ & $\alpha$ \\
+%     \hline
+%          $106.8$ & $5.768$ & $134.0$ & $14.06$ & $0.178$ & $0.144$ & $20.04$ & $0.595$ \\
+%     \hline
+%     \end{tabular}
+%     \caption{3D Rubrene Bulk crystal data. Here $g$ is the Holstein hole-phonon coupling element, $\omega_0$ is the single-mode effective phonon frequency, $J$ is the electron transfer/hopping integral, $a$ is the geometric-meaned crystal lattice constant, $\gamma$ is the Holstein adiabaticity unitless parameter, $m_b$ is the effective hole band-mass, $\lambda^2 = (g / \hbar\omega_0)^2$ is the unitless squared hole-phonon coupling element and $\alpha = \lambda^2 \gamma / 6$ is the 3D unitless Holstein electron-phonon parameter.}
+%     \label{tab:rubrene}
+% \end{table}
+
+% At zero temperature, the Holstein polaron radius $R_0$ is $0.058$ times the lattice constant, and so is a \emph{small} polaron. Compare this to the Fr\"ohlich model where the polaron radius is $3.436$ times the lattice constant and so is a \emph{large} polaron. The Holstein polaron mass $M_0$ is slightly larger at $1.08$ times the hole band mass. In contrast, the Fr\"ohlich polaron mass is already $2.48$ times heavier than the valence-band hole. Notably, the spring-constant $\kappa_0$ for the Holstein polaron is over $7$ times stronger than for the Fr\"ohlich polaron, which may correspond to an increased likelihood for the Holstein polaron to stay local to its current lattice site compared to the Fr\"ohlich polaron which is more delocalised and likely to move around. This is certainly reflected in the predicted room-temperature mobilities, as mentioned above.
+
+% \begin{table}
+%     \centering
+%     \begin{tabular}{|c|c|c|c|c|c|c|}
+%     \hline
+%         & $v_0$ (THz$2\pi$) & $w_0$ (THz$2\pi$) & $M_0$ ($m_e$) &  $\kappa_0$ (mN m$^{-1}$) & $R_0$ (Å) & $F_0$ (meV) \\
+%     \hline
+%          Holstein & $3.376$ & $3.139$ & $0.157$ & $24.71$ & $0.828$ & $-0.178$ \\
+%     \hline
+%          Fr\"ohlich & $3.213$ & $2.758$ & $0.357$ & $3.250$ & $48.33$ & $-43.60$ \\
+%     \hline
+%     \end{tabular}
+%     \caption{Ground-state polaron properties for a Rubrene Bulk crystal calculated using the variational Holstein and Fr\"ohlich models.}
+%     \label{tab:rubrenegs}
+% \end{table}
+
+% \begin{table}
+%     \centering
+%     \begin{tabular}{|c|c|c|c|c|c|c|c|}
+%     \hline
+%         & $v$ (THz$2\pi$) & $w$ (THz$2\pi$) & $M$ ($m_e$) &  $\kappa$ (mN m$^{-1}$) & $R$ (Å) & $F$ (meV) & $\mu$ (cm$^2$V$^{-1}$s$^{-1}$) \\
+%     \hline
+%          Holstein & $4.656$ & $3.875$ & $0.444$ & $106.8$ & $1.465$ & $-3.735$ & $11.55$ \\
+%     \hline
+%         Fr\"ohlich & $8.143$ & $6.780$ & $0.442$ & $24.33$ & $83.07$ & $-81.58$ & $89.76$ \\
+%     \hline
+%     \end{tabular}
+%     \caption{Room temperature ($300$ K) polaron properties for a Rubrene Bulk crystal calculated using the variational Holstein and Fr\"ohlich models.}
+%     \label{tab:rubrenert}
+% \end{table}
+
+% At room temperature $T = 300$ K, both polarons have roughly doubled in size. The Holstein polaron radius is still only $0.1$ times the lattice constant, whereas the Fr\"ohlich polaron is now about $6$ times larger than the lattice constant. Both polarons now have the same mass, around $3$ times heavier than the valence-band hole. The spring constant for the Holstein polaron is now only $4$ times greater than the Fr\"ohlich polaron.
+
+% In Figs.~(\ref{fig:rubrene}) I give the temperature-dependent properties for the Rubrene polaron: polaron-free energy and mobility. I also provide the optimal variational parameters $v$ and $w$ with respect to temperature.  Additionally, I provide the frequency-response of the optical conductivity at temperatures $T = 0.1$ K, $6.3$ K and $50$ K for the Holstein polaron and $T = 0.4$ K, $26$ K and $207$ K for the Fr\"ohlich polaron. The temperature difference is because the two models have the same temperature regime for their respective inverse thermodynamics temperatures. For the Holstein polaron, $T^{(H)} = 1$ in polaron units is about $T = 11.6$ K, whereas in the Fr\"ohlich polaron units $T^{(F)} = 1$ is about $T = 48$ K. In the top-left figure, we have the polaron free energies for Rubrene, which has a maximum of $T = 1$ in polaron units (note that the figure shows the negative of the free energy). The Holstein polaron free energy is significantly smaller than the Fr\"ohlich polaron since it only ever couples to one lattice site, whereas the Fr\"olich polaron (in principle) couples to many lattice sites over an extent of multiple lattice constants. The Holstein polaron seems to have a sharper dependence on temperature at lower temperatures. Still, both polarons have a similar dependence above the Debye temperature $T_D \sim 120$ K corresponding to the energy of the Rubrene effective phonon mode. The top-right figure shows the temperature dependence of the $v$ and $w$ variational parameters. For both polarons, these take a minimum at $T=1$ is the respective polaron units. Still, whilst above the Debye temperature $v$ and $w$ increase linearly with temperature for the Fr\"ohlich polaron, they reach a sudden plateau for the Holstein polaron. In the bottom-right figure, we see the temperature dependence of the polaron charge-carrier mobility. The Holstein polaron mobility descends far more quickly than for the Fr\"ohlich polaron and reaches what will eventually become a constant value around $\mu \sim 9.0$ cm$^2$V$^{-1}$s$^{-1}$ towards higher temperatures, whereas the Fr\"ohlich mobility will continue to decrease at a rate proportional to $\mu \sim T^{-1/2}$. Finally, the bottom-right figure shows the frequency dependence of the real component of the complex conductivity for both polarons. At low temperatures, both polarons see a response peak beginning at the phonon frequency $\omega_0 = 5.768$ THz. Still, the Fr\"ohlich polaron response decays far more rapidly with frequency than the Holstein polaron. As we increase the temperature, this trend continues, except that for both polarons, we begin to see some response below the phonon frequency due to thermally excited phonons that generate an extra background response. This results in a local minimum in the conductivity around the effective polaron frequency $v$ as energy is lost to internal phonons that make up the polaron state. At much higher temperatures, the thermally excited phonon response now drowns out any polaronic response, and we are left with a typical Drude-like conductivity for both polarons, again with the Holstein polaron decaying more slowly than the Fr\"ohlich polaron with increasing frequency.
+
+% By applying both polaron models to Rubrene, we can more clearly see that the physics described by either model is very different. However, the predictions of the Holstein model seem to better align with the experimentally observed charge-carrier mobility.
 
 \section{Cubic \& Anisotropic Materials}
 \label{sec:chap-sixth-third}
@@ -210,9 +420,9 @@ By applying both polaron models to Rubrene, we can more clearly see that the phy
     \label{fig:anisotropy}
 \end{figure}
 
-In~\cite{guster_frohlich_2021}, we investigate the polaron effective mass, radius and ground-state energy that arise from a generalised Fr\"ohlich Hamiltonian that incorporates degenerate bands with anisotropy and multiple phonon branches. These polaron properties are calculated for 20 cubic materials (including II-VI compounds: CdS, CdSe, CdTe, ZnS, ZnSe, ZnTe; III-V compounds: AlAs, AlSb, AlP, BAs, BN, GaAs, GaN, GaP; oxides: BaO, CaO, Li$_2$O, MgO, SrO; and SiC) using the lowest order of perturbation theory and the strong coupling limit. \newline
+In~\cite{guster_frohlich_2021}, we investigate the polaron effective mass, radius and ground-state energy that arise from a generalised Fr\"ohlich Hamiltonian that incorporates degenerate bands with anisotropy and multiple phonon branches. These polaron properties are calculated for 20 cubic materials (including II-VI compounds: CdS, CdSe, CdTe, ZnS, ZnSe, ZnTe; III-V compounds: AlAs, AlSb, AlP, BAs, BN, GaAs, GaN, GaP; oxides: BaO, CaO, Li$_2$O, MgO, SrO; and SiC) using the lowest order of perturbation theory and the strong coupling limit. 
 
-In the non-degenerate case, I provide a na\"ive extension of Feynman's path integral approach to include anisotropic effective band masses, which is used as a point of comparison with the full perturbative treatment for characterising the polaron in the weak-coupling limit (c.f. section IIb in~\cite{guster_frohlich_2021} and subsection 3.8 of this chapter). From Figure \ref{fig:anisotropy} (left), we see that the variational approach gives a lower estimate for the ground-state compared to the perturbative result for both isotropic (up to $2.5$\% lower) and anisotropic (up to $17.5$\% lower) materials. In Figure \ref{fig:anisotropy} (right), we have the relative difference in polaron effective mass between the two approaches. The largest difference is found in materials that, within the Fr\"ohlich approach, are found in~\cite{guster_frohlich_2021} to be at the continuum limit breakdown where the discrete nature of the lattice cannot be ignored. These materials include BaO, CaO, SrO and, to a lesser extent, Li$_2$O. In both the anisotropic and isotropic cases, the relative difference increases with polaron effective mass, and the in-plane and out-of-plane effective mass differences seem to diverge. This sudden increase in the relative difference is associated with a breakdown limit around $\alpha = 6$ in the perturbative approach for determining the polaron effective mass.
+In the non-degenerate case, I provide a na\"ive extension of Feynman's path integral approach to include anisotropic effective band masses, which is used as a point of comparison with the full perturbative treatment for characterising the polaron in the weak-coupling limit (c.f. section IIb in~\cite{guster_frohlich_2021} and subsection 3.8 of this chapter). From Figure \ref{fig:anisotropy} (left), we see that the variational approach gives a lower estimate for the ground-state compared to the perturbative result for both isotropic (up to $2.5$\% lower) and anisotropic (up to $17.5$\% lower) materials. In Figure \ref{fig:anisotropy} (right), we have the relative difference in polaron effective mass between the two approaches. The most significant difference is found in materials that, within the Fr\"ohlich approach, are found in~\cite{guster_frohlich_2021} to be at the continuum limit breakdown where the discrete nature of the lattice cannot be ignored. These materials include BaO, CaO, SrO and, to a lesser extent, Li$_2$O. In both the anisotropic and isotropic cases, the relative difference increases with polaron effective mass, and the in-plane and out-of-plane effective mass differences seem to diverge. This sudden increase in the relative difference is associated with a breakdown limit around $\alpha = 6$ in the perturbative approach for determining the polaron effective mass.
 
 \section{High-Throughput Material Classification}
 \label{sec:chap-sixth-fourth}

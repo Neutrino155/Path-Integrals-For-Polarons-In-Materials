@@ -1,0 +1,353 @@
+\chapter{Memory Function Expansions}
+\label{appx-3:memoryfunctions}
+
+\section{Contour integration of the memory function} 
+
+Following Devreese et al.~\cite{devreese_optical_1972} I derived infinite-power-series expansions of the real and imaginary components of Eq.~(\ref{eqn:fhip_chi}) (or Eq.~(35) in FHIP~\cite{feynman_mobility_1962}) in terms of Bessel and Struve special functions, and hypergeometric functions. 
+
+The practical computational implementation of these expansions was made difficult by the very high precision required on the special functions to make the expansions converge. Using arbitrary precision numerics, a partially working implementation was developed, but it was discovered that direct numeric integration of Eq.~(\ref{eqn:fhip_chi}) could achieve the same result with less computation time and less complex code.
+
+We start by changing the contour of the memory function as done in FHIP~\cite{feynman_mobility_1962}. The memory function for the polaron is defined to linear order~\cite{peeters_theory_1984} as $\Sigma(\Omega) = \chi^*(\Omega) / \Omega$, where,
+\begin{equation}\label{eqn:memfunc}
+    \chi(\Omega) = \int_0^\infty \left[ 1 - e^{i \Omega u} \right] \textrm{Im} S(u)\ du,
+\end{equation}
+is the 
+\begin{equation}
+    S(u) = \frac{2\alpha}{3\sqrt{\pi}} \left[D(u) \right]^{-\frac{3}{2}} \left( e^{iu} + \frac{2}{e^{\beta} - 1} \textrm{cos}(u) \right),
+\end{equation}
+and 
+\begin{equation}
+    \begin{gathered}
+    D(u) = \frac{w^2}{\beta v^2} \left\{a^2 - \beta^2/4 -\ b\ \textrm{cos}(vu)\ \textrm{cosh}(v\beta/2) +\ u^2 -\ i \left[ b\ \textrm{sin}(vu)\ \textrm{sinh}(v\beta/2) + u\beta \right] \right\},
+    \end{gathered}
+\end{equation}
+with $R \equiv (v^2 - w^2) / (w^2 v)$, $a^2 = \beta^2 / 4 + R \beta\ \textrm{coth}(\beta v / 2)$ and $b = R \beta\ /\ \textrm{sinh}(\beta v / 2)$, which are the same as Eqs.~(47b) in FHIP~\cite{feynman_mobility_1962}.
+
+Solving for the real and imaginary parts of $\Sigma(\Omega)$ gives the real and imaginary parts of $\chi(\Omega)$,
+\begin{subequations}
+    \begin{align}
+        \textrm{Re} \, \chi(\Omega) &= \int_0^\infty \left[ 1 - \textrm{cos}(\Omega u) \right] \textrm{Im} S(u)\ du, \\[1em]
+        \textrm{Im} \, \chi(\Omega) &= \int_0^\infty \textrm{sin}(\Omega u)\ \textrm{Im} S(u)\ du .
+    \end{align}
+\end{subequations}
+As both $[1 - \textrm{cos}(\Omega u)]$ and $\textrm{sin}(\Omega)$ are real we can take `Im' outside the integral,
+\begin{subequations}
+    \begin{align}
+        \textrm{Re} \, \chi(\Omega) &= \textrm{Im} \int_0^\infty \left[ 1 - \textrm{cos}(\Omega u) \right] S(u)\ du,  \label{realsus} \\[1em]
+        \textrm{Im} \, \chi(\Omega) &= \textrm{Im} \int_0^\infty \textrm{sin}(\Omega u)\ S(u)\ du\ . \label{imagsus}
+    \end{align}
+\end{subequations}
+Now we promote $u \in \mathbb{R}$ to a complex variable $u = x + iy \in \mathbb{C}$. The integrals then become integrals on the complex plane, 
+\begin{subequations}
+\begin{align}
+    \begin{split}
+    \textrm{Re} \chi(\Omega) &= \textrm{Im} \int_\Gamma \left[ 1 - \textrm{cos}(\Omega x) \textrm{cosh}(\Omega y) +\ i\ \textrm{sin}(\Omega x) \textrm{sinh}(\Omega y) \right] S(x + iy)\ du,  \label{realsuscomplex} 
+    \end{split} \\[1em]
+    \begin{split}
+    \textrm{Im}\chi(\Omega) &= \textrm{Im} \int_\Gamma \left[ \textrm{sin}(\Omega x)\ \textrm{cosh}(\Omega y) +\ i\ \textrm{cos}(\Omega x)\ \textrm{sinh}(\Omega y) \right] S(x + iy)\ du, \label{imagsuscomplex}
+    \end{split}
+\end{align}
+\end{subequations}
+where $\Gamma$ is our contour of integration. To motivate a choice of contour, let's consider the form of $D(x + iy)$ and $S(x + iy)$, 
+\begin{equation}
+\begin{gathered}
+    D(x + i y) = \frac{w^2}{\beta v^2} \left\{\left[ a^2 - \beta^2/4 \right.\right. 
+    \left.\left.-\ b\ \textrm{cos}(vx)\ \textrm{cosh}(v( y-\beta/2)) + x^2 + y(\beta - y) \right] \right. \\
+    \left.+\ i \left[ b\ \textrm{sin}(vx)\ \textrm{sinh}(v(y-\beta/2)) + 2x(y-\beta/2) \right] \right\}
+\end{gathered}
+\end{equation}
+\begin{equation}
+    S(x + i y )
+    = \frac{2 \alpha}{3 \sqrt{\pi}} \frac{\textrm{cos}(x + i(y
+    - \beta/2))}{\textrm{sinh}(\beta / 2) \left[ D(x + iy) \right]^{\frac{3}{2}}}.
+\end{equation}
+Now we notice that $D(x + i y )$ and $S(x + i y )$ are trivially real when $y = \beta / 2$. This gives the results,
+\begin{equation}
+    D(x + i\beta/2) = \frac{w^2}{\beta v^2} \left[ x^2 + a^2 - b\ \textrm{cos}(vx) \right] \in \mathbb{R}
+\end{equation}
+\begin{equation}
+    \begin{split}
+        S(x + i\beta/2) = \frac{2 \alpha}{3 \sqrt{\pi}}
+        \frac{\beta^{\frac{3}{2}}}{\textrm{sinh}(\beta / 2)} \left( \frac{v}{w}
+        \right)^3 \frac{\textrm{cos}(x)}{\left[x^2 + a^2 - b\ \textrm{cos}(vx)
+        \right]^{\frac{3}{2}}} \in \mathbb{R}.
+    \end{split}
+\end{equation}
+
+\begin{center}
+\begin{figure}
+\begin{tikzpicture}[decoration={markings,
+    mark=at position 2cm   with {\arrow[line width=1pt]{stealth}},
+    mark=at position 6cm with {\arrow[line width=1pt]{stealth}},
+    mark=at position 9cm   with {\arrow[line width=1pt]{stealth}},
+    mark=at position 11cm with {\arrow[line width=1pt]{stealth}},
+    mark=at position 14cm   with {\arrow[line width=1pt]{stealth}},
+    mark=at position 18cm   with {\arrow[line width=1pt]{stealth}},
+    mark=at position 21cm   with {\arrow[line width=1pt]{stealth}},
+    mark=at position 23cm   with {\arrow[line width=1pt]{stealth}},
+  }]
+  \draw[thick, ->] (0,0) -- (9,0) coordinate (xaxis);
+
+  \draw[thick, ->] (0,0) -- (0,5) coordinate (yaxis);
+
+  \node[above] at (xaxis) {$\mathrm{Re}(u)$};
+
+  \node[right]  at (yaxis) {$\mathrm{Im}(u)$};
+
+  \path[draw,blue, line width=0.8pt, postaction=decorate] 
+        (0,4)
+    --  (8,4)  node[midway, above right, black] {$\Gamma_3$} node[above, black] {$\infty + i\frac{\beta}{2}$}
+    --  (8,0)  node[midway, right, black] {$\Gamma_4$} node[below, black] {$\infty$}
+    --  (0,0)  node[midway, below, black] {$\Gamma_1$} node[below, black] {$0$} 
+    --  (0,4)  node[midway, left, black] {$\Gamma_2$} node[above, left, black] {$i\frac{\beta}{2}$};
+\end{tikzpicture}
+\caption{\label{fig:integralcontour} The complex contour chosen to transform the integral in Eq.~(\ref{eqn:memfunc}). No singularities lie within the closed contour so the contour integral is zero.}
+\end{figure}
+\end{center}
+
+From this, we choose to integrate over the contours $\Gamma_1 \in (\infty + 0i, 0 + 0i] \rightarrow \Gamma_2 \in [0 + i0, 0 + i\beta/2] \rightarrow \Gamma_3 \in [0 + i\beta/2, \infty + i\beta/2) \rightarrow \Gamma_4 \in (\infty + i\beta/2, \infty + 0i)$ as shown in Fig.~\ref{fig:integralcontour}. Since the integrands in Eqs.~(\ref{realsuscomplex}) and (\ref{imagsuscomplex}) are analytic in this region, this closed contour integral will be zero. 
+(There is a pole in $\textrm{Im}S(x+iy)$ at $0 + i0$, but this is cancelled by the zero of the elementary/trigonometric functions in front of it at this point.) 
+The closing piece of the contour lies at $x \rightarrow \infty$ and can be neglected as $S(x+iy) \rightarrow 0$ in this limit. Thus, for the real part of $\chi(\Omega)$ we have,
+\begin{equation}
+    \begin{gathered}
+        \int_0^\infty \left[ 1 - \textrm{cos}(\Omega x) \right] S(x)\ dx =
+        \int_0^{\beta / 2} \left[ 1 - \textrm{cosh}(\Omega y) \right] S(iy)\ d(iy) \\ 
+        + \int_0^\infty \left[ 1 - \textrm{cos}(\Omega x) \textrm{cosh}\left(\frac{\Omega \beta}{2}\right)\right. 
+        \left.+\ i\ \textrm{sin}(\Omega x) \textrm{sinh}\left(\frac{\Omega \beta}{2}\right) \right] S\left(x + \frac{i \beta}{2}\right)\ dx,
+    \end{gathered}
+\end{equation}
+and for the imaginary part of $\chi(\Omega)$ we have,
+\begin{equation}
+    \begin{gathered}
+        \int_0^\infty \textrm{sin}(\Omega x) S(x)\ dx =
+        i\int_0^{\beta / 2} \textrm{sinh}(\Omega y) S(iy)\ d(iy) \\
+        + \int_0^\infty \left[ \textrm{sin}(\Omega x) \textrm{cosh}\left(\frac{\Omega \beta}{2}\right) +\ i\ \textrm{cos}(\Omega x) \textrm{sinh}\left(\frac{\Omega \beta}{2}\right) \right] S\left(x + \frac{i \beta}{2}\right)\ dx.
+    \end{gathered}
+\end{equation}
+We can now see more clearly why we choose to integrate at $y = \beta / 2$. Since $S(x + i\beta / 2)$ is real, acting `Im' on these integrals will cancel the second integral in the contour integral for $\textrm{Im}\chi(\Omega)$ (which is entirely real), and the third integral for both $\textrm{Re}\chi(\Omega)$ and $\textrm{Im}\chi(\Omega)$ is simplified due to the absence of any cross-terms that would have resulted for other values of $y$ as $S(x + iy)$ would have been complex. To see that the second integral for $\textrm{Im}\chi(\Omega)$ is real, we need to see if $S(iy)$ is real. First, we look at $D(iy)$, which is given by,
+\begin{equation}
+    \begin{gathered}
+        D(iy) = \frac{w^2}{\beta v^2} \left[a^2 - \frac{\beta^2}{4} + y(\beta - y) - b\ \textrm{cosh}\left( vy - \frac{\beta v}{2} \right) \right] \in \mathbb{R},
+    \end{gathered}
+\end{equation}
+and then $S(iy)$ is given by, 
+\begin{equation}
+    \begin{gathered}
+        S(iy) = \frac{2 \alpha}{3 \sqrt{\pi}} \frac{\beta^{3/2}}{\textrm{sinh}(\beta / 2)} \left( \frac{v}{w} \right)^3 \frac{\textrm{cosh}(y - \beta / 2)}{\left[a^2 - \beta^2/4 + y(\beta - y) - b\ \textrm{cosh}(v(y - \beta / 2)) \right]^{3/2}} \in \mathbb{R},
+    \end{gathered}
+\end{equation}
+so $S(iy)$ is indeed real. Since the second integral for $\textrm{Im}\chi(\Omega)$ has two complex $i$ s and $S(iy)$ is real, the whole integral is entirely real and so it doesn't contribute to $\textrm{Im}\chi(\Omega)$. Unfortunately, $\textrm{Re}\chi(\Omega)$ does not simplify as nicely as $\textrm{Im}\chi(\Omega)$ because the second integral is imaginary and so is still present after taking only the imaginary parts. Nonetheless, for $\textrm{Re}\chi(\Omega)$ we get,
+\begin{equation}
+    \begin{aligned}
+        \textrm{Re}\chi(\Omega) &= \textrm{Im} \int_0^\infty \left[1 - \textrm{cos}(\Omega x)\right] S(x)\ dx \\
+        &=\frac{2 \alpha}{3 \sqrt{\pi}} \frac{\beta^{3/2}}{\textrm{sinh}(\beta / 2)} \left( \frac{v}{w} \right)^3 \bigg\{
+        \textrm{sinh}\left( \frac{\Omega \beta}{2} \right) \int_0^\infty \frac{\textrm{sin}(\Omega x) \textrm{cos}(x)\ dx}{\left[ x^2 + a^2 - b\ \textrm{cos}(vx) \right]^{3/2}}\\
+        &+ \int_0^{\beta/2} \frac{\left[ 1 - \textrm{cosh}(\Omega x) \right] \textrm{cosh}(x - \beta / 2)\ dx }{\left[ a^2 - \beta^2 / 4 + x(\beta - x) - b\ \textrm{cosh}(v(x - \beta / 2)) \right]^{3/2}} \bigg\},
+    \end{aligned}
+\end{equation}
+and for $\textrm{Im}\chi(\Omega)$ we get,
+\begin{equation} \label{eqn: ImX}
+    \begin{aligned}
+         \textrm{Im}\chi(\Omega) = \textrm{Im} \int_0^\infty \textrm{sin}(\Omega x) S(x)\ dx
+         = \frac{2 \alpha}{3 \sqrt{\pi}} \frac{\beta^{3/2}\ \textrm{sinh}(\Omega \beta / 2)}{\textrm{sinh}(\beta / 2)} \left( \frac{v}{w} \right)^3 \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x)\ dx}{\left[x^2 + a^2 - b\ \textrm{cos}(vx) \right]^{3/2}}.
+    \end{aligned}
+\end{equation}
+
+\section{Im$\chi$ expansion in Bessel-K functions} 
+
+In Devreese et al.~\cite{devreese_optical_1972} the integral in Eq.~(\ref{eqn: ImX}) is expanded in an infinite sum of modified Bessel functions of the second kind. Here we follow the same procedure and arrive at the same result, but provide detailed workings. Specifically, we are interested in solving the integral,
+\begin{equation} \label{eqn: imx_integral}
+    \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x)\ dx}{\left[x^2 + a^2 - b\ \textrm{cos}(vx) \right]^{3/2}}\ .
+\end{equation}
+We start by noticing that,
+\begin{equation} \label{eqn: inequality}
+    \left| \frac{b\ \textrm{cos}(vx)}{x^2 + a^2} \right| < 1 \quad \textrm{if}\ v > 0\ \textrm{and}\ \beta > 0\ ,
+\end{equation}
+so we can do a binomial expansion of the denominator,
+\begin{equation}
+    \begin{aligned}
+        \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x)}{\left(x^2 + a^2\right)^{3/2}} \left[ 1 - \frac{b\ \textrm{cos}(vx)}{x^2 + a^2}\right]^{-3/2}dx &= \int_0^\infty dx\ \frac{\textrm{cos}(\Omega x) \textrm{cos}(x)}{\left(x^2 + a^2\right)^{3/2}} \sum_{n=0}^\infty \binom{-3/2}{n} \frac{(-b)^n \textrm{cos}^n(vx)}{\left( x^2 + a^2 \right)^n}dx\\
+        &= \sum_{n=0}^\infty \binom{-3/2}{n} (-b)^n \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x) \textrm{cos}^n(vx)}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx,
+    \end{aligned}
+\end{equation}
+where $\binom{-3/2}{n}$ is a binomial coefficient. Next we expand $\textrm{cos}^n(vx)$ using the power-reduction formula,
+\begin{equation}
+    \begin{gathered}
+        \textrm{cos}^n(vx) = \frac{2}{2^n} \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \textrm{cos}((n -2k)vx) + \frac{(1-n\textrm{mod}2)}{2^{n}} \binom{n}{\frac{n}{2}},
+    \end{gathered}
+\end{equation}
+where the second term comes from even $n$ contributions only. Substituting this into our integral gives,
+\begin{equation}
+    \begin{gathered}
+        \sum_{n=0}^\infty \binom{-3/2}{n} \left(-\frac{b}{2}\right)^n \bigg[
+        2 \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x) \textrm{cos}((n -2k)vx)}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx
+        + (1-n\textrm{mod}2) \binom{n}{\frac{n}{2}} \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x)}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx \bigg].
+    \end{gathered}
+\end{equation}
+We can now combine the cosines inside of the integrals into sums of single cosines using,
+\begin{equation}
+    \begin{aligned}
+        \textrm{cos}(\Omega x) \textrm{cos}(x) \textrm{cos}(vx(n - 2k)) &=
+        \frac{1}{4} \bigl\{\textrm{cos}(x(\Omega + 1 + v(n-2k)))
+        +\textrm{cos}(x(\Omega - 1 + v(n-2k))) \\ 
+        &\quad\ \ +\textrm{cos}(x(\Omega + 1 - v(n-2k)))
+        +\textrm{cos}(x(\Omega - 1 - v(n-2k))) \bigr\} \\[1em]
+        &\equiv \frac{1}{4} \sum_{z_4} \textrm{cos}(xz_{k,4}^n)
+    \end{aligned}
+\end{equation}
+where for brevity we have defined $z_{k,4}^n \in \{\Omega + 1 + v(n-2k),\ \Omega - 1 + v(n-2k),\ \Omega + 1 - v(n-2k),\ \Omega - 1 - v(n-2k) \}$. Likewise,
+\begin{equation}
+    \begin{gathered}
+        \textrm{cos}(\Omega x) \textrm{cos}(x) =\frac{1}{2} \bigl\{\textrm{cos}(x(\Omega + 1)) +\ \textrm{cos}(x(\Omega - 1))\bigr\} \\[1em]
+        \equiv \frac{1}{2} \sum_{z_2} \textrm{cos}(xz_2)
+    \end{gathered}
+\end{equation}
+where for brevity we have defined $z_2 \in \{\Omega + 1,\ \Omega - 1\}$. Substituting these into our expansion gives,
+\begin{equation}
+    \begin{aligned}
+        \sum_{n=0}^\infty \binom{-3/2}{n} \left(-\frac{b}{2}\right)^n \bigg[2\sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \sum_{z_4} \int_0^\infty \frac{\textrm{cos}(xz^n_{k,4}(\Omega))}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx
+        + (1-n\textrm{mod}2) \binom{n}{\frac{n}{2}} \sum_{z_2} \int_0^\infty \frac{ \textrm{cos}(xz_2(\Omega))}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx \bigg].
+    \end{aligned}
+\end{equation}
+We now have a lot of integrals of the form,
+\begin{equation} \label{eqn: cosintegral}
+    \int_0^\infty \frac{\textrm{cos}(xz)}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx,
+\end{equation}
+which is an integral representation of modified Bessel functions of the second kind,
+\begin{equation}
+    \begin{aligned}
+        \int_0^\infty \frac{\textrm{cos}(xz)\ dx}{\left(x^2 + a^2\right)^{n + 3/2}} &= \frac{\sqrt{\pi}}{\Gamma(n + 3/2)} K_{n+1}(|z|a) \bigg|\frac{z}{2a}\bigg|^{n + 1} \\
+        &\equiv B_n(z)
+    \end{aligned}
+\end{equation}
+Thus, overall we can expand Im$\chi(\Omega)$ in a series of these Bessel functions,
+\begin{equation}
+    \begin{aligned}
+        \textrm{Im}\chi(\Omega) = \frac{2\alpha \beta^{\frac{3}{2}}}{3\sqrt{\pi}} \frac{\textrm{sinh}(\frac{\Omega \beta}{2})}{\textrm{sinh}(\frac{\beta}{2})} \left(  \frac{v}{w}\right)^3 \sum_{n=0}^\infty \binom{-\frac{3}{2}}{n} \left(-\frac{b}{2}\right)^n \bigg[\sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} &\sum_{z_4} B_{n}(z^n_{k,4}(\Omega)) + (1-n\textrm{mod}2) \binom{n}{\frac{n}{2}} &\sum_{z_2} B_{n}(z_2(\Omega))\bigg]
+    \end{aligned}
+\end{equation}
+where $a^2 = \beta^2 / 4 + R \beta\ \textrm{coth}(\beta v / 2)$, $b = R \beta\ /\ \textrm{sinh}(\beta v / 2)$ and $R = (v^2 - w^2) / (w^2 v)$. Also, $z_{k,4}^n(\Omega) \in \{\Omega + 1 + v(n-2k),\ \Omega - 1 + v(n-2k),\ \Omega + 1 - v(n-2k),\ \Omega - 1 - v(n-2k) \}$ and $z_2(\Omega) \in \{\Omega + 1,\ \Omega - 1\}$.\\
+
+\section{Re$\chi$ expansion in Bessel-I, Struve-L and $_1F_2$ hypergeometric functions} 
+
+Motivated by the expansion of Im$\chi(\Omega)$ in Devreese et al.~\cite{devreese_optical_1972} we provide a similar expansion for Re$\chi(\Omega)$. I follow a similar procedure as for Im$\chi(\Omega)$ and notice that our efforts focus on solving the integrals,
+\begin{equation}
+    \int_0^\infty \frac{\textrm{sin}(\Omega x) \textrm{cos}(x)\ dx}{\left[ x^2 + a^2 - b\ \textrm{cos}(vx) \right]^{3/2}},
+\end{equation}
+\begin{equation}
+    \int_0^{\beta/2} \frac{\left[ 1 - \textrm{cosh}(\Omega x) \right] \textrm{cosh}(x - \beta / 2)\ dx }{\left[ a^2 - \beta^2 / 4 + x(\beta - x) - b\ \textrm{cosh}(v(x - \beta / 2)) \right]^{3/2}}.
+\end{equation}
+The first integral is very similar to Eq.~(\ref{eqn: imx_integral}), just with a cosine swapped out for a sine. Following a similar procedure as for Eq.~(\ref{eqn: imx_integral}) gives,
+\begin{equation}
+    \begin{gathered}
+         \int_0^\infty \frac{\textrm{sin}(\Omega x) \textrm{cos}(x)\ dx}{\left[ x^2 + a^2 - b\ \textrm{cos}(vx) \right]^{3/2}} = \\
+         \sum_{n=0}^\infty \binom{-3/2}{n} \left(-\frac{b}{2}\right)^n \bigg[2\sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \sum_{z_4} \int_0^\infty \frac{\textrm{sin}(xz^n_{k,4}(\Omega))}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx
+         +(1-n\textrm{mod}2) \binom{n}{\frac{n}{2}} \sum_{z_2} \int_0^\infty \frac{ \textrm{sin}(xz_2(\Omega))}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx \bigg],
+    \end{gathered}
+\end{equation}
+where we now look for any special functions for which,
+\begin{equation}
+    \int_0^\infty \frac{\textrm{sin}(xz)}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx
+\end{equation}
+is the integral representation. We found that,
+\begin{equation}
+    \begin{aligned}
+        \int_0^\infty \frac{\textrm{sin}(xz)}{\left(x^2 + a^2\right)^{n + 3/2}}\ dx &= \frac{\sqrt{\pi}}{2}\frac{\Gamma(-\frac{1}{2}-n)\  \textrm{sgn}(z)|z|^{n+1}}{(2a)^{n+1}}\left[ I_{n+1}(|z|a) - \textbf{L}_{-(n+1)}(|z|a) \right] \\
+        &\equiv J_n(z)
+    \end{aligned}
+\end{equation}
+for $n \geq 0$ and $a \geq 0$. Here $\textrm{sgn(x)}$ is the signum function, $I_{n}(x)$ is the modified Bessel function of the first kind, $\textbf{L}_{n}(x)$ is the modified Struve function. Therefore, for Re$\chi(\Omega)$ we have,
+\begin{equation}
+    \begin{aligned}
+        \textrm{Re}\chi(\Omega) &=
+        \frac{2 \alpha \beta^{3/2}}{3 \sqrt{\pi}} \frac{\sinh\left( \frac{\Omega \beta}{2} \right)}{\sinh(\beta / 2)} \left( \frac{v}{w} \right)^3 \Bigg\{ \sum_{n = 0}^\infty \binom{-\frac{3}{2}}{n} \left(\frac{b}{2}\right)^n \bigg[ \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \sum_{z_4} J_{n}(z_{k,4}^n(\Omega)) + (1-n\textrm{mod}2) \binom{n}{\frac{n}{2}} \sum_{z_2} J_{n}(z_2(\Omega)) \bigg]\Bigg\} \\
+        &+ \frac{2 \alpha}{3 \sqrt{\pi}} \frac{\beta^{3/2}}{\sinh(\beta / 2)} \left( \frac{v}{w} \right)^3\int_0^{\beta/2} \frac{\left[ 1 - \cosh(\Omega x) \right] \cosh(x - \beta / 2)\ dx }{\left[ a^2 - \beta^2 / 4 + x(\beta - x) - b\ \cosh(v(x - \beta / 2)) \right]^{3/2}} 
+    \end{aligned}
+\end{equation}
+where $a$, $b$, $z_4$ and $z_2$ are the same as before. Expanding the second integral with the hyperbolic integrand is more complicated. We start by doing a change of variables $x \rightarrow (1 - x) \beta / 2$ to transform the denominator into a similar form as before and to change the limits to $[0, 1]$,
+\begin{equation}
+    \int_0^{\beta/2} \frac{\left[ 1 - \cosh(\Omega x) \right] \cosh(x - \beta / 2)\ dx }{\left[ a^2 - \beta^2 / 4 + x(\beta - x) - b\ \cosh(v(x - \beta / 2)) \right]^{3/2}} \longrightarrow \frac{\beta}{2} \int_0^1 \frac{[1 - \cosh(\Omega\beta [1 - x] / 2)] \cosh(\beta x / 2) dx}{[a^2 - (\beta x / 2)^2 - b \cosh(\beta v x / 2)]^{3/2}}.
+\end{equation}
+Now we see that for $x \in [0, 1]$
+\begin{equation}
+    \bigg| \frac{b\cosh(v\beta x/2)}{a^2 - (\beta x / 2)^2} \bigg| < 1 \quad \textrm{if } v > 0 \textrm{ and } \beta > 0
+\end{equation}
+so we can do a binomial expansion of the denominator as before,
+\begin{equation}
+    \begin{aligned}
+        \sum_{n = 0}^\infty \binom{-\frac{3}{2}}{n} \left( \frac{2}{\beta}\right)^{2n+2} (-b)^n &\int_0^1 \frac{[1 - \cosh(\Omega\beta[1-x]/2)]\cosh(\beta x/2)\cosh^n(v\beta x / 2)}{((2a/\beta)^2 - x^2)^{n+3/2}} dx.
+    \end{aligned}
+\end{equation}
+Then we do another binomial expansion of the remaining denominator
+\begin{equation}
+    \begin{aligned}
+        \sum_{n = 0}^\infty \binom{-\frac{3}{2}}{n} \left( \frac{2}{\beta}\right)^{2n+2} (-b)^n \sum_{m = 0}^\infty &\binom{-n-\frac{3}{2}}{m} (-1)^m \left( \frac{\beta}{2a}\right)^{2n + 2m + 3} \\
+        &\times \int_0^1 \left[1 - \cosh\left(\frac{\Omega\beta[1-x]}{2}\right)\right]\cosh\left(\frac{\beta x}{2}\right)\cosh^n\left(\frac{v\beta x}{2}\right) x^{2m} dx.
+    \end{aligned}
+\end{equation}
+We can then expand the product of hyperbolic cosines in the integrand,
+\begin{equation}\label{eqn:bla}
+    \begin{aligned}
+        &\sum_{n = 0}^\infty \binom{-\frac{3}{2}}{n} \left( \frac{2}{\beta}\right)^{2n+2} (-b)^n \sum_{m = 0}^\infty \binom{-n-\frac{3}{2}}{m} (-1)^m \left( \frac{\beta}{2a}\right)^{2n + 2m + 3} \frac{1}{2^n}  \\
+        &\times \Bigg\{\binom{n}{\frac{n}{2}}(1 - n \textrm{mod} 2) \left[ \int_0^1 \frac{\cosh(\frac{\beta z_1 x}{2})}{x^{-2m}} dx - \frac{1}{2} \sum_{z_2} \left( \cosh\left(\frac{\Omega\beta}{2}\right) \int_0^1 \frac{\cosh(\frac{\beta z_2 x }{2})}{x^{-2m}} dx - \sinh\left(\frac{\Omega\beta}{2}\right) \int_0^1 \frac{\sinh(\frac{\beta z_2 x}{2})}{x^{-2m}} dx \right) \right] \\
+        &+ \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \left[ \sum_{z_3} \int_0^1 \frac{\cosh(\frac{\Omega\beta z_{3} x}{2})}{x^{-2m}}dx - \frac{1}{2} \sum_{z_4} \left( \cosh\left(\frac{\Omega\beta}{2}\right) \int^1_0 \frac{\cosh(\frac{\Omega\beta z_{4} x}{2})}{x^{-2m}} dx - \sinh\left(\frac{\Omega\beta}{2}\right) \int^1_0 \frac{\sinh(\frac{\Omega\beta z_{4} x}{2})}{x^{-2m}} dx \right) \right] \Bigg\}
+    \end{aligned}
+\end{equation}
+where $z_1 = 1$, $z_2(\Omega) \in \{ \Omega + 1,\ \Omega - 1 \}$, $z_{k,3}^n \in \{ 1 + v(n - 2k),\ 1 - v(n - 2k) \}$ and $z_{k,4}^n(\Omega) \in \{ \Omega + 1 + v(n - 2k),\ \Omega - 1 + v(n - 2k),\ \Omega + 1 - v(n - 2k),\ \Omega - 1 - v(n - 2k) \}$. 
+Now we have two integrals of the forms
+\begin{equation}
+    \int_0^1 \cosh(zx) x^{2m} dx, \qquad \int^1_0\sinh(zx) x^{2m} dx,
+\end{equation}
+which are the integral forms of the generalised hypergeometric functions
+\begin{subequations}
+\begin{equation}
+    \int_0^1 \cosh(zx) x^{2m} dx = \pFq{1}{2}{m + \frac{1}{2}}{\frac{1}{2}, m + \frac{3}{2}}{\frac{z^2}{4}} = \sum_{t = 0}^\infty \frac{z^{2t}}{(2t+2m+1)(2t)!}, \quad m > -\frac{1}{2}
+\end{equation}
+\begin{equation}
+    \int_0^1 \sinh(zx) x^{2m} dx = \frac{z}{2m + 2} \pFq{1}{2}{m + 1}{\frac{3}{2}, m + 2}{\frac{z^2}{4}} = \sum_{t=0}^\infty \frac{z^{2t+1}}{(2t+2m+2)(2t+1)!}, \quad m > -1.
+\end{equation}
+\end{subequations}
+For brevity, we will define
+\begin{subequations}
+\begin{equation}
+    _1F_2^c(z) \equiv \pFq{1}{2}{m + \frac{1}{2}}{\frac{1}{2}, m + \frac{3}{2}}{\frac{\beta^2z^2}{16}} = \sum_{t = 0}^\infty \frac{(\beta z / 2)^{2t}}{(2t+2m+1)(2t)!}
+\end{equation}
+\begin{equation}
+    _1F_2^s(z) \equiv \frac{\beta z}{4m + 4} \pFq{1}{2}{m + 1}{\frac{3}{2}, m + 2}{\frac{\beta^2 z^2}{16}} = \sum_{t=0}^\infty \frac{(\beta z / 2)^{2t+1}}{(2t+2m+2)(2t+1)!}
+\end{equation}
+\end{subequations}
+so that Eq.~(\ref{eqn:bla}) becomes
+\begin{equation}
+    \begin{aligned}
+        &\sum_{n = 0}^\infty \binom{-\frac{3}{2}}{n} \left( \frac{2}{\beta}\right)^{2n+2} (-b)^n \sum_{m = 0}^\infty \binom{-n-\frac{3}{2}}{m} (-1)^m \left( \frac{\beta}{2a}\right)^{2n + 2m + 3} \frac{1}{2^n}  \\
+        &\times \Bigg\{\binom{n}{\frac{n}{2}}(1 - n \textrm{mod} 2) \left[ _1F_2^c(z_1) - \frac{1}{2} \sum_{z_2} \left( \cosh\left(\frac{\Omega\beta}{2}\right)\ _1F_2^c(z_2) - \sinh\left(\frac{\Omega\beta}{2}\right)\ _1F_2^s(z_2) \right) \right] \\
+        &+ \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \left[ \sum_{z_3}\ _1F_2^c(z_3) - \frac{1}{2} \sum_{z_4} \left( \cosh\left(\frac{\Omega\beta}{2}\right)\ _1F_2^c(z_4) - \sinh\left(\frac{\Omega\beta}{2}\right)\ _1F_2^s(z_4) \right) \right] \Bigg\}
+    \end{aligned}
+\end{equation}
+which we can reduce further by defining
+\begin{equation}
+    M^{c/s}_{n}(z) \equiv \sum_{m = 0}^\infty \binom{-n-\frac{3}{2}}{m} (-1)^m a^{-2(n+m+1)} \left(\frac{\beta}{2}\right)^{2m + 1}\ _1F_2^{c/s}(z) 
+\end{equation}
+to give
+\begin{equation}
+    \begin{aligned}
+        \sum_{n = 0}^\infty \binom{-\frac{3}{2}}{n} \left(\frac{-b}{2}\right)^n \Bigg\{ \binom{n}{\frac{n}{2}}(1 - n \textrm{mod} 2) \Biggl[ M^{c}_n(z_1) - &\frac{1}{2} \sum_{z_2} \left( \cosh\left(\frac{\Omega\beta}{2}\right) M^{c}_n(z_2) - \sinh\left(\frac{\Omega\beta}{2}\right) M^{s}_n(z_2) \right) \Biggr] \\
+        + \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \Biggl[ \sum_{z_3} M^{c}_n(z_3) - &\frac{1}{2} \sum_{z_4} \left( \cosh\left(\frac{\Omega\beta}{2}\right) M^{c}_n(z_4) - \sinh\left(\frac{\Omega\beta}{2}\right) M^{s}_n(z_4) \right) \Biggr] \Bigg\}.
+    \end{aligned}
+\end{equation}
+Combining this with the rest of $\textrm{Re}\chi(\Omega)$ gives
+\begin{equation}
+    \begin{aligned}
+        \textrm{Re}\chi(\Omega) = \frac{2\alpha \beta^{3/2} v^3}{3\sqrt{\pi} w^3 \sinh(\beta/2)} \sum_{n=0}^\infty \binom{-\frac{3}{2}}{n} \left(-\frac{b}{2}\right)^n \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad& \\ 
+        \times \Bigg\{ \binom{n}{\frac{n}{2}} (1 - n\textrm{mod}2) \left[ M^{c}_n(1) + \frac{1}{2} \sum_{z_2} \left( \sinh\left(\frac{\Omega\beta}{2}\right) \left[ M^{s}_n(z_2(\Omega)) + J_n(z_2(\Omega)) \right] - \cosh\left(\frac{\Omega\beta}{2}\right) M^{c}_n(z_2(\Omega)) \right) \right]&\\
+        + \sum_{k = 0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \left[ \sum_{z_3} M^{c}_n(z_{k,3}^n) + \frac{1}{2} \sum_{z_4} \left( \sinh\left(\frac{\Omega\beta}{2}\right) \left[ M^{s}_n(z_{k,4}^n(\Omega)) + J_n(z_{k,4}^n(\Omega)) \right] - \cosh\left(\frac{\Omega\beta}{2}\right) M^{s}_n(z^n_{k,4}(\Omega)) \right) \right]&\Bigg\}.
+    \end{aligned}
+\end{equation}
+So, altogether we have the expansion for the memory function
+\begin{equation}
+    \begin{aligned}
+        \chi(\Omega) = \frac{2\alpha \beta^{3/2} v^3}{3\sqrt{\pi} w^3 \sinh(\beta/2)} \sum_{n=0}^\infty \binom{-\frac{3}{2}}{n} \left(-\frac{b}{2}\right)^n \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad& \\ 
+        \times \Bigg\{ \binom{n}{\frac{n}{2}} (1 - n\textrm{mod}2) \left[ M^{c}_n(1) + \frac{1}{2} \sum_{z_2} \left( \sinh\left(\frac{\Omega\beta}{2}\right) \left[ M^{s}_n(z_2) + J_n(z_2) + iB_n(z_2) \right] - \cosh\left(\frac{\Omega\beta}{2}\right) M^{c}_n(z_2(\Omega)) \right) \right]&\\
+        + \sum_{k = 0}^{\floor*{\frac{n-1}{2}}} \binom{n}{k} \left[ \sum_{z_3} M^{c}_n(z_{k,3}^n) + \frac{1}{2} \sum_{z_4} \left( \sinh\left(\frac{\Omega\beta}{2}\right) \left[ M^{s}_n(z_{k,4}^n) + J_n(z_{k,4}^n) + iB_n(z_{k,4}^n)) \right] - \cosh\left(\frac{\Omega\beta}{2}\right) M^{s}_n(z^n_{k,4}) \right) \right]&\Bigg\}.
+    \end{aligned}
+\end{equation}

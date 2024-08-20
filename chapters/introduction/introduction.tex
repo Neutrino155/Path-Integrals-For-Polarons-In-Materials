@@ -3,19 +3,65 @@
 \pagestyle{body}
 
 \chapter{Introduction}
-\label{chap:first}
+\label{chap:1}
 
 \thesisepisrcyear{\justifying{``The underlying physical laws necessary for the mathematical theory of a large part of physics and the whole of chemistry are thus completely known, and the difficulty is only that the exact application of these laws leads to equations much too complicated to be soluble. It, therefore, becomes desirable that approximate practical methods of applying quantum mechanics should be developed, which can lead to an explanation of the main features of complex atomic systems without too much computation.''}}{Paul A. M. Dirac}{Quantum mechanics of many-electron systems}{1929}
 
-\chapterintrobox{This is the introduction paragraph.}
+\chapterintrobox{The central aim of this work is to develop methods that can offer fully predictive temperature- and frequency-dependent mobilities for various systems of technical interest, thereby offering design clues for and methods to screen new materials computationally. Specifically, this thesis aims to predict semiconductor materials `polaronic' properties and how they impact the underlying electron transport. The key methodology used and expanded upon lies in Feynman's path integral approach to quantum physics, which has proven to be a powerful approach to modelling the polaron.}
+
+\section{Semiconductor Materials}
+\label{sec:1-1}
+
+\lettrine{S}emiconductor materials have enormous technical applications ranging from photovoltaic cells and light-emitting diodes to field-effect transistors and solid-state lasers. A key phenomenological quantity that influences the performance of a semiconductor is the charge carrier mobility. The required mobility depends on the application; for example, a solid-state laser requires higher mobility than a photovoltaic cell. As a phenomenological quantity, mobility is not a direct ground-state property. Instead, mobility arises from competitive dynamic processes within a material and can occasionally be strongly temperature-dependent. Most mobility theories use semi-classical approximations to model mobility, using an effective scattering time such as in Drude-like models or neglecting electron-phonon interactions as in the adiabatic Born-Oppenheimer approximation. Otherwise, it is usually assumed that the electron-phonon coupling is either weak or strong, where approximate limits are taken. However, some semiconductors, such as halide perovskites, possess large dielectric electron-phonon interactions, forming large polarons. These materials typically exhibit intermediate electron-phonon coupling strengths. Alternatively, one can use the path integral formulation of quantum mechanics to derive an inherently quantum mobility theory~\cite{feynman_slow_1955, feynman_mobility_1962}. Though based on a linear-response theory, this is non-perturbative and can provide a temperature-dependent mobility model to all orders in the electron-phonon coupling strength.
+
 
 \section{The Polaron}
-\label{sec:chap-first-first}
+\label{sec:1-2}
 
-\section{Polaron Mobility}
-\label{sec:chap-first-second}
+The polaron is a quasiparticle formed from the interaction of charge carriers with the vibrational modes of a material's atomic lattice. This can equivalently be thought of as a quantum field theory of a single charged fermion interacting with a bosonic field; this is the phonon field for the polaron. The formation of a polaron can significantly alter the properties of a material~\cite{franchini_polarons_2021}, and it is essential to understand polarons to predict the mobility of charge carriers accurately. The extent of a polaron can be large (encompassing multiple lattice sites), where the polaron often moves around the material, or small (comparable or smaller than a lattice constant), where the polaron becomes localised to individual lattice sites. The large polaron is commonly modelled by the Fröhlich Hamiltonian~\cite{frohlich_electrons_1954}, and the small polaron by the Holstein Hamiltonian~\cite{holstein_studies_1959-1, holstein_studies_1959}.
 
-\section{Relevance: Semiconductor Materials}
-\label{sec:chap-first-third}
+The key methodology this thesis builds upon is Feynman’s variational path integral approximation (FVA)~\cite{feynman_slow_1955}. This method translates the Fr\"ohlich polaron Hamiltonian into an action, which is used to derive the partition function for the system as a path integral. Since the phonon coordinates enter the action quadratically, the phonon path integral is Gaussian. Its closed-form expression results in an effective temporally non-local potential acting on the electron. This partition function is then approximated by a trial partition function derived from a trial action, requiring that this partition function has a closed-form expression (typically limiting the trial action to be quadratic). Feynman chose this trial action to represent an electron harmonically coupled to a fictitious particle via a spring. Using Jensen’s inequality for convex functions, Feynman derived an inequality for the polaron-free energy. An optimal upper bound is then found by varying the mass and spring constant of the trial model. 
 
-\lettrine{S}emiconductor materials have enormous technical applications ranging from photovoltaic cells and light-emitting diodes to field-effect transistors and solid-state lasers. A key phenomenological quantity that influences the performance of a semiconductor is the charge carrier mobility. The required mobility depends on the application; for example, a solid-state laser requires higher mobility than a photovoltaic cell. As a phenomenological quantity, mobility is not a direct ground-state property. Instead, mobility arises from competitive dynamic processes within a material and can occasionally be strongly temperature-dependent. Most mobility theories use semi-classical approximations to model mobility, using an effective scattering time such as in Drude-like models or neglecting electron-phonon interactions as in the adiabatic Born-Oppenheimer approximation. Otherwise, it is usually assumed that the electron-phonon coupling is either weak or strong, where approximate limits are taken. However, some semiconductors, such as halide perovskites, possess large dielectric electron-phonon interactions, forming large polarons. These materials typically exhibit intermediate electron-phonon coupling strengths. Alternatively, one can use the path integral formulation of quantum mechanics to derive an inherently quantum mobility theory (\cite{feynman_slow_1955, feynman_mobility_1962}). Though based on a linear-response theory, this is non-perturbative and can provide a temperature-dependent mobility model to all orders in the electron-phonon coupling strength.
+\section{Polaron Response Functions}
+\label{sec:1-3}
+
+Further developments were also made using the method of ‘influence functionals’ to derive response functions, such as the mobility, from a functional Taylor expansion of the polaron action about the optimal trial action~\cite{feynman_mobility_1962} - this method was then further used to obtain the optical conductivity~\cite{devreese_optical_1972}.
+
+\section{Existing Developments}
+\label{sec:1-4}
+
+So far in the literature, the variational method has been generalised to include: finite temperatures~\cite{osaka_polaron_1959}, effective phonon frequencies~\cite{hellwarth_mobility_1999}, Bose-polarons~\cite{ichmoukhamedov_general_2022}, bipolarons~\cite{verbist_extended_1992}, many-polarons~\cite{devreese_many-body_2010}, magnetic fields~\cite{peeters_theory_1984}, anharmonic phonons~\cite{houtput_beyond_2021}, external linear-response electric fields~\cite{feynman_mobility_1962}, non-linear response electric fields~\cite{thornber_velocity_1970}, the optimal self-consistent quadratic trial model~\cite{adamowski_feynmans_1980, adamowski_general_1984}, optimal self-consistent response functions~\cite{thornber_linear_1971}. This list is not exhaustive. My work includes the extension to multiple phonon modes~\cite{martin_multiple_2023}, multiple fictitious particle trial models, and anisotropic band masses. I recently extended the variational method to the Holstein model~\cite{martin_predicting_2024}. Many of the extensions above to the method need more available code. Therefore, part of my PhD project has also involved developing an open-source package written in Julia~\cite{bezanson_julia_2017} that implements some theoretical developments~\cite{frost_jarvistpolaronmobilityjl_2023}.
+
+\section{This Thesis}
+\label{sec:1-5}
+
+% So far, I have accomplished the following during my PhD: \\
+
+% \begin{itemize}
+%     \item I co-developed a Julia code package \texttt{PolaronMobility.jl} \cite{code} that allows for efficient evaluation of the original variational principles, developed in \cite{Feynman1955, Feynman1962, Devreese1972, Hellwarth1999}, using numerical optimisation and Gauss-Kronrod integration.
+%     \item I wrote highly efficient Julia code \cite{code} that allows for evaluation of the complex mobility at all temperatures and applied frequencies, pushing the limits of the calculation further compared those given in the literature. The numerical results agree very well with numerically exact Diagrammatic Monte Carlo results \cite{Mishchenko2019, Martin2022}.
+%     \item I derived asymptotic power series expansions of the complex mobility in terms of hypergeometric functions \cite{Martin2022}.
+%     \item I extended the Feynman Variational Method to a Fr\"ohlich polaron model with \emph{multiple} phonon modes. I implemented this in Julia code \cite{code}.
+%     \item I applied the multiple phonon mode extended variational method to Methylammonium Lead Iodide perovskite material and predicted its polaronic properties and complex conductivity \cite{Martin2022}. The results agree well with experimental Terahertz Spectroscopy measurements \cite{Shawn2021}.
+%     \item I extended the Feynman Variational Method to a Fr\"ohlich polaron model with anisotropic band-masses \cite{Bogdan2021}.
+%     \item I extended the trial model to include multiple fictitious particles; improving the variational solution and wrote corresponding code in \cite{code}.
+%     \item I co-developed a Path Integral Monte Carlo (PIMC) Julia code package \texttt{PolaronQMC.jl} \cite{qmccode} that calculate the temperature-dependent polaron energy for the Fr\"ohlich model. I then co-supervised four MSci and 2 UROP students who have since developed this code further to include multiple phonon modes and the Holstein model. They also wrote a complementary Diagrammatic Monte Carlo (DiagMC) code package \texttt{Tethys.jl} \cite{dmccode} for the ground-state energy.
+%     \item I extended the Feynman Variational Method to general phonon-momentum dependence and electron-phonon coupling matrices and wrote corresponding code in \cite{code}.
+%     \item I developed the theory for a coherent-state path integral \cite{Altland_Simons_2010} version of the Feynman Variational Method and hypothesised an analogy to the Luttinger-Ward functional and cumulant Green functions. This is an initial step towards generalising to many-polaron systems within grand canonical ensembles.
+%     \item I extended the Feynman Variational Method to the Holstein lattice-polaron model and applied it to the organic semiconductor Rubrene \cite{MartinArxiv2022}. 
+%     \item Performed high-throughput application of the variational method to predict polaronic properties and mobilities of 1260 materials with PhD student Yande Fu.
+%     \\
+% \end{itemize}
+
+Overall, this thesis may be split into four main milestones (not necessarily presented in chronological order):
+
+\begin{description}
+
+\item[Generalise the material action:] I will extend the effective model Lagrangian to provide greater material-specific detail. Diagrammatic Quantum Monte Carlo (DQMC) or Path Integral Monte Carlo (PIMC) algorithms, which directly evaluate the effective Lagrangian, are used to guide the development of these more sophisticated model actions.
+
+\item[Improve the trial action:] I will extend the trial polaron Lagrangian beyond Feynman's original spring-mass harmonic model (while retaining the analytic solution) to increase the accuracy of the variational approximation and the predicted response functions.
+
+\item[Compute the response functions:] I will compute response functions of the polaron variation state, which enable comparison to experimental observables. For instance, the optical absorption of the polaron state is compared to transient absorption measurements on these materials; the frequency-dependent mobility could be calculated and compared to Terahertz and microwave conductivity measurements.
+
+\item[High-Throughput material classification:] I will use my codes to predict the polaronic properties of material groups and classes. This requires characterising materials by recourse to the material databases of synthetic data derived from electronic structure calculations, such as the Materials Project, or by using standard electronic structure packages, such as VASP and Gauss.
+\end{description}

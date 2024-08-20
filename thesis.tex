@@ -15,14 +15,21 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
+\usepackage{newtxtext,newtxmath}
+\usepackage{siunitx}
 \usepackage{mathtools}
-\usepackage{mathpazo}
+\usepackage{booktabs}
 \usepackage{ragged2e}
 \usepackage{physics}
+\usepackage[verbose]{placeins}
+\usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+\usepackage{dcolumn}% Align table columns on decimal point
+\usetikzlibrary{decorations.markings}
 
 \import{utils/}{preamble_contents.tex}
 
 \begin{document}
+
 
 \import{title/}{title.tex}
 
@@ -52,17 +59,17 @@
 
 \import{chapters/introduction/}{introduction.tex}
 
-\import{chapters/literature/}{literature.tex}
+\import{chapters/background/}{background.tex}
 
 \import{chapters/materialmodel/}{materialmodel.tex}
 
-\import{chapters/trialmodel/}{trialmodel.tex}
+ \import{chapters/trialmodel/}{trialmodel.tex}
 
-\import{chapters/responsefunctions/}{responsefunctions.tex}
+ \import{chapters/responsefunctions/}{responsefunctions.tex}
 
-\import{chapters/materials/}{materials.tex}
+ \import{chapters/materials/}{materials.tex}
 
-\import{chapters/conclusion/}{conclusion.tex}
+ \import{chapters/conclusion/}{conclusion.tex}
 
 \import{utils/}{bibliography.tex}
 

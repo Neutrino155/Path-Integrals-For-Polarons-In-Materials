@@ -1,9 +1,296 @@
-\chapter{Improving the Trial Path Integral Model \& Variational Solution}
+\chapter{Improving the Trial Path Integral Model and Variational Approximation}
 \label{chap:fourth}
 
-\thesisepisrcyear{What is the meaning of life?}{John Doe}{Thoughts}{1971}
+\thesisepisrcyear{[The] [m]ost important part of doing physics is the knowledge of approximation.}{Lev Landau}{Unknown}{Unknown}
 
 \chapterintrobox{This is the introduction paragraph.}
+
+\section{Multiple Phonon Mode Variational Solution}
+
+\subsection{Multiple Phonon Mode Free Energy}
+\label{subsec:3-1-2}
+
+The energy of the trial system $S_0$ and the internal energy $\langle S_0 \rangle_0$ remains unchanged and is as presented by Osaka~\cite{osaka_polaron_1959},
+\begin{equation}
+    F_0 = \frac{3}{\beta} \left[\log\left(\frac{v \sinh (w \hbar \beta / 2)}{w \sinh (v \hbar \beta / 2)}\right) - \frac{1}{2} \log \left(2\pi\hbar^2 \beta / m_b \right) \right]
+\end{equation}
+\begin{equation}
+    \langle S_0 \rangle_0 = \frac{3\hbar}{4}\frac{v^2-w^2}{v} \left( \coth \left( \frac{v \hbar \beta}{2} \right) - \frac{2}{v \hbar \beta} \right)
+\end{equation}
+However, as the model action $S$ has been generalised to include multiple phonon modes, I derive a multiple phonon mode extension to the internal energy of the model action, 
+\begin{equation}
+\begin{gathered}
+    \langle S \rangle_0 = \sum _{j=1}^m \frac{\hbar \alpha_j \omega_j^2}{\sqrt{\pi}} \int_0^{\frac{\hbar\beta}{2}} d\tau D_{\omega_j}(\tau) \left[ G(\tau) \right]^{-\frac{1}{2}} ,
+\label{eqn:B}
+\end{gathered}
+\end{equation}
+These are similar to Hellwarth and Biaggio's single mode versions, but with the single effective phonon frequency $\omega_0$ substituted with the branch dependent phonon frequencies $\omega_j$. There are $m$ with index $j$ phonon branches.
+
+Summing $F_0$ in Eq.~(\ref{eqn:A}), $\langle S_0 \rangle_0$ in Eq.~(\ref{eqn:B}), and $\langle S \rangle_0$ in Eq.~(\ref{eqn:C}), I obtain a generalised variational inequality for the contribution to the free energy of the polaron from the $j$th phonon branch with phonon frequency $\omega_j$ and coupling constant $\alpha_j$, and $2$ variational parameters $v$ and $w$, 
+\begin{equation}\label{eqn:multi_feynman_jensen}
+        F(\beta) \leq F_0 - \langle S_0 \rangle_0 - \sum_{j=1}^m \langle S_j \rangle_0 .
+\end{equation}
+I obtain variational parameters $v$ and $w$ that minimise the free energy expression and will be used in evaluating the polaron mobility. Considering only one phonon branch ($m = 1$) simplifies to \=Osaka's free energy. Feynman's original athermal version can be obtained by taking the zero-temperature limit ($\beta \rightarrow \infty$).
+
+\section{Lattice Polaron Variational Solution}
+
+There are two main difficulties for the small lattice polaron. First, the electronic dispersion is that of a tight-binding model and is not quadratic. Second, the momentum and position paths are discrete, and the `path-integral' is an infinite summation rather than a functional integral. Therefore, the corresponding `path-integral' is a non-Gaussian summation rather than a typical Gaussian functional integral. To apply the Feynman variational approximation, the trial path integral must have the same measure as the original system, but since the paths are discrete, even if the trial path integral were Gaussian, a Gaussian sum does not have a closed-form expression, unlike a Gaussian integral. Even if we approximate the paths to be continuous to bypass this issue, unlike for the Fr\"ohlich model, we cannot choose the kinetic action of the trial path-integral to be identical to the Holstein kinetic action as it is non-Gaussian. We would then have an additional term, the difference between the trial and actual kinetic actions. To apply the Feynman-Jensen inequality, we need this term to be convex; this is no longer guaranteed.
+
+To circumnavigate these issues in pursuit of tangible results, I instead chose to approximate the Holstein kinetic action with an approximate parabolic form with an effective band mass, much like the Fr\"ohlich model. I then allow the electron paths to be unconstrained such that the momentum integrals for the electron are unbounded and can be evaluated to give the standard Gaussian kinetic action. I could keep the momentum integrals bounded to the first Brillouin zone and still have a closed-form expression for the kinetic action; however, in addition to the standard Gaussian form, there are error functions that make it unclear how the resulting path integral could be evaluated - if it is even possible. By making these approximations, it is possible to follow the usual variational procedure with the same trial action as the Fr\"ohlich model. I should note that the Holstein electron-phonon interaction is still treated correctly, and the phonon quasi-momenta is still confined to the first Brillouin zone. 
+
+By following the standard procedure for the Fr\"ohlich model, I derive an approximate variational inequality for the lattice polaron free energy that fully accounts for the lattice electron-phonon integral despite allowing the electron not to be confined to individual lattice sites. Despite the latter approximation, this model still captures many typical features of small lattice polaron.
+
+A critical difference between the Holstein and Fr\"ohlich models is the domain of the reciprocal-space integral.  For the Fr\"ohlich model, this is over all of reciprocal space and has spherical symmetry, whereas the Holstein model integral is bounded (by the error function) to the first Brillouin Zone (and formally reflects the crystal symmetry). Physically, this is an ultraviolet momentum cutoff due to the discrete lattice in the Holstein model, without which the integrals (in all spatial dimensions) catastrophically diverge. 
+
+The Fr\"ohlich model also diverges in 1D, whereas the Holstein converges for all dimensionalities.
+
+% \subsection{Variational Solution}
+
+% The variational inequality for the Holstein model is:
+% \begin{equation}
+%     \begin{aligned}
+%         F^{(H)} &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_0 - \frac{g_H^2(n)}{2M\omega_0} \frac{V}{N} \int_0^{\hbar\beta} d\tau \frac{D_{\omega_0}(\tau)}{G(\tau)^{n/2}} \left[1 - \frac{\Gamma(n/2, \Lambda^2 r_p^2 G(\tau))}{\Gamma(n/2)}\right].
+%     \end{aligned}
+% \end{equation}
+% The expectation value of the trail action $\langle S_0 \rangle_0$ and the free energy of the trial system $F_0(\beta) $ are the same for both models and are as given by \=Osaka \cite{osaka_polaron_1959},
+% \begin{equation}
+%     \langle S_0 \rangle_0 = \frac{n\hbar\beta}{4} \frac{v^2-w^2}{v} \left(\frac{2}{v\hbar\beta} - \coth\left(\frac{v\hbar\beta}{2}\right)\right),
+% \end{equation}
+% and the trial free energy is,
+% \begin{equation}
+%     F_0(\beta) = \frac{n}{2\beta} \log\left(2\pi\hbar\beta\right) + \frac{n}{\beta} \log\left(\frac{w \sinh(\hbar\beta v / 2)}{v \sinh(\hbar\beta w / 2)}\right).
+% \end{equation}
+
+I provide results for the abstract Holstein model and compare these results to Ragni's Diagrammatic Monte Carlo results and the Fr\"ohlich Hamiltonian. I look at one- to three-dimensional models. 
+
+The Fr\"ohlich model is of academic interest as most continuum materials are relatively isotropic. For the Holstein model, organic semiconductors are often highly anisotropic, and the varying behaviour is of direct technical interest. 
+
+To characterise the models, I consider:
+\begin{enumerate}
+    \item The energy and character of the athermal quasi-particle (polaron) state versus coupling.
+    \item The temperature dependence of the polaron mobility and polaron energy.
+    \item The frequency dependence of the polaron mobility and optical conductivity. 
+\end{enumerate}
+I note that the literature on the Holstein model is inconsistent in the conventions of defining the parameters of the Holstein model, mainly how these parameters depend on the number of spatial dimensions (or not). In that sense, referring to the models \emph{unitless} parameters is probably more universal and transparent. For the Fr\"ohlich model, this is the electron-phonon coupling strength $\alpha$. 
+
+For the Holstein model and the equivalent $\alpha_H$, the second energy scale (of hopping integral versus phonon energy) requires an additional adiabaticity parameter $\gamma$. We follow the convention used by Ragni~\cite{ragni_diagrammatic_2020} in their Diagrammatic Monte Carlo (DiagMC) study, in which we plot our results. 
+
+%Aside from the new variational approximation to the Holstein model, in this paper, we will also present (alongside the Holstein data) three-dimensional Fr\"ohlich polaron data so that the two models' differences are apparent.
+
+Lastly, I state what is absent: I do not have any numeric results for the general k-space integration form of the theory. This involves more computation and ingesting a suitably validated set of electronic structure electron-phonon calculations. Work in this direction is ongoing.
+
+\subsection{Athermal Holstein Polaron}
+
+I start with the zero temperature polaron in one-, two- and three dimensions for the parabolic Holstein model and the three-dimensional Fr\"ohlich model. We present the models in a unitless presentation where the adiabaticity $\gamma = 1$ ($\omega_0 = J = 1$). We also assume that two dimensionless coupling alpha parameters, $\alpha_H$ and $\alpha_F$, used in the parabolic Holstein and Fr\"ohlich models produce similar physical regimes within either model for a point of comparison. Therefore, I will compare these two models to a single alpha parameter $\alpha \equiv \alpha_H = \alpha_F$.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-alpha-energy-COLOUR.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-alpha-vw-COLOUR.pdf}
+  \end{subfigure}
+  \caption{Optimal values of the polaron variational parameters $v$ and $w$ for the Fr\"ohlich and Holstein models with respect to the electron-phonon dimensionless coupling parameter $\alpha$. \textbf{Left:} Fr\"ohlich model in 2D ($v$ solid blue and $w$ dot-dash green) and 3D ($v$ dashed orange and $w$ dot-dot-dash pink). \textbf{Right:} Holstein model in 1D ($v$ solid blue and $w$ dot-dot-dash pink), 2D ($v$ dashed orange and $w$ solid yellow) and 3D ($v$ dot-dashed green and $w$ dashed turquoise).}
+  \label{fig:vw_alpha}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-1dto3d-alpha-energy-omega-diagmc-COLOUR.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-1d-alpha-energy-adiabaticity-diagmc-COLOUR.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-2d-alpha-energy-adiabaticity-diagmc-COLOUR.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/holstein-3d-alpha-energy-adiabaticity-diagmc-COLOUR.pdf}
+  \end{subfigure}
+  \caption{Polaron binding energy for the Fr\"ohlich and Holstein models with respect to the electron-phonon dimensionless coupling parameter $\alpha$. \textbf{Left:} Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange). \textbf{Right:} Holstein model in 1D (dashed orange), 2D (dot-dashed green) and 3D (dot-dot-dashed pink), and the 3D Fr\"ohlich result scaled by $1/6$ in energy and $1/3$ in $\alpha$ to align with the Holstein weak-coupling ($\alpha < 1$). Co-plotted are DiagMC results for the Holstein model in 1D (blue diamonds), 2D (orange squares) and 3D (green circles).}
+  \label{fig:energy_alpha}
+\end{figure}
+
+\subsubsection{Polaron Variational Parameters}
+
+In Fig.~(\ref{fig:vw_alpha}) are the polaron variational parameters $v$ and $w$ of the Holstein and Fr\"ohlich polarons as a function of the electron-phonon dimensionless coupling parameter $\alpha$. The Holstein model has a noticeably different variational solution than the Fr\"ohlich model, with a distinct discontinuity in three dimensions. This transition is smoother for one- and two-dimensions and occurs at $\alpha \approx 2n$, where $n$ is the dimensionality of the model. We interpret this transition as physically corresponding to forming a small-polaron state.
+ 
+In both models, $w$ asymptotes to  $\omega_0 = 1$ at large electron-phonon coupling $\alpha$, with a more abrupt transition in the Holstein model. The $v$ parameters have a different strong coupling dependency on $\alpha$. In the Fr\"ohlich model at large $\alpha$, $v_F \sim \alpha^2$ whereas in the Holstein model $v_H \sim \sqrt{\alpha}$. Another noticeable difference is the weak coupling limit ($\alpha \to 0$) where the Fr\"ohlich model parameters asymptotes are $v_F = w_F = 3$, whereas Holstein are $v_H = w_H \approx 2n$.
+
+\subsubsection{Polaron Ground-state Energy}
+
+Fig.~(\ref{fig:vw_alpha}) is the variational solution for the free energy of the one-, two- and three-dimensional parabolic Holstein model (with $J = \omega_0 = 1$ in this unitless presentation) with respect to the electron-phonon coupling parameter $\alpha$. I also compare the variational solution to the three-dimensional Fr\"ohlich model ($\omega_0 = 1$).
+
+The athermal polaron energy at $\alpha = 0$ corresponds to the band extrema for either model. In the Fr\"ohlich model, this is zero $E_F(\alpha=0) = 0$, and for the Holstein model, this is $E_H(\alpha=0) = 2nJ$ with $n$ the dimensionality. The athermal energy in the Fr\"ohlich model is approximately linear for small alpha $E_F \sim -\hbar\omega_0\alpha$ and quadratic for large alpha $E_F \sim -\hbar\omega_0 \alpha^2$. The athermal energy in the parabolic Holstein model is also linear for small alpha $E_H + 2nJ \sim  -J\alpha/2$ (which is the same for all dimensions), but the large alpha behaviour is not quadratic and is instead linear and dependent on the number of dimensions $E_H +2nJ \sim -J n \alpha$.
+
+In Fig.~(\ref{fig:energy_alpha}) we now vary the adiabaticity $\gamma = \hbar\omega_0/J = 0.1, 0.3$ and $0.5$ in the parabolic Holstein model for dimensions $n = 1, 2$ and $3$ and compare our variational results with diagrammatic Monte-Carlo (diagMC) results provided by Ragni (for values of $\alpha = 0$ to $5$ which are shown more closely in the inset figures). Our variational solutions agree with Ragni's diagMC results for all dimensions and adiabaticities. The adiabaticity affects the lower alpha energy of the polaron below the small polaron transition around $\alpha = 2n$ and increases the sharpness of this transition for smaller adiabaticity. We note that in three dimensions with $\gamma < 1$, this transition momentarily \emph{reduces} the polaron binding energy in the variational solution, which is not replicated in the diagMC results --  more diagMC data for $\alpha > 5$ may be required to determine if this is an artefact of the parabolic Holstein model or just the variational solution. In Fig.~(\ref{fig:energy_alpha}) we also show (bottom-right sub-figure) a comparison of the diagMC results for the \emph{parabolic-band} Holstein model with the original \emph{tight-binding-band} Holstein model where we see that the two models predict similar energies below the small-polaron transition, but the tight-binding model shows a sharper, dimension-independent transition at $\alpha = 2$ and larger polaron-binding energy above this transition.
+
+\subsection{Thermal polarons}
+
+I now look at the finite temperature dependence of the polaron in two- and three-dimensions for the parabolic Holstein model (top sub-figures) and the three-dimensional Fr\"ohlich model (bottom sub-figure), for values of the electron-phonon coupling $\alpha = 0.1, 2, 4, 6, 8, 10, 12$. Here we also take a unitless presentation with $\omega_0 = J = 1$. 
+
+\subsubsection{Polaron Free Energy}
+
+\begin{figure}[!tbp]
+    \includegraphics[width=.49\textwidth]{figures/holstein-2d-energy-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-energy-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/holstein-3d-energy-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-energy-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{figures/holstein-1d-energy-temp-00625to32-COLOUR.pdf}
+    \caption{Polaron binding energy for the Fr\"ohlich model in 2D (dot-dash pink) and 3D (solid gold), and Holstein model in 1D (solid blue), 2D (dashed orange) and 3D (dotted green) with respect to temperature (in units of the phonon frequency $\omega_0$), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling. The Fr\"ohlich free energy has been scaled down by $1/6$ to better compare with the Holstein free energy.}
+    \label{fig:energy_temp}
+\end{figure}
+
+In Fig.~(\ref{fig:energy_temp}) is the temperature dependence of the polaron free energy. In the parabolic Holstein model, the polaron-free energy transitions from the ground-state energy at very low temperatures to  $E_H = -2nJ - \alpha n J$ at large temperatures with the transition point occurring around the Debye temperature $T_D = \hbar\omega_0/k_B$. Comparatively, whilst the Fr\"ohlich model also shows a transition around the Debye temperature, above this temperature, the polaron free energy increases as $E_F \sim -T^{1/2}$ without bound.
+
+
+% \subsubsection{Polaron Mass and Spring Constant}
+
+% \begin{figure}[!tbp]
+%     \includegraphics[width=.49\textwidth]{figures/mass_temp_25_083.png}
+%     \includegraphics[width=.49\textwidth]{figures/mass_temp_4_133.png}
+%     \includegraphics[width=.49\textwidth]{figures/mass_temp_6_2.png}
+%     \includegraphics[width=.49\textwidth]{figures/mass_temp_8_267.png}
+%     \includegraphics[width=.49\textwidth]{figures/mass_temp_10_333.png}
+%     \includegraphics[width=.49\textwidth]{figures/mass_temp_12_4.png}
+%     \caption{Temperature dependence ($T$, in units of phonon frequency $\omega_0$) of the fictitious particle mass $M$ from the trial system for the Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange), and for the Holstein model in 1D (dot-dashed green), 2D (dot-dot-dashed pink) and 3D (solid gold), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling. This mass can be expressed in terms of the traditional $v$ and $w$ using $M = (v^2 - w^2) / w^2$. The Fr\"ohlich results are un-scaled here.}
+%     \label{fig:mass_temp}
+% \end{figure}
+
+% \begin{figure}[!tbp]
+%     \includegraphics[width=.49\textwidth]{figures/spring_temp_25_083.png}
+%     \includegraphics[width=.49\textwidth]{figures/spring_temp_4_133.png}
+%     \includegraphics[width=.49\textwidth]{figures/spring_temp_6_2.png}
+%     \includegraphics[width=.49\textwidth]{figures/spring_temp_8_267.png}
+%     \includegraphics[width=.49\textwidth]{figures/spring_temp_10_333.png}
+%     \includegraphics[width=.49\textwidth]{figures/spring_temp_12_4.png}
+%     \caption{Temperature dependence ($T$, in units of phonon frequency $\omega_0$) of the fictitious particle spring-constant $\kappa$ from the trial system for the Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange), and for the Holstein model in 1D (dot-dashed green), 2D (dot-dot-dashed pink) and 3D (solid gold), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling. This mass can be expressed in terms of the traditional $v$ and $w$ using $\kappa = (v^2 - w^2)$. The Fr\"ohlich results are un-scaled here.}
+%     \label{fig:spring_temp}
+% \end{figure}
+
+% In Figs. (\ref{fig:mass_temp}) we have the temperature dependence of the fictitious particle mass for the Holstein polaron with varying electron-phonon coupling. At smaller coupling, both the Holstein and Fr\"ohlich models show a maximum at intermediate temperatures and show similar dependence on temperature up until some critical transition temperature where the Holstein polaron mass abruptly stops decreasing with temperature and starts to become heavier, unlike the Fr\"ohlich polaron mass which continues to get lighter with increasing temperatures until reducing tot he electron band-mass at infinite temperature. At stronger coupling, the maximum mass at intermediate temperatures is replaced with a plateaued maximum that exists for all temperatures $T < \omega_0$. The critical transition temperature at higher temperatures still exists for the Holstein polaron mass.
+
+% The plateau less than the phonon energy $T < \omega_0$ arises due to the lack of excited phonons whose random motion decreases the effective electron-phonon interaction, resulting in a decreasing phonon contribution to the effective electron mass. For the Holstein model, the polaron mass increases at a critical temperature equal to the natural frequency of the electron-phonon interaction $v$. Phonons then begin to transfer energy back into the effective electron-phonon interaction and increase the phonon contribution to the effective electron mass.
+
+% In Figs. (\ref{fig:spring_temp}) we have the temperature dependence of the fictitious particle spring constant for the Holstein polaron with varying electron-phonon coupling. An interesting difference here is that the spring constant for the Fr\"ohlich polaron keeps increasing linearly with temperature, whereas the spring constant for the Holstein polaron seems to plateau to some value at higher temperatures. This is most noticeable in weaker couplings. Similar to the polaron mass, as we go to stronger coupling, both kinds of polarons reach a constant spring constant for temperatures lower than the phonon energy.
+
+% One final overall observation is that the 2D Holstein polaron and the 3D Fr\"ohlich polaron seem to be most similar. This isn't all that surprising since it only for two dimensions that the self-interaction functional (Eq.~\ref{eqn:general_self_interaction})) in the Holstein model has the same phonon-momentum dependence as in the Fr\"ohlich model - which does not change with dimensionality unlike for the Holstein polaron.
+
+\section{The General Parabolic Polaron Variational Solution}
+
+Following the procedure for the Fr\"ohlich model~\cite{feynman_slow_1955,martin_multiple_2023}, we derive a variational inequality for a general \emph{parabolic-band} polaron, moving the model-specific evaluation into the self-interaction function. 
+
+The variational method for the polaron developed by Feynman gives a lower upper-bound to the polaron free energy, 
+\begin{equation}\label{eqn:general-feynman-jensen}
+    \begin{aligned}
+         F &\leq F_0(\beta) - \frac{1}{\hbar\beta} \langle S_{\text{pol}} - S_{0} \rangle_0 , \\
+         &\leq F_0(\beta) -\frac{1}{\hbar^2\beta} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ D_{\omega_0}(\tau - \tau') \langle \Phi_{\text{pol}} - \Phi_0 \rangle_0 ,
+    \end{aligned}
+\end{equation}
+where the expectation $\langle \mathcal{O} \rangle_0$ is defined as 
+\begin{equation}
+    \langle \mathcal{O} \rangle_0 \equiv \frac{\int \mathcal{D}^3 r(\tau)
+    \mathcal{O} e^{-S_0[\vb{r}(\tau)]}}{\int \mathcal{D}^3 r(\tau)
+    e^{-S_0[\vb{r}(\tau)]}}. 
+\end{equation}
+Here $S_0[\vb{r}(\tau)]$ is a trial action that is chosen to best approximate
+the polaron model-action $S_{\text{pol}}[\vb{r}(\tau)]$, with the requirement
+that the path integral for $S_0$ can be analytically evaluated.  
+The trial-action is typically chosen to be at most quadratic in the electron
+coordinate $\vb{r}(\tau)$ for this reason. 
+We use the original 1955 quasi-particle trial action of Feynman, 
+\begin{equation}
+    S_{0}[\vb{r}(\tau)] = \frac{m_b}{2} \int_0^{\hbar\beta} d\tau\ \Dot{\vb{r}}^2(\tau) + \frac{1}{\hbar} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ D_{w}(\tau - \tau') \Phi_0\left[\vb{r}(\tau), \vb{r}(\tau')\right] ,
+\end{equation}
+where the trial self-interaction functional is a simple quadratic,
+\begin{equation}
+    \Phi_0[\vb{r}(\tau), \vb{r}(\tau')] = \hbar w \kappa \left[\vb{r}(\tau) - \vb{r}(\tau')\right]^2 .
+\end{equation}
+The $\kappa$ and $w$ variational parameters have a direct interpretation as the
+spring-constant and oscillation frequency of a quasi-particle. 
+We have integrated the interaction with the phonon-field and replaced it
+with a fictitious mass coupled to our electron by a spring, representing the
+phonon drag. 
+This trial model (the quasi-particle) is often reparameterised in terms of $v$
+and $w$ variational parameters where $\kappa = m_b (v^2 - w^2)$. 
+
+The expectation value of the trail action $\langle S_0 \rangle_0$ and the free energy of the trial system $F_0(\beta) $ are as given by \=Osaka~\cite{osaka_polaron_1959},
+\begin{equation}
+    \langle S_0 \rangle_0 = \frac{n\hbar\beta}{4} \frac{v^2-w^2}{v} \left(\frac{2}{v\hbar\beta} - \coth\left(\frac{v\hbar\beta}{2}\right)\right) ,
+\end{equation}
+\begin{equation}
+    F_0(\beta) = \frac{n}{\beta} \log\left(\frac{w \sinh(\hbar\beta v / 2)}{v \sinh(\hbar\beta w / 2)}\right).
+\end{equation}
+All the expectation values in the variational expression can be evaluated from
+$\langle e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau')} \rangle_0$, which for the trial model has a closed-form expression 
+\begin{equation}
+    \langle e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau'))} \rangle_0 = \exp\left[-\hbar q^2 G(\tau - \tau') / 2 m_b \right] ,
+\end{equation}
+where the imaginary-time thermal polaron Green's function $G(\tau)$ is given by
+\begin{equation} \label{eqn:polarongreensfunc}
+    G(\tau) = \tau \left(1 - \frac{\tau}{\hbar\beta}\right) + \frac{v^2 - w^2}{v^3} \left[ D_v(0) - D_v(\tau) - v \tau \left(1 - \frac{\tau}{\hbar\beta} \right) \right],
+\end{equation}
+where $D$ is the phonon propagator from Eq.~(\ref{eqn:phonongf}).
+
+In $n$-dimensions, from Eq.~(\ref{eqn:general-feynman-jensen}) we have 
+\begin{equation}\label{eqn:generalfreeenergy}
+        F \leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_{0} - \frac{2}{\hbar} \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 \int_0^{\hbar\beta} d\tau\ D_{\omega_0}(\tau)\ e^{-\hbar q^2 G(\tau) / 2 m_b}
+\end{equation}
+where we have used,
+\begin{equation}
+    \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ f(\abs{\tau - \tau'}) \sim 2\hbar\beta \int_0^{\hbar\beta}d\tau\ f(\tau),
+\end{equation}
+which is valid when the Hamiltonian for the system is time-translation invariant and $\beta$ is large.
+
+To evaluate the remaining phonon-momentum integral, we can either evaluate it using Cartesian coordinates or we can transform the $q$-space summation into a spherical integral
+over the $n$-dimensional ball 
+\begin{equation} \label{eqn:general_self_interaction}
+    \begin{aligned}
+        \langle \Phi_{\text{pol}}\rangle_0 &= \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 e^{-\hbar q^2 G(\tau) / 2 m_b} , \\
+        &= \frac{V \abs{S^{n-1}}}{(2\pi)^n} \int_0^R dq \abs{V_q}^2 q^{n-1} e^{-\hbar q^2 G(\tau) / 2 m_b} ,
+    \end{aligned}
+\end{equation}
+with $\abs{S^{n-1}} = 2\pi^{n/2}/\Gamma(n/2)$ the hypervolume of the unit $(n-1)$-sphere and $R$ the radius of the ball. 
+
+% Specialising in the Holstein model for the self-interaction functional we have,
+% \begin{equation}
+%     \begin{aligned}
+%         \langle \Phi^{(H)} \rangle_0 &= \frac{g^2_H(n) \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\Lambda} dq\ q^{n-1} e^{-q^2 r_p^2 G(\tau)} , \\
+%         &= \frac{g^2_H(n) \abs{S^{n-1}}}{(2\pi)^n} \frac{\Lambda^n}{2} \left(\Lambda^2 r_p^2 G(\tau) \right)^{-\frac{n}{2}} \left[ \Gamma\left(\frac{n}{2}\right) - \Gamma\left(\frac{n}{2}, \frac{\Lambda^2 r_p^2}{2} G(\tau) \right) \right], \\
+%         &= \frac{g_H^2(n)}{(4\pi r_p^2 G(\tau))^{n/2}} \left[1 - \frac{\Gamma\left(\frac{n}{2}, \Lambda^2 r_p^2 G(\tau) \right)}{\Gamma(\frac{n}{2})} \right], 
+%     \end{aligned}
+% \end{equation}
+% where $\Gamma(s, x)$ is the upper incomplete Gamma function. Since $\lim_{x\to\infty} \Gamma(s, x) \to 0$ the continuum approximation where $\Lambda \to \infty$ gives:
+% \begin{equation}
+%     \langle \Phi^{(H)} \rangle_0^C = \frac{2 n J \hbar \omega_0 \alpha_H}{(4\pi r^2_p G(\tau))^{n/2}}.
+% \end{equation}
+% However, the addition integral over the imaginary time variable diverges with this expression.
+
+For the Fr\"ohlich self-interaction functional, we have
+\begin{equation}
+    \begin{aligned}
+        \langle\Phi_F\rangle_0 &= \frac{g^2_F \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\infty} dq\ e^{-\hbar q^2 G(\tau) / 2 m_b} , \\
+        &= \alpha_F \hbar^2 \omega_0^{3/2} \frac{\Gamma(\frac{n-1}{2})}{2 \Gamma(\frac{n}{2})} \frac{1}{\sqrt{G(\tau)}}.
+    \end{aligned}
+\end{equation}
+The variational inequality for the Fr\"ohlich model is 
+\begin{equation}
+        F_F \leq F_0(\beta) -\frac{1}{\beta} \langle S_0 \rangle_0 - \alpha_F \hbar \omega_0^{3/2} \frac{\Gamma\left(\frac{n-1}{2}\right)}{\Gamma(\frac{n}{2})} \int_0^{\hbar\beta} d\tau\ \frac{D_{\omega_0}(\tau)}{\sqrt{G(\tau)}} .
+\end{equation}
+For the parabolic Holstein model with a hypercubic lattice (i.e. cubic in 3D),
+the self-interaction functional is  
+\begin{equation}
+    \begin{aligned}
+        \langle \Phi_H \rangle_0 &= g^2_H \left[\frac{a}{2\pi} \int_{-\frac{\pi}{a}}^{\frac{\pi}{a}} dq\ e^{-\hbar q^2 G(\tau) / 2 m_b}\right]^n , \\
+        &= 2 n \alpha_H J \hbar \omega_0 \left[\frac{\text{erf}\left(\pi \sqrt{G(\tau) J/\hbar} \right)}{\sqrt{4\pi G(\tau)J/\hbar}}\right]^n
+    \end{aligned}
+\end{equation}
+where $\gamma = \hbar\omega_0 / J$ is the adiabaticity. 
+
+Substituting the Holstein self-interaction functional into Eq.~(\ref{eqn:general-feynman-jensen}) gives the variational inequality for the Holstein model as 
+\begin{equation}
+        F_H \leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_0 - n \alpha_H J \omega_0 \int_0^{\hbar\beta} d\tau\ D_{\omega_0}(\tau) \Biggl[\frac{\text{erf}(\pi \sqrt{G(\tau)J/\hbar})}{\sqrt{4\pi G(\tau)J/\hbar}}\Biggr]^n
+\end{equation}
 
 \section{Multiple Fictitious Particles}
 \label{sec:chap-fourth-first}
@@ -21,55 +308,42 @@ The generalised polaron trial action is,
     \end{gathered}
 \end{equation}
 Here $\kappa_{p}$ is the spring constant associated with the $p$th fictitious particle, and $w_{p}$ is the corresponding oscillation frequency. The solution to the partition function for this action was evaluated in~\cite{poulter_complete_1992}.
-\newline
 
 Following Feynman, I extend Hellwarth and Biaggio's $A$ and $C$ equations (Eqs.~(62b) and (62e) in Ref.~\cite{hellwarth_mobility_1999}), which are symmetrised (for ease of computation) versions of the finite temperature polaron actions of \=Osaka~\cite{osaka_polaron_1959}, 
 \begin{subequations}
 \begin{align}
-    A &= \frac{3}{\hbar \beta m} \left[ \sum_{p = 1}^n \log\left(\frac{v_{p} \sinh (w_{p} \hbar \beta / 2)}{w_{p} \sinh (v_{p} \hbar \beta / 2)}\right) + \frac{1}{2} \log \left(2\pi\hbar \beta\right) \right] , \label{eqn:A} \\
-    C &= \frac{3}{m} \sum_{p, q = 1}^n \frac{C_{pq}}{v_{q} w_{p}} \left( \coth \left( \frac{v_{q} \hbar \beta}{2} \right) - \frac{2}{v_{q} \hbar \beta} \right) . \label{eqn:C}
+    A &= \frac{3}{\beta} \left[ \sum_{p = 1}^n \log\left(\frac{v_{p} \sinh (w_{p} \hbar \beta / 2)}{w_{p} \sinh (v_{p} \hbar \beta / 2)}\right) + \frac{1}{2} \log \left(2\pi\hbar^2 \beta / m_b\right) \right] , \label{eqn:A} \\
+    C &= \frac{3}{4} \sum_{p, q = 1}^n \frac{C_{pq}}{v_{q} w_{p}} \left( \coth \left( \frac{v_{q} \hbar \beta}{2} \right) - \frac{2}{v_{q} \hbar \beta} \right) . \label{eqn:C}
 \end{align}
 \end{subequations}
 With, 
 \begin{subequations}
     \begin{align}
-        C_{pq} &= \frac{w_{p}}{4} \frac{\kappa_{p} h_{q}}{v_{q}^2 - w_{p}^2} ,\\
+        C_{pq} &= w_{p} \frac{\kappa_{p} h_{q}}{v_{q}^2 - w_{p}^2} ,\\
         \kappa_{p} &= \left(v_{p}^2 - w_{p}^2 \right) \prod\limits_{\substack{q=1 \\ q\neq p}}^n \frac{v_{q}^2 - w_{p}^2}{w_{q}^2 - w_{p}^2} ,\\
         h_{p} &= \left( v_{p}^2 - w_{p}^2 \right) \prod\limits_{\substack{q=1 \\ q\neq p}}^n \frac{w_{q}^2 - v_{q}^2}{v_{q}^2 - v_{q}^2} .
     \end{align}
 \end{subequations}
 $C_{pq}$ are the components of a generalised ($n \times n$) matrix version of Feynman's $C$ variational parameter. The cross (off-diagonal) terms give the coupling (interaction) between the fictitious particles.
 
-A generalisation of the expression in the denominator of Hellwarth and Biaggio's $B$ equation (Eqn.~(62c) in~\cite{hellwarth_mobility_1999}) is,
+A generalisation of the polaron (quasiparticle) Green function is,
 \begin{equation}\label{eqn:multi_D}
     G(\tau) = \tau  \left(1 - \frac{\tau}{\hbar\beta}\right) + \sum_{p=1}^n \frac{h_p}{v_p^3} \left(D_{v_p}(0) - D_{v_p}(\tau) - v_p \tau \left(1 - \frac{\tau}{\hbar\beta} \right)\right).
 \end{equation}
-When $n=1$ (a single fictitious particle) and $x \rightarrow iu$, $G(\tau)$ is the same as $D(u)$ from Eqn.~(35c) in the FHIP~\cite{feynman_mobility_1962} mobility theory. 
+When $n=1$ (a single fictitious particle) and $x \rightarrow iu$, $G(\tau)$ is the same as $D(u)$ from Eq.~(35c) in the FHIP~\cite{feynman_mobility_1962} mobility theory. 
 
-From this trial Green function $G(\tau)$ we arrive at a generalisation to Hellwarth and Biaggio's B expression with multiple ($n$ with index $p$) variational parameters $v_{p}$ and $w_{p}$, 
+From this trial Green function $G(\tau)$ I arrive at a generalisation to Osaka's $\langle S \rangle_0$ with multiple ($n$ with index $p$) variational parameters $v_{p}$ and $w_{p}$, 
 \begin{equation}
 \begin{gathered}
-    B = \frac{\alpha \omega_0}{\sqrt{\pi}} \int_0^{\frac{\hbar\beta}{2}} d\tau D_{\omega_0}(\tau) \left[ G(\tau) \right]^{-\frac{1}{2}} .
+    \langle S \rangle_0 = \frac{\hbar \alpha \omega_0^2}{\sqrt{\pi}} \int_0^{\frac{\hbar\beta}{2}} d\tau D_{\omega_0}(\tau) \left[ G(\tau) \right]^{-\frac{1}{2}} .
 \label{eqn:B}
 \end{gathered}
 \end{equation}
-
-Summing the trial free energy $A$ in Eqn. (\ref{eqn:A}), the trial-model interaction $B$ in Eqn. (\ref{eqn:B}), and the trial action $C$ in Eqn. (\ref{eqn:C}), we obtain a generalised variational inequality for the contribution to the free energy of the polaron from $2n$ variational parameters $v_{p}$, $w_{p}$, 
-
-\begin{equation}\label{eqn:multi_feynman_jensen}
-        F(\beta) \leq - \hbar \omega_0 (A + C + B) . \\
-\end{equation}
-
-Here, I have written out the expression explicitly rather than using `polaron' units. 
-
-We obtain vectors of length $n$ for the variational parameters $v_{p}$ and $w_{p}$ that correspond to these minima, which will be used in evaluating the polaron mobility. Considering only two variational parameters ($n = 1$) simplifies Hellwarth and Biaggio's form of \=Osaka's free energy. Feynman's original athermal version can then be obtained by taking the zero-temperature limit ($\beta \rightarrow \infty$).
-
-% Note on how we don't solve for multiple modes in the rest of the results
-Our derivation supports a set of normal modes for the polaron quasi-particle model (multiple $v_{p}$ and $w_{p}$ parameters).
+I then obtain length vectors $n$ for the variational parameters $v_{p}$ and $w_{p}$ that correspond to the minimum upper-bound to the free energy, which will be used in evaluating the polaron mobility. Considering only two variational parameters ($n = 1$) simplifies to \=Osaka's free energy expression. Feynman's original athermal version can be obtained by taking the zero-temperature limit ($\beta \rightarrow \infty$).
 
 \subsection{Numerical Results}
 
-In this section, I present my numerical investigations into the result of the trial model generalised to multiple fictitious particles in the case of the Fr\"ohlich polaron model. Adding more fictitious particles adds two more variational parameters per particle to the trial model, representing the mass and frequency (or alternatively the spring constant) of each new particle coupled to the electron. These can be transformed into corresponding $v_p$ and $w_p$ parameters where $p$ labels each fictitious particle. The ordering of these parameters can be fixed such that $v_1 > w_1 > v_2 > w_2 > ...$. Due to the additional computational difficulty in converging the variational solution, I only present the results up to $N=4$ additional fictitious particles. I found that converging these results became increasingly difficult as my initial guess had to be reasonably close to the actual optimal result otherwise, the optimisation easily converged instead to other local minima or forced one or more of the fictitious particles to become infinite massive by collapsing the variational parameters $w \to 0$, $v \to \infty$. Likewise, the size of the optimisation box grew exponentially, making it harder to constrain the optimisation.
+In this section, I present my numerical investigations into the result of the trial model generalised to multiple fictitious particles in the case of the Fr\"ohlich polaron model. Adding fictitious particles adds two more variational parameters per particle to the trial model, representing each new particle's mass and frequency (or the spring constant) coupled to the electron. These can be transformed into corresponding $v_p$ and $w_p$ parameters where $p$ labels each fictitious particle. The ordering of these parameters can be fixed such that $v_1 > w_1 > v_2 > w_2 > ...$. Due to the additional computational difficulty in converging the variational solution, I only present the results up to $N=4$ additional fictitious particles. Converging these results became increasingly difficult as my initial guess had to be reasonably close to the optimal result. Otherwise, the optimisation efficiently converged instead to other local minima or forced one or more fictitious particles to become infinite massive by collapsing the variational parameters $w \to 0$, $v \to \infty$. Likewise, the size of the optimisation box grew exponentially, making it harder to constrain the optimisation.
 
 It is known that the Feynman variational result cannot obtain the true weak-coupling perturbative result. At small alpha $\alpha$, Feynman's one fictitious mass model gives the weak coupling expansion for the polaron energy:
 
@@ -77,7 +351,7 @@ It is known that the Feynman variational result cannot obtain the true weak-coup
     \frac{E}{\hbar\omega_0} = -\alpha - 0.0123 \alpha^2.
 \end{equation}
 
-It is known that using a general memory function in the trial model and finding its optimal form results in a $\alpha^2$ coefficient $0.0125978$~\cite{rosenfelder_best_2001}. The true perturbative weak coupling result is $0.01592$. So we can see that the gains in the free energy bound, at least for the Fr\"ohlich model, will be small. As a side note, the Feynman variational method can be improved by including higher-order corrections in the form of higher-order cumulants in the difference between the polaron and trial actions. This has been found to bring it much closer to the true solution at the cost of significantly more computation. Despite small improvements in the energy bound of the variational method, we will see that the corresponding dynamical theory sees significant changes, likely due to the high sensitivity of analytic continuation on the optimal result obtained.
+It is known that using a general memory function in the trial model and finding its optimal form results in a $\alpha^2$ coefficient $0.0125978$~\cite{rosenfelder_best_2001}. The accurate perturbative weak coupling result is $0.01592$. So we can see that the gains in the free energy bound, at least for the Fr\"ohlich model, will be small. As a side note, the Feynman variational method can be improved by including higher-order corrections in higher-order cumulants in the difference between the polaron and trial actions. This has been found to bring it much closer to the actual solution at the cost of significantly more computation. Despite small improvements in the energy bound of the variational method, we will see that the corresponding dynamical theory sees significant changes, likely due to the high sensitivity of analytic continuation on the optimal result.
 
 \subsection{The additional parameters}
 
@@ -133,11 +407,11 @@ It is known that using a general memory function in the trial model and finding 
   \label{fig:multivwbeta}
 \end{figure}
 
-In Figs. (\ref{fig:multivwalpha}) is the coupling-dependence of the optimal $v$ and $w$ parameters for the Fr\"ohlich model, an increasing number of fictitious particles in the trial model from $N=1$ to $N=5$. In the top-right figure ($N=2$), I have also co-plotted the results obtained by Abe for the two-particle model in Ref.~\cite{abe_improvement_1971}. 
+In Figs.~(\ref{fig:multivwalpha}) the coupling-dependence of the optimal $v$ and $w$ parameters for the Fr\"ohlich model, an increasing number of fictitious particles in the trial model from $N=1$ to $N=5$. In the top-right figure ($N=2$), I have also co-plotted the results obtained by Abe for the two-particle model in Ref.~\cite{abe_improvement_1971}. 
 
-Notably, the first fictitious particle seems to follow a different trend for $w$, which asymptotes to $w = \omega_0$ at strong coupling, compared to any other additional particles where $w$ follows a similar coupling dependence as the $v$ parameter. As we add more particles, the $v$ and $w$ corresponding to each additional particle become exponentially larger, whilst the previous $v$ and $w$ parameters decrease slightly. The gap between $v$ and $w$ for each additional particle becomes significantly smaller until it is unperceivable in the plots. This suggests that each successive particle becomes exponentially lighter but with a larger spring constant. When we look at the energy, we will see that each additional particle contributes diminishingly to the system's free energy.
+Notably, the first fictitious particle seems to follow a different trend for $w$, which asymptotes to $w = \omega_0$ at strong coupling, compared to any other additional particles where $w$ follows a similar coupling dependence as the $v$ parameter as we add more particles, the $v$ and $w$ corresponding to each additional particle become exponentially more prominent, whilst the previous $v$ and $w$ parameters decrease slightly. The gap between $v$ and $w$ for each additional particle becomes significantly smaller until it is unperceivable in the plots. This suggests that each successive particle becomes exponentially lighter with a larger spring constant. Looking at the energy, we will see that each additional particle contributes diminishingly to the system's free energy.
 
-In Figs. (\ref{fig:multivwbeta}) is the temperature-dependence of the optimal $v$ and $w$ parameters for the Fr\"ohlich model, an increasing number of fictitious particles in the trial model from $N=1$ to $N=4$. Each $v_p$ and $w_{p>2}$ appears to reach a low plateau for $\beta \omega_0 > 8$ whereas the first $w_1$ appears to have a minimum around $\beta\omega_0 \approx \alpha = 6$ before increasing to a plateau. This suggests that the trial model eventually becomes insensitive to changes in temperature below some critical temperature.
+In Figs. (\ref{fig:multivwbeta}) is the temperature-dependence of the optimal $v$ and $w$ parameters for the Fr\"ohlich model, an increasing number of fictitious particles in the trial model from $N=1$ to $N=4$. Each $v_p$ and $w_{p>2}$ appears to reach a low plateau for $\beta \omega_0 > 8$ whereas the first $w_1$ seems to have a minimum around $\beta\omega_0 \approx \alpha = 6$ before increasing to a plateau. This suggests that the trial model eventually becomes insensitive to changes in temperature below some critical temperature.
 
 \subsection{Improving the Energy Bound}
 
@@ -159,219 +433,13 @@ In Figs. (\ref{fig:multivwbeta}) is the temperature-dependence of the optimal $v
     \centering
     \includegraphics[width=\textwidth]{figures/frohlich-3d-energy-alpha-0to12-temp-00625to32-N-2minus3-contourf.png}
   \end{subfigure}
-  \caption{Polaron free energy for the Fr\"ohlich model for increasing number $N$ of fictitious particles in the trial model. \textbf{Top-left} Absolute change in the free energy for $N>1$ compared to the free energy result for $N=1$. The generalised trial models quickly converge to the optimal free-energy bound, with the greatest improvement on Feynman's original trial model seen around $\alpha = 7$. \textbf{Top-right} A complementary result to the first figure obtained in Ref{} by using a general spectral function corresponding to the $N\to\infty$ limit. By comparison, I can see that only a few fictitious particles are needed to converge to the best possible variational solution. \textbf{Bottom-left:} The temperature-dependence of the percentage improvement of additional fictitious particles compared to just one. The most improvement appears around $\beta\omega_0 \approx 8$ of 0.16\%, after which the improvement plateaus. \textbf{Bottom-right:} Similar to the previous figure, the percentage improvement is relative to the previous number of fictitious particles (e.g. $N=3$ compared to $N=2$). Any improvements peak at $\beta\omega_0 \geq 8$ and exponentially decrease with the addition of more particles, showing a rapid convergence to the optimal trial solution.}
+  \caption{Polaron free energy for the Fr\"ohlich model for increasing number $N$ of fictitious particles in the trial model. \textbf{Top-left} Absolute change in the free energy for $N>1$ compared to the free energy result for $N=1$. The generalised trial models quickly converge to the optimal free-energy bound, with the greatest improvement on Feynman's original trial model seen around $\alpha = 7$. \textbf{Top-right} A complementary result to the first figure obtained in Ref{} using a general spectral function corresponding to the $N\to\infty$ limit. By comparison, I can see that only a few fictitious particles are needed to converge to the best possible variational solution. \textbf{Bottom-left:} The temperature-dependence of the percentage improvement of additional fictitious particles compared to just one. The most improvement appears around $\beta\omega_0 \approx 8$ of 0.16\%, after which the improvement plateaus. \textbf{Bottom-right:} Similar to the previous figure, the percentage improvement is relative to the previous number of fictitious particles (e.g. $N=3$ compared to $N=2$). Any improvements peak at $\beta\omega_0 \geq 8$ and exponentially decrease with the addition of more particles, showing a rapid convergence to the optimal trial solution.}
   \label{fig:multienergy}
 \end{figure}
 
 In Figs. (\ref{fig:multienergy}) the top-left figure shows the relative shift in the free energy for $N>1$ compared to the free energy result for $N=1$ as a function of the electron-phonon coupling from $\alpha=1$ to $\alpha=12$. Two key observations are: firstly, the largest improvement to the free energy bound can be seen at intermediate coupling around $\alpha \approx 7$. Secondly, there is rapid convergence to the optimal free energy bound with no discernible difference between the results for $N=3$, $N=4$ and $N=5$ fictitious particles. The two asymptotes are given by $3 \times 10^{-4} \alpha^2$ at lower coupling and $0.81 \alpha^{-2}$ at higher coupling. The top-right figure is borrowed from Fig. 3 in~\cite{sels_dynamic_2016} in which Dries Sels obtained the optimal result for the Feynman polaron model by using a general bath spectrum in the trial action, which corresponds to the $N\to\infty$ limit of our many fictitious particle trial action. Comparison with our results shows that we have obtained the correct optimal trial solution and that only $N=3$ fictitious particles are required to do so, which is computationally tractable compared to more particles or a self-consistent approach with a general bath spectrum.
 
-The lower figures in Figs.!(\ref{fig:multienergy}) show the temperature dependence of the percentage improvement of additional fictitious particles compared to just one. The bottom-left figure shows that the maximum improvement to the free energy bound is obtained around $\beta \omega_0 = 8$, which is the temperature when $w_1$ takes its minimum value. At lower temperatures, the improvement slightly decreases before plateauing. The bottom-right figure shows the percentage improvement relative to the previous number of fictitious particles (e.g., $N = 3$ compared to $N = 2$). Here, we can see that the relative improvement in the free energy bound is exponentially decreasing with each additional particle with a maximum improvement of $N=3$ over $N=2$ at just $0.01$\%.
-
-\section{Lattice Polaron Variational Solution}
-
-We face two key difficulties in extending the Feynman Variational Method to lattice polarons. The first is that, unlike the path integral for the Fr\"ohlich model, the path integral for the Holstein model is constrained. The position paths are confined to the unit cell of the lattice with periodic boundary conditions. Likewise, the quasi-momentum paths are confined to the first Brillouin zone. 
-
-Secondly, for the Fr\"ohlich model, the kinetic part of the trial action was chosen to be identical to that of the model action. The two kinetic actions then cancel so that the final variational inequality for the polaron-free energy is independent of the kinetic action. This is no longer possible for the Holstein model because by choosing the trial kinetic action to be the same as in the Holstein model, the trial path integral is no longer evaluable; it is no longer a Gaussian integral.
-
-To circumnavigate these issues in pursuit of tangible results, I instead chose to approximate the Holstein kinetic action with an approximate parabolic form with an effective band mass, much like the Fr\"ohlich model. I then allow the electron paths to be unconstrained such that the momentum integrals for the electron are unbounded and can be evaluated to give the standard Gaussian kinetic action. I could keep the momentum integrals bounded to the first Brillouin zone and still have a closed-form expression for the kinetic action; however, in addition to the standard Gaussian form, there are error functions that make it unclear how the resulting path integral could be evaluated - if it is even possible. By making these approximations, it is possible to follow the usual variational procedure with the same trial action as for the Fr\"ohlich model. I should note that the Holstein electron-phonon interaction is still treated properly, and the phonon quasi-momenta is still confined to the first Brillouin zone. 
-
-Thus far, I have been unsuccessful in generalising the variational principle to incorporate these path constraints and non-quadratic kinetic action, but I have some ideas for how it may be approached.
-
-The first idea is to maintain the usual trial action and obtain an additional term in the variational inequality for the polaron free energy accounting for the difference in the tight-binding-like Holstein model kinetic action and the approximate parabolic trial kinetic action. Here, the `electron' mass in the trial action would be entered as a variational parameter in addition to the usual $v$ and $w$ parameters. The difficulty with this approach comes with calculating this additional expectation value as it is the expectation of a Modified Bessel function of the first kind with respect to the trial system. It is not clear to me if this has a closed-form expression.
-
-The second idea is to use an entirely different representation for the path integral in terms of coherent states. Coherent state path integrals are commonly used in many-body condensed matter theory. I think the variational approximation may be derived from these coherent state path integrals, and it may allow for a more sophisticated approximation for general Hamiltonians, provided that Jensen's inequality can still be applied. 
-
-By following the standard procedure as done for the Fr\"ohlich model, we may derive an approximate variational inequality for the lattice polaron free energy that fully accounts for the lattice electron-phonon integral despite allowing the electron not to be confined to individual lattice sites. Despite the latter approximation, this model still captures many of the typical features of small lattice polaron.
-
-The variational method for the polaron developed by Feynman gives a lower upper-bound to the polaron-free energy,
-\begin{equation}
-    \begin{aligned}
-         F &\leq F_0(\beta) - \frac{1}{\hbar\beta} \langle S_{\text{pol}} - S_{0} \rangle_0 , \\
-         &\leq F_0(\beta) -\frac{1}{4\hbar\omega_0\beta M} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ D_{\omega_0}(\abs{\tau - \tau'}) \langle \Phi_{\text{pol}} - \Phi_0 \rangle_0 ,
-    \end{aligned}
-\end{equation}
-where the expectation $\langle \mathcal{O} \rangle_0$ is defined as,
-\begin{equation}
-    \langle \mathcal{O} \rangle_0 \equiv \frac{\int \mathcal{D}^3 r(\tau) \mathcal{O} e^{-S_0[\vb{r}(\tau)]}}{\int \mathcal{D}^3 r(\tau) e^{-S_0[\vb{r}(\tau)]}},
-\end{equation}
-and $S_0[\vb{r}(\tau)]$ is a trial action that is chosen to approximate best the polaron model action $S_{\text{pol}}[\vb{r}(\tau)]$ and where the path integral for $S_0$ can be analytically evaluated. The trial action is typically chosen to be quadratic in the electron coordinate $\vb{r}(\tau)$ for this reason. We use the standard quasi-particle `trial action' for the electron-phonon lattice model, 
-\begin{equation}
-    \begin{aligned}
-        S_{0}[\vb{r}(\tau)] &= \frac{m_b}{2} \int_0^{\hbar\beta} d\tau\ \Dot{\vb{r}}^2(\tau) + \frac{w}{8 \kappa} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ D_{w}(\abs{\tau - \tau'}) \Phi_0\left[\vb{r}(\tau), \vb{r}(\tau')\right] ,
-    \end{aligned}
-\end{equation}
-where $\kappa$ and $w$ are variational parameters, respectively, representing the spring constant and oscillation frequency of Feynman's fictitious spring-mass trial model. The trial model is often reparameterised in terms of $v$ and $w$ variational parameters where $\kappa = m_b (v^2 - w^2)$. The trial self-interaction functional is quadratic,
-\begin{equation}
-    \Phi_0[\vb{r}(\tau), \vb{r}(\tau')] = \kappa^2 \left[\vb{r}(\tau) - \vb{r}(\tau')\right]^2 .
-\end{equation}
-All the expectation values in the variational expression can be evaluated from $\langle e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau')} \rangle_0$ which for the trial model has a closed-form expression:
-\begin{equation}
-    \langle e^{i \vb{q} \cdot (\vb{r}(\tau) - \vb{r}(\tau'))} \rangle_0 := \exp\left[-q^2 r_p^2 G(\abs{\tau - \tau'})\right] ,
-\end{equation}
- where the imaginary-time thermal polaron Green function $G(\tau)$ is given by
-\begin{equation} \label{eqn:polarongreensfunc}
-    \begin{aligned}
-        G(\tau) &= \tau \left(1 - \frac{\tau}{\hbar\beta}\right) + \frac{v^2 - w^2}{v^3} \left[ D_v(0) - D_v(\tau) - v \tau \left(1 - \frac{\tau}{\hbar\beta} \right) \right].
-    \end{aligned}
-\end{equation}
-Generally, we can transform the $q$-space summation into a spherical integral over the $n$-ball,
-\begin{equation} \label{eqn:general_self_interaction}
-    \begin{aligned}
-        \langle \Phi_{\text{pol}}\rangle_0 &= \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 e^{-q^2 r_p^2 G(\tau) / 2} , \\
-        &= \frac{V \abs{S^{n-1}}}{(2\pi)^n} \int_0^R dq \abs{V_q}^2 q^{n-1} e^{-q^2 r_p^2 G(\tau)} ,
-    \end{aligned}
-\end{equation}
-where $\abs{S^{n-1}} = 2\pi^{n/2}/\Gamma(n/2)$ is the hypervolume of the unit $(n-1)$-sphere and $R$ is the radius of the ball. In $n$-dimensions, we have
-\begin{equation}\label{eqn:generalfreeenergy}
-    \begin{aligned}
-        F &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_{0} - \frac{1}{2\omega_0} \sum_{\vb{q}} \abs{V_{\vb{q}}}^2 \int_0^{\hbar\beta} d\tau D_{\omega_0}(\tau)\ e^{-q^2 r_p^2 G(\tau)} , \\
-        &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_{0} - \frac{V \abs{S^{n-1}}}{2 (2\pi)^n \omega_0} \int_0^{\hbar\beta} d\tau D_{\omega_0}(\tau) \int_0^R dq\ \abs{V_q}^2 q^{n-1} e^{-q^2 r_p^2 G(\tau)} ,
-    \end{aligned}
-\end{equation}
-where I have used,
-\begin{equation}
-    \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\tau'\ f(\abs{\tau - \tau'}) \sim 2\hbar\beta \int_0^{\hbar\beta}d\tau\ f(\tau),
-\end{equation}
-which is valid when the Hamiltonian for the system is time-translation invariant.
-
-Specialising in the Holstein model for the self-interaction functional we have,
-\begin{equation}
-    \begin{aligned}
-        \langle \Phi^{(H)} \rangle_0 &= \frac{g^2_H(n) \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\Lambda} dq\ q^{n-1} e^{-q^2 r_p^2 G(\tau)} , \\
-        &= \frac{g^2_H(n) \abs{S^{n-1}}}{(2\pi)^n} \frac{\Lambda^n}{2} \left(\Lambda^2 r_p^2 G(\tau) \right)^{-\frac{n}{2}} \left[ \Gamma\left(\frac{n}{2}\right) - \Gamma\left(\frac{n}{2}, \frac{\Lambda^2 r_p^2}{2} G(\tau) \right) \right], \\
-        &= \frac{g_H^2(n)}{(4\pi r_p^2 G(\tau))^{n/2}} \left[1 - \frac{\Gamma\left(\frac{n}{2}, \Lambda^2 r_p^2 G(\tau) \right)}{\Gamma(\frac{n}{2})} \right], 
-    \end{aligned}
-\end{equation}
-where $\Gamma(s, x)$ is the upper incomplete Gamma function. Since $\lim_{x\to\infty} \Gamma(s, x) \to 0$ the continuum approximation where $\Lambda \to \infty$ gives:
-\begin{equation}
-    \langle \Phi^{(H)} \rangle_0^C = \frac{2 n J \hbar \omega_0 \alpha_H}{(4\pi r^2_p G(\tau))^{n/2}}.
-\end{equation}
-However, the addition integral over the imaginary time variable diverges with this expression.
-
-For the Fr\"ohlich self-interaction functional we have
-\begin{equation}
-    \begin{aligned}
-        \langle\Phi^{(F)}\rangle_0 &= \frac{g^2_F(n) \abs{S^{n-1}}}{(2\pi)^n} \int_0^{\infty} dq\ e^{-q^2 r_p^2 G(\tau)} , \\
-        &= \alpha_F \frac{\Gamma(\frac{n-1}{2})}{2 \Gamma(\frac{n}{2})} \frac{1}{\sqrt{G(\tau)}}.
-    \end{aligned}
-\end{equation}
-One difference between the Holstein and Fr\"ohlich model is in the domain of the radial reciprocal-space integral. Whereas the domain of the radial integral for the Fr\"ohlich model is over all of reciprocal-space, it is bounded to the first Brillouin Zone for the Holstein model, keeping the total reciprocal-space integral within a sphere with volume equal to the Brillouin zone volume. Physically, this is a manifestation of an ultraviolet momentum cutoff due to the discrete lattice. In the continuum Fr\"ohlich model, the integral is convergent for all $n > 1$ – the Fr\"ohlich model diverges in 1D.
-
-The variational inequality for the Holstein model is:
-\begin{equation}
-    \begin{aligned}
-        F^{(H)} &\leq F_0(\beta) + \frac{1}{\beta} \langle S_0 \rangle_0 - \frac{g_H^2(n)}{2M\omega_0} \frac{V}{N} \int_0^{\hbar\beta} d\tau \frac{D_{\omega_0}(\tau)}{G(\tau)^{n/2}} \left[1 - \frac{\Gamma(n/2, \Lambda^2 r_p^2 G(\tau))}{\Gamma(n/2)}\right].
-    \end{aligned}
-\end{equation}
-and the variational inequality for the Fr\"ohlich model is:
-\begin{equation}
-    \begin{aligned}
-        F^{(F)} &\leq F_0(\beta) -\frac{1}{\beta} \langle S_0 \rangle_0 - \alpha_F \frac{\Gamma\left(\frac{n-1}{2}\right)}{2 \Gamma(\frac{n}{2})} \int_0^{\hbar\beta} d\tau \frac{D_{\omega_0}(\tau)}{\sqrt{G(\tau)}} ,
-    \end{aligned}
-\end{equation}
-The expectation value of the trail action $\langle S_0 \rangle_0$ and the free energy of the trial system $F_0(\beta) $ are the same for both models and are as given by \=Osaka \cite{Osaka1959},
-\begin{equation}
-    \langle S_0 \rangle_0 = \frac{n\hbar\beta}{4} \frac{v^2-w^2}{v} \left(\frac{2}{v\hbar\beta} - \coth\left(\frac{v\hbar\beta}{2}\right)\right),
-\end{equation}
-and the trial free energy is,
-\begin{equation}
-    F_0(\beta) = \frac{n}{2\beta} \log\left(2\pi\hbar\beta\right) + \frac{n}{\beta} \log\left(\frac{w \sinh(\hbar\beta v / 2)}{v \sinh(\hbar\beta w / 2)}\right).
-\end{equation}
-
-\subsection{Coupling Dependence}
-
-The main weak-to-strong polaron transition to occurs around $\alpha^{{H}} \approx 2$ for the Holstein model when using Ragni's convention. Elsewhere in the literature, this happens at $\alpha^{(H)} \approx 1$ or at some other value. Ultimately, this is just a matter of re-scaling the Holstein alpha parameter. I have assumed that this polaron transition is similar in nature to the $\alpha = 6$ transition present in the Fr\"ohlich model - where perturbation theory diverges. Therefore, whenever I am comparing the Holstein polaron results to the Fr\"ohlich polaron, I will  the Fr\"ohlich alpha according to a rough expression
-\begin{equation}
-    \alpha^{(F)} \approx 3 \alpha^{(H)}
-\end{equation}
-This expression has only been deduced by eye and is not mathematically derived, but it will allow us better to compare the Fr\"ohlich and Holstein models and differentiate their underlying physics. I choose to scale the Fr\"ohlich model so that direct comparison with diagMC results is maintained and to avoid any possible unforeseen complications on the Holstein variational solution.
-
-\subsubsection{Polaron Ground-state Energy}
-
-\begin{figure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/holstein-1dto3d-alpha-energy-omega-diagmc-COLOUR.pdf}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/holstein-1d-alpha-energy-adiabaticity-diagmc-COLOUR.pdf}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/holstein-2d-alpha-energy-adiabaticity-diagmc-COLOUR.pdf}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/holstein-3d-alpha-energy-adiabaticity-diagmc-COLOUR.pdf}
-  \end{subfigure}
-  \caption{Polaron binding energy for the Fr\"ohlich and Holstein models with respect to the electron-phonon dimensionless coupling parameter $\alpha$. \textbf{Left:} Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange). \textbf{Right:} Holstein model in 1D (dashed orange), 2D (dot-dashed green) and 3D (dot-dot-dashed pink), and the 3D Fr\"ohlich result scaled by $1/6$ in energy and $1/3$ in $\alpha$ to align with the Holstein weak-coupling ($\alpha < 1$). Co-plotted are DiagMC results for the Holstein model in 1D (blue diamonds), 2D (orange squares) and 3D (green circles).}
-  \label{fig:energy_alpha}
-\end{figure}
-
-The first numerical result in Fig. (\ref{fig:energy_alpha}) is the dependence on the Holstein free energy on the unitless alpha parameter $\alpha$. On the left, we have the Fr\"ohlich free energy for 2D and 3D, and on the right, we have the Holstein free energy compared to diagMC data in 1D, 2D and 3D. The predictions made by this new variational theory agree fairly well with the diagMC, especially before the transition point at $\alpha = 2$, which is characterised by a distinctive kink in the free energy. After $\alpha = 2$, the variational theory \emph{underestimates} the true free energy. Now, this begs an important question: is this theory variational? From its construction, it should \emph{only} ever provide an $\textbf{upper-bound}$ to the polaron free energy, so, at first sight, it goes below the diagMC data is concerning. However, it should be recognised that to apply the variational approximation, we have to approximate the Holstein model electron band as an unbounded parabola. Therefore, the variational method inevitably overestimates the kinetic energy in the model, which should be asymptotic to zero at large coupling. However, in our model, it continues to grow rough as $KE \sim \sqrt{\alpha}$. So, I argue that the variational bound is preserved; we are just not solving for the Holstein model exactly due to the approximations made along the way. Nonetheless, the variational approximation seems to capture the same small polaron transition at $\alpha = 2$ well, having the correct dependence and scaling with the number of spatial dimensions.
-
-On another note, the Holstein model has a free energy that is significantly smaller than the large Fr\"ohlich polaron. On the right, we have co-plotted the 3D Fr\"ohlich free energy result in pink, scaled down by a factor of $6$ to bring it inline with the weak-coupling prediction of the Holstein model. This suggests that polaronic effects are stronger in materials that can form large polarons. Conceptually, this is logical as the Holstein electron-phonon interaction is purely local and isolated to individual lattice sites. In contrast, in the Fr\"ohlich model, it is a long-range interaction and thus more strongly bounding.
-
-\subsubsection{Polaron Variational Parameters}
-
-\begin{figure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/holstein-alpha-energy-COLOUR.pdf}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/holstein-alpha-vw-COLOUR.pdf}
-  \end{subfigure}
-  \caption{Optimal values of the polaron variational parameters $v$ and $w$ for the Fr\"ohlich and Holstein models with respect to the electron-phonon dimensionless coupling parameter $\alpha$. \textbf{Left:} Fr\"ohlich model in 2D ($v$ solid blue and $w$ dot-dash green) and 3D ($v$ dashed orange and $w$ dot-dot-dash pink). \textbf{Right:} Holstein model in 1D ($v$ solid blue and $w$ dot-dot-dash pink), 2D ($v$ dashed orange and $w$ solid yellow) and 3D ($v$ dot-dashed green and $w$ dashed turquoise).}
-  \label{fig:vw_alpha}
-\end{figure}
-Next are the results for the $v$ and $w$ variational parameters for the Holstein model (Fig. (\ref{fig:vw_alpha})). We have the Fr\"ohlich results in 2D and 3D on the left. On the right are the Holstein results in 1D, 2D and 3D. We assume that the alpha ranges used produce similar physical regimes within either model for point of comparison, as mentioned above.
-
-Immediately, the Holstein model noticeably has a very different variational solution to the Fr\"ohlich model, with a distinctive discontinuity around $\alpha = 2$, which causes a suddenly more rapid increase in the polaron binding energy. This is attributed to transitioning into a small polaron state. Both models have $w \to 1 \omega_0$ at large coupling, albeit more abruptly in the Holstein model. Also, the $v$ parameters appear to have a different strong coupling dependency on $\alpha$. In the Fr\"ohlich model at large $\alpha$, $v^{(F)} \sim \alpha^2$ whereas in the Holstein model $v^{(H)} \sim \sqrt{\alpha}$. Another noticeable difference is in the $\alpha \to 0$ limits where regardless of the number of spatial dimensions, the Fr\"ohlich model parameters asymptote to $v = w = 3$, but in the Holstein model, the zero-coupling limit depends on the number of spatial dimensions. Finally, the polaron transition seems to be dimensionally dependent in the Fr\"ohlich model, occurring at $\alpha = \approx 3$ in 2D and $\alpha \approx 6$ in 3D. Meanwhile, the transition in the Holstein model seems to be independent of dimensionality. It should be noted, however, that the alpha unitless coupling is often \emph{defined} this way.
-
-\subsection{Holstein Polaron Temperature Dependence}
-
-In this section, we look at how the Holstein model varies with temperature. Notably, its free energy, variational parameters and DC mobility. As the $v$ and $w$ parameter scale to large values with temperature, I have opted to represent them in terms of the trial model fictitious particle mass $M = v^2 / w^2 - 1$ and spring-constant $\kappa = v^2 - w^2$ instead as they produce more readable and digestible plots. The temperature range looked at is $T = 0.125 \omega_0$ to $T = 32 \omega_0$. For clearer context, in the Fr\"ohlich model, $T = \omega_0$ is roughly $T \approx 48 $K, and in the Holstein model, it is roughly $T \approx 11.6 $K up to a multiple of the phonon frequency in units of THz$2\pi$. We also look at these temperatures over a range of couplings $\alpha^{(F)} = 2.5, 4, 6, 8, 10, 12$ and $\alpha^{(H)} \approx \alpha^{(F)} / 3 = 0.83, 1.33, 2, 2.67, 3.33, 4$.
-
-\subsubsection{Holstein Polaron Free Energy}
-
-\begin{figure}[!tbp]
-    \includegraphics[width=.49\textwidth]{figures/holstein-2d-energy-temp-00625to32-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{figures/holstein-3d-energy-temp-00625to32-COLOUR.pdf}
-    \includegraphics[width=.49\textwidth]{chapters/literature/figures/frohlich-3d-energy-temp-00625to32-COLOUR.pdf}
-    \caption{Polaron binding energy for the Fr\"ohlich model in 2D (dot-dash pink) and 3D (solid gold), and Holstein model in 1D (solid blue), 2D (dashed orange) and 3D (dotted green) with respect to temperature (in units of the phonon frequency $\omega_0$), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling. The Fr\"ohlich free energy has been scaled down by $1/6$ to better compare with the Holstein free energy.}
-    \label{fig:energy_temp}
-\end{figure}
-
-In Figs. (\ref{fig:energy_temp}) we have many plots showing how the temperature dependence of the Holstein polaron in 1D, 2D and 3D, and the Fr\"ohlich polaron in 2D and 3D, changes as the electron-phonon coupling increases. Note that the Fr\"ohlich free energy has been scaled down by $1/6$ to better compare trends with the Holstein free energy. A few trends can be noticed. First and foremost, at weaker coupling ($\alpha^{(F)} = 2.5$, $\alpha^{(H)} = 0.83$), the Holstein polaron energy grows more rapidly with increasing temperature than the Fr\"ohlich polaron, but this difference fades with increasing coupling until they seem to have a similar dependence on temperature. Secondly, the different dimensional Holstein polarons have a similar temperature dependence at all coupling, aside from a seemingly constant multiplicative factor where the 1D and 2D Holstein polaron energies are roughly $1/3$ and $2/3$ respectively of the 3D Holstein polaron. 
-
-% \subsubsection{Polaron Mass and Spring Constant}
-
-% \begin{figure}[!tbp]
-%     \includegraphics[width=.49\textwidth]{figures/mass_temp_25_083.png}
-%     \includegraphics[width=.49\textwidth]{figures/mass_temp_4_133.png}
-%     \includegraphics[width=.49\textwidth]{figures/mass_temp_6_2.png}
-%     \includegraphics[width=.49\textwidth]{figures/mass_temp_8_267.png}
-%     \includegraphics[width=.49\textwidth]{figures/mass_temp_10_333.png}
-%     \includegraphics[width=.49\textwidth]{figures/mass_temp_12_4.png}
-%     \caption{Temperature dependence ($T$, in units of phonon frequency $\omega_0$) of the fictitious particle mass $M$ from the trial system for the Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange), and for the Holstein model in 1D (dot-dashed green), 2D (dot-dot-dashed pink) and 3D (solid gold), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling. This mass can be expressed in terms of the traditional $v$ and $w$ using $M = (v^2 - w^2) / w^2$. The Fr\"ohlich results are un-scaled here.}
-%     \label{fig:mass_temp}
-% \end{figure}
-
-% \begin{figure}[!tbp]
-%     \includegraphics[width=.49\textwidth]{figures/spring_temp_25_083.png}
-%     \includegraphics[width=.49\textwidth]{figures/spring_temp_4_133.png}
-%     \includegraphics[width=.49\textwidth]{figures/spring_temp_6_2.png}
-%     \includegraphics[width=.49\textwidth]{figures/spring_temp_8_267.png}
-%     \includegraphics[width=.49\textwidth]{figures/spring_temp_10_333.png}
-%     \includegraphics[width=.49\textwidth]{figures/spring_temp_12_4.png}
-%     \caption{Temperature dependence ($T$, in units of phonon frequency $\omega_0$) of the fictitious particle spring-constant $\kappa$ from the trial system for the Fr\"ohlich model in 2D (solid blue) and 3D (dashed orange), and for the Holstein model in 1D (dot-dashed green), 2D (dot-dot-dashed pink) and 3D (solid gold), for values of the Fr\"ohlich electron-phonon coupling $\alpha = 2.5, 4, 6, 8, 10, 12$ and $1/3$ of these values for the Holstein electron-phonon coupling. This mass can be expressed in terms of the traditional $v$ and $w$ using $\kappa = (v^2 - w^2)$. The Fr\"ohlich results are un-scaled here.}
-%     \label{fig:spring_temp}
-% \end{figure}
-
-% In Figs. (\ref{fig:mass_temp}) we have the temperature dependence of the fictitious particle mass for the Holstein polaron with varying electron-phonon coupling. At smaller coupling, both the Holstein and Fr\"ohlich models show a maximum at intermediate temperatures and show similar dependence on temperature up until some critical transition temperature where the Holstein polaron mass abruptly stops decreasing with temperature and starts to become heavier, unlike the Fr\"ohlich polaron mass which continues to get lighter with increasing temperatures until reducing tot he electron band-mass at infinite temperature. At stronger coupling, the maximum mass at intermediate temperatures is replaced with a plateaued maximum that exists for all temperatures $T < \omega_0$. The critical transition temperature at higher temperatures still exists for the Holstein polaron mass.
-
-% The plateau less than the phonon energy $T < \omega_0$ arises due to the lack of excited phonons whose random motion decreases the effective electron-phonon interaction, resulting in a decreasing phonon contribution to the effective electron mass. For the Holstein model, the polaron mass increases at a critical temperature equal to the natural frequency of the electron-phonon interaction $v$. Phonons then begin to transfer energy back into the effective electron-phonon interaction and increase the phonon contribution to the effective electron mass.
-
-% In Figs. (\ref{fig:spring_temp}) we have the temperature dependence of the fictitious particle spring constant for the Holstein polaron with varying electron-phonon coupling. An interesting difference here is that the spring constant for the Fr\"ohlich polaron keeps increasing linearly with temperature, whereas the spring constant for the Holstein polaron seems to plateau to some value at higher temperatures. This is most noticeable in weaker couplings. Similar to the polaron mass, as we go to stronger coupling, both kinds of polarons reach a constant spring constant for temperatures lower than the phonon energy.
-
-% One final overall observation is that the 2D Holstein polaron and the 3D Fr\"ohlich polaron seem to be most similar. This isn't all that surprising since it only for two dimensions that the self-interaction functional (Eqn.~\ref{eqn:general_self_interaction})) in the Holstein model has the same phonon-momentum dependence as in the Fr\"ohlich model - which does not change with dimensionality unlike for the Holstein polaron.
+The lower figures in Figs.~(\ref{fig:multienergy}) show the temperature dependence of the percentage improvement of additional fictitious particles compared to just one. The bottom-left figure shows that the maximum improvement to the free energy bound is obtained around $\beta \omega_0 = 8$, the temperature when $w_1$ takes its minimum value. At lower temperatures, the improvement slightly decreases before plateauing. The bottom-right figure shows the percentage improvement relative to the previous number of fictitious particles (e.g., $N = 3$ compared to $N = 2$). Here, we can see that the relative improvement in the free energy bound is exponentially decreasing with each additional particle with a maximum improvement of $N=3$ over $N=2$ at just $0.01$\%.
 
 \section{The Optimal Functional Solution}
 \label{sec:chap-fourth-second}
@@ -395,7 +463,7 @@ where $\Sigma(\tau - \tau')$ is a general memory kernel and is a real, continuou
 \end{subequations}
 The first assumption is required for a translation invariant system, but the second assumption can be relaxed if required. 
 
-The goal is now to find the optimal memory function $\Tilde{\Sigma}(\tau)$ that minimises the upper bound to the free energy. Therefore, the free energy becomes a functional of the memory function,
+The goal is to find the optimal memory function $\Tilde{\Sigma}(\tau)$ that minimises the upper bound to the free energy. Therefore, the free energy becomes a functional of the memory function,
 \begin{equation}
     F \leq F_{\text{trial}} \left[ \Sigma \right] = F_{\text{ph}} + F_{S_0[\Sigma]} + \frac{1}{\beta} \langle S - S_0[\Sigma] \rangle_{S_0[\Sigma]}.
 \end{equation}
@@ -415,7 +483,7 @@ where $n$ is the dimensionality. The covariance is also often referred to in thi
 \begin{equation}
     S_0 = \frac{m_b}{2}\int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\tau'\ \vb{r}(\tau) \left[ \frac{\partial}{\partial \tau} \delta(\tau - \tau') - \Sigma(\tau - \tau') \right] \vb{r}(\tau'),
 \end{equation}
-where the integral kernel is $G^{-1}(\tau - \tau') = G_0(\tau - \tau') - \Sigma(\tau - \tau')$ with $G_0(\tau - \tau') = \partial_{\tau}\delta(\tau - \tau')$ the bare free particle Green's function. Under the assumption of translation invariance and,
+where the integral kernel is $G^{-1}(\tau - \tau') = G_0(\tau - \tau') - \Sigma(\tau - \tau')$ with $G_0(\tau - \tau') = \partial_{\tau}\delta(\tau - \tau')$ the bare free particle Green's function. Under the assumption of translation invariance,
 \begin{equation}
     \int_0^{\hbar\beta} \Sigma(\tau) d\tau \neq 0,
 \end{equation}
@@ -491,7 +559,7 @@ Note that the free-electron energy is $F_{el} = \ln\{\det G_0^{-1}\} = \Tr \ln G
 \begin{equation} \label{eqn:scfreeenergy}
     F \leq \frac{1}{2} \Tr \ln \left( D_0 \right) + \Tr \ln \left(-G\right) + \Tr\left(\Sigma G\right) + \Phi[G],
 \end{equation}
-where we have used that for bosonic phonons $F_{ph} = \frac{1}{2} \Tr \ln (D_0)$ where $D_0$ is the free phonon Green's function. We note that this takes on a similar form to the expression for the grand potential obtained by Luttinger and Ward~\cite{luttinger_ground-state_1960} where $\Phi[G]$ is an approximation to the Luttinger-Ward functional; the sum of all closed, bold, two-particle irreducible diagrams. Other approximations to this functional include GW-theory where it is truncated to include just ring-diagrams $\Phi[G] \approx GUG + GUGGUG + \dots$, and Density Mean-Field Theory (DMFT) where only local-diagrams are accounted for.
+where we have used that for bosonic phonons $F_{ph} = \frac{1}{2} \Tr \ln (D_0)$ where $D_0$ is the free phonon Green's function. We note that this takes on a similar form to the expression for the grand potential obtained by Luttinger and Ward~\cite{luttinger_ground-state_1960} where $\Phi[G]$ is an approximation to the Luttinger-Ward functional; the sum of all closed, bold, two-particle irreducible diagrams. Other approximations to this function include GW theory, where it is truncated to include just ring-diagrams $\Phi[G] \approx GUG + GUGGUG + \dots$, and Density Mean-Field Theory (DMFT), where only local diagrams are accounted for.
 
 \subsection{General Memory Function}
 

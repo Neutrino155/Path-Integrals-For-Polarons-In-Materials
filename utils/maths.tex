@@ -17,3 +17,19 @@
 \newcommand*{\spd} [2]{\frac{\partial^{2} #1}{\partial #2^{2}}}        % second order partial derivative
 
 \newcommand{\bfrac}[2]{\ensuremath{\frac{\displaystyle #1}{\displaystyle #2}}}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newcommand*\pFqskip{8mu}
+\catcode`,\active
+\newcommand*\pFq{\begingroup
+        \catcode`\,\active
+        \def ,{\mskip\pFqskip\relax}%
+        \dopFq
+}
+\catcode`\,12
+\def\dopFq#1#2#3#4#5{%
+        {}_{#1}F_{#2}\biggl[\genfrac..{0pt}{}{#3}{#4};#5\biggr]%
+        \endgroup
+}

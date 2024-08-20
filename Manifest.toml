@@ -220,9 +220,9 @@ version = "1.14.3+3"
 
 [[deps.Hwloc_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "ca0f6bf568b4bfc807e7537f081c81e35ceca114"
+git-tree-sha1 = "1d334207121865ac8c1c97eb7f42d0339e4635bf"
 uuid = "e33a78d0-f292-5ffc-b300-72abe9b543c8"
-version = "2.10.0+0"
+version = "2.11.0+0"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]

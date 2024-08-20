@@ -1,0 +1,65 @@
+\chapter{Path Integral Derivation}
+\label{appx:first}
+
+\begin{equation}
+    \rho(r_i, r_f; \hbar\beta) = \int_{r(0)=r_i}^{r(\hbar\beta)=r_f} \mathcal{D}r(\tau)\ \exp{-\frac{1}{\hbar}\int_0^{\hbar\beta}d\tau\ \left[\frac{m}{2} \dot{r}(\tau)^2 + V(r(\tau))\right]}
+\end{equation}
+
+The free energy can be obtained using,
+\begin{equation}
+    e^{-\beta F} = \int_{-\infty}^{\infty} dr\ \rho(r, r; \hbar\beta)
+\end{equation}
+
+The classical limit corresponds to high temperature $\beta \ll 1$. Expanding around the classical path $r_{\text{cl}}$ and neglecting the quantum fluctuations gives the classical free energy,
+\begin{equation}
+    e^{-\beta F_{\text{cl}}} = \int_{-\infty}^{\infty} dr\ \rho_{\text{cl}}(r, r; \hbar\beta) = \left(\frac{m}{2\pi\hbar^2\beta}\right)^{\frac{1}{2}} \int_{-\infty}^{\infty} dr\ e^{-\beta V(r)}.
+\end{equation}
+The classical path tends to let $V(r(\tau))$ to be lower than $V(r_{\text{cl}}$. This means,
+\begin{equation}
+    \rho_{\text{cl}}(r_i,r_f;\hbar\beta) < \rho(r_i,r_f;\hbar\beta),
+\end{equation}
+and
+\begin{equation}
+    F_{\text{cl}} \gtrsim F.
+\end{equation}
+
+The density matrix for a free particle is,
+\begin{equation}
+    \rho(r_i, r_f; \hbar\beta) = \int_{r(0)=r_i}^{r(\hbar\beta)=r_f} \mathcal{D}r(\tau)\ \exp{-\frac{1}{\hbar}\frac{m}{2}\int_0^{\hbar\beta}d\tau\ \dot{r}(\tau)^2}
+\end{equation}
+Expand about the classical path $r(\tau) = r_{\text{cl}}(\tau) + \delta r(\tau)$ in the action,
+\begin{equation}
+\begin{aligned}
+    S[r_{\text{cl}}(\tau) + \delta r(\tau)] &= \frac{m}{2} \int_0^{\hbar\beta} \left[ \dot{r_{\text{cl}}}(\tau) + \dot{\delta r}(\tau) \right]^2 \\
+    &= \frac{m}{2} \int_0^{\hbar\beta} \left[\dot{r_{\text{cl}}}(\tau)^2 + \dot{r_{\text{cl}}}(\tau) \dot{\delta r}(\tau) + \dot{\delta r}(\tau)^2 \right] \\
+    \frac{m}{2} \left[ 2 \dot{r_{\text{cl}}} \right]_{r_i}^{r_f}
+\end{aligned}
+\end{equation}
+
+\section{Particle interacting with a harmonic oscillator}
+
+\begin{equation}
+    H = \frac{p^2}{2m} + \left(\frac{P^2}{2M} + \frac{M\omega^2}{2}R^2\right) - \gamma r R + V(r)
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+    Z = &\int \mathcal{D}r(\tau) \mathcal{D}R(\tau) \exp{-\frac{1}{\hbar} \int_0^{\hbar\beta} d\tau \left(\frac{m}{2} \dot{r}(\tau)^2 + V(r(\tau))\right)} \\
+    &\times \exp{-\frac{1}{\hbar}\int_0^{\hbar\beta} d\tau \left(\frac{M}{2}\dot{R}(\tau)^2 + \frac{M\omega^2}{2}R(\tau)^2 - \gamma r(\tau) R(\tau)\right)}
+\end{aligned}
+\end{equation}
+The path integral over the harmonic oscillator is
+\begin{equation}
+\begin{aligned}
+    Z_{\text{osc}}[f] &= \int_{x(0)=x_i}^{x(\hbar\beta)=x_f} \mathcal{D}R(\tau) \exp\left[-\frac{1}{\hbar}\int_0^{\hbar\beta}d\tau\left(\frac{M}{2}\dot{R}(\tau)^2 + \frac{M\omega^2}{2}R^2 + if(\tau)R(\tau)\right)\right] \\
+    &= \left(\frac{M\omega}{2\pi\hbar \sinh\left(\hbar\omega\beta\right)}\right)^{1/2} e^{-\Phi[f]/\hbar}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+    \Phi[f] &= \frac{1}{4M\omega} \int_0^{\hbar\beta}\int_0^{\hbar\beta} d\tau d\tau' e^{-\omega\abs{\tau-\tau'}} f(\tau)f(\tau') \\
+    &+ \frac{M\omega}{2 \sinh\left(\omega\hbar\beta\right)} \left[\left(R^2-R'^2\right)\cosh(\hbar\omega\beta) - 2RR'\right] \\
+    &+ \frac{M\omega}{2 \sinh\left(\omega\hbar\beta\right)} \left[\right]
+\end{aligned}
+\end{equation}

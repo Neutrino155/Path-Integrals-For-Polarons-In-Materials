@@ -1,0 +1,1982 @@
+\chapter{Background}
+\label{chap:second}
+
+\thesisepisrcyear{\justifying{``What I cannot create, I do not understand.  
+Know how to solve every problem that has been solved.'}'}{Richard P. Feynman}{Feynman's Last Chalkboard}{1988}
+
+\chapterintrobox{In this chapter I will outline the key existing developments towards polaron physics in the last 90 years and that much of this thesis aims to build upon. I first provide a heuristic overview of the historical developments of the field. I will then present a comprehensive re-derivation of the key theories of the Fr\"ohlich and Holstein polarons, and of Feynman's original variational path integral approach to approximating the polaron state.}
+
+\section{Polaron Physics}
+\label{sec:2-1}
+
+\subsection{A Brief History}
+\label{subsec:2-1-1}
+
+\subsubsection{Landau and Pekar, 1933-1948}
+\label{subsubsec:2-1-1-1}
+
+The self-localisation of an electron in a perfect crystal due to lattice deformations was investigated by Landau~\cite{landau_motion_1933}, who was concerned with the effect of lattice defects on materials such as sodium chloride. Later, the concept of a ``polaron'' was initially proposed and coined by Pekar~\cite{pekar_local_1946, pekar_notitle_1946, pekar_notitle_1947} to describe the spontaneous trapping of an electron due to the induced polarisation of an atomic lattice in a strongly ionic material. Further developments on the exact definition of a polaron led to a joint paper by Pekar and Landau~\cite{pekar_effective_1948}, where they calculated the effective mass of a large,  strongly-coupled polaron. The polaron was established as a \emph{quasiparticle} that consists of a charge carrier (such as an electron or hole) `dressed' by a cloud of virtual phonon excitations that follow the charge carrier as it propagates through a polarisable medium. Suppose the polaron's spatial delocalisation is large compared to the lattice parameter of a material. The material can be treated as a polarisable continuum, and we have a \emph{large} polaron. However, when the extent of the polaron is of the order of the lattice parameter, we have a \emph{small} polaron, and lattice effects cannot be ignored.
+
+\subsubsection{Fr\"ohlich \& Holstein, 1950-1959}
+\label{subsubsec:2-1-1-2}
+
+The theoretical groundwork for polaron theories was formally established by Fr\"ohlich~\cite{frohlich_electrons_1954} and Holstein~\cite{holstein_studies_1959-1, holstein_studies_1959}. Both Fr\"ohlich and Holstein developed rigorous quantum-field Hamiltonians that describe large or small polarons respectively. The Fr\"ohlich Hamiltonian represents a simplistic physical system composed of a single conduction-band electron linearly coupled to a polarisation field. This polarisation field, carried by longitudinal optical phonons, is represented by a set of quantum harmonic oscillators with no dispersion and oscillating at the same frequency. The strength of the electron-phonon coupling is characterised by a dimensionless coupling constant called the ``Fr\"ohlich alpha parameter'' and can be determined from the properties of the material. Despite its simplistic representation, an exact solution to the Fr\"ohlich Hamiltonian has evaded direct evaluation. \textcolor{red}{Add Holstein summary.}
+
+\subsubsection{Feynman, 1955}
+\label{subsubsec:2-1-1-3}
+
+\textcolor{red}{Add more introductory summary.}
+
+Feynman~\cite{feynman_slow_1955}, cast the Fr\"ohlich Hamiltonian into a Lagrangian by converting the electron and phonon creation and annihilation operators into the corresponding coordinates and momenta and by doing a Legendre transformation. After a Gaussian integration over the momenta, he obtained a Gaussian configuration path integral over the phonon coordinates, which could be evaluated explicitly. The result was an exact \emph{`model}' action of the electron coupled by a non-local Coulomb potential to a second fictitious particle. 
+
+This path integral could not be evaluated precisely because the remaining electron coordinates have a $1 / r$ dependence; the path integral is non-Gaussian. So, Feynman proposed a \emph{`trial}' action that attempts to capture the main properties of the model action but is quadratic in the electron coordinates and leads to a solvable Gaussian path integral. This trial action represents a system of an electron coupled to a fictitious massive particle via a spring-like harmonic potential that decays exponentially in time. After passing the model and trial actions into imaginary time, he obtained an expression for the quantum statistical partition function that is a convex functional, allowing him to apply Jensen's inequality. The result was a variational inequality that minimised the difference between the trial and model action to give an approximate lower upper bound on the ground-state polaron self-energy.
+
+Feynman's variational inequality involved two variational parameters. The first, denoted by $C$, controlled the strength of the harmonic coupling and the second, denoted by $w$, controlled the decay rate of the coupling in time. Later in his paper, Feynman substituted $C$ with the parameter $v$, which is the frequency of the harmonic coupling. Feynman used his polaron theory to evaluate the polaron's ground-state energy and effective mass for all electron-phonon coupling strengths.
+
+\subsubsection{\=Osaka, 1959-1961}
+\label{subsubsec:2-1-1-4}
+
+\=Osaka~\cite{osaka_polaron_1959, osaka_theory_1961}, generalised Feynman's path integral variational approach to nonzero temperatures. \=Osaka achieved this by recognising that the equation of motion resulting from another more straightforward trial action produced the same equation of motion as Feynman proposed. Therefore, \=Osaka used the solution of the path integral of this more tractable action to obtain the temperature-dependent density matrix for the polaron state. At zero temperature, \=Osaka's formulation is identical to Feynman's expression for the polaron self-energy.
+
+\subsubsection{Feynman, Hellwarth, Iddings \& Platzman, 1962}
+\label{subsubsec:2-1-1-5}
+
+\textcolor{red}{Mention influence functionals. Maybe Feynman-Vernon.}
+
+Feynman, Hellwarth, Iddings \& Platzman~\cite{feynman_mobility_1962} (commonly referred to as ``FHIP'') derived, from the path integral approach, an approximate expression for the impedance function of the polaron under the influence of a weakly alternating electric field. This impedance function was valid for all frequencies of an applied electric field, temperatures, and all electron-phonon coupling strengths. The impedance function was not variational, instead it was obtained from a second-order functional expansion around the quadratic trial action used by~\cite{feynman_slow_1955}. The critical step of this derivation was evaluating the ``memory function''. This memory function was obtained from the imaginary part of the dynamic structure factor, which was, in turn, obtained from the electron density-density correlation function and evaluated as a path integral. The memory function contained the dynamics of the polaron and depended on the values of the variational parameters that gave the lowest estimate of the polaron self-energy. It was assumed that these values of the variational parameters provided the most accurate prediction of the dynamics. An explicit expression for the imaginary part of the memory function was given, from which they obtained an expression for the DC mobility of the polaron and looked at the behaviour in the limit of zero, low and high temperatures.
+
+\subsubsection{Devreese, Sitter \& Goovaerts, 1972}
+\label{subsubsec:2-1-1-6}
+
+Starting from the approach used by~\cite{feynman_mobility_1962}, Devreese, Sitter \& Goovaerts~\cite{devreese_optical_1972} (commonly referred to as ``DSG'') showed how to calculate the optical absorption of Fr\"ohlich polarons, for all coupling, temperature and frequency. It was demonstrated that three different kinds of polaron excitations appear in the spectra produced from their expression: scattering states where, for example, one real phonon is excited; relaxed excited states (RES); and Franck-Condon (FC) states. It was found that these spectral features only appear from an expansion of the impedance function obtained in FHIP and not from the corresponding conductivity function that is the reciprocal of the impedance. This was argued as justification for the choice in FHIP to expand the impedance to second-order instead of the conductivity, which is more commonly used when studying the linear response of a system. Additionally, they provided both the real and imaginary parts of the memory function explicitly as an infinite series of special functions (e.g. Bessel functions) and simplified forms of these series at zero temperature.
+
+\subsubsection{Hellwarth \& Biaggio, 1997-8}
+\label{subsubsec:2-1-1-7}
+
+Hellwarth \& Biaggio~\cite{hellwarth_mobility_1999}, derived a Lagrangian that described a free electron interacting with a polar lattice with multiple infrared-active optical-phonon modes, in the presence of an applied field. From this Lagrangian, they derive an effective model action comparative to Feynman's model action, except that it had a summation over terms differing in the phonon frequency and electron-phonon coupling strength corresponding to each phonon mode. Rather than use this effective action directly, they defined a single effective phonon frequency and electron-phonon coupling (for which they provided two different schemes to obtain) and used \=Osaka's free energy minimisation procedure instead. They used the mobility equation derived in FHIP and their own derived Lorentz-Lorenz relation to produce accurate predictions for the room-temperature electron mobility and reflectivity in Bi$_{12}$SiO$_{20}$.
+
+\subsubsection{Mishchenko, Prokof’ev, Sakamoto \& Svistunov, 1998-2000}
+\label{subsubsec:2-1-1-9}
+
+\textcolor{red}{More DQMC papers? 2019 Mobility, 2016 Holstein, 2022 Stefano etc.}
+
+Prokof’ev \& Svistunov~\cite{prokofev_polaron_1998}, in addition to Mishchenko \& Sakamoto~\cite{mishchenko_diagrammatic_2000}, performed a detailed study on the Fr\"ohlich polaron model using a diagrammatic quantum Monte Carlo method (DQMC). They produced precise numerical data for the polaron self-energy, effective mass, general structure of the polaron cloud and spectral density of the polaron from intermediate to strong electron-phonon couplings. Their method used a set of Green's functions of the polaron, which they simulated using a standard diagrammatic expansion-Matsubara technique at zero temperature and related them to the polaron parameters. These results are considered the `gold standard' for the Fr\"ohlich model and are often used as a theoretical benchmark to compare newer model predictions against.
+
+\subsection{Fr\"ohlich's Large Polaron}
+\label{subsec:2-1-2}
+
+Fr\"ohlich~\cite{frohlich_electrons_1954} studied a system whereby a charged particle in a dielectric medium polarises its surroundings. The resultant polarisation field interacts with the particle, and the particle then possesses self-energy in the field due to the changes it, in turn, causes in the field. A simple example is the motion of a free conduction band electron in an ionic crystal. This is a relevant model for physical materials and also theoretically interesting as it is a simple example of a non-relativistic quantum field theory of a fermion interacting with a bosonic quantum field. For a slow electron in the conduction band, the electronic dispersion relation $\epsilon_k$ is approximately quadratic in the momentum $\hbar \textbf{k}$ 
+\begin{equation}
+    \epsilon_k = \frac{\hbar^2 k^2}{2 m_0}.
+\label{eqn-212-1:frohlich-dispersion}
+\end{equation}
+Here $m_0$ is the effective band mass of the electron and is usually different to the electronic mass $m_e$, and $\vb{k}$ is the wave vector of the electron. Eq. (\ref{eqn-212-1:frohlich-dispersion}) is typically only valid near the extrema of the valence and conduction bands, such as for slow conduction electrons. This results from a typical Bloch electron plane wave moving through a rigid lattice.  
+
+Fr\"ohlich improved Bloch's approximation by modelling an electron moving through a non-rigid isotropic polar lattice. The electron experiences an electrostatic potential generated by the displacement of ions from their lattice sites. For small ion displacements compared to the lattice spacing, this potential is one generated by an electric dipole. Since the lattice is polar, ion displacements that lead to electric polarisations interact more strongly with electrons than other types of displacements, which Fr\"ohlich disregards. The electronic wave function varies slowly over many lattice spacings for sufficiently low-energy electrons. Therefore, the lattice can be approximated by a continuum such that the electric field, generated by the displacement of ions in the lattice, can be described by a macroscopic continuous polarisation field, $\vb{P}(\vb{r})$. 
+
+\subsubsection{Classical field theory}
+\label{subsubsec:2-1-2-1}
+
+From the usual definition of the electric displacement field $\vb{D}(\vb{r})$, the polarisation field is related to the total electric field intensity $\vb{E}(\vb{r})$ by (in CGS units),
+\begin{equation}
+    \vb{E}(\vb{r}) = \vb{D}(\vb{r}) - 4\pi\vb{P}(\vb{r}).
+\label{eqn-2121-1}
+\end{equation}
+Therefore, $-4\pi\vb{P}(\vb{r})$ is the contribution made by the lattice to the total electric field intensity. Since the main force acting on the electron is the polarisation field $\vb{P}(\vb{r})$ from the ionic displacement, the classical equation of motion of the electron is
+\begin{equation}
+    m_0 \vb{\ddot{r}} = 4\pi e \vb{P}(\vb{r}).
+\label{eqn-2121-2}
+\end{equation}
+For a single free electron with charge $e$ and position $\vb{r}$, the electric displacement is
+\begin{equation}
+    \vb{D}(\vb{r}, \vb{r}) = -e \grad \left(\frac{1}{\abs{\vb{r} - \vb{r}}}\right),
+\label{eqn-2121-3}
+\end{equation}
+such that $\curl \vb{D}(\vb{r}, \vb{r}) = 0$ and $\div \vb{D}(\vb{r}, \vb{r}) = 4\pi e \delta (\vb{r} - \vb{r})$. This electric displacement represents the `external' electric fields that act on the electron in the crystal. Since the displacement field is longitudinal ($\curl \vb{D}(\vb{r}, \vb{r}) = 0$), the polarisation field generated by the electron will be longitudinal too (assuming that magnetic fields can be neglected). Therefore, if $\vb{P}(\vb{r})$ is the electric polarisation at the position $\vb{r}$, then the rotational part of the field must be zero,
+\begin{equation}
+    \curl \vb{P}(\vb{r}) = 0.
+\label{eqn-2121-4}
+\end{equation}
+The electric field generated by the polarisation $-4\pi \vb{P}$ can be expressed by an electric potential $\Phi(\vb{r})$ given by Poisson's equation,
+\begin{equation}
+    -\grad \Phi(\vb{r}) = -4\pi\vb{P}(\vb{r}).
+\label{eqn-2121-5}
+\end{equation}
+The energy of the interaction between the electron and the lattice displacements is then
+\begin{equation}
+    \begin{aligned}
+    E_{e-l} &= -\int \vb{D}(\vb{r}, \vb{r}) \vb{P}(\vb{r}) d^3 \vb{r}, \\ 
+    &= \frac{e}{4\pi} \int \grad \left( \frac{1}{\abs{\vb{r} - \vb{r}}} \right) \grad \Phi(\vb{r}) d^3 \vb{r}, \\
+    &= e\Phi(\vb{r}).
+    \end{aligned}
+\label{eqn-2121-6}
+\end{equation}
+The longitudinal modes of the lattice that generate the polarisation field are either optical lattice modes (where two adjacent ions move in opposite directions) or acoustic modes (where adjacent ions move in the same direction). Only the optical modes produce dipole moments that add constructively for small lattice displacements, generating a significant resultant polarisation. This is especially true of long-wavelength optical modes, which have the most significant interaction with the electron and are dispersion-less with constant vibrational frequency $\omega_0$. Fr\"ohlich assumed that only these long-wavelength longitudinal optical (LO) modes had any considerable effect on the conduction electron and neglected all other lattice modes. 
+
+The total lattice polarisation has two contributions, one from high-frequency oscillations $\vb{P}_{e}(\vb{r})$ due to the deformation of the ions, and one from infrared oscillations due to ionic displacement $\vb{P}_{i}(\vb{r})$
+\begin{equation}
+    \vb{P}(\vb{r}) = \vb{P}_{e}(\vb{r}) + \vb{P}_{i}(\vb{r}).
+\label{eqn-2121-7}
+\end{equation}
+Under an external field $\vb{D}(\vb{r})$ the equations of motion for these two polarisations are driven harmonic oscillator equations
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \vb{\ddot{P}}_{i}(\vb{r}) + \omega^2_{i} \vb{P}_{i}(\vb{r}) &= \vb{D}(\vb{r}, \vb{r}) / \gamma,
+    \end{split}\\
+    \begin{split}
+        \vb{\ddot{P}}_{e}(\vb{r}) + \omega^2_{e} \vb{P}_{e}(\vb{r}) &= \vb{D}(\vb{r}, \vb{r}) / \delta,
+    \end{split}
+\end{align}
+\label{eqn-2121-8}
+\end{subequations}
+where $\omega_{e}/2\pi$ and $\omega_{i}/2\pi$ are the frequencies corresponding to the optical absorption in the high (electronic) and infrared regions, respectively. $\gamma$ and $\delta$ are constants related to energy associated with the respective displacements. To determine these constants, we go to the zero-frequency ``static'' case where $\vb{\dot{P}} = 0$ and $\vb{D} = \epsilon_0 \vb{E}$, with $\epsilon_0$ the total zero-frequency dielectric constant. In the zero-frequency limit, the polarisation is
+\begin{equation}
+    4\pi \vb{P}(\vb{r}) = (\epsilon_0 - 1) \vb{E}(\vb{r}) = (1\ - \epsilon_0^{-1}) \vb{D}(\vb{r}).
+\label{eqn-2121-9}
+\end{equation}
+In the high-frequency limit, the frequency $\Omega$ of the external field $\vb{D}$ satisfies $\omega_e \gg \Omega \gg \omega_i$ such that the lattice polarisation is not excited. In the high-frequency limit, the polarisation is
+\begin{equation}
+    4\pi\vb{P}(\vb{r}) = 4\pi\vb{P}_e(\vb{r}) = (1 - \epsilon_\infty^{-1}) \vb{D}(\vb{r}),
+\label{eqn-2121-10}
+\end{equation}
+where $\epsilon_\infty$ is the high-frequency dielectric constant. In the high-frequency limit, the ions can no longer keep up $\vb{P}_{i} \approx 0$, whereas the electronic oscillators can follow nearly adiabatically. Therefore, the $\vb{\ddot{P}}_{e}$ term would be negligible compared to $\omega^2_{e} \vb{P}_{e}$, and so for a field $\vb{D}$ of equal strength, $\vb{P}_e$ would have roughly the same value in the static limit as in the high-frequency limit. Hence, we can combine the two expressions above to obtain the ionic polarisation
+\begin{equation}
+    \vb{P}_i(\vb{r}) = \vb{P}(\vb{r}) - \vb{P}_e(\vb{r}) = \frac{1}{4\pi} \left(\frac{1}{\epsilon_\infty} - \frac{1}{\epsilon} \right) \vb{D}(\vb{r}),
+\label{eqn-2121-11}
+\end{equation}
+where $\vb{P}_e$ in either limit will cancel. Now, using the equations of motion in the static limit ($\vb{\ddot{P}}_{e} = \vb{\ddot{P}}_{i} = 0$) and our expressions for $\vb{P}_i$ and $\vb{P}_e$ we find
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \frac{1}{\gamma} &= \frac{\omega_{i}^2}{4\pi} \left(\frac{1}{\epsilon_\infty} - \frac{1}{\epsilon_0} \right),
+    \end{split}\\
+    \begin{split}
+        \frac{1}{\delta} &= \frac{\omega_{e}^2}{4\pi} \left(1 - \frac{1}{\epsilon_\infty} \right).
+    \end{split}
+\end{align}
+\label{eqn-2121-12}
+\end{subequations}
+Combined with the equation of motion for the electron, all three equations of motion can be obtained from the overall Lagrangian
+\begin{equation}
+\begin{gathered}
+    L = \frac{1}{2} m_0 \vb{\dot{r}}^2 + \frac{1}{2} \gamma \int \left[ \vb{\dot{P}}_{i}^2(\vb{r}) - \omega_i^2 \vb{P}^2_i (\vb{r}) \right] d^3 \vb{r} \\
+    + \frac{1}{2} \delta \int \left[ \vb{\dot{P}}_{e}^2(\vb{r}) - \omega_e^2 \vb{P}^2_e (\vb{r}) \right] d^3 \vb{r} + \int \vb{D}(\vb{r}, \vb{r})\left[\vb{P}_e(\vb{r})+\vb{P}_i(\vb{r})\right] d^3\vb{r} + E_{zp}
+\end{gathered}
+\label{eqn-2121-13}
+\end{equation}
+by using the standard method of extremising the corresponding action $\delta S = \int dt \delta L = 0$ with $\vb{r}$, $\vb{P}_e(\vb{r})$ and $\vb{P}_i(\vb{r})$ as variables. $E_{zp}$ is an arbitrary constant representing the polarisation field's zero-point energy without the electron's interaction. 
+
+The corresponding Hamiltonian can be derived via a Legendre transformation by noting that the conjugate momenta (defined as $\partial L/\partial\dot{X}$ with the generalised coordinate $X \in \{\vb{r},  \vb{P}_e(\vb{r}), \vb{P}_i(\vb{r})\}$) are $\vb{p} = m_0 \vb{\dot{r}}$, $\vb{\Pi}_e(\vb{r}) = \gamma \vb{\dot{P}}_e(\vb{r})$ and $\vb{\Pi_i(\vb{r})} = \delta \vb{\dot{P}}_i (\vb{r})$. Hence, the Hamiltonian is
+\begin{equation}
+    \begin{gathered}
+        H = \sum_{X} \frac{\partial L}{\partial \dot{X}} \dot{X} - L = \frac{\vb{p}^2}{2 m_0} + \frac{1}{2} \int \left[\vb{\Pi}_{i}^2(\vb{r})/\gamma + \gamma\omega_{i}^2 \vb{P}^2_i (\vb{r}) \right]
+        d^3 \vb{r} 
+        \\ + \frac{1}{2} \int \left[\vb{\Pi}_{e}^2(\vb{r})/\delta + \delta\omega_{e}^2 \vb{P}^2_e (\vb{r}) \right] d^3 \vb{r} - \int \vb{D}(\vb{r},\vb{r})\left[\vb{P}_e(\vb{r})+\vb{P}_i(\vb{r})\right] d^3\vb{r} - E_{zp}.
+    \end{gathered}
+\label{eqn-2121-14}
+\end{equation}
+The canonically conjugate variables all obey the classical Poisson's Brackets
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \left\{\vb{p}_{el, j}, \vb{r}_{el, j}'\right\} &= \delta_{j, j}',
+    \end{split}\\
+    \begin{split}
+        \left\{\vb{P}_{j}(\vb{r}), \vb{\Pi}_{j}'(\vb{r}')\right\} &= \delta_{j, j}' \delta(\vb{r}-\vb{r}').
+    \end{split}
+\end{align}
+\label{eqn-2121-15}
+\end{subequations}
+Classically, when the electron is at rest, the force acting on the electron must vanish, and so $\Phi(\vb{r})$ must be minimum at $\vb{r} = \vb{r}$. However, the above Hamiltonian diverges as $\vb{r} \to \vb{r}$. This happens because the lattice has been approximated as a continuum. This can be accounted for by representing the polarisation vectors as a Fourier series and excluding terms with wavelengths shorter than the lattice constant. With this cut-off, $\Phi(\vb{r})$ will now have a minimum at $\vb{r} = \vb{r}$ and $\vb{P}(\vb{r}) = 0$. Nonetheless, when the electron is moving slowly, $\vb{P}(\vb{r}) \neq 0$ due to the time-dependent terms in the equation of motion, but $\vb{P}_e(\vb{r}) \ll \vb{P}_i(\vb{r})$ because $\omega^2_e \gg \omega^2_i$. This means that for a slow electron, the displacement of ions in the lattice is primarily due to the infrared polarisation field $\vb{P}_i(\vb{r})$. Therefore, for a slow electron, the $\vb{P}_e(\vb{r})$ terms remain mostly constant and can be disregarded from the lattice dynamics. This gives Fr\"ohlich's  Hamiltonian for a slow electron in an ionic lattice to be
+\begin{equation}
+\begin{aligned}
+    H = \frac{\vb{p}^2}{2 m_0} &+ \frac{1}{2} \int \left[\vb{\Pi}_{i}^2(\vb{r})/\gamma + \gamma\omega_{i}^2 \vb{P}^2_i (\vb{r}) \right] d^3 \vb{r} \\
+    &- \int \vb{D}(\vb{r},\vb{r})\vb{P}_i(\vb{r}) d^3\vb{r} - E_{zp} .
+\end{aligned}
+\label{eqn-2121-16:frohlich_hamiltonian_slow}
+\end{equation}
+
+\subsubsection{Quantising Fr\"ohlich's Hamiltonian}
+\label{subsubsec:2-1-2-2}
+
+From now on, I will drop the `$i$' index for the infrared polarisation field, and $\vb{P}(\vb{r})$ will represent the infrared ionic displacement polarisation field, with frequency $\omega_0$. To prepare this Hamiltonian for quantisation, Fr\"ohlich introduced an auxiliary complex vector field $\vb{B}(\vb{r})$ that is defined by
+\begin{subequations}
+\begin{align}
+    \begin{split}
+    \vb{B}(\vb{r}) &= \sqrt{\frac{\gamma \omega_0}{2\hbar}} \left[ \vb{P}(\vb{r}) + \frac{i}{\gamma\omega_0} \vb{\Pi}(\vb{r})\right],
+    \end{split}\\
+    \begin{split}
+    \vb{B}^*(\vb{r}) &= \sqrt{\frac{\gamma \omega_0}{2\hbar}} \left[ \vb{P}(\vb{r}) - \frac{i}{\gamma\omega_0} \vb{\Pi}(\vb{r})\right],
+    \end{split}
+\end{align}
+\label{eqn-2133-1}
+\end{subequations}
+where $\curl \vb{B}(\vb{r}) = \curl \vb{B}^\dagger(\vb{r}) = 0$. Equivalently, this can be written in terms of the infrared polarisation field,
+\begin{subequations}
+\begin{align}
+    \begin{split}
+    \vb{P}(\vb{r}) &= \sqrt{\frac{\hbar}{2\gamma\omega_0}} \left[\vb{B}^*(\vb{r}) + \vb{B}(\vb{r})\right],
+    \end{split}\\
+    \begin{split}
+    \vb{\Pi}(\vb{r}) &= i \sqrt{\frac{\gamma\hbar\omega_0}{2}} \left[\vb{B}^*(\vb{r}) - \vb{B}(\vb{r})\right].
+    \end{split}
+\end{align}
+\label{eqn-2122-2}
+\end{subequations}
+Substituting these into (\ref{eqn-2121-16:frohlich_hamiltonian_slow}) gives the Hamiltonian
+\begin{equation}
+\begin{aligned}
+    H = \frac{\vb{p}^2}{2m_0} + \hbar \omega_0 \int \vb{B}^*(\vb{r}) \vb{B}(\vb{r}) d^3\vb{r}
+    - \sqrt{\frac{\hbar}{2\gamma\omega_0}} \int \vb{D}(\vb{r}, \vb{r}) \left[ \vb{B}^*(\vb{r}) + \vb{B}(\vb{r}) \right] d^3 \vb{r} 
+    - E_{zp}.
+\end{aligned}
+\label{eqn-2122-3}
+\end{equation}
+To quantise this Hamiltonian, $\vb{B}(\vb{r})$ is given a periodic boundary condition over a cube of volume $V_0 = L^3$ and is expressed as a Fourier series,
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \vb{B}(\vb{r}) &= \frac{1}{\sqrt{V_0}} \sum_{\vb{q}} \frac{\vb{q}}{\abs{\vb{q}}} b_{\vb{q}} e^{i \vb{q} \cdot \vb{r}},
+    \end{split}\\
+    \begin{split}
+        \vb{B}^*(\vb{r}) &= \frac{1}{\sqrt{V_0}} \sum_{\vb{q}} \frac{\vb{q}}{\abs{\vb{q}}} b^*_{\vb{q}} e^{-i \vb{q} \cdot \vb{r}}.
+    \end{split}
+\end{align}
+\label{eqn-2122-4}
+\end{subequations}
+The Fourier coefficients are given by
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        b_{\vb{q}} &= \frac{1}{\sqrt{V_0}} \frac{\vb{q}}{\abs{\vb{q}}} \cdot \int d^3\vb{r}\  \vb{B}(\vb{r}) e^{-i \vb{q} \cdot \vb{r}},
+    \end{split}\\
+    \begin{split}
+        b_{\vb{q}} &= \frac{1}{\sqrt{V_0}} \frac{\vb{q}}{\abs{\vb{q}}} \cdot \int d^3\vb{r}\  \vb{B}^*(\vb{r}) e^{i \vb{q} \cdot \vb{r}},
+    \end{split}
+\end{align}
+\label{eqn-2122-5}
+\end{subequations}
+where the components $q_j$ of the wave-vector $\vb{q}$ satisfy
+\begin{equation}
+    q_j = \frac{2\pi}{V_0^{1/3}} n_j, \quad n_j = 0, \pm 1, \pm 2, \dots \ .
+\label{eqn-2122-6}
+\end{equation}
+In the limit as the volume goes to infinity $V_0 \to \infty$ the sum over $\vb{q}$ becomes
+\begin{equation}
+    \sum_{\vb{q}} \rightarrow \frac{V_0}{(2\pi)^3} \int d^3 \vb{q}.
+\label{eqn-2122-7}
+\end{equation}
+The fact that $\vb{P}(\vb{r})$ and $\vb{\Pi}(\vb{r})$ are real functions imposes the following condition on the Fourier components $b_{\vb{q}}$ and $b^*_{\vb{q}}$,
+\begin{equation}
+    b^*_{\vb{q}} = -b_{-\vb{q}}.
+\label{eqn-2122-8}
+\end{equation}
+The infrared polarisation field and its momenta conjugate can be written in terms of $b_{\vb{q}}$ and $b^*_{\vb{q}}$ 
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \vb{P}(\vb{r}) &= \sqrt{\frac{\hbar}{2\gamma\omega_0V_0}} \sum_{\vb{q}} \frac{\vb{q}}{\abs{\vb{q}}} \left[b^*_{\vb{q}}e^{-i\vb{q}\cdot\vb{r}} + b_{\vb{q}} e^{i\vb{q}\cdot\vb{r}}\right],
+    \end{split}\\
+    \begin{split}
+        \vb{\Pi}(\vb{r}) &= i\sqrt{\frac{\gamma\hbar\omega_0}{2V_0}} \sum_{\vb{q}} \frac{\vb{q}}{\abs{\vb{q}}} \left[b^*_{\vb{q}}e^{-i\vb{q}\cdot\vb{r}} - b_{\vb{q}} e^{i\vb{q}\cdot\vb{r}}\right].
+    \end{split}
+\end{align}
+\label{eqn-2122-9}
+\end{subequations}
+To derive the Poisson Bracket's for $b_{\vb{q}}$ and $b_{\vb{q}}^*$, note that $\vb{P}(\vb{r})$ and $\vb{\Pi}(\vb{r})$ are conjugate variables. This means that $\sqrt{\hbar / 2\gamma \omega_0} (b_{\vb{q}}^* + b_{\vb{q}})$ and  $i\sqrt{\hbar \omega_0 / 2\gamma} (b_{\vb{q}}^* - b_{\vb{q}})$ are conjugate too. Therefore, quantisation via Bose statistics gives
+\begin{equation}
+    \left\{b_{\vb{q}}^* + b_{\vb{q}}, b_{\vb{q}'}^* - b_{\vb{q}'}\right\} = \frac{2}{i\hbar} \delta_{\vb{q}, \vb{q}'},
+\label{eqn-2122-10}
+\end{equation}
+and since commutators involving the same operator but different $\vb{q}$s vanish, the commutators are
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \left\{b_{\vb{q}},b^*_{\vb{q}'}\right\} &= \frac{1}{i\hbar} \delta_{\vb{q}, \vb{q}'},
+    \end{split}\\
+    \begin{split}
+        \left\{b_{\vb{q}},b_{\vb{q}'}\right\} &= \left\{b^*_{\vb{q}},b^*_{\vb{q}'}\right\} = 0.
+    \end{split}
+\end{align}
+\label{eqn-2122-11}
+\end{subequations}  
+The interaction energy between the electron and the infrared polarisation field can now be defined in terms of $b_{\vb{q}}$ and $b^*_{\vb{q}}$,
+\begin{equation}
+    \begin{aligned}
+    e \Phi (\vb{r}) &= - \int \vb{D}(\vb{r}, \vb{r}) \vb{P}(\vb{r}) d^3\vb{r} \\
+    &= -\sqrt{\frac{\hbar}{2\gamma\omega_0V_0}} \int \vb{D}(\vb{r}, \vb{r}) \sum_{\vb{q}} \frac{\vb{q}}{\abs{\vb{q}}} \left[b_{\vb{q}}^* e^{-i\vb{q}\cdot\vb{r}} + b_{\vb{q}} e^{i\vb{q}\cdot\vb{r}} \right] d^3\vb{r},
+    \end{aligned}
+\label{eqn-2122-12}
+\end{equation}
+Where to proceed, one integrates by parts to give
+\begin{equation} 
+    \begin{aligned}
+    e \Phi (\vb{r}) &= 4\pi i \sqrt{\frac{e^2 \hbar}{2\gamma\omega_0V_0}} \int \delta(\vb{r} - \vb{r}) \sum_{\vb{q}} \frac{1}{\abs{\vb{q}}} \left[b_{\vb{q}}^* e^{-i\vb{q}\cdot\vb{r}} - b_{\vb{q}} e^{i\vb{q}\cdot\vb{r}} \right] d^3\vb{r} \\
+    &= 4\pi i \left( \frac{e^2 \hbar}{2 \gamma \omega_0 V_0} \right)^{1/2} \sum_{\vb{q}} \frac{1}{\abs{\vb{q}}} \left[b_{\vb{q}}^* e^{-i\vb{q} \cdot \vb{r}} - b_{\vb{q}} e^{i\vb{q} \cdot \vb{r}}\right].
+    \end{aligned}
+\label{eqn-2122-13:phi}
+\end{equation}
+Hence, for the Hamiltonian (written in symmetrised form), we get
+\begin{equation}
+\begin{aligned}
+    H &= \frac{\vb{p}^2}{2m_0} + \frac{\hbar \omega_0}{2} \sum_{\vb{q}} \left[b_{\vb{q}}^* b_{\vb{q}} + b_{\vb{q}} b^*_{\vb{q}}\right] - E_{zp} \\
+    &+ 4\pi i e \left( \frac{\hbar}{2 \gamma \omega_0 V_0} \right)^{1/2} \sum_{\vb{q}} \frac{1}{\abs{\vb{q}}} \left[ b_{\vb{q}}^* e^{-i\vb{q} \cdot \vb{r}} - b_{\vb{q}} e^{i\vb{q} \cdot \vb{r}}\right].
+\end{aligned}
+\label{eqn-2122-14}
+\end{equation}
+The result for $\Phi (\vb{r})$ in Eq. (\ref{eqn-2122-13:phi}) only holds if $\vb{q} \neq 0$, and the summations must exclude the case for when $\vb{q} = 0$. This situation represents an electron in a neutral, rigid lattice and must not be subjected to periodic boundary conditions. Otherwise, the periodic boundary conditions would repeat this charge since the volume $V_0$ contains a charge $e$. This cannot happen as it leads to a diverging overlap of the many long-range repulsive Coulomb interactions. To avoid this, an opposite ``mirror'' charge $-e$ is distributed homogeneously over the volume $V_0$, which compensates for the $\vb{q} = 0$ component of the electronic charge. So, the $\vb{q} = 0$ component does not contribute to the interaction energy. This is known as the homogeneous background charge. 
+
+To quantise, the electron momentum $\vb{p}$ is replaced with the operator $i\hat{\grad}_{\vb{r}}$, $b_{\vb{q}}$ and $b^*_{\vb{q}}$ by the operators $\hat{b}_{\vb{q}}$ and $\hat{b}^\dagger_{\vb{q}}$, and the Poisson Brackets by $i\hbar$ times the corresponding commutator
+\begin{subequations}
+    \begin{equation}
+        \comm{b_{\vb{q}}}{b^\dagger_{\vb{q}'}} = \delta_{\vb{q}, \vb{q}'},
+    \end{equation}
+    \begin{equation}
+        \comm{b_{\vb{q}}}{b^\dagger_{\vb{q}}} = \comm{b_{\vb{q}'}}{b^\dagger_{\vb{q}'}} = 0.
+    \end{equation}
+\label{eqn-2122-15}
+\end{subequations}
+The polarisation field can be viewed as a set of harmonic oscillators $\vb{q}$, all with the same frequency $\omega_0/2\pi$. The operators $b_{\vb{q}}$ and $b_{\vb{q}}^\dagger$ then represent the creation and annihilation operators, respectively, of quanta of polarisation with different wave-numbers $\vb{q}$ but all with the same energy $\hbar \omega_0$. These quanta are usually referred to as \emph{phonons}. Thus, $\hat{b}_{\vb{q}}$ and $\hat{b}_{\vb{q}}^\dagger$ possess `raising' and `lowering' properties when acting on a normalised eigenfunction $\ket{n_{\vb{q}}}$,
+\begin{subequations}
+    \begin{equation}
+        (\hat{b}_{\vb{q}}^\dagger)^n \ket{0_{\vb{q}}} = \left(n!\right)^{1/2} \ket{n_{\vb{q}}}
+    \end{equation}
+    \begin{equation}
+        (\hat{b}_{\vb{q}})^n \ket{n_{\vb{q}}} = \left(n!\right)^{1/2} \ket{0_{\vb{q}}}, \quad \hat{b}_{\vb{q}} \ket{0_{\vb{q}}} = 0.
+    \end{equation}
+\label{eqn-2122-16}
+\end{subequations}
+Fr\"ohlich defined a single dimensionless parameter $\alpha$ that quantifies the strength of the electron-phonon interaction described by the last term in the Hamiltonian. This is defined by
+\begin{empheq}{The Fr\"ohlich Dimensionless Coupling Constant}
+\begin{equation}
+    \alpha = \frac{2\pi e^2}{\hbar \gamma \omega_0^3} \sqrt{\frac{2m_0\omega_0}{\hbar}} = \frac{1}{\sqrt{2}}\left(\frac{1}{\epsilon_{\infty}} - \frac{1}{\epsilon_0}  \right) \frac{e^2}{\hbar \omega_0 r_0}.
+\label{eqn-2122-17:frohlich_alpha}
+\end{equation}
+\end{empheq}
+where I defined the characteristic length scale $r_0 \equiv \sqrt{\hbar/m_0\omega_0}$. The Fr\"ohlich's Hamiltonian becomes
+\begin{equation}
+    \hat{H} = -\frac{\vb{\hat{\grad_{\vb{r}}}}^2}{2m_0} + \frac{\hbar\omega_0}{2} \sum_{\vb{q}} \left[\hat{b}_{\vb{q}}^\dagger \hat{b}_{\vb{q}} + \hat{b}_{\vb{q}} \hat{b}_{\vb{q}}^\dagger\right] - E_{zp} + \sum_{\vb{q}} ( M_{\vb{q}} \hat{b}_{\vb{q}} e^{i\vb{q} \cdot \vb{r}} + M_{\vb{q}}^* \hat{b}_{\vb{q}}^\dagger \, e^{-i\vb{q} \cdot \vb{r}}),
+\label{eqn-2122-18}
+\end{equation}
+with the interaction term
+\begin{equation}
+    M_{\vb{q}} = i\frac{\hbar \omega_0}{q} \left(\frac{2\sqrt{2} \pi r_0 \alpha}{V_0} \right)^{1/2} .
+\label{eqn-2122-19:eph_coupling}
+\end{equation}
+The zero-point energy $E_{zp}$ can be eliminated using the commutation relations where $E_{zp}$ is given by
+\begin{equation}
+    E_{zp} = \sum_{\vb{q}} \frac{\hbar\omega_0}{2} \ .
+\label{eqn-2122-19}
+\end{equation}
+This results in
+\begin{empheq}{The Fr\"ohlich Hamiltonian}
+\begin{equation}
+    \hat{H} = -\frac{\vb{\hat{\grad_{\vb{r}}}}^2}{2m_0} + \frac{\hbar\omega_0}{2} \sum_{\vb{q}}\hat{b}_{\vb{q}} \hat{b}_{\vb{q}}^\dagger + \sum_{\vb{q}} ( M_{\vb{q}} \hat{b}_{\vb{q}} e^{i\vb{q} \cdot \vb{r}} + M_{\vb{q}}^* \hat{b}_{\vb{q}}^\dagger \, e^{-i\vb{q} \cdot \vb{r}}).
+\label{eqn-2122-20:frohlich_hamiltonian}
+\end{equation}
+\end{empheq}
+The first term is the electron's band energy measured at the bottom of the conduction band. The second term gives the polarisation field's energy measured at the zero-point energy of the polarisation field. Finally, the third term is the electron's interaction energy when interacting with a long-wavelength longitudinal optical phonon.
+
+\subsection{Holstein's Small Polaron}
+\label{subsec:2-1-3}
+
+\textcolor{red}{Expand upon more with full derivation.}
+
+Holstein studied the motion of an electron in a one-dimensional molecular crystal. We have a linear chain of $N$ identical lattice particles without the charge carrier. Holstein considered these lattice particles diatomic molecules with fixed orientations and centres of gravity but variable internuclear separations. The lattice vibrations correspond to variations in the individual internuclear separations and are assumed to be uncoupled. If these vibrations are harmonic (i.e. the potential energy of a particular molecule is parabolic), the lattice Hamiltonian is,
+\begin{equation}
+    H_{\text{lattice}} = \frac{1}{2M} \sum_{n=1}^N p_n^2 + \frac{M}{2} \sum_{n=1}^N \omega_0^2 x_n^2,
+\end{equation}
+where $x_n$ is the deviation of an internuclear separation from its equilibrium position, $p_n \equiv -i\hbar\partial/\partial x_n$ is the corresponding canonical momentum, $M$ is the nuclear mass and $\omega_0$ is the harmonic vibrational frequency.
+
+Holstein considered the motion of a single charge carrier formulated within the tight-binding approximation where one assumes that the one-electron potential may be written as the sum of molecular potentials,
+\begin{equation}
+    V(\vb{r}, x_1, \dots, x_N) = \sum_{n=1}^N U(\vb{r} - n\vb{a}, x_n),
+\end{equation}
+where $\vb{r}$ is the electron position and $\vb{a}$ is the unit lattice vector. The molecular potential $U$ is assumed to be short-range, $U(\vb{a}, x_n) \ll U(0,x_n)$.
+
+The electron eigenfunctions, $\phi(\vb{r} - n\vb{a}, x_n)$ are obtained from the Time-Independent Schrodinger Equation (TISE),
+\begin{equation}
+    \left[-\frac{\hbar^2}{2m}\nabla^2 + U(\vb{r}-n\vb{a}, x_n)\right] \phi(\vb{r}-n\vb{a},x_n) = E(x_n)\phi(\vb{r}-n\vb{a},x_n),
+\end{equation}
+with eigenvalues $E(x_n)$. The total wavefunction is then a linear superposition,
+\begin{equation}
+    \psi(\vb{r},x_1, \dots, x_n) = \sum_{n=1}^N c_n(x_1, \dots, x_n) \phi_n(\vb{r},x_n),
+\end{equation}
+of the molecular electron wave functions $\phi_n(\vb{r},x_n)$ localised around the $n$th molecular site. The coefficients $c_n(x_1, \dots, x_n)$ depend on all the internuclear coordinates and should obey the time-dependent Schr\"odinger Equation (TDSE),
+\begin{equation}
+    i\hbar \frac{\partial \psi}{\partial t} = \left[-\frac{\hbar^2}{2m}\nabla^2 + \sum_{n=1}^N U(\vb{r}-n\vb{a},x_n) + \sum_{n=1}^N \left(-\frac{\hbar^2}{2M}\frac{\partial^2}{\partial x_n^2} + \frac{M}{2}\omega_0^2 x_n^2\right)\right] \psi,
+\end{equation}
+followed by multiplication on the left with $\phi_n^*(\vb{r},x_n)$ and integration over the electron coordinate $\vb{r}$,
+\begin{equation}
+\begin{gathered}
+    \sum_{m=1}^N T_{nm} \left[ i\hbar \frac{\partial}{\partial t} - \sum_{j=1}^N \left(-\frac{\hbar^2}{2M}\frac{\partial^2}{\partial x_j^2} + \frac{M}{2}\omega_0^2 x_j^2 \right) -E(x_m) \right] c_m(x_1, \dots, x_m) \\ 
+    = \sum_{\substack{m = 1 \\ j \neq m}}^N \left[ \int  d\vb{r}\ \phi^*(\vb{r}-n\vb{a},x_n) U(\vb{r}-j\vb{a},x_j)\phi(\vb{r}-m\vb{a},x_m) \right] c_m(x_1,\dots,x_m) \\
+    - \frac{\hbar^2}{2M} \sum_{m=1}^N \int d\vb{r}\ \phi^*(\vb{r}-n\vb{a}) \left[ 2\frac{\partial\phi(\vb{r}-m\vb{a},x_m)}{\partial x_m}\frac{\partial c_m}{\partial x_m} + c_m \frac{\partial^2\phi(\vb{r}-m\vb{a},x_m)}{\partial x_m^2}\right],
+\end{gathered}
+\end{equation}
+where,
+\begin{equation}
+    T_{nm} \equiv \int d\vb{r}\ \phi^*(\vb{r}-n\vb{a},x_n)\phi(\vb{r}-m\vb{a},x_m) = \delta_{nm} + S_{nm}.
+\end{equation}
+$S_{nm}$ are overlap (non-orthogonality) integrals, assumed to be non-zero only for nearest neighbours and small compared to unity.
+
+Multiply on the left by the inverse of the transfer matrix, $T^{-1}_{nm}$,
+\begin{equation}
+    \begin{gathered}
+        \left[ i\hbar \frac{\partial}{\partial t} - \sum_{j=1}^N \left(-\frac{\hbar^2}{2M}\frac{\partial^2}{\partial x_j^2} + \frac{M}{2}\omega_0^2 x_j^2 \right) -E(x_m) \right] c_n(x_1, \dots, x_m) \\
+        = \sum_{\substack{l,m = 1 \\ j \neq m}}^N T^{-1}_{nl} \left[ \int  d\vb{r}\ \phi^*(\vb{r}-n\vb{a},x_n) U(\vb{r}-j\vb{a},x_j)\phi(\vb{r}-m\vb{a},x_m) \right] c_m(x_1,\dots,x_m) \\
+        - \frac{\hbar^2}{2M} \sum_{l,m=1}^N T^{-1}_{nl} \int d\vb{r}\ \phi^*(\vb{r}-n\vb{a}) \left[ 2\frac{\partial\phi(\vb{r}-m\vb{a},x_m)}{\partial x_m}\frac{\partial c_m}{\partial x_m} + c_m \frac{\partial^2\phi(\vb{r}-m\vb{a},x_m)}{\partial x_m^2}\right]
+    \end{gathered}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    \sum_{\substack{m = 1 \\ j \neq m}}^N \left[ \int d\vb{r}\ \phi^*(\vb{r}-n\vb{a}, x_n) U(\vb{r}-j\vb{a}, x_j) \phi(\vb{r}-m\vb{a}, x_m) \right] c_m(x_1, \dots, x_j) \\ 
+    - \sum_{\substack{m = 1 \\ j \neq m}}^N S_{nm} \left[ \int d\vb{r}\ \phi^*(\vb{r}-m\vb{a}, x_m) U(\vb{r}-j\vb{a}, x_j) \phi(\vb{r}-m\vb{a}, x_m) \right] c_m(x_1, \dots, x_j)
+\end{gathered}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    \sum_{\substack{n, m = 1 \\ n \neq m}}^N \left[ 
+\int d\vb{r}\ \phi^*(\vb{r} - n\vb{a}, x_n) U(\vb{r} - n\vb{a}, x_n) \phi \right]
+\end{gathered}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    \left[i\hbar \frac{\partial}{\partial t} - \sum_{m=1}^N\left(-\frac{\hbar^2}{2M} \frac{\partial^2}{\partial x_m^2} + \frac{M}{2} \omega_0^2 x_m^2\right) - E(x_n) - W(x_1, \dots, x_n)\right] \\
+    \times c_n(x_1, \dots, x_n) = \sum_{\pm} J(x_n, x_{n \pm 1}) c_{n \pm 1}(x_1, \dots, x_n)
+\end{gathered}
+\end{equation}
+
+In the Holstein model \cite{holstein_studies_1959-1, holstein_studies_1959}, the electronic and phononic wave numbers $k$ and $q$ assume $N$ discrete values within the first Brillouin zone $-\frac{\pi}{a} < k, q < \frac{\pi}{a}$, where $N$ is the number of sites and $a$ the lattice constant. The electron dispersion is,
+\begin{equation}
+    \epsilon^{(H)}_{\vb{q}} = -2 J \sum_{i=1}^n \cos(k_i) ,
+\end{equation}
+where $J$ is the nearest-neighbour electronic hopping amplitude. The electron-phonon interaction $M_{\vb{q}} \to M_0$ is just a constant given by,
+\begin{equation}
+    \begin{aligned}
+        M^{(H)}_{0} &= \frac{g_{H}(n)}{\sqrt{N}} , \\
+        &= \sqrt{\frac{2 J n \hbar \omega_0 \alpha_H}{N}} ,
+    \end{aligned}
+\end{equation}
+where $g_{H}(n)$ is the Holstein electron-phonon coupling strength in $n$ dimensions and is parameterised by the \emph{unitless} coupling constant $\alpha_H$. As $J$ is the main energy scale in this model, we also need to define another unitless parameter $\gamma \equiv \hbar \omega_0 / J$, which is the ratio of the phonon energy and electron hopping amplitude and called the adiabaticity.
+
+\section{The Feynman Path Integral \& Variational Approach}
+\label{sec:2-2}
+
+Feynman developed a variational principle to find the lowest energy of a system described by a path integral. This variational principle was applied to the Fr\"ohlich model of the polaron~\cite{frohlich_electrons_1954} and was the first method to accurately predict the ground-state energy and effective mass of the polaron for all values of the electron-phonon coupling constant. We start with Fr\"ohlich's Hamiltonian for a slow electron as given in Eq.~(\ref{eqn-2122-20:frohlich_hamiltonian}) and cast the phonon creation and annihilation operators into their corresponding coordinates $\hat{x}_{\vb{q}}$ and momenta $\hat{p}_{\vb{q}}$
+\begin{equation}
+   \hat{x}_{\vb{q}} = \frac{1}{\sqrt{2}} r_0 \left(\hat{b}^\dagger_{\vb{q}} + \hat{b}_{\vb{q}} \right), \quad \hat{p}_{\vb{q}} = i\hbar \frac{1}{\sqrt{2}} \frac{1}{r_0} \left(\hat{b}^\dagger_{\vb{q}} - \hat{b}_{\vb{q}} \right),
+\label{eqn-22-1}
+\end{equation}
+or Fourier components
+\begin{equation}
+   \hat{b}_{\vb{q}} = \frac{1}{\sqrt{2}} \frac{1}{r_0} \left(\hat{x}_{\vb{q}} + i \frac{\hat{p}_{\vb{q}}}{m_0 \omega_0} \right), \quad \hat{b}^\dagger_{\vb{q}} = \frac{1}{\sqrt{2}} \frac{1}{r_0} \left(\hat{x}_{\vb{q}} - i \frac{\hat{p}_{\vb{q}}}{m_0 \omega_0} \right),
+\label{eqn-22-2}
+\end{equation}
+which substituted into Eq. (\ref{eqn-2122-20:frohlich_hamiltonian}) gives
+\begin{equation}
+    H = \frac{\hat{\vb{p}}^2}{2 m_0} + \frac{1}{2} \sum_{\vb{q}} \left( \hat{p}_{\vb{q}}^2 + \omega_0^2 \hat{x}_{\vb{q}}^2 \right) + \sum_{\vb{q}} M_{\vb{q}} \hat{\rho}_{\vb{q}} \hat{x}_{\vb{q}},
+\label{eqn-22-3}
+\end{equation}
+where $\hat{\rho}_{\vb{q}} = e^{i \vb{q} \cdot \hat{\vb{r}}}$ is the electron density operator.
+
+\subsection{Ground-State Polaron}
+\label{subsec:2-2-1}
+
+If the wavefunction $\psi(\vb{r}_{i}, x_i, t_i)$ corresponding to the polaron system is known at some initial time $t_{i}$, then the wavefunction at some later time $t_f$ is given by
+\begin{equation}
+    \psi(\vb{r}_{f}, x_{f}, t_f) = \int d^3\vb{r}_{i} \int dx_i\ K(\vb{r}_{f}, x_f, t_f; \vb{r}_{i}, x_i, t_i) \psi(\vb{r}_{i}, x_i, t_i),
+\label{eqn-221-1}
+\end{equation}
+where $\vb{r} \equiv \vb{r}$ and $x \equiv \{x_{\vb{q}}\}$ represents the set of all polarisation coordinate oscillators. $K(\vb{r}_{f}, x_f, t_f; \vb{r}_{i}, x_i, t_i)$ is commonly called the time-evolution ``kernel'' or ``propagator'' and gives the probability amplitude to go from the state of the system $\{\vb{r}_{i}, x_i\}$ at time $t_i$ to the state of the system $\{\vb{r}_{f}, x_f\}$ at time $t_f$. It can be defined as
+\begin{equation}
+\begin{aligned}
+    K(\vb{r}_{f}, x_f, t_f; \vb{r}_{i}, x_i, t_i) &\equiv \bra{\psi(\vb{r}_f, x_f)} e^{-i\hat{H}(t_f - t_i)} \ket{\psi(\vb{r}_i, x_i)} \\
+    &= \sum_n \psi_n(\vb{r}_f, x_f) \psi_n^*(\vb{r}_i, x_i) e^{-i E_n t_f},
+\end{aligned}
+\label{eqn-221-2}
+\end{equation}
+where $\psi_n$ are a complete orthonormal set of the Fr\"ohlich Hamiltonian eigenfunctions and $E_n$ are the corresponding energy eigenvalues. The ground-state energy can be obtained by letting $\phi_0(x)$ be any function of the phonon coordinates $x$ that is not orthogonal to the exact ground-state wavefunction $\psi_0(\vb{r}, x)$. The inner product of the kernel with $\phi_0(x)$ gives the probability amplitude $G_{0,0}$ for the system in the ground state to return to the ground state 
+\begin{equation}
+\begin{aligned}
+    G_{0,0}(t_f) &= \bra{\phi_0(x_f)} K(\vb{r}_{f}, x_f, t_f; \vb{r}_{i}, x_i, t_i) \ket{\phi_0(x_i)} \\
+    &= \int\int dx_f dx_i\ \phi_0^*(x_f) K(\vb{r}_{f}, x_f, t_f; \vb{r}_{i}, x_i, t_i) \phi_0(x_i) \\
+    &= \sum_n a_{n,0}(\vb{r}_f) a^*_{n,0}(\vb{r}_i) e^{-i E_n t_f},
+\end{aligned}
+\label{eqn-221-3}
+\end{equation}
+where
+\begin{equation}
+    a_{n,0}(\vb{r}) = \int dx\ \phi^*_0(x) 
+    \psi_n(\vb{r}, x).
+\label{eqn-221-4}
+\end{equation}
+If we evaluate this for the electron to start and end at the same position (which we choose to be $0$ for convenience), $\vb{r}_f = \vb{r}_i = 0$ from imaginary-time $i0$ to $-i\tau$ we obtain
+\begin{equation}
+    \begin{aligned}
+    G_{0,0}(-i\tau) &= \bra{\phi_0(x_f)} K(0, x_f, -i\tau; i0, x_i, 0) \ket{\phi_0(x_i)} \\
+    &= \int\int dx_f dx_i\ \phi_0^*(x_f) K(0, x_f, -i\tau; 0, x_i, i0) \phi_0(x_i) \\
+    &= \sum_n a_{n,0}(0) a^*_{n,0}(0) e^{-E_n \tau},
+    \end{aligned}
+\label{eqn-221-5}
+\end{equation}
+which in the limit as $\tau \to \infty$ picks out the ground-state of the system
+\begin{equation}
+    \lim_{\tau \to \infty} \sum_n a_{n,0}(0) a^*_{n,0}(0) e^{-E_n \tau} \rightarrow a_{0,0}(0) a^*_{0,0}(0) e^{-E_0 \tau}.
+\label{eqn-221-6}
+\end{equation}
+Therefore we find that ground-state energy $E_{gs}$
+\begin{equation}
+    E_{gs} = \lim_{\tau \to \infty} \left[-\frac{1}{\tau} \ln G_{0,0}(-i\tau) \right].
+\label{eqn-221-7}
+\end{equation}
+If we identify $\tau = \hbar /(k_B T) = \hbar\beta$ (where $\beta$ is the thermodynamic beta) then the kernel $K(\vb{r}_{f}, x_f, -i\beta; \vb{r}_{i}, x_i, 0)$ is the same as the statistical density matrix $\rho(\vb{r}_{f}, x_f, \hbar\beta; \vb{r}_{i}, x_i, 0)$, and $G_{0,0}(-i\hbar\beta)$ is the same as the statistical partition function $Z$ where
+\begin{equation}
+    Z(\beta) = \textrm{Tr} \left[\rho\right] = \int \int d\vb{r} dx\ \rho(\vb{r}, x, \vb{r}, x; \beta),
+\label{eqn-221-8}
+\end{equation}
+and is related to the Helmholtz free energy $F$ by
+\begin{equation}
+    Z(\beta) = e^{-\beta F} = \textrm{Tr}\left[ e^{-\beta \hat{H}}\right] = \sum_n e^{-\beta E_n}.
+\label{eqn-221-9}
+\end{equation}
+Therefore, we can rewrite the expression for the ground-state energy as
+\begin{equation}
+    E_{gs} = \lim_{\beta \to \infty}\left[F(\beta) \right] = \lim_{\beta \to \infty} \left[-\frac{1}{\beta} \ln Z(\beta) \right].
+\label{eqn-221-10}
+\end{equation}
+
+\subsubsection{Path Integral Expression}
+\label{subsubsec:2-2-1-1}
+
+The kernel can be expressed explicitly as a path integral,
+\begin{equation}
+    K(\vb{r}_f, x_f, t_f; \vb{r}_i, x_i, t_i) = \int_{\vb{r}_i, t_i}^{\vb{r}_f, t_f} \mathcal{D} \vb{r}(t) \int_{x_i, t_i}^{x_f, t_f} \mathcal{D}x(t)\ \exp\left\{{\frac{iS[\vb{r}(t),\ x(t)]}{\hbar}}\right\},
+\label{eqn-2211-1}
+\end{equation}
+where the action $S[\mathbf{r},\ x]$ is given by
+\begin{equation}
+\begin{aligned}
+    S[\mathbf{r}(t),\ x(t)] &= \frac{m_0}{2} \int_{t_i}^{t_f} dt\ \vb{\dot{r}}^2(t) + \frac{1}{2} \sum_{\vb{q}} \int_{t_i}^{t_f} dt\ \left( \dot{x}_{\vb{q}}^2(t) - \omega_0^2 x_{\vb{q}}^2(t) \right) \\
+    &- \sum_{\vb{q}} M_{\vb{q}} \int_{t_i}^{t_f} dt\ \rho_{\vb{q}}(t) x_{\vb{q}}(t). 
+\label{eqn-2211-2}
+\end{aligned}
+\end{equation}
+Since the phonon coordinates $x(t)$ appear quadratically in the action, the path integral over them can be made to be Gaussian and done explicitly to simplify $G_{0,0}$
+\begin{equation}
+    G_{0,0}(t_f, t_i) = \prod_{\vb{q}} G_{\vb{q}}(t_f, t_i) \times \int^{0, t_f}_{0, t_i} \mathcal{D}\vb{r}(t)\ \exp\left\{ \frac{i}{\hbar}  \frac{m_0}{2} \int^{t_f}_{t_i} dt\ \vb{\dot{r}}^2(t)  \right\},
+\label{eqn-2211-3}
+\end{equation}
+where
+\begin{equation}
+\begin{gathered}
+    G_{\vb{q}}(t_f, t_i) = \int_{-\infty}^{\infty} dx_{\vb{q}, f} dx_{\vb{q}, i}\ \phi_0^*(x_{\vb{q}, f}) \\
+    \times \left[\int^{x_{\vb{q},f}, t_f}_{x_{\vb{q}, i}, t_i} \mathcal{D}x_{\vb{q}}(t) \exp \left\{\frac{i}{\hbar} \int_{t_i}^{t_f} dt\  \frac{1}{2}\left(\dot{x}_{\vb{q}}^2(t) - \omega_0^2 x_{\vb{q}}^2(t) \right) - M_{\vb{q}} \rho_{\vb{q}}(t) x_{\vb{q}}(t) \right\} \right] \phi_0(x_{\vb{q}, i}),
+\end{gathered}
+\label{eqn-2211-4}
+\end{equation}
+To make the phonon path integral Gaussian, we can choose $\phi_0(x_{\vb{q}})$ to be the ground-state wave function of a simple harmonic oscillator.
+\begin{equation}
+    \phi_0(x_{\vb{q}}) = \left(\frac{1}{\pi r_0^2}\right)^{1/4} \exp \left\{-\frac{x_{\vb{q}}^2}{2 r_0^2} \right\}
+\label{eqn-2211-6}
+\end{equation}
+Now the integrals in $G_{\vb{q}}$ can be solved analytically to give
+\begin{equation}
+    G_{\vb{q}}(t_f, t_i) = \left(\right)^{\frac{3}{2}} \exp \left\{ -\frac{\abs{M_{\vb{q}}}^2}{2} \int_{t_i}^{t_f} \int_{t_i}^{t_f} dt ds\ \rho_{\vb{q}}(t) D_{\omega_{\vb{q}}}(t-s) \rho^*_{\vb{q}}(s) \right\}.
+\label{eqn-2211-7}
+\end{equation}
+where generally,
+\begin{equation}
+\begin{aligned}
+    D_{\omega_{\vb{q}}}(t-s) &= \langle x_{\vb{q}}(t) x_{-\vb{q}}(s) \rangle_{0} \\
+    & = n_{\omega_{\vb{q}}} e^{i \omega_{\vb{q}} \abs{t-s}} + (n_{\omega_{\vb{q}}} + 1) e^{-i \omega_{\vb{q}}\abs{t-s}}
+\end{aligned}
+\end{equation}
+is the equilibrium bare (non-interacting) phonon Green function and $n_{\omega_{\vb{q}}} = (e^{\hbar\beta\omega_{\vb{q}}} - 1)^{-1}$ is the Bose-Einstein distribution. For Einstein (dispersionless) modes $\omega_0$ and low temperatures $D_{\omega_0}(t) \to e^{-i \omega_0 \abs{t}}$. The determinant can be evaluated
+
+Feynman then obtained the total polaron kernel defined entirely in terms of the electron coordinate,
+\begin{equation}
+\begin{aligned}
+    G_{0,0}(t_f, t_i) &= \int^{0, t_f}_{0, t_i} \mathcal{D}\vb{r}(t)\ \exp\left\{ \frac{i}{\hbar} \left[  \frac{m_0}{2} \int^{t_f}_{t_i} dt\ \vb{\dot{r}}^2 \right.\right. \\
+    &\left.\left.- \frac{1}{2} \sum_{\vb{q}} \abs{M_{\vb{q}}}^2 \int_{t_i}^{t_f} \int_{t_i}^{t_f} dt ds\  \rho_{\vb{q}}(t) D_{\omega_0}(t-s) \rho^*_{\vb{q}}(s) \right] \right\},
+\end{aligned}
+\label{eqn-2211-8}
+\end{equation}
+where the summation of $\vb{q}$ can be evaluated to give,
+\begin{equation}
+\begin{aligned}
+    \sum_{\vb{q}} \abs{M_{\vb{q}}}^2 \rho_{\vb{q}}(t) \rho^*_{\vb{q}}(s) &= \abs{M_{0}}^2 V_0 \int \frac{d^3\vb{q}}{(2\pi)^3} \frac{e^{i\vb{q}\cdot \left(\vb{r}(t) - \vb{r}(s) \right)}}{q^2} \\
+    &= \abs{M_{0}}^2 \frac{V_0}{4\pi} \frac{1}{\abs{\vb{r}(t) - \vb{r}(s)}}.
+\end{aligned}
+\label{eqn-2211-9}
+\end{equation}
+Substituting the result of this summation and setting $t_i = 0$ gives the final form of $G_{0,0}$ to be
+\begin{equation}
+    G_{0,0}(t_f) = \int^{0, t_f}_{0, 0} \mathcal{D}\vb{r}(t)\ \exp\left\{ \frac{i}{\hbar} S_{\text{eff}} \left[\vb{r}(t)\right] \right\},
+\label{eqn-2211-10}
+\end{equation}
+where the new effective action $S_{eff}$ is given by
+\begin{equation}
+     S_{\text{eff}}[\vb{r}(t)] = \frac{m_0}{2} \int^{t_f}_{0} dt\ \vb{\dot{r}}(t)^2 -\frac{\alpha \hbar r_0 \omega_0^2}{2\sqrt{2}} \int_{0}^{t_f} \int_{0}^{t_f} dt ds\ \frac{e^{-i\omega_0\abs{t-s}}}{\abs{\vb{r}(t) - \vb{r}(s)}}.
+\label{eqn-2211-11}
+\end{equation}
+where low temperature $\beta \gg 1$ is assumed. This new effective \emph{model} action represents an electron coupled by a non-local time-retarded Coulomb potential to itself from an earlier time. If we do a Wick rotation back into imaginary time, we obtain the density matrix as a path integral.
+\begin{equation}
+    \rho(\vb{r}_{f}, \hbar\beta; \vb{r}_{i}, 0) = \int_{\vb{r}_i, 0}^{\vb{r}_f, \hbar\beta} \mathcal{D} \vb{r}(\tau)\ \exp{-\frac{S[\mathbf{r}(\tau)]}{\hbar}},
+\label{eqn-2211-12:path_density}
+\end{equation}
+where the model action becomes
+\begin{empheq}[top=-6pt]{Feynman's Polaron \emph{Model} Action}
+\begin{equation}
+    S = \frac{m_0}{2}\int^{\hbar\beta}_0 d\tau \left(\frac{d\mathbf{r}(\tau)}{d\tau}\right)^2 - \frac{\alpha \hbar r_0 \omega_0^2}{2\sqrt{2}} \int^{\hbar\beta}_0 d\tau \int^{\hbar\beta}_0 d\sigma \frac{e^{-\omega_0 |\tau - \sigma|}}{|\mathbf{r}(\tau) - \mathbf{r}(\sigma)|} .
+\label{eqn-2211-13:athermal_model_action}
+\end{equation}
+\end{empheq}
+Therefore, we can find the exact ground-state energy of the polaron using
+\begin{equation}
+    E_{gs} = \lim_{\beta \to \infty} \left\{ \frac{1}{\beta} \ln \int_{0, 0}^{0, \hbar\beta} \mathcal{D}\vb{r}(\tau)\ e^{-S[\vb{r}(\tau)]/\hbar} \right\}.
+\label{eqn-2211-14}
+\end{equation}
+The power of this result is that the many-body problem involving an infinite number of phonons interacting with a single conduction electron has been reduced to a one-body problem with one integral with a temporal non-local effective potential. Due to the Coloumbic nature of this potential, the model action is not functionally-integrable. However, Feynman devised a variational approach to at least approximate it. 
+
+\subsection{Feynman-Jensen Variational Principle}
+\label{subsec:2-2-2}
+
+The model action cannot be solved exactly as a path integral since it is not quadratic in the electron coordinates. However, Feynman was able to obtain a variational upper-bound approximation of the ground-state energy of the polaron. Feynman noticed that he could use Jensen's inequality: for a set of real values $f$, the average of $\exp(f)$ exceeds the exponential of the average,
+\begin{equation}
+    \langle \exp(f) \rangle \geq \exp(\langle f \rangle).
+\label{eqn-222-1}
+\end{equation}
+Therefore, if one can find another functionally-integrable trial action $S_0$ that closely approximates the model action $S$ for the paths $\vb{r}(\tau)$ that most significantly contribute to the path integral, then Jensen's inequality can give a lower-bound on the partition function:
+\begin{empheq}{The Feynman-Jensen Variational Principle}
+\begin{equation}
+    \begin{aligned}
+        Z(\beta) &= \int_{0, 0}^{0, \hbar\beta} \mathcal{D} \vb{r}(\tau)\ e^{-S[\mathbf{r}(\tau)]/\hbar} \\ &= \int_{0, 0}^{0, \hbar\beta} \mathcal{D} \vb{r}(\tau)\ e^{-\left(S[\mathbf{r}(\tau)] - S_0[\mathbf{r}(\tau)]\right) / \hbar} e^{-S_0[\mathbf{r}(\tau)]/\hbar} \\
+        &= \langle \exp( [S - S_0]  / \hbar) \rangle_{S_0} \cdot Z_0(\beta) \\
+        &\geq \exp(\langle S - S_0 \rangle_{S_0} / \hbar) \cdot Z_0(\beta). 
+    \end{aligned}
+\label{eqn-222-2}
+\end{equation}
+\end{empheq}
+The average taken with positive weight $S_0$ is given by
+\begin{equation}
+    \langle S-S_0 \rangle_{S_0} = \left[ Z_0(\beta) \right]^{-1} \int_{0, 0}^{0, \hbar\beta} \mathcal{D}\vb{r}(\tau) (S-S_0) e^{-S_0[\vb{r}]/ \hbar},
+\label{eqn-222-3}
+\end{equation}
+where,
+\begin{equation}
+    Z_0(\beta) = \int_{0, 0}^{0, \hbar\beta} \mathcal{D} \vb{r}(\tau)\ e^{-S_0[\mathbf{r}(\tau)]/\hbar} ,
+\label{eqn-222-4}
+\end{equation}
+is the partition function for the system described by the trial action $S_0$. Therefore, using the relation between the partition function and the ground-state energy, we obtain 
+\begin{equation}
+\begin{aligned}
+    E_{gs} &= \lim_{\beta \to \infty} \left[-\frac{1}{\beta} \ln Z(\beta) \right] , \\
+    &\leq \lim_{\beta \to \infty} \left[ -\frac{1}{\beta} \ln Z_0(\beta) - \frac{1}{\beta} \langle S-S_0 \rangle_{S_0} \right] , \\ 
+    &\leq E^0_{gs} - \lim_{\beta \to \infty} \left[ \frac{1}{\beta} \langle S-S_0 \rangle_{S_0} \right] ,
+\end{aligned}
+\label{eqn-222-5}
+\end{equation}
+where $E^0_{gs}$ is the ground-state energy of the trial system. 
+
+\subsection{Feynman's Quasi-Particle Trial Model}
+
+The next step is determining which trial action, $S_0$, to use. Feynman proposed multiple potential trial actions. His first choice corresponds to the free electron, $S_0 = \frac{m_0}{2} \int_0^{\hbar\beta} d\tau\ \dot{\vb{r}}^2(\tau)$ which gives the weak-coupling second-order perturbation method result $E_{gs} \leq -\hbar\omega_0\alpha$. His second choice was an electron in local potential $S_0 = \frac{m_0}{2} \int_0^{\infty} d\tau\ \dot{\vb{r}}^2(\tau) + \int_0^{\hbar\beta} d\tau\ V(\vb{r}(\tau))$. If this local-potential is Coulombic $V(\vb{r}(\tau)) = Q/\vb{r}(\tau)$, with a variational charge-like parameter $Q$, one obtains Landau's variational result for strong-coupling, $E_{gs} \leq -0.098 \hbar\omega_0 \alpha^2$. Instead, if the local-potential is harmonic $V(\vb{r}(\tau)) = \kappa \vb{r}^2(\tau)$, with a variational spring-constant parameter $\kappa$, then the upper-bound is improved to $E_{gs} \leq -0.106 \hbar\omega_0 \alpha^2$. However, Fr\"ohlich and Feynman concluded that binding the electron to a position using a local potential would only give worse results at low couplings than for a free electron.
+
+To obtain a method that works over the entire range of $\alpha$, Feynman proposed coupling the electron to some fictitious particle with finite mass so that the electron is not bound to a position and is free to move. Motivated by the local harmonic potential outperforming the Coulombic potential and the comparative ease in corresponding derivation, Feynman chose to couple the electron and fictitious particle with a harmonic spring. The Hamiltonian for this harmonic spring-mass system is,
+\begin{equation}
+    H_F = \frac{\vb{p}_{\text{el}}^2}{2 m_0} + \frac{\vb{p}^2}{2 m_f} + \kappa (\vb{r} - \vb{x})^2
+\end{equation}
+where $\vb{p}_{\text{el}}$ and $\vb{p}$ are the momentum of the electron and fictitious particle, $m_0$ and $m_f$ are their masses, $\vb{r}$ and $\vb{x}$ their positions, and $\kappa$ is the spring-constant. 
+
+The Feynman polaron quasi-particle has a direct mechanistic interpretation. 
+The Lagrangian consists of an effective-mass electron, an additional fictitious particle (mass $M$, in units of the electron effective-mass), coupled by a harmonic restoring force ($k$). This Lagrangian is given by
+\begin{empheq}{Feynman's Spring-Mass Lagrangian}
+\begin{equation}\label{eqn:triallagrangian}
+    \begin{aligned}
+        L = \frac{m_b}{2} \dot{\vb{r}}(t)^2 + \frac{m_f}{2} \dot{\vb{x}}(t)^2 - \frac{\kappa}{2} \left(\vb{r}(t) - \vb{x}(t)\right)^2.
+    \end{aligned}
+\end{equation}
+\end{empheq}
+The rate of oscillation of this mode is $w=\sqrt{\frac{\kappa}{m_f}}$, expressed as a pre-factor to the material phonon frequency. This oscillation describes the coherent energy exchange between the electron and the phonon field. The phonon frequencies are blue-shifted by the electron-phonon coupling. 
+\begin{equation}
+     - \frac{\alpha \hbar r_0 \omega_0}{2\sqrt{2}} \frac{D_{\omega_0}(\tau - \sigma)}{|\mathbf{r}(\tau) - \mathbf{r}(\sigma)|} \longrightarrow \frac{\kappa w}{8} D_w(\tau - \sigma) [\vb{r}(\tau) - \vb{r}(\sigma)]^2,
+\label{eqn-222-6}
+\end{equation}
+where $\kappa$ and $w$ are variational parameters. The trial action is then,
+\begin{empheq}{Feynman's Polaron \emph{Trial} Action}
+\begin{equation}
+        S_0 = \frac{m_0}{2}\int^{\hbar\beta}_0 d\tau \left(\frac{d\mathbf{r}(\tau)}{d\tau}\right)^2
+        + \frac{\kappa w}{8} \int^{\hbar\beta}_0 d\tau \int^{\hbar\beta}_0 d\sigma D_w(\tau-\sigma) \left[\mathbf{r}(\tau) - \mathbf{r}(\sigma)\right]^2 .
+\label{eqn-222-7:athermal_trial_action}
+\end{equation}
+\end{empheq}
+Substituting the model action $S$ and trial action $S_0$ into the variational inequality gives,
+\begin{equation}
+    E_{gs} \leq E_{gs}^0 - \lim_{\beta\to\infty} \frac{1}{\beta} \langle S - S_0\rangle_{S_0}.
+\label{eqn-222-8}
+\end{equation}
+Using,
+\begin{equation}
+    \frac{1}{\beta} \int_0^{\hbar\beta} \int_0^{\hbar\beta} d\tau d\sigma f(\abs{\tau - \sigma}) = \frac{2}{\beta} \int^{\hbar\beta}_0 d\tau (\hbar\beta - \tau) f(\abs{\tau})
+\end{equation}
+we get,
+\begin{subequations}
+    \begin{equation}
+        \lim_{\beta\to\infty} \frac{1}{\beta}\langle S \rangle_{S_0} = -\frac{\alpha \hbar r_0 \omega_0^2}{\sqrt{2}} \int^{\infty}_0 d\tau\ D_{\omega_0}(\tau) \langle \abs{\vb{r}(\tau) - \vb{r}(0)}^{-1} \rangle_{S_0},
+    \end{equation}  
+    \begin{equation}
+         \lim_{\beta\to\infty} \frac{1}{\beta}\langle S_0 \rangle_{S_0} = \frac{\kappa w}{4} \int^{\infty}_0 d\tau\ D_{w}(\tau) \langle \left[\vb{r}(\tau) - \vb{r}(0)\right]^{2} \rangle_{S_0}.
+    \end{equation}   
+\end{subequations}
+To solve $\langle S \rangle_{S_0}$ and $\langle S_0 \rangle_{S_0}$ we concentrate on the $\abs{\vb{r}(\tau) - \vb{r}(0)}^{-1}$ term in $\langle S \rangle_{S_0}$ and express it by a Fourier transform,
+\begin{equation}
+\begin{aligned}
+    \abs{\vb{r}(\tau) - \vb{r}(\sigma)}^{-1} &= \int \frac{d^3\vb{q}}{(2\pi)^3} \frac{1}{q^2} e^{i\vb{q} \cdot \left[\vb{r}(\tau) - \vb{r}(0)\right]} \\
+    &\equiv \int \frac{d^3\vb{q}}{(2\pi)^3} \frac{1}{q^2} \exp\left(\int_0^{\infty} dt\ \vb{J}_{\vb{q},\tau}(t) \cdot \vb{r}(t) \right),
+\end{aligned}
+\label{eqn-222-9}
+\end{equation}
+where we have defined an `external force' function $\vb{J}_{\vb{q}, \tau}(t) = i \vb{q} \left[ \delta(t-\tau) - \delta(t) \right]$. Substituting this into $\langle S \rangle_{S_0}$ and $\langle S_0 \rangle_{S_0}$ simplifies them into,
+\begin{subequations}
+    \begin{equation}
+        \lim_{\beta\to\infty} \frac{1}{\beta} \langle S \rangle_{S_0} = -\frac{\alpha \hbar r_0 \omega_0^2}{\sqrt{2}} \int^{\infty}_0 d\tau\ D_{\omega_0}(\tau) \int \frac{d^3 \vb{q}}{(2\pi)^3} \frac{1}{q^2} Z\left[\vb{J}_{\vb{q},\tau}(t)\right]
+    \label{eqn-222-10}
+    \end{equation}  
+    \begin{equation}
+        \lim_{\beta\to\infty} \frac{1}{\beta} \langle S_0 \rangle_{S_0} = \frac{\kappa w}{4} \int^{\infty}_0 d\tau\  D_{w}(\tau) \left(- \grad^2_{\vb{q}} Z\left[\vb{J}_{\vb{q},\tau}(t)\right] \biggr\rvert_{\vb{q} = 0} \right),
+    \label{eqn-222-11}
+    \end{equation}  
+\end{subequations}
+where,
+\begin{equation}
+    Z\left[\vb{J}_{\vb{q},\tau}(t)\right] \equiv \biggl\langle \exp\left(\int_0^{\infty} dt\ \vb{J}_{\vb{q},\tau}(t) \cdot \vb{r}(t) \right) \biggr\rangle_{S_0},
+\label{eqn-222-12}
+\end{equation}
+is the generating functional. The generating functional is also the intermediate scattering function, the temporal Fourier transform of the dynamical structure factor, and is proportional to the two-point electron density-density correlation function. 
+
+We need the ground-state energy $E^0_{gs}$ associated with the trial system. We can avoid directly evaluating the path integral $Z_0$ by noting that,
+\begin{equation}
+    \lim_{\beta \to \infty} Z_0(\beta) = \lim_{\beta \to \infty} \exp(-\beta E^0_{gs}) = \lim_{\beta \to \infty} \int^{\infty}_{-\infty} d\vb{r}' \int^{\vb{r}'}_{\vb{r}'} \mathcal{D}\vb{r}(\tau) \exp\left(-\frac{S_0[\vb{r}(\tau)]}{\hbar}\right).
+\label{eqn-222-13:trial_partition}
+\end{equation}
+So, differentiating both sides concerning $\kappa$,
+\begin{equation}
+     \frac{\partial E_{gs}^0}{\partial \kappa} = \frac{1}{\kappa} \lim_{\beta\to\infty} \frac{1}{\beta} \langle S_0 \rangle_{S_0}
+    \label{eqn-222-14}
+\end{equation}
+and then integrating both sides,
+\begin{equation}
+    E^{0}_{gs} = \int^{\kappa}_0 d\kappa'\ \frac{1}{\kappa'} \lim_{\beta\to\infty} \frac{1}{\beta} \langle S_0(\kappa') \rangle_{S_0} .
+\label{eqn-222-15}
+\end{equation}
+Since $ E^{0}_{gs} = 0$ when $\kappa = 0$ (i.e. the free particle). Hence, solving for the upper-bound to the ground-state energy has been reduced to solving $Z[J_{\vb{q},\tau}(t)]$, which, written explicitly, is,
+\begin{equation}
+    Z[J_{\vb{q},\tau}(t)] = \bfrac{\oint \mathcal{D}\vb{r}(\tau) \exp\left(-\frac{S_0}{\hbar} + \int^{\infty}_0 dt\ J_{\vb{q},\tau}(t) \cdot \vb{r}(t) \right)}{\oint \mathcal{D}\vb{r}(\tau) \exp\left(-\frac{S_0}{\hbar}\right)}.
+\label{eqn-222-16:generating_functional}
+\end{equation}
+We can solve the path integral in the numerator by the usual method of changing the path-integration variable to $\vb{r}'(\tau) \equiv \vb{r}(\tau) - \vb{\bar{r}}(\tau)$ where $\vb{\bar{r}}(\tau)$ is the path that extremises the trial action $S_0$ and with the boundary conditions $\vb{\bar{r}}(0) = \vb{\bar{r}}(\hbar\beta) = 0$. Thus, $\vb{\bar{r}}(\tau)$ contributes most to the path integral and is the classical path, whereas $\vb{r}'(\tau)$ are the `quantum fluctuations' about the classical path. The path integral now only contains $\vb{\bar{r}}(\tau)$ quadratically, which then separates off as a normalisation factor that excludes the force term $J_{\vb{q},\tau}(t)$ and is equal to the denominator (i.e. the trial partition function $Z_0(\beta)$), so it cancels. $\vb{\bar{r}}(\tau)$ solves the classical equation of motion that is obtained by extremising the trial action $S_0$ and gives the following integral-differential equation of motion,
+\begin{equation}
+    \frac{d^2 \vb{\bar{r}}(t)}{dt^2} = \frac{\kappa w}{2} \int^{\infty}_0 ds\ D_{w}(t-s) \left[\vb{\bar{r}}(t) - \vb{\bar{r}}(s)\right] - J_{\vb{q},\tau}(t) ,
+\label{eqn-222-17}
+\end{equation}
+which can be used to simplify $Z[J_{\vb{q},\tau}(t)]$ by eliminating the classical action term $S_0[\vb{\bar{r}}]$ to leave,
+\begin{equation}
+    Z[J_{\vb{q},\tau}(t)] = \exp\left( \frac{1}{2} \int^{\infty}_0 dt\ J_{\vb{q},\tau}(t) \cdot \vb{\bar{r}}(t) \right).
+\label{eqn-222-18}
+\end{equation}
+Now, all that is left is to solve the equation of motion to find the classical path $\vb{\bar{r}}(t)$. This can be done by first defining,
+\begin{equation}
+    \vb{x}(t) \equiv \frac{w}{2} \int^{\infty}_0 ds\ D_{w}(t-s) \vb{\bar{r}}(s).
+\label{eqn-222-19}
+\end{equation}
+Since $d\abs{t-s}/dt = \sgn(t-s)$ and $d\sgn(t-s)/dt = 2\delta(t-s)$, we have,
+\begin{equation}
+    \frac{d^2\vb{x}(t)}{dt^2} = w^2 \left[\vb{x}(t) - \vb{\bar{r}}(t)\right],
+\label{eqn-222-20}
+\end{equation}
+and
+\begin{equation}
+    \frac{d^2 \vb{\bar{r}}(t)}{dt^2} = \kappa \left[\vb{\bar{r}}(t) - \vb{x}(t)\right] - \vb{f}(\vb{q}, t, \tau, \sigma) ,
+\label{eqn-222-21}
+\end{equation}
+where in the second equation and in the limit $\beta \to \infty$ we obtain the term,
+\begin{equation}
+    \int^\infty_0 ds\ D_w(t-s) = \int^\infty_0 ds\ e^{-w\abs{t-s}} = \frac{2}{w} - \frac{e^{-wt}}{w}, \quad t \in [0, \infty)
+\label{eqn-222-22}
+\end{equation}
+and we neglect the second transient term since it has a negligible contribution. These differential equations can be separated and solved to give the classical path as,
+\begin{equation}
+    \vb{\bar{r}}(t) = \int^{\infty}_0 ds\ g(t-s) J_{\vb{q},\tau}(t),
+\label{eqn-222-23}
+\end{equation}
+where,
+\begin{equation}
+\begin{aligned}
+    g(t-s) &= \frac{1}{2\pi} \oint dz \frac{z^2 + w^2}{z^2 \left(z^2 + v^2\right)} \left(e^{-z\abs{t-s}}-1\right) \\
+    &= i \left[\frac{1}{2} \mathrm{Res}(z=0) + \mathrm{Res}(z = iv) \right] \\
+    &= -\frac{1}{2v^2} \left[ \frac{v^2-w^2}{v}\left(1 - e^{-v\abs{t-s}}\right) + w^2 \abs{t-s} \right],
+\end{aligned}
+\label{eqn-222-24}
+\end{equation}
+with $v^2 \equiv w^2 + \kappa = (1 + M / m_0) w^2$. Substituting the solution for $\vb{\bar{r}}(t)$ into $Z[J_{\vb{q},\tau}(t)]$ then gives,
+\begin{equation}
+    \begin{aligned}
+        Z[J_{\vb{q},\tau}(t)] &= \exp\left( \frac{1}{2} \int^{\hbar\beta}_0 dt \int^{\hbar\beta}_0 ds\ J_{\vb{q},\tau}(t) \cdot  g(t-s) \cdot J_{\vb{q},\tau}(s) \right) \\
+        &= \exp \left( \vb{q}^2 g(\tau - \sigma) \right).
+    \end{aligned}
+\label{eqn-222-25}
+\end{equation}
+Finally, we can use the solution for $Z[J_{\vb{q},\tau}(t)]$ to determine $ \langle S \rangle_{S_0}$,
+\begin{equation}
+    \lim_{\beta\to\infty} \frac{1}{\beta} \langle S \rangle_{S_0} = -\frac{\alpha\hbar\omega_0^2}{\sqrt{\pi}}\int^{\infty}_0 d\tau \frac{e^{-\tau \omega_0}}{\sqrt{ G(\tau)}},
+\label{eqn-222-26}
+\end{equation}
+where,
+\begin{equation}
+    G(\tau) = -2 \omega_0 g(\tau) = \omega_0 \left[\frac{w^2}{v^2} \tau  + \frac{v^2-w^2}{v^3} \left(1-e^{-v\tau} \right)\right],
+\label{eqn-222-27:feynman_D_function}
+\end{equation}
+and also determine $\langle S_0 \rangle_{S_0}$ and $E^0_{gs}$,
+\begin{equation}
+    \lim_{\beta\to\infty} \frac{1}{\beta} \langle S_0 \rangle_{S_0} = -\frac{3\hbar\kappa}{4 v} = -\frac{3}{4} \hbar \frac{v^2-w^2}{v},
+\label{eqn-222-28}
+\end{equation}
+\begin{equation}
+    E^0_{gs} = \frac{3}{2}\hbar(v - w).
+\label{eqn-222-29}
+\end{equation}
+Finally, we obtain the variational principle for the ground-state energy of the polaron,
+\begin{empheq}{Feynman's Variational Ground-State Energy}
+\begin{equation}
+    E_{gs} \leq \frac{3 \hbar}{4 v} \left(v-w\right)^2 - \alpha\hbar\omega^2_0\sqrt{\frac{1}{\pi}}\int^{\infty}_0 d\tau \frac{e^{-\tau \omega_0}}{\sqrt{ G(\tau)}}.
+\label{eqn-222-30:gsenergy_feynman}
+\end{equation}
+\end{empheq}
+Here, $v$ and $w$ are to be varied to find the lowest approximate upper bound to the exact ground-state $E_{gs}$. Regarding these variational parameters the spring constant is $\kappa = v^2 - w^2$ and the fictitious mass is $m_f = (v^2 - w^2) / w^2$.
+
+\subsubsection{Weak- and strong- coupling limits}
+\label{subsubsec:2-2-2-1}
+
+The original work of Feynman~\cite{feynman_slow_1955} provides several asymptotic estimates of this $w$ parameter. The standard approximations often reproduced in textbooks are $w=3$ for small $\alpha$ coupling and $w=1$ for large $\alpha$ coupling. 
+
+Precise work requires a numeric solution, but these limits inform us that the internal polaron mode, as a function of electron-phonon coupling, starts as a harmonic of $3\,\omega_0$ and continuously red-shifts to the phonon fundamental frequency $\omega_0$.
+
+For extremal values of the coupling $\alpha$, $w$ smoothly approaches limits of $1$ and $3$. The energy minimum in the weak-coupling (small alpha) limit occurs when $v$ is near $w$. Therefore, Feynman set $v = (1 + \varepsilon) w$ where $\varepsilon$ is small and expanded the energy expression (RHS of Eq.~(\ref{eqn-222-30:gsenergy_feynman})) w.r.t $\varepsilon$. Feynman then minimised the energy first w.r.t $\varepsilon$ and then w.r.t $w$ and found that in the weak-coupling limit, the energy is least when,
+\begin{equation}
+\begin{gathered}
+    \frac{w}{\omega_0} = 3, \quad \frac{v}{\omega_0} = 3 \left[ 1 + \frac{2\alpha}{3w} \left(1 -\frac{2}{w} \left[ \sqrt{w-1}-1 \right] \right) \right] ,\\
+    \frac{E_{gs}}{\hbar\omega_0} \leq -\alpha - \left(\frac{\alpha}{9}\right)^2 - \mathcal{O}\left(\alpha^4\right) \approx -\alpha - 0.0123 \alpha^2 - \mathcal{O}\left(\alpha^4\right) .
+\end{gathered}
+\label{eqn-2221-1:weak_gs_feynman}
+\end{equation}
+The result agrees well with the perturbative result $E^w_{gs}$,
+\begin{equation}
+    \frac{E^w_{gs}}{\hbar\omega_0} = -\alpha - 0.0159196220 \alpha^2 - 0.000806070048 \alpha^3 - \mathcal{O}\left(\alpha^4\right) .
+\label{eqn-2222-13}
+\end{equation}
+In the strong-coupling (large alpha) limit, $v$ is large, and $w$ approaches one, so $w / v \ll 1$. Therefore, Feynman expanded the energy expression w.r.t $w / v$ and then minimised the energy w.r.t $v$ and $w$ and found that in the strong-coupling limit the energy is least when,
+\begin{equation}
+\begin{gathered}
+    \frac{w}{\omega_0} = 1, \quad \frac{v}{\omega_0} = \frac{4\alpha^2}{9\pi} - 4\left( \log2 + \frac{1}{2} \gamma \right) + 1 , \\
+    \frac{E_{gs}}{\hbar\omega_0} \leq -\frac{\alpha^2}{2\pi} - \frac{3}{2}(2\log2+\gamma)-\frac{3}{4} + \mathcal{O}\left(\frac{1}{\alpha^2}\right) \approx -0.1061\alpha - 2.8294 + \mathcal{O}\left(\frac{1}{\alpha^2}\right) , \\
+\end{gathered}
+\label{eqn-2221-2:strong_gs_feynman}
+\end{equation}
+where $\gamma = 0.5772 \dots$ is the Euler-Mascheroni constant. This is reasonable when compared to the result of the precise strong-coupling expansion $E^s_{gs}$,
+\begin{equation}
+    \frac{E^s_{gs}}{\hbar\omega_0} = -0.108513 \alpha^2 - 2.836 - \mathcal{O}\left(\frac{1}{\alpha^2}\right).
+\label{eqn-2222-16}
+\end{equation}
+
+\subsubsection{Feynman's polaron effective mass}
+\label{subsec:2-2-2-2}
+
+Feynman found the effective polaron mass at zero temperature~\cite{feynman_slow_1955} by assuming that the electron moves with a small velocity $\vb{u}$ from an initial coordinate $\vb{0}$ to a final coordinate $\vb{r}_f = \vb{u} \hbar\beta$ in imaginary time $\hbar\beta$. Feynman then sought the total energy of the polaron and equated it to the form $E_0 + \frac{1}{2}M u^2$ by expanding the expression of the total energy to quadratic order in the velocity $\vb{u}$. From the kinetic energy term, Feynman found the polaron effective mass,
+\begin{empheq}{The Feynman Polaron Effective Mass}
+\begin{equation}
+\begin{gathered}
+    M = m_0 \left[ 1 + \frac{\alpha \omega_0^3}{3\sqrt{\pi}} \int^\infty_0 d\tau \frac{\tau^2 e^{-\tau \omega_0}}{\left[G(\tau)\right]^{3/2}} \right].
+\end{gathered}
+\label{eqn-2222-1:mass_feynman}
+\end{equation}
+\end{empheq}
+Here, the variational parameter values minimise the polaron ground-state energy when $u = 0$ in Eq.~(\ref{eqn-222-30:gsenergy_feynman}). From the values in Eq.~(\ref{eqn-2221-1:weak_gs_feynman}) Feynman obtained the weak-coupling expression,
+\begin{equation}
+    M = m_0 \left[ 1 + \frac{\alpha}{6} + 2.469136 \left(\frac{\alpha}{10}\right)^2 + 3.566719 \left(\frac{\alpha}{10}\right)^3 + \dots \right] ,
+\label{eqn-2222-2:weak_mass_feynman}
+\end{equation}
+and from the values in Eq.~(\ref{eqn-2221-2:strong_gs_feynman}) the strong-coupling expression,
+\begin{equation}
+\begin{aligned}
+    M &\approx m_0 \left[ 11.85579 - \frac{4}{3\pi} (1 + \ln 4) \alpha^2 + \frac{16}{81\pi^2} \alpha^4 \dots \right], \\
+    &\approx m_0 \left[11.85579 - 1.012775 \alpha^2 + 0.020141 \alpha^4 + \dots\right].
+\end{aligned}
+\label{eqn-2222-3:strong_mass_feynman}
+\end{equation}
+For comparison, the exact weak-coupling mass is,
+\begin{equation}
+    M_w = m_0 \left[ 1 + \frac{\alpha}{6} + 2.362763 \left(\frac{\alpha}{10}\right)^2 + \mathcal{O}\left(\alpha^4\right) \right],
+\label{eqn-2251-4}
+\end{equation}
+and the exact strong-coupling result is,
+\begin{equation}
+    M_s = m_0 \left[ 0.0227019 \alpha^4 + \mathcal{O}\left(\alpha^2\right) \right].
+\label{eqn-2251-5}
+\end{equation}
+
+Alternatively, Schultz~\cite{schultz_slow_1959} used the `zeroth-order' effective mass,
+\begin{empheq}{The Schultz `Zeroth-Order' Polaron Effective Mass}
+\begin{equation}
+     M = m_0 + m_f = m_0 \left(\frac{v}{w}\right)^2 ,
+\label{eqn-2222-6}
+\end{equation}
+\end{empheq}
+which is obtained by approximating the model action $S$ with the trial $S_0$; no higher-order expansion terms are included. 
+
+At finite temperatures, the effective polaron mass (as described by~\cite{peeters_theory_1984}) is proportional to the imaginary part of the complex impedance function $Z(\Omega, \beta)$ provided by~\cite{feynman_mobility_1962} (Eqs.~(35), (36) \& (41)) in the zero frequency limit $\Omega \to 0$,
+\begin{equation}
+    M(\beta) =  e m_0 \lim_{\Omega \to 0} \left\{ \frac{\text{Im} Z(\Omega, \beta)}{\Omega} \right\}.
+\label{eqn-2222-4}
+\end{equation}
+
+\subsubsection{Schultz's polaron effective size}
+
+Schultz~\cite{schultz_slow_1959} estimated the polaron size by calculating the root mean square distance between the electron and the fictitious particle. The reduced mass of their relative motion is:
+\begin{equation}
+    \mu_0 = \frac{m_f m_0}{m_f - m_0}.
+\label{eqn-2222-5:reduced_mass_schultz}
+\end{equation}
+Schultz then used the ground-state harmonic oscillator wave function for the relative coordinate $\Delta r = \vb{r} - \vb{x}$ between the electron and the fictitious mass,
+\begin{equation}
+    \phi_0(\Delta r) = \left(\frac{\mu_0 v}{\pi m_0 \omega_0 r_0^2} \right)^{3/4} \exp\left( -\frac{\mu_0 v \Delta r^2}{2m_0 \omega_0 r_0^2} \right),
+\label{eqn-2222-7:gs_wavefunction_schultz}
+\end{equation}
+to define a polaron radius as the root mean square distance between the electron and the fictitious mass,
+\begin{equation}
+    R \equiv \langle \Delta r^2 \rangle^{1/2} = \frac{r_0}{2} \left(\frac{3 m_0 \omega_0}{\mu_0 v}\right)^{1/2} = \frac{r_0}{2} \left( \frac{3 \omega_0 v}{(v^2 - w^2)} \right)^{1/2}.
+\label{eqn-2222-8:polaron_size_schultz}
+\end{equation}
+In the weak-coupling limit, with $v$ and $w$ given in Eq.~\ref{eqn-2221-1:weak_gs_feynman}, this expression for the polaron radius reduces to,
+\begin{equation}
+    \frac{R}{r_0} \sim \frac{3}{4} \sqrt{\frac{6}{\alpha}},
+\label{eqn-2222-9:weak_polaron_size_schultz}
+\end{equation}
+and in the strong-coupling limit (Eq.~\ref{eqn-2221-2:strong_gs_feynman}) the radius becomes,
+\begin{equation}
+    \frac{R}{r_0} \sim \frac{3 \sqrt{\pi}}{2\alpha}.
+\label{eqn-2222-10:strong_polaron_size_schultz}
+\end{equation}
+
+\subsubsection{Numerical Results}
+\label{subsubsec:2-2-5-1}
+
+\begin{figure}
+\centering
+\includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-alpha-0to12-COLOUR.pdf}
+\includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-alpha-0to12-COLOUR.pdf}
+\caption{Properties of Feynman's athermal polaron theory, calculated for electron-phonon $\alpha$ couplings ranging from $1$ to $12$. Green is the negative of the best approximated ground-state energy $E$, purple is the polaron effective mass $M$, blue is the $v$ variational parameter; red is the $w$ variational parameter, orange is the polaron size, and brown is the polaron spring-constant.}
+\label{fig-2251-1:athermaltheory}
+\end{figure}
+
+Feynman's original path integral theory~\cite{feynman_slow_1955} for the polaron produced a variational principle for the ground-state energy of the polaron. The variational $v$ and $w$ parameters that make the best lower upper bound to the ground-state energy are then used in expressions that Feynman derived for the polaron's effective mass and complex conductivity. 
+
+Fig.~(\ref{fig-2251-1:athermaltheory}, left) shows the values of the polaron ground-state energy $-E_{gs}$, effective mass $M$ and the corresponding $v$ and $w$, for values of the Fr\"ohlich $\alpha$ parameter ranging from $1$ to $12$. These data are all presented in their `polaron units' form for easier comparison to Feynman's original paper. The ground state demonstrates the linear weak-coupling behaviour at smaller $\alpha$ before it becomes exponentially more negative as $\alpha$ increases (as the electron-phonon coupling strengthens). The effective mass starts roughly equal to the conduction electron band-mass $M = m_0 $ at small $\alpha$ and then grows exponentially larger at stronger couplings. The $v$ and $w$ variational parameters start as approximately equal with $v \approx w \approx 3$ at weak couplings but diverge at strong couplings as $w$ asymptotically approaches $w = 1$ and $v$ increases exponentially at a similar rate to the ground-state energy. 
+
+\subsection{Finite Temperature Polaron}
+\label{subsec:2-2-3}
+
+\=Osaka~\cite{osaka_polaron_1959} extends Feynman's athermal path integral polaron model to the case at a finite temperature. This means that the variational principle of the self-energy of the polaron is replaced by the variation of the \emph{free energy}. \=Osaka begins with the density matrix of the polaron system with the model action of the polaron at a finite temperature given by,
+\begin{equation}
+    S = \frac{m_0}{2} \int_0^{\hbar\beta} d\tau\ \dot{\vb{r}}^2(\tau) - \frac{\alpha \hbar r_0 \omega_0^2}{2\sqrt{2}} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\sigma\ \frac{D_{\omega_0}(\tau-\sigma)}{\abs{\vb{r}(\tau) - \vb{r}(\sigma)}}.
+\label{eqn-223-2:osaka_model_action}
+\end{equation}
+\=Osaka then chose the trial action to be,
+\begin{equation}
+    S_0 = \frac{m_0}{2} \int_0^{\hbar\beta} d\tau\ \dot{\vb{r}}^2(\tau) + \frac{\kappa w}{8} \int_0^{\hbar\beta} d\tau \int_0^{\hbar\beta} d\sigma\ D_w(\tau - \sigma) \abs{\vb{r}(\tau) - \vb{r}(\sigma)}^2,
+\label{eqn-223-5:osaka_trial_action}
+\end{equation}
+where $D_{\Omega}(\tau)$ is the dimensionless phonon Green's function
+\begin{equation}
+    D_{\Omega}(\tau-\sigma) = n_{\Omega} e^{\Omega \abs{\tau-\sigma}} + (n_{\Omega} + 1) e^{-\Omega\abs{\tau-\sigma}}.
+\label{eqn-223-3}
+\end{equation}
+The model and trial density matrices are then,
+\begin{subequations}
+    \begin{equation}
+        \rho_S(\vb{r}_f, \vb{r}_i; \hbar\beta) = \int_{\vb{r}(0) = \vb{r}_i}^{\vb{r}(\hbar\beta) = \vb{r}_f} \mathcal{D} \vb{r}(\tau) \exp\left(-\frac{S[\vb{r}(\tau)]}{\hbar}\right),
+    \end{equation}   
+    \begin{equation}
+        \rho_{S_0}(\vb{r}_f, \vb{r}_i; \hbar\beta) = \int_{\vb{r}(0) = \vb{r}_i}^{\vb{r}(\hbar\beta) = \vb{r}_f} \mathcal{D} \vb{r}(\tau) \exp\left(-\frac{S_0[\vb{r}(\tau)]}{\hbar}\right).
+    \end{equation} 
+\label{eqn-223-7}
+\end{subequations}
+The variational principle for a finite temperature is then
+\begin{equation}
+    \rho_S(\vb{r}_f, \vb{r}_i; \hbar\beta) \geq \rho_{S_0}(\vb{r}_f, \vb{r}_i; \hbar\beta) \exp\langle S - S_0 \rangle_{S_0},
+\label{eqn-223-8}
+\end{equation}
+where
+\begin{equation}
+     \langle S - S_0 \rangle_{S_0} = \bfrac{\int_{\vb{r}(0) = \vb{r}_i}^{\vb{r}(\hbar\beta) = \vb{r}_f} \mathcal{D} \vb{r}(\tau) \left(S[\vb{r}(\tau)] - S_0[\vb{r}(\tau)] \right)  \exp\left(-\frac{S_0[\vb{r}(\tau)]}{\hbar}\right)}{\rho_{S_0}(\vb{r}_f, \vb{r}_i; \hbar\beta)}.
+\label{eqn-223-9}
+\end{equation}
+The RHS of the variational equation then has to be calculated and minimised concerning the variational parameters $v$ and $C$. The equation of motion obtained from the trial action $S_0$ is,
+\begin{equation}
+    \begin{aligned}
+        m_0 \ddot{\vb{r}}(\tau) &= \frac{\kappa w}{2} \int^{\hbar\beta}_0 d\sigma\ D_w(\tau - \sigma) \left[ \vb{r}(\tau) - \vb{r}(\sigma) \right] \\
+        &= \kappa \vb{r}(\tau) - \frac{\kappa w}{2} \int^{\hbar\beta}_0 d\sigma\ D_w(\tau - \sigma) \vb{r}(\sigma),
+    \end{aligned}
+\label{eqn-223-10}
+\end{equation}
+which we can use with the boundary conditions $\vb{r}(\hbar\beta) = \vb{r}_f$ and $\vb{r}(0) = \vb{r}_i$ to give the trial density matrix to be
+\begin{equation}
+    \rho_{S_0}\left(\vb{r}_i, \vb{r}_f; \hbar\beta\right) = Z_{\text{ph}} \exp \left\{-\frac{m_0}{2\hbar}\left( \vb{r}(\hbar\beta) \cdot \dot{\vb{r}}(\hbar\beta) - \vb{r}(0) \cdot \dot{\vb{r}}(0) \right)\right\},
+\label{eqn-223-11}
+\end{equation}
+where $Z_{\text{ph}} = \left(2 \sinh\left(\frac{\hbar\beta w}{2}\right)\right)^{-3}$ is the free phonon partition function. As the trial density matrix is quadratic in the harmonic oscillator coordinates, it is determined entirely by the classical path. 
+
+Now, directly solving for $\vb{r}(\tau)$ from the equation of motion is difficult, so instead \"Osaka considered a system with a different Lagrangian $L'$,
+\begin{equation}
+    L' = \frac{1}{2} \left( m_0\dot{\vb{r}}^2 + M\dot{\vb{x}}^2 - \kappa \left( \vb{r} - \vb{x} \right)^2 \right),
+\label{eqn-223-12}
+\end{equation}
+of a particle of mass $m_0$ coupled by a harmonic spring with a force constant $\kappa$ to a particle of mass $M$. After integrating over the $\vb{R}$ coordinate, the density matrix $\rho'$ of the Lagrangian $L'$ is given by
+\begin{equation}
+    \begin{aligned}
+        \rho'(\vb{r}_i, \vb{r}_f; \hbar\beta) &= Z_{\text{ph}} \int_{\vb{r}(0) = \vb{r}_i}^{\vb{r}(\hbar\beta) = \vb{r}_f} \exp \left[-\frac{1}{2\hbar} \int_0^{\hbar\beta} d\tau \left(m_0 \dot{\vb{r}}^2 + M w^2 \vb{r}^2\right)\right. \\
+        &+ \left.\frac{\kappa w}{8\hbar} \int^{\hbar\beta}_0 d\tau \int^{\hbar\beta}_0 d\sigma\ D_{w}(\tau - \sigma) \vb{r}(\tau) \vb{r}(\sigma) \right] \mathcal{D}\vb{r}(\tau),
+    \end{aligned}
+\label{eqn-223-13}
+\end{equation}
+where $w = \sqrt{\kappa / M}$. This new action has the same equation of motion with the same form as the previous action,
+\begin{equation}
+    m_0 \ddot{\vb{r}}(\tau) = \kappa \vb{r}(\tau) - \frac{\kappa w}{2} \int^{\hbar\beta}_0 d\sigma\ D_{w}(\tau - \sigma) \vb{r}(\sigma),
+\label{eqn-223-14:osaka_eom}
+\end{equation}
+which, under the classical path approximation, gives the density matrix,
+\begin{equation}
+    \rho'(\vb{r}_i, \vb{r}_f; \hbar\beta) = Z_{\text{ph}} \exp \left\{-\frac{m_0}{2\hbar}\left( \vb{r}(\hbar\beta) \cdot \dot{\vb{r}}(\hbar\beta) - \vb{r}(0) \cdot \dot{\vb{r}}(0) \right)\right\}.
+\label{eqn-223-15}
+\end{equation}
+This means that the density matrix $\rho'$ is the same as $\rho$, with the same equation of motion. Therefore, \=Osaka used the solution to the equation of motion in Eq.~(\ref{eqn:osaka_eom}) to calculate the trial density matrix $\rho_{S_0}$ where the trial action $S_0$ is replaced by the action corresponding to the Lagrangian $L'$. 
+
+The key to calculating $\langle S - S_0 \rangle_{\vb{r}_i, \vb{r}_f}$ is to evaluate the generating functional $Z[J_{\vb{q},\tau}(t)]$ in Eq.~(\ref{eqn-222-16:generating_functional}) using the same method Feynman used, except that Osaka replaced the trial action $S_0$ with that of $L'$ and instead evaluated the path integral in the generating functional $Z[J_{\vb{q},\tau}(t)]$ using the Lagrangian
+\begin{equation}
+    L = \frac{m_0}{2} \dot{\vb{r}}^2 + \frac{m_f}{2}\dot{\vb{x}}^2 - \frac{\kappa}{2} \left( \vb{r} - \vb{x} \right)^2 + \vb{J}_{\vb{q}, \tau, \sigma}(t) \cdot \vb{r},
+\label{eqn-223-16:osaka_trial_lagrangian}
+\end{equation}
+where $\vb{J}_{\vb{q}, \tau, \sigma}(t) = i \vb{q} \left[ \delta(t-\tau) - \delta(t-\sigma) \right]$ as before. This Lagrangian is evaluated by first doing a change of variables
+\begin{equation}
+    \vb{x}' = \vb{r} - \vb{x}, \quad \vb{r}' = \frac{m_f}{m_0} \vb{x} + \frac{m_0}{m_f + m_0} \vb{r},
+\label{eqn-223-17}
+\end{equation}
+to give
+\begin{equation}
+    L = \frac{m_f+m_0}{2} \dot{\vb{r}}'^2 + \mu_0 \dot{\vb{x}}'^2 - \frac{\kappa}{2} \vb{x}'^2 +\mu_0\ \vb{J}_{\vb{q}, \tau, \sigma}(t) \cdot \vb{x}' + m_0\ \vb{J}_{\vb{q}, \tau, \sigma}(t) \cdot \vb{r}'.
+\label{eqn-223-18}
+\end{equation}
+This gives equations of motion for $\vb{x}'$ and $\vb{r}'$
+\begin{equation}
+    \ddot{\vb{x}}' = v\vb{x}' - \frac{1}{m_0} \vb{J}_{\vb{q}, \tau, \sigma}(t), \quad \ddot{\vb{r}}' = -\frac{1}{m_f+m_0} \vb{J}_{\vb{q}, \tau, \sigma}(t),
+\label{eqn-223-18:osaka_eoms}
+\end{equation}
+where $v = \sqrt{\kappa / \mu_0}$ as defined by Feynman. \=Osaka gave the solution for $\vb{x}'$ under the boundary conditions $\vb{x}'(0) = \vb{x}'_i$ and $\vb{x}'(\hbar \beta) = \vb{x}'_f$ to be
+\begin{equation}
+    \begin{aligned}
+    \vb{x}'(t) &= \frac{\vb{x}'_i \sinh (v[\hbar\beta - t]) + \vb{x}'_f \sinh(vt)}{v\sinh(v\hbar\beta)} \\
+    &+ i\vb{q} \sinh(vt)\ \frac{\sinh(v[\hbar\beta - \tau]) - \sinh(v[\hbar\beta - \sigma])}{v\sinh(v\hbar\beta)} \\
+    &- \frac{i\vb{q}}{v}
+    \begin{cases}
+        \sinh(v[t-\tau]) - \sinh(v[t-\sigma]) & t > \tau \\
+        -\sinh(v[t-\sigma]) & \sigma < t < \tau \\
+        0 & t < \sigma,
+    \end{cases}
+    \end{aligned}
+\label{eqn-223-20}
+\end{equation}
+if $\tau > \sigma$, otherwise the conditional is
+\begin{equation}
+    \begin{cases}
+        \sinh(v[t-\tau]) - \sinh(v[t-\sigma]) & t > \sigma \\
+        \sinh(v[t-\sigma]) & \sigma < t < \tau \\
+        0 & t < \tau.
+    \end{cases}
+\label{eqn-223-21}
+\end{equation}
+Under the boundary conditions $\vb{r}'(0) = \vb{r}'_i$ and $\vb{r}'(\hbar\beta) = \vb{r}'_f$ the solution for $\vb{r}'$ is
+\begin{equation}
+    \begin{aligned}
+    \vb{r}'(t) &= \vb{r}'_i + \frac{v^2 (\vb{r}'_f - \vb{r}'_i) - i\vb{q}w^2 (\tau - \sigma)}{\hbar\beta v^2} \\
+    &- i\vb{q}\frac{w^2}{v^2} \left[
+    \left(\begin{cases}
+        t - \tau & t > \tau \\
+        0 & t < \tau
+    \end{cases}\right) - 
+    \left(\begin{cases}
+        t - \sigma & t > \sigma \\
+        0 & t < \sigma.
+    \end{cases}\right)
+    \right].
+    \end{aligned}
+\label{eqn-223-22}
+\end{equation}
+Using the equations of motion, \=Osaka obtains the generating functional
+\begin{equation}
+    \begin{aligned}
+         Z[J_{\vb{q},\tau}(t)] &= \exp \left(  -\frac{\mu_0}{2\hbar} \left[ \vb{x}'(\hbar\beta) \cdot \vb{\dot{x}'}(\hbar\beta) - \vb{x}'(0) \cdot \vb{\dot{x}'}(0) \right] \right. \\ 
+        &- \frac{m_f + m_0}{2\hbar}  \left[ \vb{r}(\hbar\beta) \cdot \vb{\dot{r}'}(\hbar\beta) - \vb{r}'(0) \cdot \vb{\dot{r}'}(0) \right] \\
+        &\left. + \frac{\mu_0}{2 \hbar} \int_0^{\hbar\beta} dt\ \vb{J}_{\vb{q}, \tau, \sigma}(t) \cdot \vb{x}'(t) \right. \\
+        &\left. + \frac{m_0}{2 \hbar} \int_0^{\hbar\beta} dt\ \vb{J}_{\vb{q}, \tau, \sigma}(t) \cdot \vb{r}'(t) \right).
+    \end{aligned}
+\label{eqn-223-23}
+\end{equation}
+\=Osaka connects this to the original action $S$ by identifying $\vb{r}'_{i,f}$ and $\vb{x}'_{i,f}$ to $\vb{r}_{i,f}$ and $\vb{x}_{i,f}$ respectively using the relations in Eq. (\ref{eqn:osaka_rel}) and then integrating over $\vb{x}_i$ under the boundary condition $\vb{x}_i = \vb{x}_f$. Using this, the fact that $\lim_{\vb{q}\to 0}  Z[J_{\vb{q},\tau}(t)] = 1$ and that the kinetic energy terms in $\langle S - S_0 \rangle$ cancel, \=Osaka obtained $\langle S \rangle_{S_0}$ as
+\begin{empheq}{Finite Temperature Model Action Expectation}
+\begin{equation}
+    \begin{aligned}
+        \langle S \rangle_{S_0} &= \frac{\alpha \hbar r_0 \omega_0^2}{2\sqrt{2}} \int^{\hbar\beta}_0 d\tau \int^{\hbar\beta}_0 d\sigma\ D_{\omega_0}(\tau - \sigma) \int \frac{d^3\vb{q}}{(2\pi)3} \frac{1}{q^2} e^{-\frac{r_0^2 q^2}{2} G(\tau)} \\
+        &= \frac{\alpha \hbar r_0 \omega_0^2}{\sqrt{2}} \int^{\hbar\beta}_0 d\tau\ (\hbar\beta - \tau) \frac{D_{\omega_0}(\tau)}{\sqrt{G(\tau)}}.
+    \end{aligned}
+\label{eqn-223-24:osaka_expected_model_action}
+\end{equation}
+\end{empheq}
+Here $G(\tau)$ is now the finite temperature generalisation of (\ref{eqn-222-27:feynman_D_function}) given by
+\begin{equation}
+    G(\tau) = \omega_0\left[\frac{w^2}{v^2} \tau \left(1 - \frac{\tau}{\hbar\beta}\right) - \frac{v^2 - w^2}{v^3} \left(D_v(\tau) - D_v(0) \right)\right]
+\label{eqn-223-25}
+\end{equation}
+$ \langle S \rangle_{S_0}$ is independent of the boundary conditions. $\langle S_0 \rangle_{S_0}$ is obtained as before from the power series of $\vb{q}$ of $Z[J_{\vb{q},\tau}(t)]$ to give
+\begin{empheq}{Finite Temperature Trial Action Expectation}
+\begin{equation}
+    \begin{aligned}
+        \langle S_0 \rangle &= \frac{3 \kappa w \beta}{4} \int^{\hbar\beta}_0 d\tau\ (\hbar\beta - \tau) D_w(\tau) G(\tau) \\
+        &= \frac{3 \kappa \beta}{4 v} \left(\frac{2}{v\hbar\beta} - \coth\left(\frac{v\hbar\beta}{2}\right) \right).
+    \end{aligned}
+\label{eqn-223-26:osaka_expected_trial_action}
+\end{equation}
+\end{empheq}
+\=Osaka then obtained the partition function from the diagonal part of the density matrix
+\begin{equation}
+    Z(\beta) = \rho_S(\vb{r}, \vb{r}; \hbar\beta) \geq \rho_{S_0}(\vb{r}, \vb{r}; \hbar\beta) \exp\langle S - S_0 \rangle_{S_0} = Z_{S_0}(\beta) \exp\langle S - S_0 \rangle_{S_0},
+\label{eqn-223-27}
+\end{equation}
+giving the variational principle
+\begin{equation}
+    F(\beta) \leq F_{S_0}(\beta) + \frac{1}{\beta} \langle S - S_0 \rangle_{S_0}.
+\label{eqn-223-28:osaka_var_eqn}
+\end{equation}
+Now, in a similar way to Feynman, \=Osaka obtained the trial free energy $F_{S_0}(\beta)$ using
+\begin{equation}
+     \frac{\partial \log Z_{S_0}}{\partial \kappa} = \frac{\langle S_0 \rangle_{S_0}}{\kappa},
+\label{eqn-223-29}
+\end{equation}
+and the fact that when $\kappa = 0$, $Z_{S_0} = V_0 (m_0/2\pi\hbar^2\beta)^{3/2}$. By integrating $\partial \log Z_{S_0} / \partial \kappa$ with respect to $\kappa$, \=Osaka obtained
+\begin{equation}
+\begin{aligned}
+    F_{S_0}(\beta) &= -\frac{1}{\beta} \log Z_{S_0}(\beta) = - \frac{1}{\beta}\log\left(\frac{V_0}{r_0^3}\right) + \frac{3}{2\beta} \log(2\pi \hbar\omega_0\beta) - \frac{1}{\beta}\int^\kappa_0 d\kappa' \frac{\langle S_0(\kappa') \rangle}{\kappa}' \\
+    &= - \log\left(\frac{V_0}{r_0^3}\right) + \frac{3}{2\beta} \log(2\pi \hbar\omega_0\beta) + \frac{3\hbar}{2} \int_w^v du \left( \coth \left( \frac{\hbar \beta u}{2}\right) - \frac{2}{\hbar\beta u} \right) \\
+    &= - \frac{1}{\beta}\log\left(\frac{V_0}{r_0^3}\right) + \frac{3}{2\beta} \log(2\pi \hbar\omega_0\beta) + \frac{3}{\beta} \log \left( \frac{w \sinh \left( \hbar \beta v / 2 \right)}{v \sinh \left( \hbar \beta w / 2 \right)} \right).
+\end{aligned}
+\label{eqn-223-30:osaka_trial_energy}
+\end{equation}
+If one finds the variational parameters $v$ and $w$ that give the lowest upper-bound to the free energy, then the average energy of the polaron state is given by
+\begin{equation}
+    E = -\frac{\partial}{\partial \beta} \left( F_{S_0} + \langle S - S_0 \rangle_{S_0} \right).
+\label{eqn-223-31}
+\end{equation}
+These results generalise Feynman's variational parameter for the polaron at zero temperature to finite temperatures parameterised by the thermodynamic beta parameter $\beta = 1 / (k_B T)$. In this zero temperature limit, $\beta \to \infty$, \=Osaka's result reduces to Feynman's.
+
+\subsubsection{Numerical Results}
+\label{subsubsec:2-2-3-1}
+
+Using \=Osaka's generalised variational principle, I was able to write codes that calculate the polaron free energy, effective mass and complex conductivity for temperatures $T$ ranging from $1$ to $10$ multiples of $\omega_0$ (here $\hbar = k_B = 1$) and for $1\leq\alpha\leq12$. 
+
+In Fig.~(\ref{fig:thermaltheory}) are contour plots that show, as a function of temperature $T / \omega_0$ and $\alpha$, (a) the polaron free energy, (b) the polaron effective mass, (c) values of the $v$ variational parameters and (d) values of the $w$ variational parameter. The free energy behaves similarly at low temperatures $T \gtrsim \hbar \omega_0 / k_B$ to the ground-state energy. Still, it seems to shift more negatively with an increasing negative gradient for $T \gtrsim \hbar \omega_0 / k_B$. The effective mass follows a similar pattern as it has roughly the same behaviour for $T \lesssim \hbar \omega_0 / k_B$ as it did for $T = 0$, but becomes exponentially more positive for temperatures $T \gtrsim \hbar \omega_0 / k_B$. The $v$ and $w$ parameters also show this pattern and increase exponentially with temperature beyond $T \gtrsim \hbar \omega_0 / k_B$. However, $v$ grows faster than $w$, so their difference increases exponentially with temperature. The artefacts that appear in contour plots for the effective mass and variational parameters at lower $\alpha$ and high temperatures may be numerical errors due to difficulties in the optimisation process.
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-2d-energy-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-3d-energy-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-2d-mass-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-3d-mass-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-2d-v-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-3d-v-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-2d-w-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width = .49\textwidth]{chapters/background/figures/frohlich-3d-w-temp-00625to32-COLOUR.pdf}
+    \caption{The temperature- and electron-phonon $\alpha$ coupling-dependence of \=Osaka's polaron free energy (top-left), Feynman's effective mass (top-right), the $v$ variational parameter (bottom-left) and the $w$ variational parameter (bottom-right).}
+    \label{fig-2252-1:thermaltheory}
+\end{figure}
+\FloatBarrier  
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = .49\textwidth]{figures/frohlich-2d-energy-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-energy-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-2d-mass-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-mass-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-2d-v-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-v-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-2d-w-temp-00625to32-contourf.png}
+    \includegraphics[width = .49\textwidth]{figures/frohlich-3d-w-temp-00625to32-contourf.png}
+    \caption{The temperature- and electron-phonon $\alpha$ coupling-dependence of \=Osaka's polaron free energy (top-left), Feynman's effective mass (top-right), the $v$ variational parameter (bottom-left) and the $w$ variational parameter (bottom-right).}
+    \label{fig-2252-2:thermaltheorycontour}
+\end{figure}
+\FloatBarrier  
+
+The free energy seems to vary less with temperature at weak coupling, which may have made finding the global minima difficult, resulting in noise.
+
+\section{Influence Functionals \& Response Functions}
+\label{sec:2-3}
+
+\subsection{Polaron DC Mobility}
+\label{subsec:2-3-1}
+
+FHIP~\cite{feynman_mobility_1962} derive an expression for the response of the Feynman polaron to weak, spatially uniform, time-varying electric fields. The current induced by the motion of the electron under the influence of a weak  alternating electric field $\vb{E} = E_0 \exp(i \Omega t)$ is generally
+\begin{equation}
+    j(\Omega) = \frac{E(\Omega)}{z(\Omega)} ,
+\end{equation}
+where $z(\Omega)$ is the complex impedance function. It is assumed that the material is isotropic so that $j = \langle \dot{r} \rangle$, where $\langle r \rangle = E / (i\Omega z(\Omega))$ is the expectation of the electron displacement in the $r$ direction. In the time domain, this is
+\begin{equation}
+    \langle r(t) \rangle = -i \int^\infty_{-\infty} dt' G(t - t') E(t') ,
+\end{equation}
+G(t) is the Green function corresponding to the \emph{linear} electron displacement at a time $t$ due to a delta function pulsed electric field at a time zero $t = 0$. The Fourier transform of $G(t)$ is
+\begin{equation}
+    \int^\infty_{-\infty} dt\ G(t) e^{-i\Omega t} = G(\Omega) = \frac{1}{\Omega z(\Omega)},
+\end{equation}
+where $G(t) = 0$ for $t < 0$. Under the influence of the external electric field $E(t)$, the F\"ohlich Hamiltonian gains an additional term $- \vb{E} \cdot \vb{r}$. If $\rho$ is the density matrix of the system, then the expected electron position at a time $t$ is
+\begin{equation}
+    \langle \vb{r}(t) \rangle = \Tr \left\{ \vb{r} \rho(t) \right\}.
+\end{equation}
+Furthermore, we assume that the system is initially in thermal equilibrium $\rho(t = 0) = \exp(-\beta H)$, then the density matrix at any later time $t$ is obtained from the time evolution equation
+\begin{equation}
+    i\hbar \frac{\partial \rho}{\partial t} = [H, \rho].
+\end{equation}
+Therefore
+\begin{equation}
+    \rho(t) = \exp{-\frac{i}{\hbar}\int^{t}_0 [H(s)- \vb{r}(s)\cdot\vb{E}(s)] ds} \rho(0) \exp{+\frac{i}{\hbar}\int^t_0 [H'(s) - \vb{r}'(s)\cdot\vb{E}'(s)] ds},
+\end{equation}
+where $\rho(0) \propto \exp(-\hbar \beta \sum_{\vb{q}} \omega_{\vb{q}} b^\dagger_{\vb{q}} b_{\vb{q}})$ such that only the phonon oscillators are initially in thermal equilibrium at temperature $(k_B \beta)^{-1}$. Due to the electron-phonon coupling, the entire polaron system will quickly return to thermal equilibrium as the electron is perturbed since the energy of the electron ($\sim 1/$volume) is infinitesimal relative to the heat bath of the system of phonon oscillators. As an aside, since $\vb{E}$ is not an operator and the system is in thermodynamic equilibrium, then $\vb{E}'(s) = \vb{E}(s)$. Still, FHIP treats them separately as the more general case, such as in a non-linear response system. We can write $\Tr \rho(t)$ as the path integral generating functional
+\begin{equation}
+    \begin{gathered}
+    \Tr \rho(t) = Z[\vb{E}, \vb{E}'] \\ = \int \mathcal{D}\vb{r}(t) \mathcal{D}\vb{r}'(t) \exp\left( \frac{i}{\hbar} \Phi[\vb{r}(t), \vb{r}'(t)] - \frac{i}{\hbar} \int^{\infty}_{-\infty} dt \left[ \vb{E}(t) \cdot \vb{r}(t) - \vb{E}'(t) \cdot \vb{r}'(t) \right] \right)
+    \end{gathered}
+\end{equation}
+where $ \Phi[\vb{r}(t), \vb{r}'(t)]$ is given by
+\begin{empheq}{Model Influence Functional Phase}
+\begin{equation}\label{eqn:fhip_model_term}
+    \begin{aligned}
+    \Phi &= -\int^{\infty}_{0} dt \int^{\infty}_{0} dt' \int \frac{d^3\vb{q}}{(2\pi)^3} \abs{M_{\vb{q}}}^2 \Bigl\{D_{\omega_{\vb{q}}}(t-t') \left(e^{i \vb{q} \cdot \left[\vb{r}(t)-\vb{r}(t')\right]} \right. \\
+    &\left.- e^{i \vb{q} \cdot \left[\vb{r}'(t)-\vb{r}(t')\right]}\right) - D^*_{\omega_{\vb{q}}}(t-t') \left(e^{i \vb{q} \cdot \left[\vb{r}(t)-\vb{r}'(t')\right]} - e^{i \vb{q} \cdot \left[\vb{r}'(t)-\vb{r}'(t')\right]}\right)\Bigr\}
+    \end{aligned}
+\end{equation}
+\end{empheq}
+where,
+\begin{equation}
+    D_{\omega_{\vb{q}}}(t) = \coth\left(\frac{\hbar\omega_{\vb{q}}\beta}{2}\right) \cos\left(\omega_{\vb{q}}t\right) - i \sin\left(\omega_{\vb{q}}t\right),
+\end{equation}
+is the real-time phonon Green function. For Fr\"ohlich's Hamiltonian we set $\omega_{\vb{q}} = \omega_0$ and the interaction term $M_{\vb{q}}$ is given by Eq.~(\ref{eqn-2122-19:eph_coupling}). 
+
+The double path integral $\mathcal{D}\vb{r}(t) \mathcal{D}\vb{r}'(t)$ is only over closed paths satisfying the boundary condition $\vb{r}(t) - \vb{r}'(t) = 0$ at times $t \to \pm \infty$. Since the electric field is weak, we can expand $\langle \vb{r} (t) \rangle$ to first-order and find the linear response Green's function for $\vb{r}(t)$, which can be obtained from the first functional derivative of the partition function concerning $\vb{E}(t) - \vb{E}'(t)$ as $t \to \infty$ when the steady state is reached. This gives
+\begin{equation}
+    G(t - t') = - \frac{\hbar^2}{2} \frac{1}{Z} \frac{\delta^2 Z[\vb{E}, \vb{E}']}{\delta \vb{E}(t, t') \delta \vb{E}'(t, t')} \biggr\rvert_{\vb{E}=\vb{E}' = 0},
+\end{equation}
+where $Z = Z[0, 0]$ is the partition function that acts as the normalisation constant. In FHIP, they set the electric field to a sum of two delta functions
+\begin{subequations}
+    \begin{align}
+        \begin{split}
+            \vb{E}(s) &= \left[\epsilon \delta(s - t') + \eta \delta(s - t)\right] \vb{e},
+        \end{split}\\
+        \begin{split}
+            \vb{E}'(s) &= \left[\epsilon \delta(s - t') - \eta \delta(s - t)\right] \vb{e},
+        \end{split}
+    \end{align}
+\end{subequations}
+to give
+\begin{equation}
+    G(t - t') = \frac{\hbar^2}{2Z}\frac{\partial^2 Z(\epsilon, \eta)}{\partial\eta\partial\epsilon} \biggr\rvert_{\eta=\epsilon=0}.
+\end{equation}
+Thus, the problem of finding the Green function $G(t - t')$ is reduced to that of finding the dependence of the generating function path integral $\mathcal{Z[\vb{E}, \vb{E}']}$ on the forcing functions $\vb{E}(t)$ and $\vb{E}'(t)$. The path integral in $\mathcal{Z[\vb{E}, \vb{E}']}$ depends on the functional $\Phi[\vb{r}(t), \vb{r}'(t)]$ which contains terms similar to the model action $S$ (athermal expression in Eq.~(\ref{eqn-2211-13:athermal_model_action}) or thermal expression in Eq.~(\ref{eqn:thermal_action})), although I should note that this is now the real-time version of the model action (obtained from a Wick-rotation). 
+
+\subsubsection{Approximating the polaron complex impedance}
+\label{subsubsec:2-3-1-1}
+
+The path integral $\mathcal{Z}[\vb{E}, \vb{E}']$ cannot be evaluated exactly. However, it can be approximated by the trial influence functional $\Phi_0[\vb{r}(t), \vb{r}'(t)]$,
+\begin{empheq}{Trial Influence Functional Phase}
+\begin{equation}
+    \begin{aligned}
+    \Phi_0 = M w^3 \int^{\infty}_{0} dt \int^{\infty}_{0} dt' \Bigl\{&D_{w}(t-t') \left( \left[\vb{r}(t)-\vb{r}(t')\right]^2 - \left[\vb{r}'(t)-\vb{r}(t')\right]^2\right) \\
+    - &D^*_{w}(t-t') \left(\left[\vb{r}(t)-\vb{r}'(t')\right]^2 -\left[\vb{r}'(t)-\vb{r}'(t')\right]^2\right)\Bigr\}.
+    \end{aligned}
+\end{equation}
+\end{empheq}
+This contains terms similar to the trial action $S_0$ (such as the athermal trial action in Eq. (\ref{eqn-222-7:athermal_trial_action}) and thermal trial action in Eq. (\ref{eqn:thermal_trial_action}), but Wick-rotated from the imaginary-time variable to the real-time variable) in which the attractive Coulomb-like potential is roughly replaced by the simpler attractive parabolic potential centred at the mean position of the electron in the past (weighted by an exponential decay with time where $w$ is the decay factor). In FHIP, it is assumed that the Wick-rotation of the trial partition function $Z_0$ (the athermal partition function given by Eq. (\ref{eqn-222-13:trial_partition}) and the thermal partition function by Eq. (\ref{eqn:osaka_trial_fenergy})), which gives the best approximation to the partition function of the actual model system via either Feynman's (athermal) or Osaka's (thermal) variational principle, can describe the dynamical behaviour of the polaron. 
+
+Therefore, in FHIP, they approximate the model generating functional $\mathcal{Z[\vb{E}, \vb{E}']}$ with the zeroth and first terms from the expansion of the path integral around the trial action
+\begin{equation}
+    \begin{aligned}
+    \mathcal{Z}[\vb{E}, \vb{E}'] &\approx \int \mathcal{D}\vb{r}(t)\mathcal{D}\vb{r}'(t)\ e^{\frac{i}{\hbar} (\Phi_0 + \int dt\ [\vb{E} \cdot \vb{r} - \vb{E}' \cdot \vb{r}'])} \\
+    &+ i\int \mathcal{D}\mathbf{r}(t) \mathcal{D}\mathbf{r}'(t)\ e^{\frac{i}{\hbar} (\Phi_0 + \int dt\ [\vb{E} \cdot \vb{r} - \vb{E}' \cdot \vb{r}'])}\left(\Phi - \Phi_0\right) \\
+    &\equiv \mathcal{Z}_0[\vb{E}, \vb{E}'] + \mathcal{Z}_1[\vb{E}, \vb{E}'].
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Calculating the zeroth term of the complex impedance}
+\label{subsubsec:2-3-1-2}
+
+The zeroth term $\mathcal{Z}_0[\vb{E}, \vb{E}']$ is the classical response and is the same as the alternative model presented by \=Osaka of two masses coupled by a harmonic spring under the influence of a linear force $\vb{f}$ (Eq. (\ref{eqn:osaka_lag_f})), where $\vb{f} = \vb{E}$. This term is then reanalysed as the sum of two normal mode harmonic oscillators so that $\mathcal{Z}_0[\vb{E}, \vb{E}']$ is written as the product of two factors, one for each harmonic oscillator. The first oscillator has a mass $m_1 = M + m_0 = m_0 v^2 / w^2$ and frequency $\omega_1 = 0$ coupled by $\vb{f}_1(t) = \vb{E}(t)$, and the second oscillator has mass $m_2 = M m_0 / (M + m_0)$, frequency $\omega_2 = v \omega_0$ and coupling $\vb{f_2(t)} = - M m_0 / (M + m_0) \vb{E}(t) = \vb{E}(t) (v^2 - w^2) / v^2$. 
+
+$\mathcal{Z}_0[\vb{E}, \vb{E}']$ is then given by
+\begin{equation}\label{eqn:Z0}
+    \begin{aligned}
+        \mathcal{Z}_0[\vb{E}, \vb{E}'] = \exp &\left\{ \frac{i}{4\pi} \int^{+\infty}_{-\infty}d\Omega\ \left( \vb{E}(-\Omega) - \vb{E}'(\Omega) \right) \right. \\
+        &\left. \times \left[ \left( \vb{E}(\Omega) + \vb{E}'(\Omega) \right) Y_0(\Omega)
+         + i \left( \vb{E}(\Omega) - \vb{E}'(\Omega) \right) A_0(\Omega) \right]\right\},
+    \end{aligned}
+\end{equation}
+where
+\begin{equation}
+    G_0(\Omega) = \lim_{\varepsilon \to 0^+} \left\{ i\frac{\Omega^2 - w^2}{(\Omega - i\varepsilon)^2} \left[ (\Omega - i\varepsilon)^2 - v^2 \right]\right\}
+\end{equation}
+and
+\begin{equation}
+    \begin{aligned}
+        A_0(\Omega) &= \frac{\pi}{2} \lim_{\varepsilon \to 0^+} \left\{ \frac{2w^2}{v^2\beta\varepsilon^2} \left[ \delta(\Omega + \varepsilon) - \delta(\Omega - \varepsilon) \right] \right. \\
+        &\left. + \frac{v^2 - w^2}{v^3} \left[ 1 + \frac{2}{e^{\beta v} - 1} \right] \left[ \delta(\Omega + v) + \delta(\Omega - v) \right] \right\}
+    \end{aligned}
+\end{equation}
+where $\vb{E}(\Omega)$ is the Fourier transform of $\vb{E}(t)$. To obtain the classical Green's function $G_0(t-t')$, in FHIP they substitute
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \vb{E}(\Omega)& = \left(\epsilon e^{-i\Omega t'} + \eta e^{i \Omega t}\right) \hat{\vb{q}}
+    \end{split}\\
+    \begin{split}
+        \vb{E}'(\Omega) &= \left(\epsilon e^{-i\Omega t'} - \eta e^{i \Omega t} \right) \hat{\vb{q}}
+    \end{split}
+\end{align}
+\end{subequations}
+into $\mathcal{Z}_0[\vb{E}, \vb{E}']$ and find the \emph{linear term} of order $\epsilon \eta$. The zeroth order approximation to $G(t - t')$ is then
+\begin{equation}
+    G_0(t - t') = \frac{1}{2\pi} \int^\infty_{-\infty} d\Omega\ G_0(\Omega) e^{i\Omega(t - t')} 
+\end{equation}
+which is the classical response of the system. 
+
+\subsubsection{Calculating the first correction term of the complex impedance}
+\label{subsubsec:2-3-1-3}
+
+To include the first order of quantum corrections to the classical response of the electron, FHIP uses the $\mathcal{Z}_1[\vb{E}, \vb{E}']$ path integral to obtain the first order approximation $G_1(t-t')$ to $G(t-t')$. To evaluate $\mathcal{Z}_1[\vb{E}, \vb{E}']$ they first look at the $\Phi \exp(i \Phi_0 / \hbar)$. Substituting the equation for $\Phi$ into $\Phi \exp(i \Phi_0 / \hbar)$, the resulting expression contains terms $\mathcal{T}$ that have the form
+\begin{equation}
+    \mathcal{T} = \int \mathcal{D}\vb{r}(t) \mathcal{D}\vb{r}'(t)\ e^{\frac{i}{\hbar} \Phi_0} \left\{ \int \frac{d^3\vb{q}}{(2\pi)^3} \abs{M_{\vb{q}}}^2 \int^\infty_{-\infty} dt \int^\infty_{-\infty} dt' D_{\omega_{\vb{q}}}(t-t') e^{i\vb{q}\cdot\left(\vb{r}(t) - \vb{r}(t')\right)} \right\}.
+\end{equation}
+The two other terms in $\Phi \exp(i \Phi_0 / \hbar)$ come from the correlations between electron paths in the density matrix $\rho(\vb{r}, \vb{r}', t)$ (i.e. off-diagonal terms) and are similar to $\mathcal{T}$, but with different replacements of $\vb{r}$ with $\vb{r}'$. To evaluate $\mathcal{T}$ one has to evaluate the path integral
+\begin{equation}
+    \begin{aligned}
+    \mathcal{R}(\vb{q}, s, s') &= \int_{\vb{r} = \vb{r}'} \mathcal{D}\vb{r}(t) \mathcal{D}\vb{r}'(t) \exp\left\{ i \vb{q} \cdot \left[ \vb{r}(s) - \vb{r}(s') \right] + \frac{i}{\hbar} \Phi_0 \right\} \\
+    &= Z_0 \langle e^{i \vb{q} \cdot [\vb{r}(s) - \vb{r}(s')]}  \rangle_{\Phi_0},
+    \end{aligned}
+\end{equation}
+where $Z_0 \equiv \mathcal{Z}_0[0, 0]$. This gives $\mathcal{T}$ to be
+\begin{equation}\label{eqn:fhip_genfun}
+    \begin{gathered}
+        \mathcal{T} = \int^\infty_{-\infty} ds \int^\infty_{-\infty} ds' D_{\omega_0}(s-s') \int \frac{d^3\vb{q}}{(2\pi)^3} \abs{M_{\vb{q}}}^2 \langle  e^{i \vb{q} \cdot [\vb{r}(s) - \vb{r}(s')]} \rangle_{\Phi_0}.
+    \end{gathered}
+\end{equation} 
+The solution to $\mathcal{R}(\vb{q}, s, s')$ is the same form as $\mathcal{Z}_0[\vb{E}, \vb{E}']$ in Eq. (\ref{eqn:Z0}) except for the non-primed components
+\begin{subequations}
+\begin{align}
+    \begin{split}
+        \vb{E}(\Omega) &= \left(\epsilon e^{-i\Omega t'} + \eta e^{-i\Omega t}\right) \vb{\hat{q}} + \vb{q} \left(e^{-i\Omega s} - e^{-i\Omega s'}\right),
+    \end{split}\\
+    \begin{split}
+        \vb{E}'(\Omega) &= \left(\epsilon e^{-i\Omega t'} - \eta e^{-i\Omega t}\right) \vb{\hat{q}},
+    \end{split}
+\end{align}
+\end{subequations}
+to give
+\begin{equation}
+    \begin{aligned}
+        \mathcal{R}(\vb{q}, t, t') &= \mathcal{Z}_0 \exp \left\{ \frac{i \abs{\vb{q}}^2}{4\pi} \int^\infty_{-\infty} d\Omega\ \abs{e^{i\Omega \tau} - e^{i\Omega \sigma}}^2 \left( Y_0 + i A_0 \right) \right. \\
+        &\left. + \frac{i \vb{q}_{\vb{r}}}{2\pi} \int^\infty_{-\infty} d\Omega\ \left(e^{i\Omega \tau} - e^{i\Omega \sigma}\right)\left(\epsilon Y_0 e^{-i\Omega t'} + i \eta A_0 e^{-i\Omega t}\right) \right. \\
+        &\left. + \frac{i \vb{q}_{\vb{r}}}{2\pi}  \int^\infty_{-\infty} d\Omega\ \left(e^{-i\Omega \tau} - e^{-i\Omega \sigma}\right) \eta e^{i\Omega t} \left( Y_0 + i A_0 \right) \right\}
+    \end{aligned}
+\end{equation}
+where
+\begin{equation}
+    \mathcal{Z}_0 = \exp \left[\frac{i}{\pi} \int^\infty_{-\infty} d\Omega\ \eta e^{i\Omega t} \left(\epsilon Y_0 e^{-i\Omega t'} + i \eta A_0 e^{-i\Omega t} \right)\right]
+\end{equation}
+for $\vb{q} = 0$. Similarly, for the primed components,
+\begin{subequations}
+    \begin{equation}
+        \vb{E}(\Omega) = \left(\epsilon e^{-i\Omega t'} + \eta e^{-i\Omega t}\right) \vb{\hat{q}} - \vb{q} e^{-i\Omega \sigma},
+    \end{equation}
+    \begin{equation}
+        \vb{E}'(\Omega) = \left(\epsilon e^{-i\Omega t'} - \eta e^{-i\Omega t}\right) \vb{\hat{q}} - \vb{q} e^{-i\Omega \tau}.
+    \end{equation}
+\end{subequations}
+To obtain $G_1(t - t')$ we need the first-order derivative of $\mathcal{R}(\vb{q}, \tau, \sigma)$ with respect to $\epsilon$ and $\eta$ and then setting $\epsilon = \eta = 0$. The result is (including a $1/3$ for averaging over the isotropic dimensions of $\vb{q}$)
+\begin{equation}
+    \begin{aligned}
+    r(\vb{q}, \tau, \sigma) &= \left\{ \frac{i}{2\pi} \int^\infty_{-\infty} d\Omega Y_0 e^{i \Omega (t - t')}
+    - \frac{q^2}{24 \pi^2} \int^\infty_{-\infty} d\Omega \left( e^{i\Omega\tau} - e^{i\Omega\sigma} \right) Y_0 e^{-i\Omega t'} \right. \\
+    &\left. \times \int^\infty_{-\infty} d\Lambda \left[\left( e^{i\Lambda\tau} - e^{i\Lambda\sigma} \right) i A_0(\Lambda) e^{-i\Lambda t} + \left( e^{i\Lambda\tau} - e^{i\Lambda\sigma} \right) e^{i\Lambda t} \left( Y_0(\Lambda) + i A_0(\Lambda) \right)\right] \right\} \\
+    &\times \exp \left\{ \frac{ik^2}{4\pi} \int^{\infty}_{-\infty} d\Omega \abs{e^{i\Omega\tau} - e^{i\Omega\sigma}}^2 \left( Y_0 + i A_0 \right) \right\}.
+    \end{aligned}
+\end{equation}
+The first term is the classical response $G_0(t - t')$, and the later terms correspond to the trial path integral with no applied electric field $\epsilon = \eta = 0$. Hence, in total $r(\vb{q}, \tau, \sigma)$ is the $\vb{q}$-dependent term in $\langle S_0 - S'_0 \rangle_{S'_0, S_0}$, where the classical response $G_0$ has cancelled with the normalisation and does not contribute to the quantum corrections to the response, $G_1$. We can do a change of variables $u = \tau - \sigma$ and perform the integral on $\sigma$ in Eq. (\ref{eqn:fhip_genfun}) to give
+\begin{equation}
+    \begin{aligned}
+        r(\vb{q}, u) &=  -\frac{q^2}{6\pi^2} \int^{\infty}_{-\infty} d\Omega \left(1 - \cos(\Omega u) \right) Y_0(\Omega) \left( Y_0(\Omega) + 2i A_0(\Omega) \right) e^{i\Omega (t - t')} \\
+        &\times \exp\left\{ \frac{ik^2}{2\pi} \int^\infty_{-\infty} d\Omega' (1 - \cos(\Omega' u)) (Y_0(\Omega') + i A_0(\Omega')) \right\},
+    \end{aligned}
+\end{equation}
+where $Y_0(-\Omega) = Y^*_0(\Omega)$ and $A_0(-\Omega) = A_0(\Omega)$. $r(\vb{q}, u)$ contributes to $G_1(u)$ and since it is already of the form of a Fourier transform, we can find the contribution $r(\vb{q}, \Omega)$ to $G_1(\Omega)$ by omitting the Fourier integral on $\Omega$ and the factor $e^{-\Omega(t - t')}$ to give:
+\begin{equation}
+    \begin{aligned}
+        r(\vb{q}, \Omega) &= -\frac{q^2}{6\pi^2} \left(1 - \cos(\Omega u) \right) Y_0(\Omega) \left( Y_0(\Omega) + 2i A_0(\Omega) \right) \\
+        &\times \exp\left\{ \frac{ik^2}{2\pi} \int^\infty_{-\infty} d\Omega' (1 - \cos(\Omega' u)) (Y_0(\Omega') + i A_0(\Omega')) \right\}.
+    \end{aligned}
+\end{equation}
+To obtain $\langle S - S_0 \rangle_{S'_0, S_0}$ we multiply $r(\vb{q}, u)$ by $y(u) + ia(u)$ and integrate on $u$. Feynman evaluated this integral by splitting the range of $u$ from $0$ to $\infty$ and from $-\infty$ to $0$, where in the latter, he put $u \to -u$ to make all integrals on $u$ positive. The integral in the exponent is $-q^2 / 2$ times $D(u)$
+\begin{equation}\label{eqn:D_FHIP}
+    \begin{aligned}
+        D(u) &= -\frac{i}{\pi} \int^\infty_{-\infty} d\Omega (1 - \cos(\Omega u) \left[ Y_0(\Omega) + iA_0(\Omega) \right] \\
+        &= \frac{i}{\pi} \left( \vb{Y}_0(u) + \vb{Y}_0(-u) \right) + 2 \left( \vb{A}_0(0) - \vb{A}_0(u) \right) \\
+        &= 2 \frac{v^2-w^2}{v^3} \frac{\sin(vu/2) \sin(v[u-i\hbar\omega_0\beta])}{\sinh(v\hbar\omega_0\beta/2)}-i\frac{w^2}{v^2}u\left(1-\frac{u}{i\hbar\omega_0\beta}\right),
+    \end{aligned}
+\end{equation}
+where $u > 0$. $\vb{Y}_0(t)$ and $\vb{A}_0(t)$ are the inverse Fourier transforms of $Y_0(\Omega)$ and $A_0(\Omega)$ where we note that $\vb{Y}_0(u) = 0$ for $u < 0$. Therefore, overall for $r(q, u)$ is 
+\begin{equation}
+    \begin{aligned}
+        r(q, u) &= \frac{-q^2}{3\pi} Y_0(\Omega) \left[ Y_0(\Omega) + 2i A_0(\Omega) \right] \\
+        &\times \int^\infty_0 du\ (1 - \cos(\Omega u)) \left[ y(u) + y(-u) + 2ia(u) \right] e^{-\frac{1}{2}q^2D(u)}
+    \end{aligned}
+\end{equation}
+which contributes to $G_1$. A similar calculation is also done to obtain the $\mathcal{T}$ terms that come from the primed $\vb{r}'$ components in $\Phi \exp(i \Phi_0 / \hbar)$. Once all are obtained, they are summed together, and the $q$ integral gives the first contribution to $G_1(\Omega)$ as
+\begin{equation}
+    G^{(1)}_1(\Omega) = -iY_0^2(\Omega) \chi(\Omega)
+\end{equation}
+where
+\begin{empheq}{Memory Function}
+\begin{equation}\label{eqn:fhip_chi}
+    \chi(\Omega) = \int_0^\infty dt\ \left[ 1 - e^{i \Omega t} \right] \text{Im} S(t)
+\end{equation}
+\end{empheq}
+with
+\begin{equation}\label{eqn:S}
+    \begin{aligned}
+        S(t) = \frac{2}{3} \int \frac{d^3\vb{q}}{(2\pi)^3} \abs{M_{\vb{q}}}^2 q^2 e^{-q^2 D(t) / 2} \left[ e^{i\omega_{\vb{q}}t} + 2n(\beta\omega_{\vb{q}}) \cos(\omega_{\vb{q}}t) \right]
+    \end{aligned}
+\end{equation}
+which for the Fr\"ohlich Hamiltonian gives
+\begin{empheq}{Fr\"ohlich Dynamical Structure Factor}
+\begin{equation}\label{eqn:dynamic_structure}
+    S(t) =  \frac{2\alpha}{3\sqrt{\pi}} \frac{\cos\left(t - i\hbar\omega_0\beta/2\right)}{\sinh\left(\hbar\omega_0 \beta / 2 \right)} \left[D(t)\right]^{-3/2}.
+\end{equation}
+\end{empheq}
+Next, the second term is obtained analogously from $\Phi_0$. It can be evaluated by differentiating $\mathcal{R}$ (and thus on $r(q, u)$) twice concerning $\vb{q}$ and then setting $\vb{q} = 0$ in the expression. This results in an integral on $u$
+\begin{equation}
+    G^{(2)}_1(\Omega) = -i4Y_0^2(\Omega) \int^\infty_0 du\ \left(1 - e^{i\Omega u} \right) S_0(u) = -i4Y_0^2(\Omega) \frac{C \Omega^2}{w(\Omega^2 - w^2)}
+\end{equation}
+where
+\begin{equation}
+    S_0(u) = C \text{Im} \left( e^{iwu} + 2 n(\beta w) \cos(wu) \right) = C \sin(wu).
+\end{equation}
+This gives the final result for the first-order change in $G$ as
+\begin{equation}
+    G_1(\Omega) = G^{(1)}_1(\Omega) + G^{(2)}_1(\Omega) = -iY_0^2(\Omega) \left[ \chi(\Omega) + \frac{4C}{w} \frac{\Omega^2}{\Omega^2 - w^2} \right].
+\end{equation}
+Hence, FHIP find an approximate form for $G(\Omega)$ composed out of the zeroth and first-order terms of the Green's function
+\begin{equation}
+    G(\Omega) = G_0(\Omega) + G_1(\Omega)
+\end{equation}
+from which they find the impedance to first-order in $G_1(\Omega)$
+\begin{equation}
+    \begin{aligned}
+    \Omega z(\Omega) &= \frac{1}{G(\Omega)} \approx \frac{1}{G_0(\Omega) + G_1(\Omega)} \\
+    &\approx \frac{1}{G_0(\Omega)} - \frac{1}{G_0^2(\Omega)} G_1(\Omega).
+    \end{aligned}
+\end{equation}
+FHIP argue that this expanded form is more accurate than $z \sim (G_0 + G_1)^{-1}$ by considering a simple example of a free particle perturbed by a harmonic oscillator. The structure of the actual $G(\Omega)$ in this example includes a resonance at the oscillator frequency which is not present in $z \sim (G_0 + G_1)^{-1}$. This resonance is present if one expands $z(\Omega)$. Therefore, FHIP use this expanded form, which is written explicitly as
+\begin{empheq}{Complex Impedance}
+\begin{equation}\label{eqn:fhip_impedance}
+    z(\Omega) \approx i\left(\Omega - \frac{\chi(\Omega)}{\Omega}\right).
+\end{equation}
+\end{empheq}
+The first term ($\Omega$) on the right-hand side is a free-particle term, while $\chi(\Omega)$ contains the corrections from the electron-phonon interactions. All of the dependence on the trial influence functional $\Phi_0$ is contained within $D(t)$, which appears in the exponential term in $S(t)$ (Eq. (\ref{eqn:dynamic_structure})). This exponential term describes the non-linear scattering of the electron due to its interaction with the phonon field oscillators. If the phonon oscillators are linearly coupled to the electron's coordinate, then Eq. (\ref{eqn:fhip_impedance}) is exact regardless of the choice of $\Phi_0$. Otherwise, beyond a linear electron-phonon coupling approximation, Eq. (\ref{eqn:fhip_impedance}) includes these higher-order interactions approximately by finding their effect for a trial influence functional $\Phi_0$ that seeks to imitate the actual influence functional $\Phi$. In FHIP, they expect Eq. (\ref{eqn:fhip_impedance}) to be an excellent approximation to the actual impedance of the polaron. 
+
+Thornber investigated an extension beyond linear response~\cite{thornber_velocity_1970}, where they evaluate the steady-state response of the electron in a finite electric field of arbitrary strength.
+
+\subsubsection{Calculating the polaron mobility}
+\label{subsubsec:2-3-1-4}
+
+To obtain a general expression for the dissipation, or equivalently the mobility, of the polaron in FHIP, they recognise that the dc mobility $\mu_{dc}$ for the polaron is
+\begin{empheq}{DC Mobility}
+\begin{equation}\label{eqn:FHIP_mobility}
+    \mu^{-1}_{dc} = \lim_{\Omega \rightarrow 0} \frac{\textrm{Im}\chi(\Omega)}{\Omega}.
+\end{equation}
+\end{empheq}  
+In FHIP, they rewrite $\text{Im} \chi(\Omega)$ into a more convenient form for calculation (which may have been true at the time due to their computational capabilities but is no longer necessarily true) by using contour integration. They recognise that since $S(u)$ is analytic between $u = \text{real}$ and $u = \text{real} + i\beta$, the contour of integration can be changed from along the real axis to one which goes first from $0$ to $i\beta/2$ up the imaginary axis and then from $i\beta/2$ to $i\beta/2 + \infty$ parallel to the real axis. In the case of Fr\"ohlich's Hamiltonian they obtain for $\textrm{Im}\chi(\Omega)$
+\begin{equation}\label{eqn:contour_imX}
+    \textrm{Im}\chi(\Omega) = - \frac{2 \alpha}{3 \sqrt{\pi}} \frac{\beta^{3/2}\ \textrm{sinh}(\Omega \beta / 2)}{\textrm{sinh}(\beta / 2)} \left( \frac{v}{w} \right)^3 \int_0^\infty \frac{\textrm{cos}(\Omega x) \textrm{cos}(x)\ dx}{\left[x^2 + a^2 - b\ \textrm{cos}(vx) \right]^{3/2}}
+\end{equation}
+where $a^2 \equiv \beta^2 / 4 + R \beta \coth (\beta v / 2)$, $b \equiv R\beta / \sinh(\beta v / 2)$ and $R \equiv (v^2 - w^2) / (w^2 v)$. 
+
+$\text{Im} \chi(\Omega)$ has maxima when $\Omega$ is equal to a frequency where absorption can happen to go to an excited polaron state, and the width of these maxima correspond to the state lifetimes for phonon emission. In FHIP, they compute $\text{Im}\chi(\Omega)$ by expanding Eq. (\ref{eqn:contour_imX}) in an infinite power series of $K$ modified Bessel functions of the second kind where only the first few terms are required for convergence in most cases.  
+
+In Appendix~\ref{appx-3:memoryfunctions}, I have reproduced the contour integration for $\text{Im}\chi(\Omega)$ and also provided the contour integration for $\text{Re}\chi(\Omega)$ as well.
+
+\subsubsection{Numerical Results}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-mobility-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-mobility-temp-00625to32-COLOUR.pdf}
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-mobility-temp-00625to32-contourf.png}
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-mobility-temp-00625to32-contourf.png}
+    \caption{The temperature- and electron-phonon $\alpha$ coupling-dependence of the polaron DC mobility.}
+    \label{fig:dcmobility}
+\end{figure}
+\FloatBarrier  
+
+Fig.~(\ref{fig:dcmobility}) shows a contour plot of the dc mobility derived in FHIP (note that this expression is in polaron units). For temperatures $T \lesssim \hbar \omega_0 / 2 k_B$, the DC mobility has a minimum around $\alpha \approx 7$, which shifts to larger values of $\alpha$ as the temperature increases. Similarly, for $\alpha \geq 7$, the mobility seems to be minimum around temperatures $T \approx \hbar \omega_0 / k_B$. Elsewhere, for $\alpha < 7$, the mobility seems to decrease rapidly as the temperature increases from $0$ up until $T \approx \hbar \omega_0 / k_B$, then above this temperature, it decreases asymptotically towards zero.
+
+\subsection{The FHIP initial product state and low-temperature mobility}
+
+In FHIP~\cite{feynman_mobility_1962}, they assume a nonphysical initial state, which results in an incorrect low-temperature weak-coupling approximation for the dc-mobility with a spurious `$2\beta$' appearing in the denominator of the mobility,
+\begin{equation}
+    \mu_{\text{FHIP}} = \left( \frac{w}{v} \right)^3 \frac{3e}{2 m^*} \frac{\exp(\beta)}{2\beta \alpha \Omega} \exp\left(\frac{v^2-w^2}{w^2 v}\right).
+\end{equation}
+This observation is important for understanding the $3/2\beta$ discrepancy between the low-temperature FHIP dc-mobility and Kadanoff's dc-mobility~\cite{kadanoff_boltzmann_1963} derived from the Boltzmann equation,
+\begin{equation}
+    \mu_{\text{K}} = \left(\frac{w}{v}\right)^3 \frac{e}{2 m^*} \frac{\exp(\beta)}{\alpha \Omega} \exp\left(\frac{v^2 - w^2}{w^2 v}\right).
+\end{equation}
+Some have argued that this discrepancy is due to taking the incorrect order of the limits $\Omega \to 0$ and $\alpha \to 0$~\cite{peeters_impedance_1983}. An alternative form of the low-temperature dc-mobility was derived by Los~\cite{los_theory_1984, los_influence_2017, los_evolution_2018} and Sels~\cite{sels_dynamic_2016}. Their mobility results differ by a factor of $3$ from Kadonoff and by a factor of $2\beta$ from FHIP,
+\begin{equation}
+    \mu_{\text{L}} = \left(\frac{w}{v}\right)^3 \frac{3 e}{2 m^*} \frac{\exp(\beta)}{\alpha \Omega} \exp\left(\frac{v^2 - w^2}{w^2 v}\right).
+\end{equation}
+Sels~\cite{sels_dynamic_2016} shows that the difference with Kadonoff is because the relaxation time approximation (neglecting the non-vanishing in-scattering term) used by Kadonoff violates particle number conservation, whereas FHIP does not. However, as mentioned above, the FHIP approximation relies on a nonphysical initial state for Feynman's polaron model. 
+Further, Los~\cite{los_influence_2017, los_evolution_2018} shows that not using a factorised initial state of the electron-phonon system results in corrections (although small) due to initial correlations being neglected.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-imag-memory-freq-COLOUR.pdf}
+\includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-real-conductivity-freq-COLOUR.pdf}
+\includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-imag-memory-freq-COLOUR.pdf}
+\includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-real-conductivity-freq-COLOUR.pdf}
+    \caption{The real conductivity (also the frequency-dependent mobility) of the polaron response obtained from the FHIP theory and calculated for $\alpha$ ranging from $1$ to $7$ and external field angular frequencies ranging from $0\ \omega_0$ to $30\ \omega_0$ multiples of the effective phonon angular frequency}
+    \label{fig:enter-label}
+\end{figure}
+\FloatBarrier
+
+I do not use the low-temperature weak-coupling approximate form of the FHIP mobility in this work. Instead, we perform a direct numerical integration of the integral in the memory function $\chi$ in Eq.~(\ref{eqn:memoryfunction}).
+
+\subsection{Optical Conductivity}
+\label{subsec:2-3-2}
+
+Devreese, Sitter and Gooverts~\cite{devreese_optical_1972} (otherwise referred to as ``DSG'') expand upon the work done in FHIP by evaluating the optical absorption coefficient of the polaron. They note that $\text{Im}\chi(\Omega)$ is not this coefficient. To obtain this coefficient, they compare the expansion of the conductivity $\sigma(\Omega) = 1 / z(\Omega)$ to the expansion of the impedance (used by FHIP) $z(\Omega)$ and find further justification for the accuracy of the impedance function expansion. This, in turn, provides a more accurate expression for the frequency-dependent complex mobility $\mu(\Omega)$. To achieve this, they find an expression for the real component of the impedance function $\text{Re}\chi(\Omega)$. They then evaluate both $\text{Re}\chi(\Omega)$ and $\text{Im}\chi(\Omega)$ at zero temperature ($\beta = \infty$) by deriving involved analytical expressions. 
+
+DSG state the relation between the optical absorption coefficient $\Gamma(\Omega)$ and the impedance $z(\Omega)$ of polarons as
+\begin{empheq}{Optical Absorption}
+\begin{equation}
+    \Gamma(\Omega) = \frac{1}{c\epsilon_0 n} \text{Re} \left\{ \frac{1}{z(\Omega)} \right\}
+\end{equation}
+\end{empheq}
+where $\epsilon_0$ is the dielectric constant of the vacuum, $n$ is the index of refraction of the medium, and $c$ is the speed of light. DSG find that for the expansion of $z(\Omega)$ at zero temperature, the optical absorption coefficient requires both the real $\text{Re} z(\Omega)$ and imaginary $\text{Im} z(\Omega)$ components of the impedance (or of $\chi(\Omega)$). They obtain the expression
+\begin{equation}
+    \Gamma_z(\Omega) = \frac{1}{c \epsilon_0 n} \lim_{\beta \to \infty} \frac{\Omega\ \textrm{Im}\chi(\Omega)}{\Omega^4 - 2 \Omega^2\ \textrm{Re} \chi(\Omega) + |\chi(\Omega)|^2}.
+\end{equation}
+If the expansion of the conductivity $1/z(\Omega)$ is used instead then they obtain
+\begin{equation}
+    \Gamma_\sigma(\Omega) = \frac{\text{Im}\chi(\Omega)}{\Omega^3} \left( \frac{\Omega^2 - w^2}{\Omega^2 -v^2} \right)^2.
+\end{equation}
+DSG rigorously takes the zero temperature limit $\beta \to \infty$. By taking the limit directly in the expression for $\chi(\Omega)$ in Eq. (\ref{eqn:fhip_chi}). The real and imaginary components at zero temperature ($\beta = \infty$) are
+\begin{subequations}
+    \begin{align}
+    \begin{split}
+        \text{Re} \chi(\Omega) &= \text{Im} \int^{\infty}_0 du\ \frac{\left[1 - \cos(\Omega u)\right] e^{iu}}{\left[R(1-e^{ivu}) - iu\right]^{3/2}},
+    \end{split}\\
+    \begin{split}
+        \text{Im} \chi(\Omega) &= \text{Im} \int^{\infty}_0 du\ \frac{\sin(\Omega u) e^{iu}}{\left[R(1-e^{ivu}) - iu\right]^{3/2}}.
+    \end{split}
+    \end{align}
+\end{subequations}
+By developing the denominator in the integrals, the expression for the two integrals become
+\begin{subequations}
+    \begin{align}
+    \begin{split}
+        \text{Re} \chi(\Omega) &= \frac{2\alpha}{3} \frac{v^3}{w^3} \sum_{n = 0}^\infty C^n_{-3/2} (-1)^n R^n \times \text{Im} \int^{\infty}_0 du\ \frac{\left[1 - \cos(\Omega u)\right] e^{i(1+nv)u}}{\left[R - iu\right]^{3/2 + n}},
+    \end{split}\\
+    \begin{split}\label{eqn:reX_exp}
+        \text{Im} \chi(\Omega) &= \frac{2\alpha}{3} \frac{v^3}{w^3} \sum_{n = 0}^\infty C^n_{-3/2} (-1)^n R^n \times \text{Im} \int^{\infty}_0 du\ \frac{\sin(\Omega u) e^{i(1+nv)u}}{\left[R - iu\right]^{3/2 + n}},
+    \end{split}
+    \end{align}
+\end{subequations}
+where $C^n_r$ are the binomial coefficients. For $\text{Im}\chi(\Omega)$ at $\beta = \infty$ DSG find the expansion
+\begin{equation}
+    \begin{split}
+        \textrm{Im}\chi(\Omega) &= \frac{2\alpha}{3} \frac{v^3}{w^3} \sum_{n=0}^\infty C^n_{-3/2} (-1)^n \frac{(2R)^n}{(2n + 1)!!} \\
+        &\times |\Omega -1 - nv|^{n + 1/2} e^{-|\Omega - 1 -nv|R}\ \frac{1 + \textrm{sgn}(\Omega - 1 - nv)}{2}
+    \end{split}
+\end{equation}
+where $(2n + 1)!! = (2n + 1) \dots 5 \cdot 3 \cdot 1$ indicates the double factorial. In FHIP, they stated the first two terms of this expansion. FHIP find that following the same procedure for $\text{Re}\chi(\Omega)$ is far more complicated and has poor convergence properties. Therefore, DSG transform the integrals in Eq. (\ref{eqn:reX_exp}) to integrals with rapidly convergent integrands to give the result
+\begin{equation}
+    \begin{split}
+    \textrm{Re}\chi(\Omega) &= \frac{2\alpha}{3} \frac{v^3}{w^3} \sum_{n=0}^\infty -\frac{1}{\Gamma(n + 3/2)} \\
+    &\times\int_0^\infty dx \left[ \left(n + \frac{1}{2}\right) x^{n-1/2} e^{-Rx} - R x^{n + 1/2} e^{-Rx} \right] \\
+    &\times \ln{\left| \frac{(1 + nv + x)^2}{\Omega^2 - (1 + nv + x)^2} \right|^{1/2}}.
+    \end{split}
+\end{equation}
+From these expansions of $\text{Re}\chi(\Omega)$ and $\text{Im}\chi(\Omega)$ DSG evaluate the optical absorption coefficient. 
+
+In Appendices B and C, I have derived the expansions of $\text{Re}\chi(\Omega)$ and $\text{Im}\chi(\Omega)$ for finite temperatures in terms of hypergeometric functions.
+
+\subsubsection{Numerical Results}
+
+I used the optical absorption expression obtained from~\cite{devreese_optical_1972} to extend the codes to calculate the complex conductivity of the polaron for different couplings $1 \leq \alpha \leq 12$, temperatures $0 \leq T / \omega_0 \leq 10$ and applied electric field frequencies $0 \leq \Omega / \omega_0 \leq 20$. I show the data obtained for $\alpha = 3, 6, 9$ where perturbation theory breaks down at $\alpha = 6$. 
+
+Fig.~(\ref{fig-2251-1:athermaltheory}, right) shows the athermal real conductivity (which is equivalent to the frequency-dependent polaron mobility) for $0 \leq \alpha \leq 7$ and for an applied electric field with an angular frequency $\Omega$ ranging from $0$ to $30$ times that of the longitudinal optical phonon frequency $\omega_0$. At lower couplings $\alpha \leq 4$, all of the first peaks start at $\Omega = \omega_0$ and for $\alpha \geq 5$ we see the appearance of additional peaks at $\Omega = \omega_0 + n \omega_0 v,\ n \in \mathbb{Z}^+$, with all of the peaks seemingly sharpening and blue-shifting to higher frequencies at stronger couplings $\alpha \geq 7$.
+
+Figures~\ref{fig:osakacontour} (contour plots) and \ref{fig:osakaridge} (ridge-line plots) show the real (left columns) and imaginary (right columns) of the complex conductivity for $\alpha = 3$ in the first rows, $\alpha = 6$ in the second rows and $\alpha = 9$ in the last rows. The figures are all log-scaled concerning the complex conductivity, and for the imaginary component, I have taken the absolute value to go to the log scale.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-imag-memory-alpha-0to12-temp-001-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-2d-real-conductivity-alpha-0to12-temp-001-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-imag-memory-alpha-0to12-temp-001-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{chapters/background/figures/frohlich-3d-real-conductivity-alpha-0to12-temp-001-freq-0to30-contourf.png}
+    \caption{The electron-phonon $\alpha$ coupling- and frequency-dependence of the imaginary component of the polaron memory function (left) and the real component of the polaron complex conductivity (right).}
+    \label{fig:gscontour}
+\end{figure}
+\FloatBarrier  
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-1-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-2-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-3-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-4-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-5-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-real-conductivity-alpha-6-temp-00625to32-freq-0to30-contourf.png}
+
+    \caption{The temperature- and frequency-dependence of the real component of the polaron complex electrical conductivity for electron-phonon couplings $\alpha = 1$ (top-left), $2$ (top-right), $3$ (middle-left), $4$ (middle-right), $5$ (bottom-left) and $6$ (bottom-right).}
+    \label{fig:osakacontour}
+\end{figure}
+\FloatBarrier  
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-real-conductivity-alpha-1-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-real-conductivity-alpha-2-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-real-conductivity-alpha-3-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-real-conductivity-alpha-4-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-real-conductivity-alpha-5-temp-00625to32-freq-0to30-contourf.png}
+
+    \caption{The temperature- and frequency-dependence of the real component of the polaron complex electrical conductivity for electron-phonon couplings $\alpha = 1$ (top-left), $2$ (top-right), $3$ (middle-left), $4$ (middle-right), $5$ (bottom-left) and $6$ (bottom-right).}
+    \label{fig:osakacontour}
+\end{figure}
+\FloatBarrier  
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-1-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-2-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-3-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-4-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-5-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-3d-imag-memory-alpha-6-temp-00625to32-freq-0to30-contourf.png}
+
+    \caption{The temperature- and frequency-dependence of the imaginary component of the polaron memory function for electron-phonon couplings $\alpha = 1$ (top-left), $2$ (top-right), $3$ (middle-left), $4$ (middle-right), $5$ (bottom-left) and $6$ (bottom-right).}
+    \label{fig:osakaridge}
+\end{figure}
+\FloatBarrier  
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-imag-memory-alpha-1-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-imag-memory-alpha-2-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-imag-memory-alpha-3-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-imag-memory-alpha-4-temp-00625to32-freq-0to30-contourf.png}
+    \includegraphics[width=.49\textwidth]{figures/frohlich-2d-imag-memory-alpha-5-temp-00625to32-freq-0to30-contourf.png}
+
+    \caption{The temperature- and frequency-dependence of the imaginary component of the polaron memory function for electron-phonon couplings $\alpha = 1$ (top-left), $2$ (top-right), $3$ (middle-left), $4$ (middle-right), $5$ (bottom-left) and $6$ (bottom-right).}
+    \label{fig:osakaridge}
+\end{figure}
+\FloatBarrier  
+
+This means that for the imaginary plots, any sharp `rifts' indicate a change in sign as the imaginary component passes through zero. The imaginary component always starts negative at low temperature and frequency, so the first rift can be assumed to indicate a change to a positive sign. I chose $\alpha = 3, 6, 9$ to give some spread of coupling strength about $\alpha = 6$ where perturbation theory typically breaks down. 
+
+From Figures \ref{fig:osakacontour} and \ref{fig:osakaridge}, we can see that firstly, at $\alpha = 3$, the complex conductivity starts with a single peak starting at $\Omega = \omega_0$ for zero temperature, which broadens out and blue-shifts to higher frequencies as the temperature increases. This peak corresponds to a single phonon excitation. At $\alpha = 6$, the conductivity develops more peaks starting at $\Omega = \omega_0 + n \omega_0 v,\ n \in \mathbb{Z}^+$ at zero temperature, corresponding to further phonon excitations, which also broaden out and blue-shift to higher frequencies as the temperature increases. The first peak for $\alpha = 6$ now has more features, with an initial shoulder which leads into a far sharper peak than before and sharper, more structured peaks as $\alpha$ increases. Finally, for $\alpha = 9$, the landscape becomes much more erratic and complex. The first peak remains. However, the trough that follows it has become so deep (reaching values close to zero) that the numerical results are noisy due to reaching float-point accuracy (working here with 64-bit floats). The second prominent peak (which I identify as regions now separated by the deep troughs) now seems to begin a little earlier than $\Omega = \omega_0 + v \omega_0$. It appears composed of smaller, sharper peaks and shoulders. 
+
+\subsection{Effective Multimode Mobility}
+\label{subsec:2-3-3}
+
+Hellwarth and Biaggio~\cite{hellwarth_mobility_1999} extended the Fr\"ohlich model to where multiple phonon modes are present in a polar cubic material. They did this by deriving the full classical field Lagrangian that describes one conduction-band electron with charge $-e$, isotropic band mass $m_0$ and position $\vb{r}(t)$, which is coupled to a polar cubic lattice that possesses many infrared-active modes with varying strengths and frequencies. They derive an effective electron-phonon coupling constant that generalises Fr\"ohlich's $\alpha$ parameter. Then, rather than explicitly incorporating the frequencies of multiple phonon modes into the Feynman path integral polaron model, they propose two different schemes for deriving an effective longitudinal optical phonon frequency. This enables them to directly use \=Osaka's finite-temperature variational principle for determining the temperature-dependent variational parameters $v$ and $w$ needed to evaluate the FHIP mobility. 
+
+As usual with Fr\"ohlich polarons, they assume that the lattice unit cell is small compared to the electron wavelength such that the lattice polarisation density $\vb{P}(\vb{r}, t)$ can be treated as continuous. All other electrons are bound in fully occupied valence bands. The system is then perturbed by a homogeneous electric field $\vb{E}^{\text{ext}}(t)$. The polarisation density is composed of many independent terms $\vb{P}_j(\vb{r}, t)$ where $j = 1, \dots m; m + 1, \dots m + M$ correspond to the $m$ infrared (lattice) and $M$ ultraviolet (bound electron) modes of the material such that
+\begin{equation}
+    \vb{P}(\vb{r}, t) = \sum_{j = 1}^{m + M} \vb{P}_j(\vb{r}, t)
+\end{equation}
+where it will be useful to separate the transverse (divergence-less) $\vb{P}_j^{\text{Tr}}(\vb{r}, t)$ and longitudinal (curl-free) $\vb{P}_j^{\text{L}}(\vb{r}, t)$ parts of the polarisation fields.
+
+\subsubsection{Classical Lagrangian and action}
+\label{subsubsec:2-3-3-1}
+
+Hellwarth's and Biaggio's Lagrangian are presented as
+\begin{equation} \label{eqn:hi_lag}
+    \begin{aligned}
+        L &= \int d^3 \vb{r} \left\{ \sum_{j = 1}^{m+M} \frac{2\pi}{\mathcal{K}_j^2} \left[ \left( \frac{\partial \vb{P}_j(\vb{r}, t)}{\partial t} \right)^2 - \mathcal{W}_j^2 \vb{P}_j^2(\vb{r}, t)\right] + \vb{P}^L(\vb{r}, t) \cdot \vb{D}^{el}(\vb{r}, t) \right. \\
+        &\left. \frac{1}{8\pi} \left[ \left( \frac{\partial \vb{A}(\vb{r}, t)}{\partial t} \right)^2 - \left( \curl{\vb{A}(\vb{r}, t)} \right)^2 \right] + \frac{1}{c} \vb{A}(\vb{r}, t) \cdot \frac{\partial \vb{P}^{\text{Tr}}(\vb{r}, t)}{\partial t} \right\} \\
+        &\frac{1}{2} \int d^3\vb{r} \int d^3\vb{r}'\ \vb{P}(\vb{r}, t) \cdot \overset{\leftrightarrow}{\vb{G}}(\vb{r} - \vb{r}') \cdot \vb{P}(\vb{x}', t) \\
+        &+\frac{m_0}{2} \left( \frac{d \vb{r}(t)}{dt} \right)^2 + e \vb{r}(t) \cdot \vb{E}^{\text{ext}}(t)
+    \end{aligned}
+\end{equation}
+where $\vb{A}(\vb{r}, t)$ is the total electric vector potential (assumed purely transverse, i.e. Coulomb gauge), $\vb{D}^{el}(\vb{r}, t)$ is the longitudinal, un-shielded Coulomb field of the electron given by
+\begin{equation}
+    \vb{D}^{el}(\vb{r}, t) = \grad \frac{e}{\abs{\vb{r} - \vb{r}(t)}},
+\end{equation}
+and finally $\overset{\leftrightarrow}{\vb{G}}(\vb{r} - \vb{r}')$ is the dipole-dipole kernel given by $-\grad^2 \abs{\vb{r} - \vb{r}}'^{-1}$. The first term in the Lagrangian describes the kinetic and potential energy of the lattice modes where $\mathcal{W}_j$ and  $\mathcal{K}_j$ denote the frequencies and oscillator strengths of the isolated lattice modes. The dipole-dipole kernel $\overset{\leftrightarrow}{\vb{G}}(\vb{r})$ demonstrates a divergent self-interaction as $\vb{r} \to \vb{r}'$, so to remove this self-interaction and better imitate the finite size of a unit cell, Hellwarth and Biaggio introduce a cut-off distance $r_0 \sim$ inter-atomic distance. They choose $\overset{\leftrightarrow}{\vb{G}}(\vb{r})$ to be given by
+\begin{equation}
+    G_{ab}(\vb{r}) = 
+    \begin{cases}
+        \bfrac{3r_a r_b}{\abs{\vb{r}}^5} - \bfrac{\delta_{ab}}{\abs{\vb{r}}^3}, & \abs{\vb{r}} > r_0 \\
+        0, & \abs{\vb{r}} \leq r_0.
+    \end{cases}
+\end{equation}
+so drops to zero at and below this cut-off.
+
+\subsubsection{Transforming the action to frequency and reciprocal space}
+\label{subsubsec:2-3-3-2}
+
+The polarisation $\vb{P}_j(\vb{r}, t)$ and electric field $\vb{A}(\vb{r}, t)$ coordinates appear up to quadratically in the Lagrangian (Eq. (\ref{eqn:hi_lag})) but are coupled. Hellwarth and Biaggio seek to uncouple these coordinates by transforming them to normal coordinates by rewriting the action corresponding to Eq. (\ref{eqn:hi_lag}) in terms of the Fourier transforms of the fields (denoted with a tilde)
+\begin{align}
+    \begin{split}
+        \vb{\Tilde{P}}^{\text{Tr / L}}_j(\vb{q}, \Omega) &= \int dt \int d^3r\ \vb{P}_j^{\text{Tr / L}}(\vb{r}, t)\ e^{i\Omega t - i \vb{q} \cdot \vb{r}}
+    \end{split}\\
+    \begin{split}
+        \vb{\Tilde{A}}(\vb{q}, \Omega) &= \int dt \int d^3r\ \vb{A}(\vb{r}, t)\ e^{i\Omega t - i \vb{q} \cdot \vb{r}}
+    \end{split}\\
+    \begin{split}\label{eqn:D_transform}
+        \vb{\Tilde{D}}^{el}(\vb{q}, \Omega) &= \int dt \int d^3r\ \vb{D}^{el}(\vb{r}, t)\ e^{i\Omega t - i \vb{q} \cdot \vb{r}}
+    \end{split}\\
+    \begin{split}
+        \vb{\Tilde{G}}_{ab}(\vb{q}) &= \int dt \int d^3r\ \vb{G}_{ab}(\vb{r})\ e^{- i \vb{q} \cdot \vb{r}}
+    \end{split}
+\end{align}
+where $\vb{\Tilde{P}}(\vb{q}, \Omega) = \vb{\Tilde{P}}^{\text{L}}(\vb{q}, \Omega) + \vb{\Tilde{P}}^{\text{Tr}}(\vb{q}, \Omega)$. Since the electron wave function is assumed larger than the cut-off distance $r_0$, Hellwarth and Biaggio keep only the lowest-order terms of the dipole-dipole kernel and write
+\begin{equation}
+    G_{ab}(\vb{q}) =
+    \begin{cases}
+        \bfrac{4\pi}{3} \left( \delta_{ab} - \bfrac{3k_a k_b}{\abs{\vb{q}}} \right), & \abs{\vb{q}} \ll \bfrac{1}{r_0} \\
+        0, & \text{larger } \abs{\vb{q}}.
+    \end{cases}
+\end{equation}
+Fourier transforming and assuming the absence of any terms where $\abs{\vb{q}}$ is not $\ll r_0^{-1}$, Hellwarth and Biaggio obtain the frequency and wave-vector version of the action
+
+\begin{equation}
+    \begin{aligned}
+        S &= \frac{1}{(2\pi)^4} \int d\Omega \int d^3 \vb{q}\ \left\{ \sum_{j=1}^{m+M} 2\pi \frac{\Omega^2 - \mathcal{W}_j^2}{\mathcal{K}_j^2} \left[ \abs{\vb{\Tilde{P}}^{\text{Tr}}(\vb{q}, \Omega)}^2 + \abs{\vb{\Tilde{P}}^{\text{L}}(\vb{q}, \Omega)}^2 \right] \right. \\
+        &\left. +\quad \vb{\Tilde{P}}^{\text{L}}(\vb{q}, \Omega)^* \cdot \vb{\Tilde{D}}^{el}(\vb{q}, \Omega) \right. \\
+        &\left. +\quad \frac{1}{8\pi} \left( \frac{\Omega^2}{c^2} - \abs{\vb{q}}^2 \right) \abs{\vb{\Tilde{A}}(\vb{q}, \Omega)}^2 \right. \\
+        & \left. +\quad i \frac{\Omega}{c} \vb{\Tilde{A}}(\vb{q}, \Omega)^* \cdot \vb{\Tilde{P}}^{\text{Tr}}(\vb{q}, \Omega) \right. \\
+        &\left. +\quad  \frac{2\pi}{3} \left[ \abs{\vb{\Tilde{P}}^{\text{Tr}}(\vb{q}, \Omega)}^2 - 2\abs{\vb{\Tilde{P}}^{\text{L}}(\vb{q}, \Omega)} \right] \right\} + S^{el} \left[ \vb{r}(t) \right]
+    \end{aligned}
+\end{equation}
+where $S^{el} \left[ \vb{r}(t) \right]$ is the action that depends on the electron coordinates $\vb{r}(t)$ (the last line of the Lagrangian in Eq. (\ref{eqn:hi_lag})).
+
+\subsubsection{Effective action for the electron-phonon interaction}
+\label{subsubsec:2-3-3-3}
+
+Hellwarth and Biaggio follow the same procedure as~\cite{feynman_slow_1955} to evaluate the quantum-mechanical unitary transformation matrices $U(\vb{r}_{el, f}, \vb{P}_f, t_f; \vb{r}_{el, i}, \vb{P}_i, t_i)$ with path integrals over the polarisation fields $\vb{P}(\vb{r}, t)$ and electron position $\vb{r}(t)$
+\begin{equation}
+    \begin{aligned}
+    U(\vb{r}_{el, f}, \vb{P}_f, t_f; \vb{r}_{el, i}, \vb{P}_i, t_i) &= \int_{\vb{r}_{el, i}, t_i}^{\vb{r}_{el, f}, t_f} \mathcal{D}\vb{r}(t) \\
+    &\times \int_{\vb{P}_i, t_i}^{\vb{P}_f, t_f} \mathcal{D}\vb{P}(\vb{r}, t)\ \exp\left\{{\frac{iS[\vb{r}(t),\ \vb{P}(\vb{r}, t)]}{\hbar}}\right\},
+    \end{aligned}
+\end{equation}
+where $S[\vb{r}(t),\ \vb{P}(\vb{r}, t)]$ is the action functional corresponding to the Lagrangian in Eq. (\ref{eqn:hi_lag}). The path integral over all trajectories of the polarisation coordinates $\vb{P}(\vb{r}, t)$ can be done precisely as before since they only appear up to quadratic order in the Lagrangian. Hellwarth and Biaggio evaluate the matrix element $\bra{0} U(\vb{r}_{el, f}, \vb{P}_f, t_f; \vb{r}_{el, i}, \vb{P}_i, t_i) \ket{0}$ where the polarisation coordinate paths begin and end in the ground state for all unperturbed polarisation oscillators. The result is an effective model action akin to Feynman's (Eq. (\ref{eqn-2211-13:athermal_model_action})) where the polarisation coordinates have been replaced by their classical solutions with no external field $\vb{\Tilde{A}}(\vb{q}, \Omega) = 0$. For the transverse part of the polarisation density, the classical solution $\vb{\Tilde{P}}^{\text{Tr}}_{C, j}(\vb{q}, \Omega)$ obeys the equation of motion
+\begin{equation}
+    4\pi \frac{\Omega^2 - \mathcal{W}_j^2}{\mathcal{K}_j^2} \vb{\Tilde{P}}^{\text{Tr}}_{C, j}(\vb{q}, \Omega) + \frac{4\pi}{3} \vb{\Tilde{P}}^{\text{Tr}}_{C}(\vb{q}, \Omega) + i \frac{\Omega}{c} \vb{\Tilde{A}}(\vb{q}, \Omega) = 0,
+\end{equation}
+and the longitudinal part of the polarisation density, the classical solution $\vb{\Tilde{P}}^{\text{L}}_{C, j}(\vb{q}, \Omega)$ obeys the equation of motion
+\begin{equation}
+    4\pi \frac{\Omega^2 - \mathcal{W}_j^2}{\mathcal{K}_j^2} \vb{\Tilde{P}}^{\text{L}}_{C, j}(\vb{q}, \Omega) - \frac{8\pi}{3} \vb{\Tilde{P}}^{\text{L}}_{C}(\vb{q}, \Omega) + \vb{\Tilde{D}}^{el}(\vb{q}, \Omega) = 0.
+\end{equation}
+Hellwarth and Biaggio found the solution to these equations of motion to be
+\begin{equation} \label{eqn:tr_sol}
+    \vb{\Tilde{P}}^{\text{Tr}}_{C}(\vb{q}, \Omega) = \sum_{j = 1}^{m+M} \vb{\Tilde{P}}^{\text{Tr}}_{C, j}(\vb{q}, \Omega) = -i \frac{\Omega}{c} \vb{\Tilde{A}}(\vb{q}, \Omega) \frac{\alpha(\Omega)}{1 - (4\pi / 3) \alpha(\Omega)}
+\end{equation}
+and
+\begin{equation}
+    \vb{\Tilde{P}}^{\text{L}}_{C}(\vb{q}, \Omega) = \sum_{j = 1}^{m+M} \vb{\Tilde{P}}^{\text{L}}_{C, j}(\vb{q}, \Omega) = \frac{\alpha(\Omega)}{1 + (8\pi / 3) \alpha(\Omega)} \vb{\Tilde{D}}^{el}(\vb{q}, \Omega)
+\end{equation}
+where
+\begin{equation}
+    \alpha(\Omega) = \frac{1}{4\pi} \sum_{j=1}^{m+M} \frac{\mathcal{K}_j^2}{\mathcal{W}_j^2 - \Omega^2}
+\end{equation}
+is the polarisability of a single-unit cell. Substituting $\vb{\Tilde{P}}^{\text{Tr}}_{C}(\vb{q}, \Omega)$ and $\vb{\Tilde{P}}^{\text{L}}_{C}(\vb{q}, \Omega)$ into the model action $S$ gives the effective model action 
+\begin{equation}
+    S^{\text{eff}} = S^{el}\left[ \vb{r}(t) \right] + S^{\text{int}} + S^{\text{norm}}
+\end{equation}
+where $S^{\text{norm}}$ is a normalisation term that cancels in the matrix element $\bra{0} U \ket{0}$. $S^{\text{int}}$ is an effective interaction term given by
+\begin{equation}
+    S^{\text{int}} = \frac{1}{2 (2\pi)^4} \int d\Omega \int d^3 \vb{q}\ B(\Omega) \vb{\Tilde{D}}^{el}(\vb{q}, \Omega)^* \cdot \vb{\Tilde{D}}^{el}(\vb{q}, \Omega)
+\end{equation}
+where $B(\Omega)$ was obtained from the relation $\vb{\Tilde{P}}^{\text{L}}_{C}(\vb{q}, \Omega) = B(\Omega) \vb{\Tilde{D}}^{el}(\vb{q}, \Omega)$ and is
+\begin{equation}
+    B(\Omega) = \frac{1}{4\pi} \left( 1 - \frac{1}{\epsilon(\Omega)} \right) = \frac{\alpha(\Omega)}{1+(8\pi/3)\alpha(\Omega)} = \frac{1}{4\pi} \sum_{j = 1}^{m + M} \frac{\kappa_j^2}{\omega_j^2 - \Omega^2}.
+\end{equation}
+$B(\Omega)$ is the macroscopic polarisability, where each term in the sum of $B(\Omega)$ acts as a harmonic longitudinal lattice mode with a frequency $\omega_j$ and coupling constant $\kappa_j$ that linearly coupled to the conduction electron field $\vb{\Tilde{D}}^{el}$. 
+
+Hellwarth and Biaggio use the Born-Oppenheimer approximation as in the original Fr\"ohlich model by assuming that the bound-electrons (ultraviolet oscillators) response speed is near instantaneous. Therefore, the short-wavelength limit $\epsilon_\infty$ of the dielectric constant accounts for the electronic contribution when the ions are immobile. Otherwise, the contribution corresponding to ionic displacements is assumed to be described by the static dielectric constant $\epsilon_0$. Therefore, the ions slowly follow the harmonic movement of the electron with a time delay. Hellwarth and Biaggio separate $B(\Omega)$ into infrared and optical contributions where the latter is represented by $\epsilon_\infty$ so that
+\begin{equation}
+    B(\Omega) = \Tilde{B}(\Omega) + \frac{1}{4\pi} \left( 1 - \frac{1}{\epsilon_\infty} \right)
+\end{equation}
+where
+\begin{equation}
+\Tilde{B}(\Omega) = \frac{1}{4\pi} \sum_{j=1}^m \frac{\kappa_j^2}{\omega_j^2 - \Omega^2}.  
+\end{equation}
+This $\Tilde{B}(\Omega)$ is the infrared contributions of $m$ polar infrared lattice modes and replaces $B(\Omega)$ when neglecting the ultraviolet contributions. Hence, since the zero frequency limit is represented by $\epsilon_0$, we can obtain the familiar Pekar factor
+\begin{equation}
+    \sum_{j=1}^m \frac{\kappa_j^2}{\omega_j^2} = \frac{1}{\epsilon_\infty} - \frac{1}{\epsilon_0}.
+\end{equation}
+Now it is assumed that the ultraviolet contributions are summarised by $\epsilon_\infty$ and an effective band mass $m_0$ that replaces the electron mass $m_e$ in the effective action $S^{\text{eff}}$. The space-time integral action is needed, so  Hellwarth and Biaggio transform the effective action by evaluating the integrals over $\Omega$ and $\vb{q}$. The frequency integral in $S^{\text{int}}$ corresponds to a Fourier-like transform
+\begin{equation}
+    \int \frac{d\Omega}{2\pi} \frac{e^{-i\Omega t}}{\omega_j^2 - \Omega^2} = \frac{i e^{-i\omega_j \abs{t}}}{2\omega_j}.
+\end{equation}
+and the transform $\vb{\Tilde{D}}^{el}(\vb{q}, \Omega)$ is calculated from Eq. (\ref{eqn:D_transform}) to give
+\begin{equation}
+    \vb{\Tilde{D}}^{el}(\vb{q}, \Omega) = 4\pi i e \int dt\ e^{i\Omega t} \frac{e^{-i\vb{q} \cdot \vb{r}(t)}}{\abs{\vb{q}}}.
+\end{equation}
+Substituting these into $S^{\text{int}}$ gives
+\begin{equation}
+    \begin{aligned}
+        S^{\text{int}} &= \frac{i e^2}{(2\pi)^2} \int d^3 \vb{q}\ \frac{1}{\abs{\vb{q}}^2} \int dt \int dt'\ e^{i\vb{q} \cdot \left[ \vb{r}(t) - \vb{r}(t') \right]} \sum_{j = 1}^m \left( \frac{\kappa_j^2}{\omega_j} e^{-i\omega_j\abs{t-t}'} \right) \\
+        &= i \frac{e^2}{4} \int dt \int dt'\ \frac{1}{\abs{\vb{r}(t) - \vb{r}(t')}} \sum_{j=1}^m \left( \frac{\kappa_j^2}{\omega_j} e^{-i\omega_j\abs{t-t}'} \right).
+    \end{aligned}
+\end{equation}
+Hellwarth and Biaggio find the final form of the effective action, akin to Feynman's, to be
+\begin{equation}\label{eqn:HI_eff_action}
+    S^{\text{p}} = \frac{m_0}{2} \int dt\ \left( \frac{d\vb{r}(t)}{dt} \right)^2 + \int dt\ \vb{E}^{\text{ext}} \cdot \vb{r}(t) \\
+    + \frac{i\hbar\omega_{\text{p}}}{2\sqrt{2}} \sum_{j = 1}^m \alpha_j \int dt \int dt'\ \frac{e^{-i\omega_j \abs{t-t}'}}{\abs{\vb{r}(t) - \vb{r}(t')}} 
+\end{equation}
+where we have excluded the infinite normalisation term due to the phonon oscillators (this does not affect the electron coordinate $\vb{r}(t)$ and so can be ignored). The effective action is written in terms of ``polaron units'': frequencies are measured relative to a standard lattice frequency $\omega_{\text{p}}$, time in units of $\omega_{\text{p}}^{-1}$, energy $\hbar \omega_{\text{p}}$, lengths $\sqrt{\hbar/(m_0 \omega_{\text{p}})}$, temperature $\hbar\omega_{\text{p}}/k_B$ and mobility $e/(m_0 \omega_{\text{p}})$. 
+
+The dimensionless coupling constants $\alpha_j$ generalise the Fr\"ohlich version to multiple phonon modes $j$ and is given by
+\begin{equation}
+    \alpha_j = \frac{\kappa_j^2}{\omega_{\text{p}} \omega_j} \frac{e^2}{\hbar} \left( \frac{m_0}{2 \hbar \omega_{\text{p}}} \right)^{1/2}.
+\end{equation}
+For a single phonon branch with frequency $\omega = \omega_{\text{p}}$ and strength $\kappa$ then this coupling constant reduces to the familiar $\alpha$,
+\begin{equation}
+    \alpha = \frac{\kappa^2}{\omega^2_{\text{p}}} \frac{e^2}{\hbar} \left( \frac{m_0}{2\hbar\omega_{\text{p}}} \right)^{1/2} = \left( \frac{1}{\epsilon_\infty} - \frac{1}{\epsilon_0} \right) \frac{e^2}{\hbar} \left( \frac{m_0}{2\hbar\omega_{\text{p}}} \right)^{1/2}.
+\end{equation}
+
+\subsubsection{The dielectric function}
+\label{subsubsec:2-3-3-4}
+
+To compare to the experiment, Hellwarth and Biaggio seek an expression for the dielectric function $\epsilon(\Omega)$. They first obtain the classical solution for the magnetic vector potential $\vb{\Tilde{A}}_C(\vb{q}, \Omega)$ and find that it obeys the equation of motion 
+\begin{equation}\label{eqn:A_eom}
+    \frac{1}{4\pi} \left( \frac{\Omega^2}{c^2} - \abs{\vb{q}}^2 \right) \vb{\Tilde{A}}_C(\vb{q}, \Omega) - i \frac{\Omega}{c} \vb{\Tilde{P}}^{\text{Tr}}(\vb{q}, \Omega) = 0.
+\end{equation}
+By substituting the classical solution for $\vb{\Tilde{P}}^{\text{Tr}}_{C}(\vb{q}, \Omega)$ in Eq. (\ref{eqn:tr_sol}) into the equation of motion for $\vb{\Tilde{A}}_C(\vb{q}, \Omega)$ in Eq. (\ref{eqn:A_eom}) they find that the classical transverse solutions must also obey (for all $\vb{q}$)
+\begin{equation}
+    \left[ \frac{1}{4\pi} \left( \frac{\Omega^2}{c^2} - \abs{\vb{q}}^2 \right) + \frac{\Omega^2}{c^2} \frac{\alpha(\Omega)}{1 - (4\pi / 3) \alpha(\Omega)} \right] \vb{\Tilde{A}}_C(\vb{q}, \Omega) = 0,
+\end{equation}
+from which they obtain the Lorentz-Lorenz relation for the dielectric function $\epsilon(\Omega)$,
+\begin{equation}
+    \epsilon(\Omega) = n^2(\Omega) = \frac{1 + (8\pi/3)\alpha(\Omega)}{1 - (4\pi/3)\alpha(\Omega)},
+\end{equation}
+where $n(\Omega) = \abs{\vb{q}} c / \Omega$ is the refractive index.
+
+\subsubsection{Obtaining a single effective phonon frequency}
+\label{subsubsec:2-3-3-5}
+
+Hellwarth and Biaggio use the mobility result from FHIP combined with \=Osaka's temperature-dependent variational parameters. To do this, they reduce the many infrared longitudinal phonon mode frequencies to a single effective frequency. To do this, they first compare their athermal effective action in Eq. (\ref{eqn:HI_eff_action}) to the thermal effective action derived by \=Osaka in Eq. (\ref{eqn:thermal_action}). From this comparison, they see that the inclusion of multiple phonon modes converts the influence functional phase $\Phi^{\text{int}}$ (Eq. (\ref{eqn:fhip_model_term})) to a sum over terms differing only in the phonon frequencies $\omega_j$ and coupling constants $\alpha_j$
+\begin{equation} \label{eqn:hellwarth_multi_action}
+    \begin{gathered}
+    \Phi^{\text{int}}[\vb{r}(t), \vb{r}'(t)] \rightarrow \frac{(\hbar\omega_{\text{p}})^{3/2}}{2\sqrt{2m_0}} \sum_{j=1}^m \frac{\alpha_j \omega_j^{-2}}{\sinh(\beta_j / 2)} \int^{\beta_j}_0 dt \int^{\beta_j}_0 dt'\ \left\{ \frac{\cos(\abs{t - t}' + i\beta_j / 2)}{\abs{\vb{r}(t) - \vb{r}(t')}} \right. \\
+    \left. + \frac{\cos(\abs{t - t}' - i\beta_j / 2)}{\abs{\vb{r}'(t) - \vb{r}'(t')}} - \frac{2\cos(\abs{t - t}' + i\beta_j / 2)}{\abs{\vb{r}'(t) - \vb{r}(t')}} \right\}
+    \end{gathered},
+\end{equation}
+where $\beta_j = \hbar\omega_j / k_B T$. 
+
+In~\cite{hellwarth_mobility_1999}, they propose two schemes, labelled `A' and `B', to reduce this expression to a single term with an effective frequency $\omega_{\text{eff}}$ and an effective coupling constant $\kappa_{\text{eff}}$. They then take the ``polaron frequency'' to be equal to this effective frequency $\omega_{\text{p}} = \omega_{\text{eff}}$. 
+
+In the first scheme, `A', they seek an effective time kernel $H_{\text{eff}}(t)$ defined by
+\begin{equation}
+    H_{\text{eff}}(t) \sim \alpha_{\text{eff}} \frac{\cos(\omega_{\text{eff}}\abs{t - t}' \pm i\beta_{\text{eff}} / 2)}{\sinh(\beta_{\text{eff}} / 2)}
+\end{equation}
+which has the properties
+\begin{equation} \label{eqn:hellwarth_scheme_s}
+    H_{\text{eff}}(0) = \sum_{j=1}^m H_{j}(0).
+\end{equation}
+This is fulfilled by taking
+\begin{equation}
+    \frac{\kappa_{\text{eff}}^2}{\omega_{\text{eff}}} \coth(\frac{\beta_{\text{eff}}}{2}) = \sum_{j=1}^m \frac{\kappa_{j}^2}{\omega_{j}} \coth(\frac{\beta_{j}}{2}),
+\end{equation}
+and
+\begin{equation}
+    \frac{dH_{\text{eff}}(t)}{dt} \biggr\rvert_{t=0} = \sum_{j=1}^m \frac{dH_{j}(t)}{dt} \biggr\rvert_{t=0}.
+\end{equation}
+This requires,
+\begin{equation}
+    \kappa_{\text{eff}}^2 = \sum_{j=1}^m \kappa_j^2.
+\end{equation}
+The second scheme, `B', seeks to find the single effective frequency $\omega_{\text{eff}}$ and coupling constant $\kappa_{\text{eff}}$ to match
+\begin{equation}
+    \int^{\beta_{\text{eff}}}_0 dt\ H_{\text{eff}}(it) = \sum_{j = 1}^m \int^{\beta_j}_0 dt\ H_j(it)
+\end{equation}
+where they now used the imaginary-time kernel $H(it)$. They found that this expression is fulfilled by
+\begin{equation}
+    \frac{\kappa_{\text{eff}}^2}{\omega_{\text{eff}}^2} = \sum_{j = 1}^m \frac{\kappa_{j}^2}{\omega_{j}^2}.
+\end{equation}
+The second scheme also requires that
+\begin{equation}
+    \frac{dH_{\text{eff}}(it)}{dt} \biggr\rvert_{t=0} = \sum_{j=1}^m \frac{dH_{j}(it)}{dt} \biggr\rvert_{t=0}
+\end{equation}
+which requires
+\begin{equation} \label{eqn:hellwarth_scheme_f}
+    \kappa_{\text{eff}}^2 = \sum_{j=1}^m \kappa_j^2.
+\end{equation}
+Despite considering temperature dependence, the final result of the second `B' scheme is independent of temperature as the temperature terms cancel.
+
+\subsubsection{Reformulation of \=Osaka's variational principle}
+\label{subsubsec:2-3-3-6}
+
+Hellwarth and Biaggio used \=Osaka's variational principle in Eq. (\ref{eqn:osaka_var}) to determine the variational parameters $v$ and $w$ to use within FHIP's mobility expression in Eq. (\ref{eqn:FHIP_mobility}). However, they reformulated the result \=Osaka obtained for the upper-bound free energy expression to a form more straightforward to calculate
+\begin{subequations}\label{eqn:hellwarth_energy}
+    \begin{equation}
+        F(\beta) / (\hbar \omega_{\text{eff}}) \leq -(A(\beta) + B(\beta) + C(\beta))
+    \end{equation}
+    with
+    \begin{equation}\label{eqn:hellwarth_A}
+        A(\beta) = -\frac{F_{S_0}(\beta)}{\hbar\omega_{\text{eff}}} = \frac{3}{\beta} \left[ \ln\left(\frac{v}{w}\right) - \frac{1}{2} \ln(2\pi\beta) - \ln\left( \frac{\sinh(v\beta/2)}{\sinh(w\beta/2)} \right) \right]
+    \end{equation}
+    and rewritten in a more symmetric form
+    \begin{equation}\label{eqn:hellwarth_B}
+        B(\beta) = \frac{\langle S (\beta) \rangle}{\hbar\omega_{\text{eff}}} = \frac{\alpha v}{\sqrt{\pi} \left( e^{\beta} - 1 \right)} \int^{\beta/2}_0 dx\ \frac{e^{\beta - x} + e^x}{\left[ w^2 x (1 - x / \beta) + Y(x) (v^2 - w^2) / v \right]^{1/2}},
+    \end{equation}
+    where
+    \begin{equation}
+        Y(x) = \frac{1 + e^{-v\beta} - e^{-vx} - e^{v(x - \beta)}}{1 e^{-v\beta}},
+    \end{equation}
+    and
+    \begin{equation}\label{eqn:hellwarth_C}
+        C(\beta) = -\frac{\langle S_0(\beta) \rangle}{\hbar \omega_{\text{eff}}} = \frac{3}{4} \frac{v^2 - w^2}{v} \left(  \coth\left( \frac{v\beta}{2} \right) - \frac{2}{v\beta} \right).
+    \end{equation}
+\end{subequations}
+These equations are used to find the lowest upper-bound to the actual free energy of the polaron for a single effective phonon branch with frequency $\omega_{\text{eff}}$ and coupling constant $\kappa_{\text{eff}}$ which determines an effective $\alpha_{\text{eff}}$ parameter.
+
+
+\section{Material Case Studies}
+\label{sec:2-4}
+
+\subsection{Methylammonium Lead Halide Perovskite}
+\label{subsec:2-4-1}
+
+\subsection{Rubrene Organic Crystal}
+\label{subsec:2-4-2}
