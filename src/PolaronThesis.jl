@@ -10,11 +10,13 @@ include("Material.jl")
 include("Feynman.jl")
 include("Frohlich.jl")
 include("Holstein.jl")
+include("Peierls.jl")
 
 # Export functions Å
 export puconvert, punit, pustrip, m0_pu, e_pu, ħ_pu, kB_pu, ω0_pu, r0_pu, E0_pu
 export Frohlich, frohlich, frohlich_alpha, frohlich_coupling, frohlich_S, frohlich_memory, save_frohlich, load_frohlich
 export Holstein, holstein, holstein_alpha, holstein_coupling, holstein_S, holstein_memory, save_holstein, load_holstein, optimal_holstein
+export Peierls, peierls, peierls_alpha, peierls_coupling, peierls_S, peierels_memory, save_peierls, load_peierls, optimal_peierls
 export polaron_propagator, S₀, E₀
 export ball_surface, phonon_propagator, variation, reduce_array, reshape_array, LogRange, ϵ_ionic_mode
 export Material, material, FrohlichMaterial, frohlichmaterial, save_frohlich_material, load_frohlich_material, HolsteinMaterial, holsteinmaterial, save_holstein_material, load_holstein_material
