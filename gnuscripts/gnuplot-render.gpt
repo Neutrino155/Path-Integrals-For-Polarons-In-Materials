@@ -75,7 +75,7 @@ set output prefix . '-COLOUR.pdf'
 set key font "Helvetica,10"
 
 # unset key
-set pointsize 0.3
+set pointsize 0.1
 
 replot
 
@@ -97,7 +97,7 @@ set linetype 5 pi -1 pt 1 lc black dt (12,5,2,5,2,5) lw 2
 set linetype 6 pi -1 pt 6 lc black dt (16,8) lw 2 
 set linetype 7 pi -1 pt 2 lc black dt (20,6,2,6) lw 2 
 set linetype 8 pi -1 pt 4 lc black dt (30,10) lw 2 
-set pointsize 0.3
+set pointsize 0.2
 set pointintervalbox 1.75
 set termoption font "Helvetica,12"
 set termoption fontscale 0.5

@@ -81,6 +81,8 @@ end
 # Standard and Feynman Materials
 
 # ╔═╡ 2b339d71-91f5-4058-8973-c99d326c918e
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"]
 	standard_feynman_data = readdlm("data/LiegeDataset/Results/StandardFeynmanFrohlich/$band/standard_feynman_data_$band")	
 	for material in eachrow(standard_feynman_data)[2:end]
@@ -89,8 +91,11 @@ for band in ["conduction", "valence"]
 	    save_frohlich_material(f, "data/frohlich/materials/feynman/$band/$(material[1])-$(material[2])")
 	end
 end
+  ╠═╡ =#
 
 # ╔═╡ 0e6c408d-5a4f-4577-8482-91681761d5c6
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"]
 	standard_data = readdlm("data/LiegeDataset/Results/StandardFrohlich/$band/standard_froelich_data_$band")	
 	for material in eachrow(standard_data)[2:end]
@@ -99,6 +104,7 @@ for band in ["conduction", "valence"]
 	    save_frohlich_material(f, "data/frohlich/materials/standard/$band/$(material[1])-$(material[2])")
 	end
 end
+  ╠═╡ =#
 
 # ╔═╡ 6568d544-c9bf-4722-a5cf-3aca5e56e9d2
 # General Materials
@@ -107,6 +113,8 @@ end
 # Single mode materials
 
 # ╔═╡ 52d2f68e-1e36-4f8c-8df3-657d364953e4
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"]
 	
 	singlemode_materials = readdir("data/LiegeDataset/Results/GeneralizedFrohlich/$band/")[1:1394]
@@ -134,11 +142,14 @@ for band in ["conduction", "valence"]
 	    end
 	end
 end
+  ╠═╡ =#
 
 # ╔═╡ c19253d3-da29-4a06-852f-742bd1d1f13e
 # Multiple mode materials
 
 # ╔═╡ 81ff1db1-b8b6-4462-a00f-88550669f8ce
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"]
 
 	multimode_materials = readdir("data/LiegeDataset/Results/GeneralizedFrohlich/$band/")[1395:end]
@@ -174,11 +185,14 @@ for band in ["conduction", "valence"]
 	    end
 	end
 end
+  ╠═╡ =#
 
 # ╔═╡ b8c34cb1-06f5-4bd1-a4c3-4d90ea235fb9
 # Generate Frohlich polaron data
 
 # ╔═╡ 8dfe9b3f-4c7f-4d46-9301-7a06e7297bf6
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"], theory in ["standard", "feynman", "general"]
 	frohlich_materials = readdir("data/frohlich/materials/$theory/$band/")
 
@@ -195,6 +209,7 @@ for band in ["conduction", "valence"], theory in ["standard", "feynman", "genera
 	    save_frohlich(f_rt, "data/frohlich/variational/$theory/$band/roomtemp/$file_name-rt")
 	end
 end
+  ╠═╡ =#
 
 # ╔═╡ 6bc9fd00-a625-40cd-896e-a908c993305d
 # Collate data into single files
@@ -203,6 +218,8 @@ end
 # Standard and Feynman
 
 # ╔═╡ 0c4cc6b0-185b-45c8-9014-4f939e3c7c54
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"], theory in ["standard", "feynman"]
 	materials = readdir("data/frohlich/materials/$theory/$band")
 	liege = theory == "standard" ? readdlm("data/LiegeDataset/Results/StandardFrohlich/$band/standard_froelich_data_$band") : readdlm("data/LiegeDataset/Results/StandardFeynmanFrohlich/$band/standard_feynman_data_$band")
@@ -234,11 +251,14 @@ for band in ["conduction", "valence"], theory in ["standard", "feynman"]
 	
 	writedlm("data/frohlich/variational/$theory/frohlich-materials-$theory-$band.txt", data_all)
 end
+  ╠═╡ =#
 
 # ╔═╡ e0d2929d-5b42-467b-aef8-5bfa0674be38
 # General
 
 # ╔═╡ c729301e-000b-49d0-91df-22f57331cdc4
+# ╠═╡ disabled = true
+#=╠═╡
 for band in ["conduction", "valence"]
 	
 	materials = readdir("data/frohlich/materials/general/$band")
@@ -279,6 +299,62 @@ for band in ["conduction", "valence"]
 	
 	writedlm("data/frohlich/variational/general/frohlich-materials-general-$band.txt", data_all)
 end
+  ╠═╡ =#
+
+# ╔═╡ 880e931f-0970-4d54-adb9-88383709493c
+# ╠═╡ disabled = true
+#=╠═╡
+for band in ["conduction", "valence"]
+	
+	materials = eachrow(readdlm("data/frohlich/variational/general/frohlich-materials-general-$band.txt"))[2:end]
+
+	headers = Vector{Any}(["mp_id", "formula", "spgroup", "groups", "volume(Å^3)", "band_mass(me)", "eps_optic(ϵ0)", "eps_total_single(ϵ0)", "eps_total_multi(ϵ0)", "eps_ionic_single(ϵ0)", "eps_ionic_multi(ϵ0)", "AHC_alpha", "alpha", "v_gs_single", "v_gs_multi", "w_gs_single", "w_gs_multi", "v_rt_single", "v_rt_multi", "w_rt_single", "w_rt_multi", "AHC_ZPR(meV)", "energy_gs_single(meV)", "energy_gs_multi(meV)", "energy_rt_single(meV)", "energy_rt_multi(meV)", "imag_memory_single", "imag_memory_multi", "mobility_single(cm^2/V/s)", "mobility_multi(cm^2/V/s)"])
+	
+	data_all = [headers]
+	
+	for material in eachindex(materials)
+		if materials[material][5] == "multi"
+			mp_id = materials[material][1]
+			formula = materials[material][2]
+			spgroup = materials[material][3]
+			groups = materials[material][4]
+			volume = materials[material][10]
+			bandmass = materials[material][9]
+			optic = materials[material][7]
+			AHCalpha = materials[material][18]
+			alpha = materials[material][11]
+			ZPR = materials[material][19]
+
+			total_single = materials[material+1][6]
+			total_multi = materials[material][6]
+			ionic_single = materials[material+1][8]
+			ionic_multi = materials[material][8]
+			vgs_single = materials[material+1][12]
+			vgs_multi = materials[material][12]
+			wgs_single = materials[material+1][13]
+			wgs_multi = materials[material][13]
+			vrt_single = materials[material+1][14]
+			vrt_multi = materials[material][14]
+			wrt_single = materials[material+1][15]
+			wrt_multi = materials[material][15]
+			Egs_single = materials[material+1][16]
+			Egs_multi = materials[material][16]
+			Ert_single = materials[material+1][17]
+			Ert_multi = materials[material][17]
+			imag_single = materials[material+1][20]
+			imag_multi = materials[material][20]
+			mobility_single = materials[material+1][21]
+			mobility_multi = materials[material][21]
+
+			data = [mp_id, formula, spgroup, groups, volume, bandmass, optic, total_single, total_multi, ionic_single, ionic_multi, AHCalpha, alpha, vgs_single, vgs_multi, wgs_single, wgs_multi, vrt_single, vrt_multi, wrt_single, wrt_multi, ZPR, Egs_single, Egs_multi, Ert_single, Ert_multi, imag_single, imag_multi, mobility_single, mobility_multi]
+
+			push!(data_all, data)
+		end
+	end
+	
+	writedlm("data/frohlich/variational/general/frohlich-materials-general-combined-$band.txt", data_all)
+end
+  ╠═╡ =#
 
 # ╔═╡ Cell order:
 # ╠═9d01a510-3ec7-11ef-0f8b-7be0ed93f14d
@@ -302,4 +378,5 @@ end
 # ╠═42ecd229-3cfc-4060-8476-ab6e1a29c989
 # ╟─0c4cc6b0-185b-45c8-9014-4f939e3c7c54
 # ╠═e0d2929d-5b42-467b-aef8-5bfa0674be38
-# ╟─c729301e-000b-49d0-91df-22f57331cdc4
+# ╠═c729301e-000b-49d0-91df-22f57331cdc4
+# ╠═880e931f-0970-4d54-adb9-88383709493c
