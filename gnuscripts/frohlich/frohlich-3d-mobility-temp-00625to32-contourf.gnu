@@ -12,7 +12,7 @@ set cblabel "Frohlich Mobility (eω₀m₀⁻¹)" offset 1,0
 set grid
 
 set xrange [0:12]
-set cbrange [5e-5:1e6]
+set cbrange [5e-3:1e6]
 set xtics 0,1,12 offset 0,0.5
 set logscale y 2
 set logscale cb

@@ -1,12 +1,12 @@
 reset session
 
 # Set the output terminal and file
-prefix = "../../plots/frohlich/frohlich-2d-imag-conductivity-alpha-1-temp-00625to32-freq-0to30-contourf"
+prefix = "../../plots/frohlich/frohlich-3d-imag-conductivity-alpha-5-temp-00625to32-freq-0to30-contourf"
 
 # Set the titles
 set xlabel "Frequency (ω₀)" offset 0,0.8
 set ylabel "Temperature (ħω₀/kB)" offset -0.5,0
-set cblabel "Frohlich Real Conductivity (e²ħ⁻¹)" offset 1,0
+set cblabel "Frohlich Imag Conductivity (e²ħ⁻¹)" offset 1,0
 
 # Enable grid
 set grid
@@ -21,7 +21,7 @@ set origin 0.02,-0.04
 set size 0.9,1.14
 
 #set yrange [0.0625:4]
-set cbrange [0:0.6]
+set cbrange [-0.5:0.2]
 set xrange [0:20]
 
 set autoscale fix
@@ -29,6 +29,6 @@ set autoscale fix
 set pm3d map
 
 # Plot the preprocessed data
-splot '../../data/frohlich/variational/model/frohlich-2d-real-conductivity-alpha-1-temp-00625to32-freq-0to30.dat' matrix nonuniform notitle
+splot '../../data/frohlich/variational/model/frohlich-3d-imag-conductivity-alpha-5-temp-00625to32-freq-0to30.dat' matrix nonuniform notitle
 
 load "../gnuplot-render.gpt"

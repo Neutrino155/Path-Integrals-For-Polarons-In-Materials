@@ -15,6 +15,7 @@ set origin 0.02,-0.04
 set size 0.9,1.14
 
 set xrange [0:12]
+set cbrange [1:4**7]
 set xtics 0,1,12 offset 0,0.5
 set logscale ycb 2
 
@@ -25,7 +26,7 @@ set ytics offset 1,0
 
 unset cbtics
 set cbtics nomirror
-set for [i=0:8] cbtics (sprintf("2^{%d}", i) 2**i) 
+set for [i=0:7] cbtics (sprintf("4^{%d}", i) 4**i) 
 
 set autoscale fix
 

@@ -1,7 +1,7 @@
 reset session
 
 prefix = "../../plots/holstein/holstein-1d-energy-alpha-0to12-omega-01to2"
-set key Left top left 
+set key Left bottom left 
 set grid
 set xlabel "α" offset 0,0.5
 set ylabel "Holstein Energy (ħω₀)" offset 0.5,0

@@ -4,7 +4,7 @@ prefix = "../../plots/frohlich/frohlich-2d-imag-conductivity-freq"
 set key Left right top
 set xlabel  "Frequency (ω₀)"
 set ylabel  "Frohlich Imag Conductivity (e²ħ⁻¹)"
-set yrange [-0.5:0.9]
+set yrange [-0.4:0.2]
 
 plot    "../../data/frohlich/variational/model/frohlich-2d-imag-conductivity-alpha-0to12-beta-100-freq-0to30.dat" u 1:21 w l t "{/Symbol a}=1", \
         "../../data/frohlich/variational/model/frohlich-2d-imag-conductivity-alpha-0to12-beta-100-freq-0to30.dat" u 1:41 w l t "{/Symbol a}=2", \

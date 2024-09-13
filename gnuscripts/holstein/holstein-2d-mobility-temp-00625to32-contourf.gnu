@@ -22,6 +22,7 @@ set size 0.9,1.14
 set for [i=-4:5] ytics (sprintf("2^{%d}", i) 2**i)
 set ytics offset 1,0
 
+set cbrange [*:1e6]
 set for [i=-2:6] cbtics (sprintf("10^{%d}", i) 10**i)
 
 set autoscale fix

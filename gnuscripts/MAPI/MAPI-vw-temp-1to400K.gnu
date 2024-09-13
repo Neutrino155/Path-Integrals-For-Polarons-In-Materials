@@ -5,9 +5,7 @@ set key bottom right
 set grid
 set xlabel  "Temperature (K)"
 set ylabel  "v, w (ω₀)"
-set xrange [1:362]
-#set xtics (1,50,100,150,200,250,300,350,400)
-set logscale xy 2
+set xtics (1,50,100,150,200,250,300,350,400)
 
 
 plot    "../../data/frohlich/variational/MAPI/frohlich-MAPI-single-temp-1to400K.dat" u 1:2 w l t "v_{Single}", \

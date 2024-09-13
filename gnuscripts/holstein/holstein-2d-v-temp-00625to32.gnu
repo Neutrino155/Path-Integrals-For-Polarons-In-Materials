@@ -6,7 +6,7 @@ set grid
 set xlabel  "T (ħω₀/kB)"
 set ylabel  "Holstein v (ω₀)"
 set xrange [0.0625:32]
-set yrange [4:40]
+set yrange [1:40]
 set logscale xy 2
 
 set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i)

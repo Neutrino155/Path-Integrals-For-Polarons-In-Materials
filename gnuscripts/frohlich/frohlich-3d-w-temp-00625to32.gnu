@@ -8,7 +8,9 @@ set ylabel  "Frohlich w (ω₀)"
 set xrange [0.0625:32]
 set yrange [1:256]
 set logscale xy 2
+
 set for [i=-4:5] xtics (sprintf("2^{%d}", i) 2**i)
+set for [i=0:8] ytics (sprintf("2^{%d}", i) 2**i) offset 0.5,0
 
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-w-alpha-0to12-temp-00625to32.dat" u 1:2 w l t "{/Symbol a}=0.1", \

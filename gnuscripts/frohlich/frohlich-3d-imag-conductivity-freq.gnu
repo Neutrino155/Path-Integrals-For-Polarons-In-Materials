@@ -1,10 +1,10 @@
 reset session
 
 prefix = "../../plots/frohlich/frohlich-3d-imag-conductivity-freq"
-set key Left right top
+set key right bottom
 set xlabel  "Frequency (ω₀)"
 set ylabel  "Frohlich Imag Conductivity (e²ħ⁻¹)"
-set yrange [-0.5:0.9]
+set yrange [-0.9:0.5]
 
 plot    "../../data/frohlich/variational/model/frohlich-3d-imag-conductivity-alpha-0to12-beta-100-freq-0to30.dat" u 1:21 w l t "{/Symbol a}=1", \
         "../../data/frohlich/variational/model/frohlich-3d-imag-conductivity-alpha-0to12-beta-100-freq-0to30.dat" u 1:41 w l t "{/Symbol a}=2", \

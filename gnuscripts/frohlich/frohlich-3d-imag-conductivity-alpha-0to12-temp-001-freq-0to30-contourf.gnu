@@ -20,10 +20,7 @@ set ytics 0,1,12 offset 0.5,0
 set xrange [0:30]
 set xtics 0,3,30 offset 0,0.5
 
-set logscale cb 
-set cbrange [0.01:10]
-
-set for [i=-2:1] cbtics (sprintf("10^{%d}", i) 10**i)
+set cbrange [-0.9:0.5]
 
 set autoscale fix
 
