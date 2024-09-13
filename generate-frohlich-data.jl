@@ -154,7 +154,7 @@ data3 = Matrix{Any}(undef, length(frohlich_2d_alpha_0to12_beta_003125to16.β) + 
 data3[1, 1] = "E(ħω₀)|T(ħω₀/kB)↓|α→"
 data3[2:end, 1] = ustrip(1 ./ frohlich_2d_alpha_0to12_beta_003125to16.β ./ kB_pu)
 data3[1, 2:end] = 0.1:0.1:12
-data3[2:end, 2:end] = reverse(ustrip(frohlich_2d_alpha_0to12_beta_003125to16.E[:,1,:])',dims=2)
+data3[2:end, 2:end] = abs.(reverse(ustrip(frohlich_2d_alpha_0to12_beta_003125to16.E[:,1,:])',dims=2))
 writedlm("data/frohlich/variational/model/frohlich-2d-E-alpha-0to12-temp-00625to32.dat", data3)
 data3
 end
@@ -170,7 +170,7 @@ data4 = Matrix{Any}(undef, length(frohlich_3d_alpha_0to12_beta_003125to16.β) + 
 data4[1, 1] = "E(ħω₀)|T(ħω₀/kB)↓|α→"
 data4[2:end, 1] = ustrip(1 ./ frohlich_3d_alpha_0to12_beta_003125to16.β ./ kB_pu)
 data4[1, 2:end] = 0.1:0.1:12
-data4[2:end, 2:end] = reverse(ustrip(frohlich_3d_alpha_0to12_beta_003125to16.E[:,1,:])',dims=2)
+data4[2:end, 2:end] = abs.(reverse(ustrip(frohlich_3d_alpha_0to12_beta_003125to16.E[:,1,:])',dims=2))
 writedlm("data/frohlich/variational/model/frohlich-3d-E-alpha-0to12-temp-00625to32.dat", data4)
 data4
 end
@@ -779,21 +779,21 @@ end
 # ╟─d2682bc3-1d04-4619-b69d-c713852b7e11
 # ╟─e8a3b9af-24b0-4b6c-974f-5049ae1e4a43
 # ╟─d83ae509-e1cd-4178-94bd-4037a68f2ac8
-# ╠═e1311bc1-7cb5-41be-8a1f-5104a8630500
-# ╠═bb1efbcf-7728-4f18-9a5c-d73315c40459
-# ╠═4e4b75c3-582b-45b0-b389-49d9e2552817
+# ╟─e1311bc1-7cb5-41be-8a1f-5104a8630500
+# ╟─bb1efbcf-7728-4f18-9a5c-d73315c40459
+# ╟─4e4b75c3-582b-45b0-b389-49d9e2552817
 # ╟─1d66f7a6-f8fa-478f-b007-956f24d047f7
 # ╟─9804abff-66b2-40af-8c16-a099e7600b73
 # ╟─5fef1d73-a691-438b-8634-293c098f1522
-# ╠═092ffc9d-e65a-4ba3-ad7b-ee346f6ff06d
-# ╠═9ce6fad2-9746-4605-b967-5447f8d0654d
+# ╟─092ffc9d-e65a-4ba3-ad7b-ee346f6ff06d
+# ╟─9ce6fad2-9746-4605-b967-5447f8d0654d
 # ╟─45377ee4-b055-4ed4-8bb3-2b7321c4e709
-# ╠═5b5a93ac-13c7-49de-bf6d-e5e546c9c2fb
-# ╠═20f9700f-3cb9-4197-8b9a-b9fe71cc748c
+# ╟─5b5a93ac-13c7-49de-bf6d-e5e546c9c2fb
+# ╟─20f9700f-3cb9-4197-8b9a-b9fe71cc748c
 # ╟─b17f1e29-cc52-455b-a6ec-aec4dc70a372
 # ╟─4d3645bb-cdf3-4e2c-9edd-c6c5be475107
-# ╠═7168a55f-e46d-4e9a-bd5c-e0daf312d126
-# ╠═84f94766-918f-40d6-a51a-2124f9e0df86
+# ╟─7168a55f-e46d-4e9a-bd5c-e0daf312d126
+# ╟─84f94766-918f-40d6-a51a-2124f9e0df86
 # ╟─fdc5be06-e1d0-4346-9402-0428fa451f8f
-# ╠═829640a1-7787-4c46-8954-13c96c7bfe29
-# ╠═7f1fcea4-1933-442b-bdab-88c37e5b79b0
+# ╟─829640a1-7787-4c46-8954-13c96c7bfe29
+# ╟─7f1fcea4-1933-442b-bdab-88c37e5b79b0

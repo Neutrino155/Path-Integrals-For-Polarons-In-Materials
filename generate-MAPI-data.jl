@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.40
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -28,24 +28,24 @@ md"""
 
 # ╔═╡ f7baaa29-046b-41c6-aa95-18a4591555ff
 MAPI = [
-   # 96.20813558773261 0.4996300522819191
-   # 93.13630357703363 1.7139631746083817
-   # 92.87834578121567 0.60108592692181
-   # 92.4847918585963 0.0058228799414729
-   # 92.26701437594754 0.100590086574602
-   # 89.43972834606603 0.006278895133832249
-   # 46.89209141511332 0.2460894564364346
-   # 46.420949316788 0.14174282581124137
-   # 44.0380222871706 0.1987196948553428
-   # 42.89702947649343 0.011159939465770681
-   # 42.67180170168193 0.02557751102757614
-   # 41.46971205834201 0.012555230726601503
-   # 37.08982543385215 0.00107488277468418
-   # 36.53555265689563 0.02126940080871224
-   # 30.20608114002676 0.009019481779712388
-   # 27.374810898415028 0.03994453721421388
-   # 26.363055017011728 0.05011922682554448
-   # 9.522966890022039 0.00075631870522737
+   96.20813558773261 0.4996300522819191
+   93.13630357703363 1.7139631746083817
+   92.87834578121567 0.60108592692181
+   92.4847918585963 0.0058228799414729
+   92.26701437594754 0.100590086574602
+   89.43972834606603 0.006278895133832249
+   46.89209141511332 0.2460894564364346
+   46.420949316788 0.14174282581124137
+   44.0380222871706 0.1987196948553428
+   42.89702947649343 0.011159939465770681
+   42.67180170168193 0.02557751102757614
+   41.46971205834201 0.012555230726601503
+   37.08982543385215 0.00107488277468418
+   36.53555265689563 0.02126940080871224
+   30.20608114002676 0.009019481779712388
+   27.374810898415028 0.03994453721421388
+   26.363055017011728 0.05011922682554448
+   9.522966890022039 0.00075631870522737
    4.016471586720514 0.08168931020200264
    3.887605410774121 0.006311654262282101
    3.5313112232401513 0.05353548710183397
@@ -69,14 +69,39 @@ MAPI = [
 # ╔═╡ 6909665a-1496-4b01-88eb-dbf499c953ae
 begin
 	phonon_frequencies = MAPI[:, 1] .* u"THz2π"
-	phonon_frequency = 1.62289245u"THz2π"
 	band_mass = 0.12u"me"
 	infrared_activities = MAPI[:, 2] .* u"q^2 / u"
 	unitcell_volume = (6.29u"Å")^3
 	electronic_dielectric = 4.5u"ϵ0"
 	ionic_dielectric = ϵ_ionic_mode.(phonon_frequencies, infrared_activities, unitcell_volume)
 	static_dielectric = 4.5u"ϵ0" + sum(ionic_dielectric)
+	phonon_frequency = (sum(ionic_dielectric) / sum(ionic_dielectric ./ sqrt.(phonon_frequencies)))^2
 end
+
+# ╔═╡ 38a9b7a5-8997-4fb6-a39e-ef722b902468
+function HellwarthBScheme(LO)
+    println("Hellwarth B Scheme... (athermal)")
+    H58 = sum((LO[:, 2] .^ 2) ./ LO[:, 1] .^ 2)
+    println("Hellwarth (58) summation: ", H58)
+
+    H59 = sum(LO[:, 2] .^ 2) # sum of total ir activity squarred
+    println("Hellwarth (59) summation (total ir activity ^2): ", H59)
+    println("Hellwarth (59) W_e (total ir activity ): ", sqrt(H59))
+
+    omega = sqrt(H59 / H58)
+    println("Hellwarth (61) Omega (freq): ", omega)
+
+    return (omega)
+end
+
+# ╔═╡ 9e0885b5-cf4b-47b5-aa2b-26ea6d29d3bc
+HellwarthBScheme(MAPI)
+
+# ╔═╡ c938e675-41d2-4868-bfc9-6b0620c06b90
+fs = frohlich(frohlichmaterial("[CH3NH3]PbX3", static_dielectric, electronic_dielectric, phonon_frequency, band_mass, unitcell_volume), [1.0, 2.0] .* u"K", LinRange(eps(), 5, 100) .* 1u"THz2π")
+
+# ╔═╡ 20bf112f-d5cc-44f2-b3f4-4141235d3e6a
+fm = frohlich(frohlichmaterial("[CH3NH3]PbX3", static_dielectric, electronic_dielectric, ionic_dielectric, phonon_frequencies, band_mass, unitcell_volume), [1.0, 2.0] .* u"K", LinRange(eps(), 5.0, 100) .* 1u"THz2π")
 
 # ╔═╡ 3851a3fe-6f3b-4099-b7a3-038dd1f5bf63
 md"""
@@ -117,6 +142,12 @@ MAPI_mobility(frohlich) = abs.(1 ./ imag.(frohlich.Σ)) * e_pu / MAPIs.mb .|> u"
 
 # ╔═╡ 799e2865-eb50-49ca-8aaf-e1d648ae2b25
 MAPI_conductivity(frohlich) = -im ./ (frohlich.Ω .+ frohlich.Σ') .* e_pu^2 / MAPIs.mb / (ħ_pu / MAPIs.mb / MAPIs.ω_LO) .|> u"μS"
+
+# ╔═╡ cb6a2b26-3dfb-426a-b5af-d4abd3b09f81
+begin
+	plot(LinRange(eps(), 5, 100) .* 1u"THz2π", real.(MAPI_conductivity(fs)), ylims=(0,100))
+	plot!(LinRange(eps(), 5, 100) .* 1u"THz2π", real.(MAPI_conductivity(fm)), ylims=(0,100))
+end
 
 # ╔═╡ 39eda869-dfab-47e7-9c8d-2ca734eed33e
 md"""
@@ -354,14 +385,19 @@ end
 # ╟─1f1e81eb-a571-46c2-8618-e252cf69d205
 # ╟─799e2865-eb50-49ca-8aaf-e1d648ae2b25
 # ╟─17068899-f58f-4415-9057-06531b35ab66
-# ╟─f7baaa29-046b-41c6-aa95-18a4591555ff
+# ╠═f7baaa29-046b-41c6-aa95-18a4591555ff
 # ╠═6909665a-1496-4b01-88eb-dbf499c953ae
+# ╠═38a9b7a5-8997-4fb6-a39e-ef722b902468
+# ╠═9e0885b5-cf4b-47b5-aa2b-26ea6d29d3bc
+# ╠═c938e675-41d2-4868-bfc9-6b0620c06b90
+# ╠═20bf112f-d5cc-44f2-b3f4-4141235d3e6a
+# ╠═cb6a2b26-3dfb-426a-b5af-d4abd3b09f81
 # ╟─3851a3fe-6f3b-4099-b7a3-038dd1f5bf63
 # ╟─e74f64c8-bedc-461e-9cf0-407f8f1d4313
-# ╟─76efc24c-812a-4e22-86e1-0f928ef13677
+# ╠═76efc24c-812a-4e22-86e1-0f928ef13677
 # ╟─9bcc691e-e704-464a-85a5-fd6bcdbecc6d
 # ╟─39eda869-dfab-47e7-9c8d-2ca734eed33e
-# ╟─cff673c1-b106-44b7-89ed-4d3a3cd588a3
+# ╠═cff673c1-b106-44b7-89ed-4d3a3cd588a3
 # ╟─e39f0dca-d015-42f1-a49d-ee88b938e545
 # ╟─5270ea61-c216-47e8-a9de-87635dabecec
 # ╟─c200c995-4eb8-4347-82fc-7dc170401df8
