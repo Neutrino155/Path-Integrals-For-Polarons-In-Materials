@@ -13,7 +13,7 @@ function polaron_propagator(τ, v, w, β)
 end
 
 function polaron_propagator(τ, v::Vector, w::Vector, β)
-    result =  τ * (1 - τ / β) + sum((h_i(i, v, w) / v[i]^2) * ((1 + exp(-v[i] * β) - exp(-v[i] * τ) - exp(v[i] * (τ - β))) / (v[i] * (1 - exp(-v[i] * β))) - τ * (1 - τ / β)) for i in eachindex(v))
+    result = τ * (1 - τ / β) + sum((h_i(i, v, w) / v[i]^2) * ((1 + exp(-v[i] * β) - exp(-v[i] * τ) - exp(v[i] * (τ - β))) / (v[i] * (1 - exp(-v[i] * β))) - τ * (1 - τ / β)) for i in eachindex(v))
     return isa(result, Complex) ? result : result > 0 ? result : eps()
 end
 

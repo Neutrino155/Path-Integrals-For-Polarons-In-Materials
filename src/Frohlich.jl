@@ -195,7 +195,7 @@ function frohlich_S(v, w, coupling, phonon_propagator, polaron_propagator; limit
 end
 
 function frohlich_memory(Ω, coupling, phonon_propagator, polaron_propagator; dims = 3)
-    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf; rtol=1e-4)
+    integral, _ = quadgk(t -> 2 * t * (1 - exp(im * Ω * t^2)) / Ω * imag(phonon_propagator(im * t^2) / polaron_propagator(im * t^2)^(3/2)), 0, Inf)
     return 2 / dims * norm(coupling)^2 * ball_surface(dims) / (2π)^dims * sqrt(π / 2) * integral
 end
 

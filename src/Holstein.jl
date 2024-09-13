@@ -79,9 +79,9 @@ function holstein(α, ω, J, β; verbose = false, dims = 3, v_guesses = false, w
 end
 
 function holstein(h::Holstein, Ω; dims = 3, verbose = false, kwargs...)
-    Ω = pustrip.(Ω)
+    Ω = pustrip.(Ω)    
     ω, J, d, g, α, E, v, w, β = [map(y -> pustrip.(y), getfield(h, x)) for x in fieldnames(Holstein)]
-    if length(α) == length(ω) return multiholstein(h, Ω; dims = dims, verbose = verbose, kwargs...) end
+    if length(α) == length(ω) && length(ω) > 1 return multiholstein(h, Ω; dims = dims, verbose = verbose, kwargs...) end
     num_α, num_ω, num_J, num_β, num_Ω = length(α), length(ω), length(J), length(β), length(Ω)
     if verbose N, n = num_α * num_ω * num_J * num_β * num_Ω, Threads.Atomic{Int}(1) end
     Σ = Array{ComplexF64}(undef, num_α, num_ω, num_J, num_β, num_Ω)
